@@ -154,10 +154,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sceneToLoad:
   - sceneAsset: {fileID: 102900000, guid: 91e029f0209149d40ba996baba6ce9b6, type: 3}
-    sceneName: Test2
+    sceneName: Stage2
   _sceneToUnload:
   - sceneAsset: {fileID: 102900000, guid: fb2dfd978c1ea2f4081161f779a47ce5, type: 3}
-    sceneName: Test3
+    sceneName: Stage3
 --- !u!61 &397365241
 BoxCollider2D:
   m_ObjectHideFlags: 0
