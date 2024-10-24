@@ -8,21 +8,25 @@ using UnityEngine;
 /// </summary>
 public class BreakPlatform : MonoBehaviour
 {
-    [Header("발판 모델")]
+    [Header("발판 모델 오브젝트")]
     [SerializeField] GameObject _platform;
 
-    [Header("돌 조각 그룹")]
+    [Header("돌 조각 그룹 오브젝트")]
     [SerializeField] GameObject _rockPieceGroup;
+
+    [Header("파티클 그룹 오브젝트")]
+    [SerializeField] GameObject _particleGroup;
 
     [Header("돌 조각 사라지는 시간")]
     [SerializeField] float _rockLifeTime;
 
     [Header("발판 재생성 시간")]
+    [SerializeField] bool _canRespawn;
     [SerializeField] float _respawnTime;
 
 
     PolygonCollider2D _platformCollider;
-    [SerializeField] BrokenRockPiece[] _rockPieces;
+    BrokenRockPiece[] _rockPieces;
     WaitForSeconds _respawnDelay;
      
     private void Awake()
@@ -47,8 +51,11 @@ public class BreakPlatform : MonoBehaviour
     {
         _platform.SetActive(false);
         _platformCollider.enabled =false;
+        _particleGroup.SetActive(true);
         OnEnableRockPieces();
-        StartCoroutine(RespawnRoutine());
+
+        if(_canRespawn)
+            StartCoroutine(RespawnRoutine());
     }
 
     IEnumerator RespawnRoutine()
@@ -56,6 +63,8 @@ public class BreakPlatform : MonoBehaviour
         yield return _respawnDelay;
         _platform.SetActive(true);
         _platformCollider.enabled = true;
+        _particleGroup.SetActive(false);
+        OnDiableRockPieces();
     }
 
 
@@ -77,6 +86,7 @@ public class BreakPlatform : MonoBehaviour
             piece.gameObject.SetActive(true);
         }
     }
+
     void OnDiableRockPieces()
     {
         foreach (BrokenRockPiece piece in _rockPieces)
