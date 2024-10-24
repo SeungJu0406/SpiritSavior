@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 사운드 매니저
+/// Manager.Sound 를 통해서 사용
+/// </summary>
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance;
