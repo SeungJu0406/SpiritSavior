@@ -4,12 +4,13 @@ public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 5f; 
     public float jumpForce = 10f; 
-    public float maxJumpTime = 1f; 
+    public float maxJumpTime = 0.5f; 
 
-    private SpriteRenderer renderer;
+    public SpriteRenderer renderer;
     private Rigidbody2D rb;
-    private bool isJumping = false;
-    private float jumpTime = 0f;
+    private bool _isJumping = false;
+    private float _jumpTime = 0f;
+    [SerializeField] float _maxSpeed;
 
     void Start()
     {
@@ -24,44 +25,49 @@ public class PlayerController : MonoBehaviour
         // 점프 키를 누를 때
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {
-            isJumping = true;
-            jumpTime = 0f;
+            _isJumping = true;
+            _jumpTime = 0f;
         }
 
-        if (Input.GetButton("Jump") && isJumping)
+        if (Input.GetButton("Jump") && _isJumping)
         {
-            if (jumpTime < maxJumpTime)
+            if (_jumpTime < maxJumpTime)
             {
-                jumpTime += Time.deltaTime;
+                _jumpTime += Time.deltaTime;
             }
         }
 
-        if (Input.GetButtonUp("Jump") && isJumping)
+        if (Input.GetButtonUp("Jump") && _isJumping)
         {
             Jump();
-            isJumping = false;
+            _isJumping = false;
         }
     }
 
     private void Move()
     {
-        float x = Input.GetAxis("Horizontal");
+        float x = Input.GetAxisRaw("Horizontal");
         rb.velocity = new Vector2(x * moveSpeed, rb.velocity.y);
 
-        //if(x < 0)
-        //{
-        //    renderer.flipX = true;
-        //}
-        //if(x > 0)
-        //{
-        //    renderer.flipX = false;
-        //}
+        if(rb.velocity.x > _maxSpeed)
+            rb.velocity = new Vector2(_maxSpeed, rb.velocity.y);
+        else if(rb.velocity.x < -_maxSpeed)
+            rb.velocity = new Vector2(-_maxSpeed, rb.velocity.y);
+
+        if (x < 0)
+        {
+            renderer.flipX = true;
+        }
+        if (x > 0)
+        {
+            renderer.flipX = false;
+        }
 
     }
 
     private void Jump()
     {
-        float jumpAmount = jumpForce * (jumpTime / maxJumpTime);
+        float jumpAmount = jumpForce * (_jumpTime / maxJumpTime);
         rb.velocity = new Vector2(rb.velocity.x, jumpAmount);
     }
 
