@@ -1,18 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] float curHp;
+    [SerializeField] float maxHp;
+    [SerializeField] private Slider _hpBar;
     void Start()
     {
-        
+        curHp = maxHp;
     }
 
-    // Update is called once per frame
+
     void Update()
     {
-        
+        _hpBar.value = curHp / maxHp;
     }
 }
