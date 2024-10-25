@@ -1,80 +1,70 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed = 5f; 
-    public float jumpForce = 10f; 
-    public float maxJumpTime = 0.5f; 
+    public enum State {Idle, Run, Jump, Fall, Size}
+    [SerializeField] State _curState = State.Idle;
+    private BaseState[] _states = new BaseState[(int)State.Size];
 
     public SpriteRenderer renderer;
-    private Rigidbody2D rb;
-    private bool _isJumping = false;
-    private float _jumpTime = 0f;
-    [SerializeField] float _maxSpeed;
+
+    [SerializeField] public float moveSpeed;        // 이동속도
+    [SerializeField] public float maxMoveSpeed;
+    [SerializeField] public float lowJumpForce = 10f;     // 낮은점프 힘
+    [SerializeField] public float highJumpForce = 25f;    // 높은점프 힘
+    [SerializeField] public float maxJumpTime = 0.2f;     // 최대점프 시간
+    [SerializeField] public float jumpStartSpeed = 18f;   // 점프시작 속도
+    [SerializeField] public float jumpEndSpeed = 10f;     // 점프종료 속도
+
+    public Rigidbody2D rigid;
+    public bool isGrounded = false;        // 캐릭터와 땅여부 체크
+    public bool isJumped = false;          // 점프중인지여부 체크
+    public float spacebarTime = 0f;     // 스페이스바 누른시간 체크
+
+    private void Awake()
+    {
+        _states[(int)State.Idle] = new IdleState(this);
+        _states[(int)State.Run] = new RunState(this);
+        _states[(int)State.Jump] = new JumpState(this);
+        _states[(int)State.Fall] = new FallState(this);
+    }
+
 
     void Start()
     {
+        rigid = GetComponent<Rigidbody2D>();
         renderer = GetComponent<SpriteRenderer>();
-        rb = GetComponent<Rigidbody2D>();
+        _states[(int)_curState].Enter();
     }
 
     void Update()
     {
-        Move();
+        _states[(int)_curState].Update();
+    }
 
-        // 점프 키를 누를 때
-        if (Input.GetButtonDown("Jump") && IsGrounded())
-        {
-            _isJumping = true;
-            _jumpTime = 0f;
-        }
+    public void ChangeState(State nextState)
+    {
+        _states[(int)_curState].Exit();
+        _curState = nextState;
+        _states[(int)_curState].Enter();
+    }
 
-        if (Input.GetButton("Jump") && _isJumping)
+    // 레이어 땅 체크
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
-            if (_jumpTime < maxJumpTime)
-            {
-                _jumpTime += Time.deltaTime;
-            }
-        }
-
-        if (Input.GetButtonUp("Jump") && _isJumping)
-        {
-            Jump();
-            _isJumping = false;
+            isGrounded = true;
         }
     }
 
-    private void Move()
+    private void OnCollisionExit2D(Collision2D collision)
     {
-        float x = Input.GetAxisRaw("Horizontal");
-        rb.velocity = new Vector2(x * moveSpeed, rb.velocity.y);
-
-        if(rb.velocity.x > _maxSpeed)
-            rb.velocity = new Vector2(_maxSpeed, rb.velocity.y);
-        else if(rb.velocity.x < -_maxSpeed)
-            rb.velocity = new Vector2(-_maxSpeed, rb.velocity.y);
-
-        if (x < 0)
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
-            renderer.flipX = true;
+            isGrounded = false;
         }
-        if (x > 0)
-        {
-            renderer.flipX = false;
-        }
-
-    }
-
-    private void Jump()
-    {
-        float jumpAmount = jumpForce * (_jumpTime / maxJumpTime);
-        rb.velocity = new Vector2(rb.velocity.x, jumpAmount);
-    }
-
-    private bool IsGrounded()
-    {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 0.1f);
-        return hit.collider != null;
     }
 }
 

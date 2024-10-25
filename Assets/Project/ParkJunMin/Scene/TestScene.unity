@@ -265,11 +265,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce94a3b1df0241f4da496a92ddb2ee7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
-  jumpForce: 10
-  maxJumpTime: 1
+  _curState: 0
   renderer: {fileID: 0}
-  _maxSpeed: 3
+  moveSpeed: 2
+  maxMoveSpeed: 3
+  lowJumpForce: 10
+  highJumpForce: 25
+  maxJumpTime: 0.2
+  jumpStartSpeed: 18
+  jumpEndSpeed: 10
+  rigid: {fileID: 0}
+  isGrounded: 0
+  isJumped: 0
+  spacebarTime: 0
 --- !u!50 &1039534994
 Rigidbody2D:
   serializedVersion: 4
