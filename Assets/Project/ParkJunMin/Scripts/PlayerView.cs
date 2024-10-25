@@ -31,7 +31,7 @@ public class PlayerView : MonoBehaviour
 
     // Animator.StringToHash("Fall_(string)")
 
-    private void Start()
+    private void Awake()
     {
         _player = GetComponent<PlayerController>();
         renderer = GetComponent<SpriteRenderer>();
