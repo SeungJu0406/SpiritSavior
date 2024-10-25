@@ -1,80 +1,98 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed = 5f; 
-    public float jumpForce = 10f; 
-    public float maxJumpTime = 0.5f; 
+    public enum State {Idle, Run, Jump, Fall, Size}
+    [SerializeField] State _curState = State.Idle;
+    private BaseState[] _states = new BaseState[(int)State.Size];
 
     public SpriteRenderer renderer;
-    private Rigidbody2D rb;
-    private bool _isJumping = false;
-    private float _jumpTime = 0f;
-    [SerializeField] float _maxSpeed;
+
+    public float moveSpeed;        // 이동속도
+    public float maxMoveSpeed;
+    public float lowJumpForce;     // 낮은점프 힘
+    public float highJumpForce;    // 높은점프 힘
+    public float maxJumpTime;     // 최대점프 시간
+    public float jumpStartSpeed;   // 점프시작 속도
+    public float jumpEndSpeed;     // 점프종료 속도
+    public float moveSpeedInAir;    // 공중에서 플레이어의 속도
+    public float maxMoveSpeedInAir; // 공중에서 플레이어의 속도의 최대값
+    public float speedAdjustmentOffsetInAir;
+    public Rigidbody2D rigid;
+    public bool isGrounded = false;        // 캐릭터와 땅여부 체크
+    public bool isJumped = false;          // 점프중인지여부 체크
+    public float jumpChargingTime = 0f;     // 스페이스바 누른시간 체크
+
+    private void Awake()
+    {
+        _states[(int)State.Idle] = new IdleState(this);
+        _states[(int)State.Run] = new RunState(this);
+        _states[(int)State.Jump] = new JumpState(this);
+        _states[(int)State.Fall] = new FallState(this);
+        moveSpeedInAir = moveSpeed * speedAdjustmentOffsetInAir;
+        maxMoveSpeedInAir = maxMoveSpeed * speedAdjustmentOffsetInAir;
+    }
+
 
     void Start()
     {
+        rigid = GetComponent<Rigidbody2D>();
         renderer = GetComponent<SpriteRenderer>();
-        rb = GetComponent<Rigidbody2D>();
+        _states[(int)_curState].Enter();
     }
 
     void Update()
     {
-        Move();
-
-        // 점프 키를 누를 때
-        if (Input.GetButtonDown("Jump") && IsGrounded())
-        {
-            _isJumping = true;
-            _jumpTime = 0f;
-        }
-
-        if (Input.GetButton("Jump") && _isJumping)
-        {
-            if (_jumpTime < maxJumpTime)
-            {
-                _jumpTime += Time.deltaTime;
-            }
-        }
-
-        if (Input.GetButtonUp("Jump") && _isJumping)
-        {
-            Jump();
-            _isJumping = false;
-        }
+        _states[(int)_curState].Update();
     }
 
-    private void Move()
+    public void ChangeState(State nextState)
     {
-        float x = Input.GetAxisRaw("Horizontal");
-        rb.velocity = new Vector2(x * moveSpeed, rb.velocity.y);
+        _states[(int)_curState].Exit();
+        _curState = nextState;
+        _states[(int)_curState].Enter();
+    }
 
-        if(rb.velocity.x > _maxSpeed)
-            rb.velocity = new Vector2(_maxSpeed, rb.velocity.y);
-        else if(rb.velocity.x < -_maxSpeed)
-            rb.velocity = new Vector2(-_maxSpeed, rb.velocity.y);
+    public void MoveInAir()
+    {
+        float moveInput = Input.GetAxis("Horizontal");
+        rigid.velocity = new Vector2(moveInput * moveSpeedInAir, rigid.velocity.y);
 
-        if (x < 0)
+        if (rigid.velocity.x > maxMoveSpeedInAir)
         {
+            rigid.velocity = new Vector2(maxMoveSpeedInAir, rigid.velocity.y);
+        }
+        else if (rigid.velocity.x < -maxMoveSpeedInAir)
+        {
+            rigid.velocity = new Vector2(-(maxMoveSpeedInAir), rigid.velocity.y);
+        }
+        FlipRender(moveInput);
+    }
+
+    public void FlipRender(float _moveDirection)
+    {
+        if(_moveDirection < 0)
             renderer.flipX = true;
-        }
-        if (x > 0)
-        {
+        if (_moveDirection > 0)
             renderer.flipX = false;
+    }
+
+    // 레이어 땅 체크
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            isGrounded = true;
         }
-
     }
 
-    private void Jump()
+    private void OnCollisionExit2D(Collision2D collision)
     {
-        float jumpAmount = jumpForce * (_jumpTime / maxJumpTime);
-        rb.velocity = new Vector2(rb.velocity.x, jumpAmount);
-    }
-
-    private bool IsGrounded()
-    {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 0.1f);
-        return hit.collider != null;
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            isGrounded = false;
+        }
     }
 }
 
