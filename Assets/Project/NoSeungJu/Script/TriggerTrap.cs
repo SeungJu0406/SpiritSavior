@@ -55,7 +55,6 @@ public class TriggerTrap : Trap
     IEnumerator RestartRoutine()
     {
         _canActive = false;
-        Debug.Log("1");
         yield return _restartTimeDelay;      
         _canActive = true;
     }
