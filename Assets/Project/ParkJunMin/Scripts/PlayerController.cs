@@ -11,11 +11,11 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] public float moveSpeed;        // 이동속도
     [SerializeField] public float maxMoveSpeed;
-    [SerializeField] public float lowJumpForce = 10f;     // 낮은점프 힘
-    [SerializeField] public float highJumpForce = 25f;    // 높은점프 힘
-    [SerializeField] public float maxJumpTime = 0.2f;     // 최대점프 시간
-    [SerializeField] public float jumpStartSpeed = 18f;   // 점프시작 속도
-    [SerializeField] public float jumpEndSpeed = 10f;     // 점프종료 속도
+    [SerializeField] public float lowJumpForce;     // 낮은점프 힘
+    [SerializeField] public float highJumpForce;    // 높은점프 힘
+    [SerializeField] public float maxJumpTime;     // 최대점프 시간
+    [SerializeField] public float jumpStartSpeed;   // 점프시작 속도
+    [SerializeField] public float jumpEndSpeed;     // 점프종료 속도
 
     public Rigidbody2D rigid;
     public bool isGrounded = false;        // 캐릭터와 땅여부 체크

@@ -15,6 +15,11 @@ public class JumpState : PlayerState
         player.isJumped = true;
         player.spacebarTime = 0f;
         player.rigid.velocity = new Vector2(player.rigid.velocity.x, player.lowJumpForce); // 1단점프
+    }
+
+    public override void Update()
+    {
+        
                                                                                            // 스페이스바를 누르는 동안 점프력 증가
         if (Input.GetKey(KeyCode.Space) && player.isJumped)
         {
@@ -38,10 +43,8 @@ public class JumpState : PlayerState
         {
             player.rigid.velocity += Vector2.up * Physics2D.gravity.y * (player.jumpStartSpeed - 1) * Time.deltaTime;
         }
-    }
 
-    public override void Update()
-    {
+
         if (player.rigid.velocity.y < 0)
         {
             Debug.Log(player.rigid.velocity.y);
