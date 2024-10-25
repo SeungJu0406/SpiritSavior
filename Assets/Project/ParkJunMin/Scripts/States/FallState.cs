@@ -32,6 +32,8 @@ public class FallState : PlayerState
         //        player.ChangeState(PlayerController.State.Idle);
         //    }
         //}
+        player.MoveInAir();
+
         if(player.isGrounded)
             player.ChangeState(PlayerController.State.Idle);
 

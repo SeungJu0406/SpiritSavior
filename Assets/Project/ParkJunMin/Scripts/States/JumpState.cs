@@ -47,7 +47,7 @@ public class JumpState : PlayerState
             player.rigid.velocity += Vector2.up * Physics2D.gravity.y * (player.jumpStartSpeed - 1) * Time.deltaTime;
         }
 
-        MoveInAir();
+        player.MoveInAir();
 
 
         if (player.rigid.velocity.y < 0)
@@ -61,22 +61,6 @@ public class JumpState : PlayerState
     public override void Exit()
     {
         Debug.Log("점프 상태 종료");
-    }
-
-    private void MoveInAir()
-    {
-        float moveInput = Input.GetAxis("Horizontal");
-        player.rigid.velocity = new Vector2(moveInput * player.moveSpeedInAir, player.rigid.velocity.y);
-
-        if (player.rigid.velocity.x > player.maxMoveSpeedInAir)
-        {
-            player.rigid.velocity = new Vector2(player.maxMoveSpeedInAir, player.rigid.velocity.y);
-        }
-        else if (player.rigid.velocity.x < -player.maxMoveSpeedInAir)
-        {
-            player.rigid.velocity = new Vector2(-(player.maxMoveSpeedInAir), player.rigid.velocity.y);
-        }
-        player.FlipRender(moveInput);
     }
 
 }
