@@ -8,6 +8,9 @@ public class UIManager : MonoBehaviour
 {
     //Á×À½»óÅÂ
     private bool _isDead;
+    // Á×¾úÀ»¶§ Sprite
+    [SerializeField] GameObject deadFace;
+
 
     [Header ("HP Bar")]
     [SerializeField] float curHp;
@@ -25,6 +28,14 @@ public class UIManager : MonoBehaviour
     {
         curHp -= 33;
         // life -= 1;
+
+        // Ã¼·Â ´Ù ´âÀ¸¸é Á×Àº¾ó±¼ È°¼ºÈ­
+        if (curHp <= 0)
+        {
+            _isDead = true;
+            deadFace.SetActive(true);
+        }
+
     }
 
     public void GiveLife()
@@ -67,6 +78,8 @@ public class UIManager : MonoBehaviour
             if (life < 1)
             {
                 _isDead = true;
+                // ÇÏÆ® ´Ù ´âÀ¸¸é Á×Àº ¾ó±¼ È°¼ºÈ­
+                deadFace.SetActive(true); 
             }
         }
     }
@@ -102,6 +115,6 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         _hpBar.value = curHp / maxHp;
-        //TakeDamage(1);
+
     }
 }
