@@ -13,14 +13,21 @@ public class IdleState : PlayerState
 
     public override void Enter()
     {
+        prevNature = player.playerModel.curNature;
         Debug.Log("Idle 상태 진입");
         player.playerView.PlayAnimation(idleAnimationIndex);
-
     }
 
     public override void Update()
     {
-        if(Mathf.Abs(Input.GetAxisRaw("Horizontal")) > 0.1f)
+        if (prevNature != player.playerModel.curNature)
+        {
+            player.playerView.PlayAnimation((idleAnimationIndex + 4)%8);
+            //player.playerModel.curNature
+            prevNature = player.playerModel.curNature;
+        }
+
+        if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) > 0.1f)
         {
             player.ChangeState(PlayerController.State.Run);
         }
