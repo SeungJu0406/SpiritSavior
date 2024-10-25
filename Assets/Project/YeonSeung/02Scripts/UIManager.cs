@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
 {
     //Á×À½»óÅÂ
     private bool _isDead;
+    // Á×¾úÀ»¶§ Sprite
     [SerializeField] GameObject deadFace;
 
     [Header ("HP Bar")]
