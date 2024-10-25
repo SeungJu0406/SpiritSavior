@@ -29,4 +29,14 @@ public class Trap : MonoBehaviour
             }
         }
     }
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (_isDisposable)
+        {
+            if (collision.gameObject.tag == "Player")
+            {
+                SceneChanger.Instance.SetKeepingTrap(transform.position, false);
+            }
+        }
+    }
 }
