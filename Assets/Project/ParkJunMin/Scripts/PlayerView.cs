@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerView : MonoBehaviour
@@ -7,6 +8,11 @@ public class PlayerView : MonoBehaviour
     private PlayerModel _playerModel;
     private PlayerController _player;
     private Animator _animator;
+    public SpriteRenderer renderer;
+    public Sprite[] sprites;
+    private int _curSpriteIndex = 0;
+    
+
     //[SerializeField] AudioClip[] clips;
 
     private int[] _animationHash = new int[]
@@ -22,11 +28,29 @@ public class PlayerView : MonoBehaviour
         Animator.StringToHash("Fall_Blue")
     };
 
+
+
     private void Start()
     {
         _player = GetComponent<PlayerController>();
+        renderer = GetComponent<SpriteRenderer>();
+        if(sprites.Length > 0 )
+            renderer.sprite = sprites[_curSpriteIndex];
         _playerModel = _player.playerModel;
         _animator = GetComponent<Animator>();
+    }
+
+    public void ChangeSprite()
+    {
+        //renderer.sprite = sprites[(_curSpriteIndex++)%sprites.Length];
+    }
+
+    public void FlipRender(float _moveDirection)
+    {
+        if (_moveDirection < 0)
+            renderer.flipX = true;
+        if (_moveDirection > 0)
+            renderer.flipX = false;
     }
 
     public void PlayAnimation(int animationIndex)
