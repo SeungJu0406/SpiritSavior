@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+
     public enum State {Idle, Run, Jump, Fall, Size}
     [SerializeField] State _curState = State.Idle;
     private BaseState[] _states = new BaseState[(int)State.Size];
@@ -93,8 +94,9 @@ public class PlayerController : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Tab))
         {
-            playerView.ChangeSprite();
-            playerModel.TagElement();
+            playerView.ChangeSprite(); // 상시 애니메이션 재생 상태라 없어도 무방
+            playerModel.TagElement(); // 속성 열거형 형식의 curNature를 바꿔줌
+            //playerView.PlayAnimation((int)_curState);
         }
     }
 
