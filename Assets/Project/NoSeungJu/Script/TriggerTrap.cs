@@ -48,13 +48,15 @@ public class TriggerTrap : Trap
         {
             FallingTrapObject fallingTrapObject = Instantiate(_fallingTrapObject, _fallingPoint.position, _fallingPoint.rotation);
             fallingTrapObject.SetLifeTimeDelay(_lifeTimeDelay);
+            StartCoroutine(RestartRoutine());
         }
     }
 
     IEnumerator RestartRoutine()
     {
         _canActive = false;
-        yield return _restartTimeDelay;
+        Debug.Log("1");
+        yield return _restartTimeDelay;      
         _canActive = true;
     }
 }

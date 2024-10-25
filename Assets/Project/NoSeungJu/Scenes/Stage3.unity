@@ -137,6 +137,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Breakable_Rocks_3
       objectReference: {fileID: 0}
+    - target: {fileID: 5721909952037243038, guid: 067a2bed862b0ba45ad0e6c90c6e011b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5727006006911412932, guid: 067a2bed862b0ba45ad0e6c90c6e011b, type: 3}
       propertyPath: m_RootOrder
       value: 2
