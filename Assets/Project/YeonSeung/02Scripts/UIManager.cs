@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-
+    //죽음상태
     private bool _isDead;
 
     [Header ("HP Bar")]
@@ -18,6 +18,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject[] lives;
     [SerializeField] public int life; 
 
+
+    // 데미지 받는함수
     public void TakeDamage(int damage)
     {
         if (life >= 1)
@@ -31,6 +33,8 @@ public class UIManager : MonoBehaviour
             }
         }
     }
+
+    // 위에 목숨 UI만
     public void LifeCount()
     {
         /* 데미지 받는거말고 그냥 하트수만 하면
