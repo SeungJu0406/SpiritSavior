@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RunState : PlayerState
 {
+    private int idleAnimationIndex = (int)PlayerController.State.Run;
     public RunState(PlayerController player) : base(player)
     {
 
@@ -12,6 +13,7 @@ public class RunState : PlayerState
     public override void Enter()
     {
         Debug.Log("Run 상태 진입");
+        player.playerView.PlayAnimation(idleAnimationIndex);
         player.isGrounded = true;
     }
     public override void Update()
@@ -45,7 +47,7 @@ public class RunState : PlayerState
             player.rigid.velocity = new Vector2(-(player.maxMoveSpeed), player.rigid.velocity.y);
         }
 
-        player.FlipRender(moveInput);
+        player.playerView.FlipRender(moveInput);
     }
 
     public override void Exit()

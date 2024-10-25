@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class FallState : PlayerState
 {
-    private float _raycastDistance = 0.5f;
-    private float _groundedrayHitDistance = 0.2f;
+    //private float _raycastDistance = 0.5f;
+    //private float _groundedrayHitDistance = 0.2f;
+    private int idleAnimationIndex = (int)PlayerController.State.Fall;
     private bool _isFalling;
     public FallState(PlayerController player) : base(player)
     {
@@ -17,6 +18,7 @@ public class FallState : PlayerState
         // 떨어질 때 빨리 떨어지게
         // 캐릭터가 하강중
         Debug.Log("Fall 상태 진입");
+        player.playerView.PlayAnimation(idleAnimationIndex);
         _isFalling = true;
         player.rigid.velocity += Vector2.up * Physics2D.gravity.y * (player.jumpEndSpeed - 1) * Time.deltaTime;
     }
