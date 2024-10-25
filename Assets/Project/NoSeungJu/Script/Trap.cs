@@ -7,8 +7,6 @@ public class Trap : MonoBehaviour
     [Header("¿œ»∏øÎ?")]
     [SerializeField] bool _isDisposable;
 
-    int test;
-
     protected virtual void Start()
     {
         if (_isDisposable) 
@@ -28,6 +26,16 @@ public class Trap : MonoBehaviour
             if (collision.gameObject.tag == "Player")
             {
                 SceneChanger.Instance.SetKeepingTrap(transform.position, false);              
+            }
+        }
+    }
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (_isDisposable)
+        {
+            if (collision.gameObject.tag == "Player")
+            {
+                SceneChanger.Instance.SetKeepingTrap(transform.position, false);
             }
         }
     }
