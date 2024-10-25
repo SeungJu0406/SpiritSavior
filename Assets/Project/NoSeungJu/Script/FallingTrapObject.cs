@@ -4,21 +4,10 @@ using UnityEngine;
 
 public class FallingTrapObject : MonoBehaviour
 {
-    Transform _fallingPoint;
     WaitForSeconds _lifeTimeDelay;
 
-    Rigidbody2D _rb;
     Coroutine _lifeTimeRoutine;
 
-    private void Awake()
-    {
-        _rb = GetComponent<Rigidbody2D>();
-    }
-
-    public void SetFallingPoint(Transform fallingPoint)
-    {
-        _fallingPoint = fallingPoint;
-    }
     /// <summary>
     /// 라이프타임 딜레이 세팅
     /// </summary>
@@ -39,10 +28,6 @@ public class FallingTrapObject : MonoBehaviour
     IEnumerator LifeTimeRoutine()
     {
         yield return _lifeTimeDelay;
-        transform.position = _fallingPoint.position;
-        transform.rotation = _fallingPoint.rotation;
-        _rb.velocity = Vector2.zero;
-        _rb.angularVelocity = 0f;
-        gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 }

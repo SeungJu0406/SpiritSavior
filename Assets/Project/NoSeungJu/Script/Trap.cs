@@ -7,8 +7,6 @@ public class Trap : MonoBehaviour
     [Header("¿œ»∏øÎ?")]
     [SerializeField] bool _isDisposable;
 
-    int test;
-
     protected virtual void Start()
     {
         if (_isDisposable) 
