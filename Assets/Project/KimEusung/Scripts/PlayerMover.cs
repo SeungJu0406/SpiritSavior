@@ -16,7 +16,7 @@ public class PlayerMover : MonoBehaviour
     private Rigidbody2D _rigid;
     private bool _iGround = false;        // 캐릭터와 땅여부 체크
     private bool _iJump = false;          // 점프중인지여부 체크
-    private float _spacebarTime = 0f;     // 스페이스바 누른시간 체크
+    private float _jumpChargingTime = 0f;     // 스페이스바 누른시간 체크
 
     void Start()
     {
@@ -33,18 +33,18 @@ public class PlayerMover : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && _iGround)
         {
             _iJump = true;
-            _spacebarTime = 0f;
+            _jumpChargingTime = 0f;
             _rigid.velocity = new Vector2(_rigid.velocity.x, _lowJumpForce); // 1단점프
         }
 
         // 스페이스바를 누르는 동안 점프력 증가
         if (Input.GetKey(KeyCode.Space) && _iJump)
         {
-            _spacebarTime += Time.deltaTime;
+            _jumpChargingTime += Time.deltaTime;
 
-            if (_spacebarTime < _maxJumpTime && _rigid.velocity.y > 0)  // 상승 중 추가 점프력
+            if (_jumpChargingTime < _maxJumpTime && _rigid.velocity.y > 0)  // 상승 중 추가 점프력
             {
-                float jumpForce = Mathf.Lerp(_lowJumpForce, _highJumpForce, _spacebarTime / _maxJumpTime);
+                float jumpForce = Mathf.Lerp(_lowJumpForce, _highJumpForce, _jumpChargingTime / _maxJumpTime);
                 _rigid.velocity = new Vector2(_rigid.velocity.x, jumpForce);  // 점프 강도
             }
         }
