@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] State _curState = State.Idle;
     private BaseState[] _states = new BaseState[(int)State.Size];
 
-    public PlayerModel playerModel;
+    public PlayerModel playerModel = new PlayerModel();
     public PlayerView playerView;
     
 
@@ -34,7 +34,6 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        playerModel = new PlayerModel();
         if(playerModel == null)
         {
             Debug.LogError("모델 생성 오류");
