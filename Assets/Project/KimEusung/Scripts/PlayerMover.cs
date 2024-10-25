@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// teg 0 : 땅 Ground 추가
+
 public class PlayerMover : MonoBehaviour
 {
     private float _moveSpeed = 10f;        // 이동속도
