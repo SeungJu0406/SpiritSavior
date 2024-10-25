@@ -50,13 +50,13 @@ public class UIManager : MonoBehaviour
             {
                 _isBlue = true;
                 _isRed = false;
-                Debug.Log($"{_isBlue},    {_isRed}");
+                // Debug.Log($"{_isBlue},    {_isRed}");
             }
             else if(_isBlue == true)
             {
                 _isBlue = false;
                 _isRed = true;
-                Debug.Log($"{_isBlue},    {_isRed}");
+                // Debug.Log($"{_isBlue},    {_isRed}");
             }
         }
     }
@@ -77,6 +77,7 @@ public class UIManager : MonoBehaviour
             RedFace.SetActive(true);
         }
     }
+
 
 
     /// <summary>
