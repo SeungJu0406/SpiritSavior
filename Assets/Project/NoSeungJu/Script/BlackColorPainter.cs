@@ -11,7 +11,11 @@ public class BlackColorPainter : MonoBehaviour
 
         foreach(SpriteRenderer renderer in spriteRenderers)
         {
-            renderer.color = Color.black;
+            Color color = new Color();
+            color = Color.black;
+            color.a = 0.5f;
+            renderer.color = color;
+            renderer.sortingLayerName = "MiniMap";
         }
     }
 }
