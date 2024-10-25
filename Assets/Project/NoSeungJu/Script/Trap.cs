@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Trap : MonoBehaviour
 {
+    [Header("¿œ»∏øÎ?")]
     [SerializeField] bool _isDisposable;
 
-    private void Start()
+    protected virtual void Start()
     {
         if (_isDisposable) 
         {
@@ -18,7 +19,7 @@ public class Trap : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
         if (_isDisposable) 
         {

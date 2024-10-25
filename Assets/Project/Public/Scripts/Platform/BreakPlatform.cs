@@ -6,7 +6,7 @@ using UnityEngine;
 /// <summary>
 /// 무너지는 발판
 /// </summary>
-public class BreakPlatform : MonoBehaviour
+public class BreakPlatform : Trap
 {
     [Header("발판 모델 오브젝트")]
     [SerializeField] GameObject _platform;
@@ -34,13 +34,16 @@ public class BreakPlatform : MonoBehaviour
         _platformCollider = GetComponent<PolygonCollider2D>();   
         _respawnDelay = new WaitForSeconds(_respawnTime);
     }
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         InitRockPiecesLifeTime();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    protected override void OnCollisionEnter2D(Collision2D collision)
     {
+        base.OnCollisionEnter2D(collision);
+
         if(collision.gameObject.tag == "Player")
         {
             Break();
