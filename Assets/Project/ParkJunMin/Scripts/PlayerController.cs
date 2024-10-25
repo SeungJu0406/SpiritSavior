@@ -7,6 +7,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] State _curState = State.Idle;
     private BaseState[] _states = new BaseState[(int)State.Size];
 
+    public PlayerModel playerModel;
+    public PlayerView playerView;
+    
+
     public SpriteRenderer renderer;
 
     public float moveSpeed;        // 이동속도
