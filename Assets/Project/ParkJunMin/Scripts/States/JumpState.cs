@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class JumpState : PlayerState
 {
+
     public JumpState(PlayerController player) : base(player)
     {
     }
@@ -13,22 +14,24 @@ public class JumpState : PlayerState
         Debug.Log("점프 상태 진입");
 
         player.isJumped = true;
-        player.spacebarTime = 0f;
+        player.jumpChargingTime = 0f;
         player.rigid.velocity = new Vector2(player.rigid.velocity.x, player.lowJumpForce); // 1단점프
     }
 
     public override void Update()
-    {
-        
-                                                                                           // 스페이스바를 누르는 동안 점프력 증가
+    {                                                                        // 스페이스바를 누르는 동안 점프력 증가
         if (Input.GetKey(KeyCode.Space) && player.isJumped)
         {
-            player.spacebarTime += Time.deltaTime;
+            player.jumpChargingTime += Time.deltaTime;
 
-            if (player.spacebarTime < player.maxJumpTime && player.rigid.velocity.y > 0)  // 상승 중 추가 점프력
+            if (player.jumpChargingTime < player.maxJumpTime && player.rigid.velocity.y > 0)  // 상승 중 추가 점프력
             {
-                float jumpForce = Mathf.Lerp(player.lowJumpForce, player.highJumpForce, player.spacebarTime / player.maxJumpTime);
+                float jumpForce = Mathf.Lerp(player.lowJumpForce, player.highJumpForce, player.jumpChargingTime / player.maxJumpTime);
                 player.rigid.velocity = new Vector2(player.rigid.velocity.x, jumpForce);  // 점프 강도
+            }
+            else
+            {
+                player.isJumped = false;
             }
         }
 
@@ -44,6 +47,8 @@ public class JumpState : PlayerState
             player.rigid.velocity += Vector2.up * Physics2D.gravity.y * (player.jumpStartSpeed - 1) * Time.deltaTime;
         }
 
+        MoveInAir();
+
 
         if (player.rigid.velocity.y < 0)
         {
@@ -57,4 +62,21 @@ public class JumpState : PlayerState
     {
         Debug.Log("점프 상태 종료");
     }
+
+    private void MoveInAir()
+    {
+        float moveInput = Input.GetAxis("Horizontal");
+        player.rigid.velocity = new Vector2(moveInput * player.moveSpeedInAir, player.rigid.velocity.y);
+
+        if (player.rigid.velocity.x > player.maxMoveSpeedInAir)
+        {
+            player.rigid.velocity = new Vector2(player.maxMoveSpeedInAir, player.rigid.velocity.y);
+        }
+        else if (player.rigid.velocity.x < -player.maxMoveSpeedInAir)
+        {
+            player.rigid.velocity = new Vector2(-(player.maxMoveSpeedInAir), player.rigid.velocity.y);
+        }
+        player.FlipRender(moveInput);
+    }
+
 }

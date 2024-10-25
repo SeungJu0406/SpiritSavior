@@ -16,22 +16,7 @@ public class RunState : PlayerState
     }
     public override void Update()
     {
-        float moveInput = Input.GetAxis("Horizontal");
-        player.rigid.velocity = new Vector2(moveInput * player.moveSpeed, player.rigid.velocity.y);
-
-        if (player.rigid.velocity.x > player.maxMoveSpeed)
-        {
-            player.rigid.velocity = new Vector2(player.maxMoveSpeed, player.rigid.velocity.y);
-        }
-        else if (player.rigid.velocity.x < -player.maxMoveSpeed)
-        {
-            player.rigid.velocity = new Vector2(-(player.maxMoveSpeed), player.rigid.velocity.y);
-        }
-
-        if (moveInput < 0)
-            player.renderer.flipX = true;
-        if (moveInput > 0)
-            player.renderer.flipX = false;
+        Run();
 
         // Idle 상태로 전환
         if (Mathf.Abs(player.rigid.velocity.x) < 0.01f)
@@ -44,6 +29,23 @@ public class RunState : PlayerState
         {
             player.ChangeState(PlayerController.State.Jump);
         }
+    }
+
+    private void Run()
+    {
+        float moveInput = Input.GetAxis("Horizontal");
+        player.rigid.velocity = new Vector2(moveInput * player.moveSpeed, player.rigid.velocity.y);
+
+        if (player.rigid.velocity.x > player.maxMoveSpeed)
+        {
+            player.rigid.velocity = new Vector2(player.maxMoveSpeed, player.rigid.velocity.y);
+        }
+        else if (player.rigid.velocity.x < -player.maxMoveSpeed)
+        {
+            player.rigid.velocity = new Vector2(-(player.maxMoveSpeed), player.rigid.velocity.y);
+        }
+
+        player.FlipRender(moveInput);
     }
 
     public override void Exit()

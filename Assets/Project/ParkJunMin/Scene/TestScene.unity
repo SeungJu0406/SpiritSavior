@@ -274,10 +274,13 @@ MonoBehaviour:
   maxJumpTime: 0.2
   jumpStartSpeed: 8
   jumpEndSpeed: 15
+  moveSpeedInAir: 0
+  maxMoveSpeedInAir: 0
+  speedAdjustmentOffsetInAir: 0.8
   rigid: {fileID: 0}
   isGrounded: 0
   isJumped: 0
-  spacebarTime: 0
+  jumpChargingTime: 0
 --- !u!50 &1039534994
 Rigidbody2D:
   serializedVersion: 4
