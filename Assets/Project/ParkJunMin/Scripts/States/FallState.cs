@@ -5,9 +5,6 @@ using UnityEngine;
 
 public class FallState : PlayerState
 {
-    //private float _raycastDistance = 0.5f;
-    //private float _groundedrayHitDistance = 0.2f;
-    private int idleAnimationIndex = (int)PlayerController.State.Fall;
     private bool _isFalling;
     public FallState(PlayerController player) : base(player)
     {
@@ -17,8 +14,9 @@ public class FallState : PlayerState
     {
         // 떨어질 때 빨리 떨어지게
         // 캐릭터가 하강중
-        Debug.Log("Fall 상태 진입");
-        player.playerView.PlayAnimation(idleAnimationIndex);
+        //Debug.Log("Fall 상태 진입");
+        animationIndex = (int)PlayerController.State.Fall;
+        player.playerView.PlayAnimation(animationIndex);
         _isFalling = true;
         player.rigid.velocity += Vector2.up * Physics2D.gravity.y * (player.jumpEndSpeed - 1) * Time.deltaTime;
     }
@@ -34,16 +32,27 @@ public class FallState : PlayerState
         //        player.ChangeState(PlayerController.State.Idle);
         //    }
         //}
+        PlayAnimationInUpdate();
         player.MoveInAir();
 
-        if(player.isGrounded)
+        // 떨어지는 상태에서 더블점프로 상태변환 (더블점프를 안썼을 경우)
+        if (!player.isDoubleJumpUsed && Input.GetKeyDown(KeyCode.Space))
+        {
+            player.ChangeState(PlayerController.State.DoubleJump);
+        }
+
+        if (player.isGrounded)
+        {
+            player.isDoubleJumpUsed = false;
             player.ChangeState(PlayerController.State.Idle);
+        }
+            
 
     }
 
     public override void Exit()
     {
-        Debug.Log("Fall 상태 종료");
+        //Debug.Log("Fall 상태 종료");
         _isFalling = false;
     }
 }
