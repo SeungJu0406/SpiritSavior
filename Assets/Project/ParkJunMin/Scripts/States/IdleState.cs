@@ -34,6 +34,13 @@ public class IdleState : PlayerState
         {
             player.ChangeState(PlayerController.State.Jump);
         }
+
+        //ÀÓ½Ã Á×À½ Æ®¸®°Å
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            player.ChangeState(PlayerController.State.Dead);
+            Debug.Log("Á×À½");
+        }
     }
 
     public override void Exit()
