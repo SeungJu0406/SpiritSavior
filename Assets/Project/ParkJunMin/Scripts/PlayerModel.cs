@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerModel
 {
     public enum Nature {Red, Blue}
-    public event Action OnPlayerTagged;
+    public event Action<Nature> OnPlayerTagged;
     public event Action OnPlayerDamageTaken;
     public event Action OnPlayerDied;
     public Nature curNature;
@@ -24,7 +24,7 @@ public class PlayerModel
         //curNature = (Nature)(((int)curNature + 1) % (int)Nature.Size);
         //curNature = (curNature + 1) % (int)Nature.Size;
         curNature = curNature == Nature.Red ? Nature.Blue : Nature.Red;
-        OnPlayerTagged?.Invoke();
+        OnPlayerTagged?.Invoke(curNature);
     }
 
     public void TakeDamage(int damage)
