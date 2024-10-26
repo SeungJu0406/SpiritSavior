@@ -4,14 +4,22 @@ using UnityEngine;
 
 public partial class PlayerController : MonoBehaviour
 {
+    [SerializeField] PlayerUI _playerUI;
+    [SerializeField] float _invincibility;
+
+    bool _canTakeDamage = true;
+
     /// <summary>
     /// 플레이어의 데미지 피격
     /// </summary>
     /// <param name="damage"></param>
-    public void TakeDamage(int damage)
+    public  void TakeDamage(int damage)
     {
+        if (_canTakeDamage == false) return;
+
         playerModel.hp -= damage;
-        if (playerModel.hp < 0)
+        _playerUI.SetHp(playerModel.hp);
+        if (playerModel.hp <= 0)
         {
             playerModel.hp = 0;
             Die();
@@ -25,6 +33,7 @@ public partial class PlayerController : MonoBehaviour
     public void TakeHeal(int healAmount)
     {
         playerModel.hp += healAmount;
+        _playerUI.SetHp(playerModel.hp);
         if (playerModel.hp > playerModel.MaxHP)
         {
             playerModel.hp = playerModel.MaxHP;
@@ -34,6 +43,16 @@ public partial class PlayerController : MonoBehaviour
     void Die()
     {
         // 플레이어 사망 로직
+        _playerUI.ShowDeadFace();
         Destroy(gameObject);
+    }
+
+    IEnumerator InvincibilityRoutine()
+    {
+        WaitForSeconds delay = new WaitForSeconds(_invincibility);
+        _canTakeDamage = false;
+        yield return delay;
+        _canTakeDamage = true;
+
     }
 }
