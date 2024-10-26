@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class FallingTrapObject : MonoBehaviour
 {
+    [Space(10)]
+    [SerializeField] int _damage = 1;   
+
     WaitForSeconds _lifeTimeDelay;
 
     Coroutine _lifeTimeRoutine;
@@ -22,10 +25,9 @@ public class FallingTrapObject : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            // 플레이어에게 데미지를 주거나, 플레이어 사망
             if (_canAttack)
             {
-                Destroy(collision.gameObject);
+                Manager.Game.Player.TakeDamage(_damage);
             }
         }
         else
