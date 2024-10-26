@@ -12,5 +12,7 @@ public partial class GameManager : MonoBehaviour
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
+
+        Player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
 }

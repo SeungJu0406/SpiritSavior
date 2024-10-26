@@ -13,7 +13,7 @@ public partial class PlayerController : MonoBehaviour
     /// 플레이어의 데미지 피격
     /// </summary>
     /// <param name="damage"></param>
-    public  void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         if (_canTakeDamage == false) return;
 
