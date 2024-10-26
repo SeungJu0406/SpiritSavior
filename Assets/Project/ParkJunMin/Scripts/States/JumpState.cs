@@ -10,7 +10,7 @@ public class JumpState : PlayerState
 
     public override void Enter()
     {
-        Debug.Log("점프 상태 진입");
+        //Debug.Log("점프 상태 진입");
         animationIndex = (int)PlayerController.State.Jump;
         player.playerView.PlayAnimation(animationIndex);
         player.isJumped = true;
@@ -53,7 +53,7 @@ public class JumpState : PlayerState
 
         if (player.rigid.velocity.y < 0)
         {
-            Debug.Log(player.rigid.velocity.y);
+            //Debug.Log(player.rigid.velocity.y);
             player.ChangeState(PlayerController.State.Fall);
         }
             
@@ -61,7 +61,7 @@ public class JumpState : PlayerState
 
     public override void Exit()
     {
-        Debug.Log("점프 상태 종료");
+        //Debug.Log("점프 상태 종료");
     }
 
 }

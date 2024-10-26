@@ -14,7 +14,7 @@ public class FallState : PlayerState
     {
         // 떨어질 때 빨리 떨어지게
         // 캐릭터가 하강중
-        Debug.Log("Fall 상태 진입");
+        //Debug.Log("Fall 상태 진입");
         animationIndex = (int)PlayerController.State.Fall;
         player.playerView.PlayAnimation(animationIndex);
         _isFalling = true;
@@ -42,7 +42,7 @@ public class FallState : PlayerState
 
     public override void Exit()
     {
-        Debug.Log("Fall 상태 종료");
+        //Debug.Log("Fall 상태 종료");
         _isFalling = false;
     }
 }

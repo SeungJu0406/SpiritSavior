@@ -10,7 +10,7 @@ public class RunState : PlayerState
 
     public override void Enter()
     {
-        Debug.Log("Run 상태 진입");
+        //Debug.Log("Run 상태 진입");
         animationIndex = (int)PlayerController.State.Run;
         player.playerView.PlayAnimation(animationIndex);
         player.isGrounded = true;
@@ -51,6 +51,6 @@ public class RunState : PlayerState
 
     public override void Exit()
     {
-        Debug.Log("Run 상태 종료");
+        //Debug.Log("Run 상태 종료");
     }
 }

@@ -12,7 +12,7 @@ public class IdleState : PlayerState
     {
         animationIndex = (int)PlayerController.State.Idle;
         prevNature = player.playerModel.curNature;
-        Debug.Log("Idle 상태 진입");
+        //Debug.Log("Idle 상태 진입");
         player.playerView.PlayAnimation(animationIndex);
     }
 
@@ -38,6 +38,6 @@ public class IdleState : PlayerState
 
     public override void Exit()
     {
-        Debug.Log("Idle 상태 종료");
+        //Debug.Log("Idle 상태 종료");
     }
 }
