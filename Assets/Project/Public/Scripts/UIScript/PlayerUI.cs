@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerUI : BaseUI
 {
@@ -15,7 +16,7 @@ public class PlayerUI : BaseUI
 
     protected void Start()
     {
-        SetHp(Manager.Game.Player.playerModel.hp);
+        InitHpBar();
     }
 
     /// <summary>
@@ -61,6 +62,7 @@ public class PlayerUI : BaseUI
                 _lifesUI[i].SetActive(false);
             }
         }
+        GetUI<Slider>("HpBar").value = hp;
     }
 
 
@@ -69,5 +71,10 @@ public class PlayerUI : BaseUI
         _lifesUI.Add(GetUI("Life1"));
         _lifesUI.Add(GetUI("Life2"));
         _lifesUI.Add(GetUI("Life3"));
+    }
+    void InitHpBar()
+    {
+        GetUI<Slider>("HpBar").maxValue = Manager.Game.Player.playerModel.MaxHP;
+        SetHp(Manager.Game.Player.playerModel.hp);
     }
 }
