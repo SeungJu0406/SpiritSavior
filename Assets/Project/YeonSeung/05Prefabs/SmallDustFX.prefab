@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 688694432486717024}
   - component: {fileID: 688694432486717031}
   m_Layer: 0
-  m_Name: DustEffectSmall
+  m_Name: SmallDustFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
