@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -10,12 +11,14 @@ public class PlayerController : MonoBehaviour
 
     public PlayerModel playerModel = new PlayerModel();
     public PlayerView playerView;
-    
+
+    private Coroutine _checkGroundRayRoutine;
+    [SerializeField] Transform _rayPoint;
 
     public SpriteRenderer renderer;
-
+    [Header("Player Setting")]
     public float moveSpeed;        // 이동속도
-    public float maxMoveSpeed;
+    public float maxMoveSpeed;     // 이동속도의 최대값
     public float lowJumpForce;     // 낮은점프 힘
     public float highJumpForce;    // 높은점프 힘
     public float maxJumpTime;     // 최대점프 시간
@@ -26,15 +29,23 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public float moveSpeedInAir;    // 공중에서 플레이어의 속도
     [HideInInspector] public float maxMoveSpeedInAir; // 공중에서 플레이어의 속도의 최대값
 
+    [Header("SpeedInAir = SpeedInGround * x")]
     public float speedAdjustmentOffsetInAir; // 공중에서의 속도 = 땅에서의 속도 * 해당 변수
+
+    [Header("Checking")]
     public Rigidbody2D rigid;
     public bool isGrounded = false;        // 캐릭터와 땅여부 체크
     public bool isJumped = false;          // 점프중인지여부 체크
     public float jumpChargingTime = 0f;     // 스페이스바 누른시간 체크
+    
 
     private void Awake()
     {
-        if(playerModel == null)
+        if(playerModel != null)
+        {
+            playerModel.curNature = PlayerModel.Nature.Red;
+        }
+        else
         {
             Debug.LogError("모델 생성 오류");
         }
@@ -45,6 +56,13 @@ public class PlayerController : MonoBehaviour
         _states[(int)State.Fall] = new FallState(this);
         moveSpeedInAir = moveSpeed * speedAdjustmentOffsetInAir;
         maxMoveSpeedInAir = maxMoveSpeed * speedAdjustmentOffsetInAir;
+        
+
+        if (_rayPoint == null)
+            _rayPoint = transform.Find("BottomPivot");
+
+        if (_checkGroundRayRoutine == null)
+            _checkGroundRayRoutine = StartCoroutine(CheckGroundRayRoutine());
     }
 
 
@@ -96,30 +114,50 @@ public class PlayerController : MonoBehaviour
             playerView.ChangeSprite(); // 상시 애니메이션 재생 상태라 없어도 무방
             playerModel.TagElement(); // 속성 열거형 형식의 curNature를 바꿔줌
             //playerView.PlayAnimation((int)_curState);
+            Debug.Log(playerModel.curNature);
         }
     }
 
     private void OnDestroy()
     {
-       
+       if(_checkGroundRayRoutine != null)
+            StopCoroutine(_checkGroundRayRoutine);
+    }
+
+    IEnumerator CheckGroundRayRoutine()
+    {
+        WaitForSeconds delay = new WaitForSeconds(0.05f);
+        while (true)
+        {
+            Debug.DrawRay(_rayPoint.position, Vector2.down * 0.1f, Color.green);
+            if (Physics2D.Raycast(_rayPoint.position, Vector2.down, 0.1f)) //_rayPoint.up * -1
+            {
+                isGrounded = true;
+            }
+            else
+            {
+                isGrounded= false;
+            }
+            yield return delay;
+        }
     }
 
     // 레이어 땅 체크
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
-        {
-            isGrounded = true;
-        }
-    }
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+    //    {
+    //        isGrounded = true;
+    //    }
+    //}
 
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
-        {
-            isGrounded = false;
-        }
-    }
+    //private void OnCollisionExit2D(Collision2D collision)
+    //{
+    //    if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+    //    {
+    //        isGrounded = false;
+    //    }
+    //}
 }
 
 
