@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
-    public enum State {Idle, Run, Jump, Fall, Size}
+    public enum State {Idle, Run, Jump, DoubleJump, Fall, Size}
     [SerializeField] State _curState = State.Idle;
     private BaseState[] _states = new BaseState[(int)State.Size];
 
@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     public float maxJumpTime;     // 최대점프 시간
     public float jumpStartSpeed;   // 점프시작 속도
     public float jumpEndSpeed;     // 점프종료 속도
+    public float doubleJumpForce;
 
     //기본 이동속도에 따라 변화되는 변수 변경x
     [HideInInspector] public float moveSpeedInAir;    // 공중에서 플레이어의 속도
@@ -53,6 +54,7 @@ public class PlayerController : MonoBehaviour
         _states[(int)State.Idle] = new IdleState(this);
         _states[(int)State.Run] = new RunState(this);
         _states[(int)State.Jump] = new JumpState(this);
+        _states[(int)State.DoubleJump] = new DoubleJumpState(this);
         _states[(int)State.Fall] = new FallState(this);
         moveSpeedInAir = moveSpeed * speedAdjustmentOffsetInAir;
         maxMoveSpeedInAir = maxMoveSpeed * speedAdjustmentOffsetInAir;
