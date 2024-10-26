@@ -4,7 +4,7 @@ using UnityEngine;
 
 public partial class PlayerController : MonoBehaviour
 {
-    public enum State {Idle, Run, Jump, DoubleJump, Fall, Size}
+    public enum State {Idle, Run, Jump, DoubleJump, Fall, Dead, Size}
     [SerializeField] State _curState = State.Idle;
     private BaseState[] _states = new BaseState[(int)State.Size];
 
@@ -57,6 +57,7 @@ public partial class PlayerController : MonoBehaviour
         _states[(int)State.Jump] = new JumpState(this);
         _states[(int)State.DoubleJump] = new DoubleJumpState(this);
         _states[(int)State.Fall] = new FallState(this);
+        _states[(int)State.Dead] = new DeadState(this);
         moveSpeedInAir = moveSpeed * speedAdjustmentOffsetInAir;
         maxMoveSpeedInAir = maxMoveSpeed * speedAdjustmentOffsetInAir;
         
@@ -73,8 +74,6 @@ public partial class PlayerController : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody2D>();
         playerView = GetComponent<PlayerView>();
-        
-
         _states[(int)_curState].Enter();
     }
 
@@ -115,9 +114,7 @@ public partial class PlayerController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Tab))
         {
             playerView.ChangeSprite(); // 상시 애니메이션 재생 상태라 없어도 무방
-            playerModel.TagElement(); // 속성 열거형 형식의 curNature를 바꿔줌
-            //playerView.PlayAnimation((int)_curState);
-            Debug.Log(playerModel.curNature);
+            playerModel.TagPlayer(); // 속성 열거형 형식의 curNature를 바꿔줌 + 태그 이벤트 Invoke
         }
     }
 
