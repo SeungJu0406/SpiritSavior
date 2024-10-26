@@ -50,6 +50,12 @@ public class JumpState : PlayerState
 
         player.MoveInAir();
 
+        // 점프 상태에서 더블점프로 상태변환
+        if (!player.isDoubleJumpUsed && Input.GetKeyDown(KeyCode.Space))
+        {
+            player.ChangeState(PlayerController.State.DoubleJump);
+        }
+
 
         if (player.rigid.velocity.y < 0)
         {

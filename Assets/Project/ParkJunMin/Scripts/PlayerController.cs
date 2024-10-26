@@ -23,7 +23,8 @@ public partial class PlayerController : MonoBehaviour
     public float maxJumpTime;     // 최대점프 시간
     public float jumpStartSpeed;   // 점프시작 속도
     public float jumpEndSpeed;     // 점프종료 속도
-    public float doubleJumpForce;
+    public float doubleJumpForce; // 더블 점프시 얼마나 위로 올라갈지 결정
+    
 
     //기본 이동속도에 따라 변화되는 변수 변경x
     [HideInInspector] public float moveSpeedInAir;    // 공중에서 플레이어의 속도
@@ -37,7 +38,8 @@ public partial class PlayerController : MonoBehaviour
     public bool isGrounded = false;        // 캐릭터와 땅여부 체크
     public bool isJumped = false;          // 점프중인지여부 체크
     public float jumpChargingTime = 0f;     // 스페이스바 누른시간 체크
-    
+    public bool isDoubleJumpUsed; // 더블점프 사용 유무를 나타내는 변수
+
 
     private void Awake()
     {
