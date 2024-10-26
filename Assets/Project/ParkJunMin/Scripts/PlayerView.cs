@@ -7,7 +7,7 @@ public class PlayerView : MonoBehaviour
 {
     private PlayerModel _playerModel;
     private PlayerController _player;
-    private Animator _animator;
+    public Animator animator;
     public SpriteRenderer renderer;
     public Sprite[] sprites;
     private int _curSpriteIndex = 0;
@@ -38,7 +38,7 @@ public class PlayerView : MonoBehaviour
         if(sprites.Length > 0 )
             renderer.sprite = sprites[_curSpriteIndex];
         _playerModel = _player.playerModel;
-        _animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
     }
 
     public void ChangeSprite()
@@ -60,11 +60,30 @@ public class PlayerView : MonoBehaviour
         {
             if (_playerModel.curNature == PlayerModel.Nature.Red)
             {
-                _animator.Play(_animationHash[animationIndex], 0, 0);
+                animator.Play(_animationHash[animationIndex], 0, 0);
             }
             else if (_playerModel.curNature == PlayerModel.Nature.Blue)
             {
-                _animator.Play(_animationHash[animationIndex + (int)PlayerController.State.Size], 0, 0);
+                animator.Play(_animationHash[animationIndex + (int)PlayerController.State.Size], 0, 0);
+            }
+        }
+        else
+        {
+            Debug.LogError("애니메이션 인덱스 에러");
+        }
+    }
+
+    public void PlayAnimation(int animationIndex, float normalizedTime)
+    {
+        if (animationIndex >= 0 && animationIndex < _animationHash.Length)
+        {
+            if (_playerModel.curNature == PlayerModel.Nature.Red)
+            {
+                animator.Play(_animationHash[animationIndex], 0, normalizedTime);
+            }
+            else if (_playerModel.curNature == PlayerModel.Nature.Blue)
+            {
+                animator.Play(_animationHash[animationIndex + (int)PlayerController.State.Size], 0, normalizedTime);
             }
         }
         else

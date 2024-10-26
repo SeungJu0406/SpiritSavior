@@ -129,8 +129,8 @@ public class PlayerController : MonoBehaviour
         WaitForSeconds delay = new WaitForSeconds(0.05f);
         while (true)
         {
-            Debug.DrawRay(_rayPoint.position, _rayPoint.up*-0.1f,Color.green);
-            if (Physics2D.Raycast(_rayPoint.position, _rayPoint.up * -1, 0.1f))
+            Debug.DrawRay(_rayPoint.position, Vector2.down * 0.1f, Color.green);
+            if (Physics2D.Raycast(_rayPoint.position, Vector2.down, 0.1f)) //_rayPoint.up * -1
             {
                 isGrounded = true;
             }
