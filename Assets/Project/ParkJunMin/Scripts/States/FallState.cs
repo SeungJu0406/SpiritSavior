@@ -35,8 +35,18 @@ public class FallState : PlayerState
         PlayAnimationInUpdate();
         player.MoveInAir();
 
-        if(player.isGrounded)
+        // 떨어지는 상태에서 더블점프로 상태변환 (더블점프를 안썼을 경우)
+        if (!player.isDoubleJumpUsed && Input.GetKeyDown(KeyCode.Space))
+        {
+            player.ChangeState(PlayerController.State.DoubleJump);
+        }
+
+        if (player.isGrounded)
+        {
+            player.isDoubleJumpUsed = false;
             player.ChangeState(PlayerController.State.Idle);
+        }
+            
 
     }
 

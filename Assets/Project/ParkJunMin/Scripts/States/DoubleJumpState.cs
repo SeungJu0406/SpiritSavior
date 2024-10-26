@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DoubleJumpState : PlayerState
 {
+    
     public DoubleJumpState(PlayerController player) : base(player)
     {
     }
@@ -12,7 +13,9 @@ public class DoubleJumpState : PlayerState
     {
         animationIndex = (int)PlayerController.State.DoubleJump;
         player.playerView.PlayAnimation(animationIndex);
-        base.Enter();
+        player.rigid.AddForce(new Vector2(player.rigid.velocity.x,player.doubleJumpForce),ForceMode2D.Impulse);
+        player.isDoubleJumpUsed = true;
+        
     }
 
     public override void Update()
