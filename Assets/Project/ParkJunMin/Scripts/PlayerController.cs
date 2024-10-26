@@ -2,9 +2,8 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public partial class PlayerController : MonoBehaviour
 {
-
     public enum State {Idle, Run, Jump, DoubleJump, Fall, Size}
     [SerializeField] State _curState = State.Idle;
     private BaseState[] _states = new BaseState[(int)State.Size];
