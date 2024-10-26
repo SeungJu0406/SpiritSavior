@@ -8,6 +8,7 @@ public class TriggerTrap : Trap
 
     [Header("떨어지는 물체")]
     [SerializeField] FallingTrapObject _fallingTrapObject;
+    [SerializeField] int _damage = 1;
 
     [Header("물체 라이프 타임")]
     [SerializeField] float _lifeTime;
@@ -27,9 +28,7 @@ public class TriggerTrap : Trap
 
     protected override void Start()
     {
-        base.Start();
-
-        
+        base.Start();      
     }
 
     protected override void OnTriggerEnter2D(Collider2D collision)
@@ -48,6 +47,7 @@ public class TriggerTrap : Trap
         {
             FallingTrapObject fallingTrapObject = Instantiate(_fallingTrapObject, _fallingPoint.position, _fallingPoint.rotation);
             fallingTrapObject.SetLifeTimeDelay(_lifeTimeDelay);
+            fallingTrapObject.SetDamage(_damage);
             StartCoroutine(RestartRoutine());
         }
     }
