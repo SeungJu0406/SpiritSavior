@@ -4,22 +4,21 @@ using UnityEngine;
 
 public class RunState : PlayerState
 {
-    private int idleAnimationIndex = (int)PlayerController.State.Run;
     public RunState(PlayerController player) : base(player)
     {
-
     }
 
     public override void Enter()
     {
         Debug.Log("Run 상태 진입");
-        player.playerView.PlayAnimation(idleAnimationIndex);
+        animationIndex = (int)PlayerController.State.Run;
+        player.playerView.PlayAnimation(animationIndex);
         player.isGrounded = true;
     }
     public override void Update()
     {
         Run();
-
+        PlayAnimationInUpdate();
         // Idle 상태로 전환
         if (Mathf.Abs(player.rigid.velocity.x) < 0.01f)
         {

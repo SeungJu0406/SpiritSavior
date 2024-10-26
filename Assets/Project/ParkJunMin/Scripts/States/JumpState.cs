@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class JumpState : PlayerState
 {
-    private int idleAnimationIndex = (int)PlayerController.State.Jump;
     public JumpState(PlayerController player) : base(player)
     {
     }
@@ -12,15 +11,17 @@ public class JumpState : PlayerState
     public override void Enter()
     {
         Debug.Log("점프 상태 진입");
-        player.playerView.PlayAnimation(idleAnimationIndex);
+        animationIndex = (int)PlayerController.State.Jump;
+        player.playerView.PlayAnimation(animationIndex);
         player.isJumped = true;
         player.jumpChargingTime = 0f;
         player.rigid.velocity = new Vector2(player.rigid.velocity.x, player.lowJumpForce); // 1단점프
     }
 
     public override void Update()
-    {                                                                        // 스페이스바를 누르는 동안 점프력 증가
-        if (Input.GetKey(KeyCode.Space) && player.isJumped)
+    {   
+        PlayAnimationInUpdate();
+        if (Input.GetKey(KeyCode.Space) && player.isJumped) // 스페이스바를 누르는 동안 점프력 증가
         {
             player.jumpChargingTime += Time.deltaTime;
 

@@ -16,7 +16,7 @@ public class PlayerModel
     public PlayerModel()
     {
         hp = 1;
-        curNature = Nature.Red;
+        //curNature = Nature.Red;
         curNature += 10;
     }
     public void TagElement()

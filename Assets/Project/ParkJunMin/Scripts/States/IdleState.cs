@@ -4,28 +4,26 @@ using UnityEngine;
 
 public class IdleState : PlayerState
 {
-    
-    private int idleAnimationIndex = (int)PlayerController.State.Idle;
     public IdleState(PlayerController player) : base(player)
     {
-       
     }
 
     public override void Enter()
     {
+        animationIndex = (int)PlayerController.State.Idle;
         prevNature = player.playerModel.curNature;
         Debug.Log("Idle 상태 진입");
-        player.playerView.PlayAnimation(idleAnimationIndex);
+        player.playerView.PlayAnimation(animationIndex);
     }
 
     public override void Update()
     {
-        if (prevNature != player.playerModel.curNature)
-        {
-            player.playerView.PlayAnimation((idleAnimationIndex + 4)%8);
-            //player.playerModel.curNature
-            prevNature = player.playerModel.curNature;
-        }
+        PlayAnimationInUpdate();
+        //if (prevNature != player.playerModel.curNature)
+        //{
+        //    player.playerView.PlayAnimation(animationIndex);
+        //    prevNature = player.playerModel.curNature;
+        //}
 
         if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) > 0.1f)
         {
