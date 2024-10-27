@@ -12,7 +12,7 @@ public class DeadState : PlayerState
     {
         animationIndex = (int)PlayerController.State.Dead;
         player.playerView.PlayAnimation(animationIndex);
-        player.playerModel.DiePlayer();
+        //player.playerModel.DiePlayer(); // 죽음시 이벤트 실행을 어디서할지는 추후 결정
     }
 
     public override void Update()

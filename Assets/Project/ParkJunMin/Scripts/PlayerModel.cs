@@ -15,7 +15,7 @@ public class PlayerModel
 
     public PlayerModel()
     {
-        hp = 1;
+        hp = 3;
         //curNature = Nature.Red;
         curNature += 10;
     }
@@ -30,14 +30,25 @@ public class PlayerModel
     public void TakeDamage(int damage)
     {
         hp -= damage;
-        OnPlayerDamageTaken?.Invoke();
+        if(hp > 0)
+        {
+            OnPlayerDamageTaken?.Invoke();
+        }
+
+        // 예외상황 발생 우려에 따라 일단 주석 처리
+        //else
+        //{
+        //    DiePlayer();
+        //}
+        
     }
 
     
 
     public void DiePlayer()
     {
-        OnPlayerDied?.Invoke();
+        if(OnPlayerDied != null)
+            OnPlayerDied?.Invoke();
     }
     
 }
