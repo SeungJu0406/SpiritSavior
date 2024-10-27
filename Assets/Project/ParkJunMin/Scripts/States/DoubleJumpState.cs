@@ -22,7 +22,7 @@ public class DoubleJumpState : PlayerState
     {
 
         player.MoveInAir();
-
+        PlayAnimationInUpdate();
         if (player.rigid.velocity.y < 0)
         {
             //Debug.Log(player.rigid.velocity.y);

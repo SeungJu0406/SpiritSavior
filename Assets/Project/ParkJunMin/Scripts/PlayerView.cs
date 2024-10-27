@@ -22,14 +22,16 @@ public class PlayerView : MonoBehaviour
         Animator.StringToHash("Jump_Red"),
         Animator.StringToHash("DoubleJump_Red"),
         Animator.StringToHash("Fall_Red"),
+        Animator.StringToHash("Die_Red"),
 
 
         Animator.StringToHash("Idle_Blue"),
         Animator.StringToHash("Run_Blue"),
         Animator.StringToHash("Jump_Blue"),
         Animator.StringToHash("DoubleJump_Blue"),
-        Animator.StringToHash("Fall_Blue")
-        
+        Animator.StringToHash("Fall_Blue"),
+        Animator.StringToHash("Die_Blue")
+
     };
 
     // Animator.StringToHash("Fall_(string)")
