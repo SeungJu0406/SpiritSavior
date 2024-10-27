@@ -13,6 +13,13 @@ public class FallingTrapObject : MonoBehaviour
 
     bool _canAttack = true;
 
+
+    int _ignorePlayerLayer;
+    private void Awake()
+    {
+        _ignorePlayerLayer = LayerMask.NameToLayer("Ignore Player");
+    }
+
     /// <summary>
     /// 돌 데미지 세팅
     /// </summary>
@@ -36,14 +43,14 @@ public class FallingTrapObject : MonoBehaviour
         {
             if (_canAttack)
             {
-                Manager.Game.Player.TakeDamage(_damage);
-                _canAttack = false;
+                Manager.Game.Player.TakeDamage(_damage);             
             }
         }
         else
         {
             _lifeTimeRoutine = _lifeTimeRoutine == null ? StartCoroutine(LifeTimeRoutine()) : _lifeTimeRoutine; 
         }
+        ProcessCollision();
     }
 
     /// <summary>
@@ -52,8 +59,16 @@ public class FallingTrapObject : MonoBehaviour
     /// <returns></returns>
     IEnumerator LifeTimeRoutine()
     {
-        _canAttack = false;
         yield return _lifeTimeDelay;
         Destroy(gameObject);
+    }
+
+    /// <summary>
+    /// 충돌 이후 처리
+    /// </summary>
+    void ProcessCollision()
+    {
+        _canAttack = false;
+        gameObject.layer = _ignorePlayerLayer;
     }
 }
