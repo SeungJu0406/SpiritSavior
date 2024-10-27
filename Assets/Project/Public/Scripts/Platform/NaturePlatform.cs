@@ -18,9 +18,9 @@ public class NaturePlatform : MonoBehaviour
 
     private void Start()
     { 
-
         PlayerController player = Manager.Game.Player;
         player.playerModel.OnPlayerTagged += SetActiveCollider;
+        SetActiveCollider(player.playerModel.curNature);
     }
 
     private void SetActiveCollider(PlayerModel.Nature nature)
