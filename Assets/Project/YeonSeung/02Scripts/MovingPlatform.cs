@@ -7,9 +7,10 @@ public class MovingPlatform : Trap
     [SerializeField] GameObject _movingPlatform;
     PolygonCollider2D _movingPlatformCollider;
 
-    [Header("움직임관련")]
-    [SerializeField] float _movingTime;
+    // [SerializeField] float _movingTime; // 시간동안 움직이다 사라지는 버전 쓰게된다면
+    [Header("움직임관련 \t 속도: ")]
     [SerializeField] float _movingSpeed;
+    [Header("움직일 거리: ")]
     [SerializeField] float _movingDistance;
     private float _movingDirection;
     [Header("왼쪽 = 빈칸 / 오른쪽 체크")]
@@ -55,9 +56,21 @@ public class MovingPlatform : Trap
 
         if(collision.gameObject.tag == "Player")
         {
-            // 밟고 1초후에 없어지는
+            // 밟으면(충돌인지되면) 부모 하에 둬서 이동 같이.
+            collision.transform.SetParent(transform);
+
+            // 밟고 1초후에 없어지는 나중에 뭐 여러 종류 발판늘리게되거나 하면
             // Destroy(gameObject,1f);
         }
+    }
+    protected void OnCollisionExit2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Player")
+        {
+            // 접촉끝나면 자식해제
+            collision.transform.SetParent(null);
+        }
+
     }
 
 }
