@@ -4,7 +4,7 @@ using UnityEngine;
 
 public partial class PlayerController : MonoBehaviour
 {
-    public enum State {Idle, Run, Jump, DoubleJump, Fall, Dead, Size}
+    public enum State {Idle, Run, Jump, DoubleJump, Fall, Damaged, Dead, Size}
     [SerializeField] State _curState = State.Idle;
     private BaseState[] _states = new BaseState[(int)State.Size];
 
@@ -24,6 +24,7 @@ public partial class PlayerController : MonoBehaviour
     public float jumpStartSpeed;   // 점프시작 속도
     public float jumpEndSpeed;     // 점프종료 속도
     public float doubleJumpForce; // 더블 점프시 얼마나 위로 올라갈지 결정
+    public float knockbackForce; // 피격시 얼마나 뒤로 밀려날 지 결정
     
 
     //기본 이동속도에 따라 변화되는 변수 변경x
@@ -39,6 +40,7 @@ public partial class PlayerController : MonoBehaviour
     public bool isJumped = false;          // 점프중인지여부 체크
     public float jumpChargingTime = 0f;     // 스페이스바 누른시간 체크
     public bool isDoubleJumpUsed; // 더블점프 사용 유무를 나타내는 변수
+    public bool isDead = false; // 죽었는지 확인
 
 
     private void Awake()
@@ -57,6 +59,7 @@ public partial class PlayerController : MonoBehaviour
         _states[(int)State.Jump] = new JumpState(this);
         _states[(int)State.DoubleJump] = new DoubleJumpState(this);
         _states[(int)State.Fall] = new FallState(this);
+        _states[(int)State.Damaged] = new DamagedState(this, knockbackForce);
         _states[(int)State.Dead] = new DeadState(this);
         moveSpeedInAir = moveSpeed * speedAdjustmentOffsetInAir;
         maxMoveSpeedInAir = maxMoveSpeed * speedAdjustmentOffsetInAir;
@@ -75,13 +78,27 @@ public partial class PlayerController : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         playerView = GetComponent<PlayerView>();
         _states[(int)_curState].Enter();
+        SubscribeEvents();
     }
 
     void Update()
     {
         _states[(int)_curState].Update();
         TagePlayer();
-        
+
+        //임시 피격 트리거
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            ChangeState(State.Damaged);
+        }
+
+        //임시 죽음 트리거
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            playerModel.DiePlayer();
+            Debug.Log("죽음");
+        }
+
     }
 
     public void ChangeState(State nextState)
@@ -118,10 +135,29 @@ public partial class PlayerController : MonoBehaviour
         }
     }
 
+    private void HandlePlayerDied()
+    {
+        isDead = true;
+        ChangeState(State.Dead);
+    }
+
+
     private void OnDestroy()
     {
-       if(_checkGroundRayRoutine != null)
+        UnsubscribeEvents();
+
+        if (_checkGroundRayRoutine != null)
             StopCoroutine(_checkGroundRayRoutine);
+    }
+
+    private void SubscribeEvents()
+    {
+        playerModel.OnPlayerDied += HandlePlayerDied;
+    }
+
+    private void UnsubscribeEvents()
+    {
+        playerModel.OnPlayerDied -= HandlePlayerDied;
     }
 
     IEnumerator CheckGroundRayRoutine()

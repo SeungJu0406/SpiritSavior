@@ -30,6 +30,14 @@ public class RunState : PlayerState
         {
             player.ChangeState(PlayerController.State.Jump);
         }
+
+        //임시 피격 트리거
+        //if (Input.GetKeyDown(KeyCode.O))
+        //{
+        //    player.ChangeState(PlayerController.State.Damaged);
+        //}
+
+
     }
 
     private void Run()
