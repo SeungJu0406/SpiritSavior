@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class GrassController : MonoBehaviour
 {
-    [SerializeField] ParticleSystem grassParticles;
+    [SerializeField] GameObject grassParticles;
 
-    private ParticleSystem _grassParticlesInstance;
+    // private ParticleSystem _grassParticlesInstance;
 
     private void SpawnGrassParticles()
     {
-        _grassParticlesInstance = Instantiate(grassParticles, transform.position, Quaternion.identity);
+        ObjectPool.SpawnObject(grassParticles, transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
