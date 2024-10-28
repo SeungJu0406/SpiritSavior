@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -41,6 +42,11 @@ public partial class PlayerController : MonoBehaviour
     public float jumpChargingTime = 0f;     // 스페이스바 누른시간 체크
     public bool isDoubleJumpUsed; // 더블점프 사용 유무를 나타내는 변수
     public bool isDead = false; // 죽었는지 확인
+
+    //벽감지
+    private float _wallCheckDistance = 0.1f;
+    public Vector2 wallCheckSize;
+    Coroutine _wallCheckRoutine;
     
     public float hp;
 
@@ -74,6 +80,9 @@ public partial class PlayerController : MonoBehaviour
 
         if (_checkGroundRayRoutine == null)
             _checkGroundRayRoutine = StartCoroutine(CheckGroundRayRoutine());
+
+        //if (_wallCheckRoutine == null) // 작성중
+        //    _wallCheckRoutine = StartCoroutine(CheckWallRoutine());
 
         //임시 체력 확인용
         hp = playerModel.hp;
@@ -134,6 +143,7 @@ public partial class PlayerController : MonoBehaviour
             rigid.velocity = new Vector2(-(maxMoveSpeedInAir), rigid.velocity.y);
         }
         playerView.FlipRender(moveInput);
+
 
         // 벽에 끼었을때 그냥 떨어지는 로직을 추가해야함
     }
@@ -208,6 +218,13 @@ public partial class PlayerController : MonoBehaviour
             }
             yield return delay;
         }
+    }
+
+    IEnumerator CheckWallRoutine()
+    {
+        WaitForSeconds delay = new WaitForSeconds(0.05f);
+        //작성중
+        yield return delay;
     }
 
     // 레이어 땅 체크
