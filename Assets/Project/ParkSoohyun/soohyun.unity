@@ -5420,6 +5420,10 @@ PrefabInstance:
       propertyPath: doubleJumpForce
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 6660741116626954115, guid: 376bf30346245cc4a8b8862924e2b26f, type: 3}
+      propertyPath: speedAdjustmentOffsetInAir
+      value: 0.9
+      objectReference: {fileID: 0}
     - target: {fileID: 7980547255051890650, guid: 376bf30346245cc4a8b8862924e2b26f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.2
