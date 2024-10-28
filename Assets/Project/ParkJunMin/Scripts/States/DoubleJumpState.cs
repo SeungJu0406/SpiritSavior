@@ -7,11 +7,12 @@ public class DoubleJumpState : PlayerState
     
     public DoubleJumpState(PlayerController player) : base(player)
     {
+        animationIndex = (int)PlayerController.State.DoubleJump;
     }
 
     public override void Enter()
     {
-        animationIndex = (int)PlayerController.State.DoubleJump;
+        
         player.playerView.PlayAnimation(animationIndex);
         player.rigid.AddForce(new Vector2(player.rigid.velocity.x,player.doubleJumpForce),ForceMode2D.Impulse);
         player.isDoubleJumpUsed = true;

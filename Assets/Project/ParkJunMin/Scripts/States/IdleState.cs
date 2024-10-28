@@ -6,11 +6,12 @@ public class IdleState : PlayerState
 {
     public IdleState(PlayerController player) : base(player)
     {
+        animationIndex = (int)PlayerController.State.Idle;
     }
 
     public override void Enter()
     {
-        animationIndex = (int)PlayerController.State.Idle;
+        
         prevNature = player.playerModel.curNature;
         //Debug.Log("Idle 상태 진입");
         player.playerView.PlayAnimation(animationIndex);
