@@ -7,12 +7,13 @@ public class RunState : PlayerState
 {
     public RunState(PlayerController player) : base(player)
     {
+        animationIndex = (int)PlayerController.State.Run;
     }
 
     public override void Enter()
     {
         //Debug.Log("Run 상태 진입");
-        animationIndex = (int)PlayerController.State.Run;
+        
         player.playerView.PlayAnimation(animationIndex);
         player.isGrounded = true;
     }

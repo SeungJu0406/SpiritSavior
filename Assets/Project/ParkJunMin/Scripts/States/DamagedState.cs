@@ -8,6 +8,7 @@ public class DamagedState : PlayerState
     private float _minKnockback = 0.5f;
     public DamagedState(PlayerController player, float knockbackForce) : base(player)
     {
+        animationIndex = (int)PlayerController.State.Damaged;
         this._knockbackForce = knockbackForce;
     }
 
@@ -28,15 +29,12 @@ public class DamagedState : PlayerState
         //무적상태 
         player.playerModel.invincibility = true;
         
-
-        animationIndex = (int)PlayerController.State.Damaged;
         player.playerView.PlayAnimation(animationIndex);
         player.hp = player.playerModel.hp;
 
         //피격시 넉백
         
         player.rigid.AddForce(knockbackDirection * _knockbackForce, ForceMode2D.Impulse);
-
     }
 
     public override void Update()
@@ -44,24 +42,25 @@ public class DamagedState : PlayerState
         // 피격상태가 끝나는걸 확인
         if(player.rigid.velocity.magnitude < 0.1f) // 넉백의 힘이 거의 사라졌을 때
         {
-            player.playerModel.invincibility = false;
-
             if (player.playerModel.hp > 0)
-                player.ChangeState(PlayerController.State.Idle);
+            {
+                player.ChangeState(PlayerController.State.WakeUp);
+            }
             else
+            {
                 player.ChangeState(PlayerController.State.Dead);
+            }
         }
-
     }
 
     public override void Exit()
     {
         Debug.Log("피격 상태 탈출");
-        // 무적 시간을 넣을경우 여기에?
     }
 
     private void KnockbackPlayer()
     {
 
     }
+
 }

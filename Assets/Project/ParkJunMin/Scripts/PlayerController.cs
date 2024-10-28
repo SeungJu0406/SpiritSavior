@@ -4,8 +4,8 @@ using UnityEngine;
 
 public partial class PlayerController : MonoBehaviour
 {
-    public enum State {Idle, Run, Jump, DoubleJump, Fall, Damaged, Dead, Spawn, Size}
-    [SerializeField] State _curState = State.Idle;
+    public enum State {Idle, Run, Jump, DoubleJump, Fall, Damaged, WakeUp, Dead, Spawn, Size}
+    [SerializeField] State _curState = State.Spawn;
     private BaseState[] _states = new BaseState[(int)State.Size];
 
     public PlayerModel playerModel = new PlayerModel();
@@ -62,6 +62,7 @@ public partial class PlayerController : MonoBehaviour
         _states[(int)State.DoubleJump] = new DoubleJumpState(this);
         _states[(int)State.Fall] = new FallState(this);
         _states[(int)State.Damaged] = new DamagedState(this, knockbackForce);
+        _states[(int)State.WakeUp] = new WakeupState(this);
         _states[(int)State.Dead] = new DeadState(this);
         _states[(int)State.Spawn] = new SpawnState(this);
         moveSpeedInAir = moveSpeed * speedAdjustmentOffsetInAir;
@@ -92,18 +93,18 @@ public partial class PlayerController : MonoBehaviour
         _states[(int)_curState].Update();
         TagePlayer();
 
-        //임시 피격 트리거
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            playerModel.TakeDamage(1); // 임시
-        }
+        ////임시 피격 트리거
+        //if (Input.GetKeyDown(KeyCode.O))
+        //{
+        //    playerModel.TakeDamage(1); // 임시
+        //}
 
-        //임시 죽음 트리거
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            playerModel.DiePlayer();
-            Debug.Log("죽음");
-        }
+        ////임시 죽음 트리거
+        //if (Input.GetKeyDown(KeyCode.P))
+        //{
+        //    playerModel.DiePlayer();
+        //    Debug.Log("죽음");
+        //}
 
         //임시 체력 확인용
         //hp = playerModel.hp;
@@ -133,6 +134,8 @@ public partial class PlayerController : MonoBehaviour
             rigid.velocity = new Vector2(-(maxMoveSpeedInAir), rigid.velocity.y);
         }
         playerView.FlipRender(moveInput);
+
+        // 벽에 끼었을때 그냥 떨어지는 로직을 추가해야함
     }
 
     public void TagePlayer()
@@ -154,6 +157,10 @@ public partial class PlayerController : MonoBehaviour
     {
         ChangeState(State.Damaged);
     }
+
+    /// <summary>
+    /// 플레이어 초기화 및 스폰 작업
+    /// </summary>
     public void HandlePlayerSpawn()
     {
         ChangeState(State.Spawn);
@@ -182,9 +189,7 @@ public partial class PlayerController : MonoBehaviour
         playerModel.OnPlayerSpawn -= HandlePlayerSpawn;
     }
 
-    /// <summary>
-    /// 플레이어 초기화 및 스폰 작업
-    /// </summary>
+
 
 
     IEnumerator CheckGroundRayRoutine()

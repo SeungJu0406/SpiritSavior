@@ -8,6 +8,7 @@ public class FallState : PlayerState
     private bool _isFalling;
     public FallState(PlayerController player) : base(player)
     {
+        animationIndex = (int)PlayerController.State.Fall;
     }
 
     public override void Enter()
@@ -15,7 +16,7 @@ public class FallState : PlayerState
         // 떨어질 때 빨리 떨어지게
         // 캐릭터가 하강중
         //Debug.Log("Fall 상태 진입");
-        animationIndex = (int)PlayerController.State.Fall;
+        
         player.playerView.PlayAnimation(animationIndex);
         _isFalling = true;
         player.rigid.velocity += Vector2.up * Physics2D.gravity.y * (player.jumpEndSpeed - 1) * Time.deltaTime;

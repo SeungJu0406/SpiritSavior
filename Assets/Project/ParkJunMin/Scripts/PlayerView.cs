@@ -23,8 +23,9 @@ public class PlayerView : MonoBehaviour
         Animator.StringToHash("Jump_Red"),
         Animator.StringToHash("DoubleJump_Red"),
         Animator.StringToHash("Fall_Red"),
-        //Animator.StringToHash("Damaged_Red"), 임시
-        Animator.StringToHash("WallClimbingStart_Red"),
+        Animator.StringToHash("DamageStart_Red"),
+        Animator.StringToHash("DamageUp_Red"),
+        //Animator.StringToHash("WallClimbingStart_Red"),
         Animator.StringToHash("Die_Red"),
         Animator.StringToHash("Spawn_Red"),
 
@@ -34,8 +35,9 @@ public class PlayerView : MonoBehaviour
         Animator.StringToHash("Jump_Blue"),
         Animator.StringToHash("DoubleJump_Blue"),
         Animator.StringToHash("Fall_Blue"),
-        //Animator.StringToHash("Damaged_Blue"), 임시
-        Animator.StringToHash("WallClimbingStart_Blue"),
+        Animator.StringToHash("DamageStart_Blue"),
+        Animator.StringToHash("DamageUp_Blue"),
+        //Animator.StringToHash("WallClimbingStart_Blue"),
         Animator.StringToHash("Die_Blue"),
         Animator.StringToHash("Spawn_Blue")
 
@@ -72,11 +74,11 @@ public class PlayerView : MonoBehaviour
         {
             if (_playerModel.curNature == PlayerModel.Nature.Red)
             {
-                animator.Play(_animationHash[animationIndex], 0, 0);
+                animator.Play(_animationHash[animationIndex],0,0);
             }
             else if (_playerModel.curNature == PlayerModel.Nature.Blue)
             {
-                animator.Play(_animationHash[animationIndex + (int)PlayerController.State.Size], 0, 0);
+                animator.Play(_animationHash[animationIndex + (int)PlayerController.State.Size],0,0);
             }
         }
         else

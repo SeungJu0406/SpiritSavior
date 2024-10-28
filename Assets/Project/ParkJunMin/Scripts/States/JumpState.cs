@@ -6,12 +6,13 @@ public class JumpState : PlayerState
 {
     public JumpState(PlayerController player) : base(player)
     {
+        animationIndex = (int)PlayerController.State.Jump;
     }
 
     public override void Enter()
     {
         //Debug.Log("점프 상태 진입");
-        animationIndex = (int)PlayerController.State.Jump;
+        
         player.playerView.PlayAnimation(animationIndex);
         player.isJumped = true;
         player.jumpChargingTime = 0f;
