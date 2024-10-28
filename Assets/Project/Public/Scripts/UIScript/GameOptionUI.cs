@@ -25,6 +25,34 @@ public class GameOptionUI : BaseUI
         InitOptionBox();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape)) 
+        {
+            ToggleGameOptionUI();
+        }
+    }
+
+    /// <summary>
+    /// 게임 옵션 UI On/Off
+    /// </summary>
+    private void ToggleGameOptionUI()
+    {
+        if (GetUI("GameOptionUI").activeSelf)
+        {
+            GetUI("GameOptionUI").SetActive(false);
+            GetUI<Animator>("MenuButton").Play("Out");
+        }
+        else
+        {
+            GetUI("GameOptionUI").SetActive(true);
+            GetUI<Animator>("MenuButton").Play("In");
+
+            GetUI("AudioOption").SetActive(false);
+        }
+    }
+
+
     /// <summary>
     /// 조작법 ON/OFF
     /// </summary>
@@ -88,25 +116,7 @@ public class GameOptionUI : BaseUI
         Manager.Sound.SetVolumeSFX(volume);
     }
 
-    /// <summary>
-    /// 게임 옵션 UI On/Off
-    /// </summary>
-    private void ToggleGameOptionUI()
-    {
-        if (GetUI("GameOptionUI").activeSelf)
-        {
-            GetUI("GameOptionUI").SetActive(false);
-            GetUI<Animator>("MenuButton").Play("Out");
-        }
-        else
-        {
-            GetUI("GameOptionUI").SetActive(true);
-            GetUI<Animator>("MenuButton").Play("In");
 
-            GetUI("AudioOption").SetActive(false);
-        }
-
-    }
 
     private void BackTitle()
     {
