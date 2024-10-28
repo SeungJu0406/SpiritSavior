@@ -82,6 +82,35 @@ public class ObjectPool : MonoBehaviour
         return spawnableObj;
     }
 
+
+    // Overload Method
+    #region 메서드오버로딩
+    public static GameObject SpawnObject(GameObject objToSpawn, Transform parentTransform)
+    {
+        PooledObject pool = ObjectPools.Find(p => p.checkString == objToSpawn.name);
+        if (pool == null)
+        {
+            pool = new PooledObject() { checkString = objToSpawn.name };
+            ObjectPools.Add(pool);
+        }
+
+        GameObject spawnableObj = pool.InactiveObjects.FirstOrDefault();
+        if (spawnableObj == null)
+        {
+            // 그냥 부모밑에...두기
+            spawnableObj = Instantiate(objToSpawn, parentTransform);
+
+        }
+        else
+        {
+            pool.InactiveObjects.Remove(spawnableObj);
+            spawnableObj.SetActive(true);
+        }
+        return spawnableObj;
+    }
+    #endregion
+
+
     public static void ReturnObjectPool(GameObject obj)
     {
         string objName = obj.name.Substring(0, obj.name.Length - 7);
