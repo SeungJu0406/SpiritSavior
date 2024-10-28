@@ -48,7 +48,8 @@ public class FallingTrapObject : MonoBehaviour
         }
         else
         {
-            _lifeTimeRoutine = _lifeTimeRoutine == null ? StartCoroutine(LifeTimeRoutine()) : _lifeTimeRoutine; 
+            Destroy(gameObject);
+            //_lifeTimeRoutine = _lifeTimeRoutine == null ? StartCoroutine(LifeTimeRoutine()) : _lifeTimeRoutine; 
         }
         ProcessCollision();
     }
@@ -57,11 +58,11 @@ public class FallingTrapObject : MonoBehaviour
     /// 물체 지면에 떨어진 후 삭제 대기 루틴
     /// </summary>
     /// <returns></returns>
-    IEnumerator LifeTimeRoutine()
-    {
-        yield return _lifeTimeDelay;
-        Destroy(gameObject);
-    }
+    //IEnumerator LifeTimeRoutine()
+    //{
+    //    yield return _lifeTimeDelay;
+    //    Destroy(gameObject);
+    //}
 
     /// <summary>
     /// 충돌 이후 처리
