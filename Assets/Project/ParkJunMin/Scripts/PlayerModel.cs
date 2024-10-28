@@ -73,12 +73,15 @@ public class PlayerModel
         OnPlayerMaxHpUp?.Invoke();
     }
 
-    
-
     public void DiePlayer()
     {
+        hp = 0;
         OnPlayerDied?.Invoke();
     }
-    
+
+    public void SpawnPlayer()
+    {
+        OnPlayerSpawn?.Invoke();
+    }
 }
 
