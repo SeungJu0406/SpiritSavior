@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class RunState : PlayerState
@@ -17,7 +18,18 @@ public class RunState : PlayerState
     }
     public override void Update()
     {
-        Run();
+        if(player.isGrounded)
+        {
+            Run();
+        }
+        else
+        {
+            player.ChangeState(PlayerController.State.Fall);
+            //player.MoveInAir();
+        }
+        
+        
+
         PlayAnimationInUpdate();
         // Idle 상태로 전환
         if (Mathf.Abs(player.rigid.velocity.x) < 0.01f)
@@ -26,10 +38,17 @@ public class RunState : PlayerState
         }
 
         // Jump 상태로 전환
-        if (Input.GetKeyDown(KeyCode.Space) && player.isGrounded) // 조건 나중에 뺄 수도 있음
+        if (Input.GetKeyDown(KeyCode.Space)) //&& player.isGrounded) // 조건 나중에 뺄 수도 있음
         {
             player.ChangeState(PlayerController.State.Jump);
         }
+
+        ////Fall 상태로 전환 // 경사면은 어떻게?
+        //if (player.rigid.velocity.y < 0)
+        //{
+        //    Debug.Log(player.rigid.velocity.y);
+        //    player.ChangeState(PlayerController.State.Fall);
+        //}
 
         //임시 피격 트리거
         //if (Input.GetKeyDown(KeyCode.O))
@@ -54,6 +73,7 @@ public class RunState : PlayerState
             player.rigid.velocity = new Vector2(-(player.maxMoveSpeed), player.rigid.velocity.y);
         }
 
+        //Debug.Log(player.rigid.velocity);
         player.playerView.FlipRender(moveInput);
     }
 
