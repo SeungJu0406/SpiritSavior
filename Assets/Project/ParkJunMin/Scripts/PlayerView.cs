@@ -12,6 +12,7 @@ public class PlayerView : MonoBehaviour
     public Sprite[] sprites;
     private int _curSpriteIndex = 0;
     public int animationIntervalNumber = 4;
+    public AnimatorStateInfo stateInfo;
 
     //[SerializeField] AudioClip[] clips;
 
@@ -25,6 +26,7 @@ public class PlayerView : MonoBehaviour
         //Animator.StringToHash("Damaged_Red"), 임시
         Animator.StringToHash("WallClimbingStart_Red"),
         Animator.StringToHash("Die_Red"),
+        Animator.StringToHash("Spawn_Red"),
 
 
         Animator.StringToHash("Idle_Blue"),
@@ -34,7 +36,8 @@ public class PlayerView : MonoBehaviour
         Animator.StringToHash("Fall_Blue"),
         //Animator.StringToHash("Damaged_Blue"), 임시
         Animator.StringToHash("WallClimbingStart_Blue"),
-        Animator.StringToHash("Die_Blue")
+        Animator.StringToHash("Die_Blue"),
+        Animator.StringToHash("Spawn_Blue")
 
     };
 
@@ -100,6 +103,18 @@ public class PlayerView : MonoBehaviour
             Debug.LogError("애니메이션 인덱스 에러");
         }
     }
+
+    public bool IsAnimationFinished()
+    {
+        stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        if(stateInfo.normalizedTime >= 1.0f)
+        {
+            return true;
+        }
+        else
+            return false;
+    }
+
 
     //public void PlayAnimation(int animationIndex)
     //{

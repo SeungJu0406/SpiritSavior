@@ -4,7 +4,7 @@ using UnityEngine;
 
 public partial class PlayerController : MonoBehaviour
 {
-    public enum State {Idle, Run, Jump, DoubleJump, Fall, Damaged, Dead, Size}
+    public enum State {Idle, Run, Jump, DoubleJump, Fall, Damaged, Dead, Spawn, Size}
     [SerializeField] State _curState = State.Idle;
     private BaseState[] _states = new BaseState[(int)State.Size];
 
@@ -41,6 +41,8 @@ public partial class PlayerController : MonoBehaviour
     public float jumpChargingTime = 0f;     // 스페이스바 누른시간 체크
     public bool isDoubleJumpUsed; // 더블점프 사용 유무를 나타내는 변수
     public bool isDead = false; // 죽었는지 확인
+    
+    public float hp;
 
 
     private void Awake()
@@ -61,6 +63,7 @@ public partial class PlayerController : MonoBehaviour
         _states[(int)State.Fall] = new FallState(this);
         _states[(int)State.Damaged] = new DamagedState(this, knockbackForce);
         _states[(int)State.Dead] = new DeadState(this);
+        _states[(int)State.Spawn] = new SpawnState(this);
         moveSpeedInAir = moveSpeed * speedAdjustmentOffsetInAir;
         maxMoveSpeedInAir = maxMoveSpeed * speedAdjustmentOffsetInAir;
         
@@ -70,6 +73,9 @@ public partial class PlayerController : MonoBehaviour
 
         if (_checkGroundRayRoutine == null)
             _checkGroundRayRoutine = StartCoroutine(CheckGroundRayRoutine());
+
+        //임시 체력 확인용
+        hp = playerModel.hp;
     }
 
 
@@ -89,7 +95,7 @@ public partial class PlayerController : MonoBehaviour
         //임시 피격 트리거
         if (Input.GetKeyDown(KeyCode.O))
         {
-            ChangeState(State.Damaged);
+            playerModel.TakeDamage(1); // 임시
         }
 
         //임시 죽음 트리거
@@ -98,6 +104,9 @@ public partial class PlayerController : MonoBehaviour
             playerModel.DiePlayer();
             Debug.Log("죽음");
         }
+
+        //임시 체력 확인용
+        //hp = playerModel.hp;
 
     }
 
@@ -141,6 +150,15 @@ public partial class PlayerController : MonoBehaviour
         ChangeState(State.Dead);
     }
 
+    private void HandlePlayerDamaged()
+    {
+        ChangeState(State.Damaged);
+    }
+    public void HandlePlayerSpawn()
+    {
+        ChangeState(State.Spawn);
+        // _playerUI.SetHp(playerModel.hp); // 일단 주석처리, 순서상의 문제로 플레이어에서 해야할수도 있음
+    }
 
     private void OnDestroy()
     {
@@ -152,21 +170,30 @@ public partial class PlayerController : MonoBehaviour
 
     private void SubscribeEvents()
     {
+        playerModel.OnPlayerDamageTaken += HandlePlayerDamaged;
         playerModel.OnPlayerDied += HandlePlayerDied;
+        playerModel.OnPlayerSpawn += HandlePlayerSpawn;
     }
 
     private void UnsubscribeEvents()
     {
+        playerModel.OnPlayerDamageTaken -= HandlePlayerDamaged;
         playerModel.OnPlayerDied -= HandlePlayerDied;
+        playerModel.OnPlayerSpawn -= HandlePlayerSpawn;
     }
+
+    /// <summary>
+    /// 플레이어 초기화 및 스폰 작업
+    /// </summary>
+
 
     IEnumerator CheckGroundRayRoutine()
     {
         WaitForSeconds delay = new WaitForSeconds(0.05f);
         while (true)
         {
-            Debug.DrawRay(_rayPoint.position, Vector2.down * 0.1f, Color.green);
-            if (Physics2D.Raycast(_rayPoint.position, Vector2.down, 0.1f)) //_rayPoint.up * -1
+            Debug.DrawRay(_rayPoint.position, Vector2.down * 0.2f, Color.green);
+            if (Physics2D.Raycast(_rayPoint.position, Vector2.down, 0.2f)) //_rayPoint.up * -1
             {
                 isGrounded = true;
             }
