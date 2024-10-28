@@ -20,6 +20,10 @@ public class DamagedState : PlayerState
         //기존의 운동량 초기화
         player.rigid.velocity = Vector2.zero;
 
+        //무적상태 
+        player.invincibility = true;
+        
+
         animationIndex = (int)PlayerController.State.Damaged;
         player.playerView.PlayAnimation(animationIndex);
         player.playerModel.TakeDamage(1); // 일단 무조건 1 데미지
@@ -35,7 +39,9 @@ public class DamagedState : PlayerState
         // 피격상태가 끝나는걸 확인
         if(player.rigid.velocity.magnitude < 0.1f) // 넉백의 힘이 거의 사라졌을 때
         {
-            if(player.playerModel.hp > 0)
+            player.invincibility = false;
+
+            if (player.playerModel.hp > 0)
                 player.ChangeState(PlayerController.State.Idle);
             else
                 player.ChangeState(PlayerController.State.Dead);

@@ -41,6 +41,7 @@ public partial class PlayerController : MonoBehaviour
     public float jumpChargingTime = 0f;     // 스페이스바 누른시간 체크
     public bool isDoubleJumpUsed; // 더블점프 사용 유무를 나타내는 변수
     public bool isDead = false; // 죽었는지 확인
+    public bool invincibility = false;
 
 
     private void Awake()
@@ -89,7 +90,7 @@ public partial class PlayerController : MonoBehaviour
         //임시 피격 트리거
         if (Input.GetKeyDown(KeyCode.O))
         {
-            ChangeState(State.Damaged);
+            playerModel.TakeDamage(1); // 임시
         }
 
         //임시 죽음 트리거
@@ -141,6 +142,11 @@ public partial class PlayerController : MonoBehaviour
         ChangeState(State.Dead);
     }
 
+    private void HandlePlayerDamaged()
+    {
+        ChangeState(State.Damaged);
+    }
+
 
     private void OnDestroy()
     {
@@ -152,12 +158,29 @@ public partial class PlayerController : MonoBehaviour
 
     private void SubscribeEvents()
     {
+        playerModel.OnPlayerDamageTaken += HandlePlayerDamaged;
         playerModel.OnPlayerDied += HandlePlayerDied;
+        playerModel.OnPlayerSpawn += SpawnPlayer;
     }
 
     private void UnsubscribeEvents()
     {
+        playerModel.OnPlayerDamageTaken -= HandlePlayerDamaged;
         playerModel.OnPlayerDied -= HandlePlayerDied;
+        playerModel.OnPlayerSpawn -= SpawnPlayer;
+    }
+
+    /// <summary>
+    /// 플레이어 초기화 및 스폰 작업
+    /// </summary>
+    public void SpawnPlayer()
+    {
+        isDead = false;
+        transform.position = Manager.Game.RespawnPoint;
+        playerModel.curNature = PlayerModel.Nature.Red;
+        ChangeState(State.Idle);
+        playerModel.hp = playerModel.curMaxHP;
+        // _playerUI.SetHp(playerModel.hp); // 일단 주석처리, 순서상의 문제로 플레이어에서 해야할수도 있음
     }
 
     IEnumerator CheckGroundRayRoutine()

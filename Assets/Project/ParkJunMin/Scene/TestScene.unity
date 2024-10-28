@@ -388,6 +388,7 @@ MonoBehaviour:
   jumpStartSpeed: 8
   jumpEndSpeed: 15
   doubleJumpForce: 8
+  knockbackForce: 3
   moveSpeedInAir: 0
   maxMoveSpeedInAir: 0
   speedAdjustmentOffsetInAir: 0.8
@@ -396,6 +397,7 @@ MonoBehaviour:
   isJumped: 0
   jumpChargingTime: 0
   isDoubleJumpUsed: 0
+  isDead: 0
 --- !u!1 &684765419
 GameObject:
   m_ObjectHideFlags: 0
@@ -475,6 +477,7 @@ MonoBehaviour:
   jumpStartSpeed: 8
   jumpEndSpeed: 15
   doubleJumpForce: 0
+  knockbackForce: 0
   moveSpeedInAir: 0
   maxMoveSpeedInAir: 0
   speedAdjustmentOffsetInAir: 0.8
@@ -483,6 +486,7 @@ MonoBehaviour:
   isJumped: 0
   jumpChargingTime: 0
   isDoubleJumpUsed: 0
+  isDead: 0
 --- !u!50 &1039534994
 Rigidbody2D:
   serializedVersion: 4
