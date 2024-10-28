@@ -41,7 +41,8 @@ public partial class PlayerController : MonoBehaviour
     public float jumpChargingTime = 0f;     // 스페이스바 누른시간 체크
     public bool isDoubleJumpUsed; // 더블점프 사용 유무를 나타내는 변수
     public bool isDead = false; // 죽었는지 확인
-    public bool invincibility = false;
+    
+    public float hp;
 
 
     private void Awake()
@@ -71,6 +72,9 @@ public partial class PlayerController : MonoBehaviour
 
         if (_checkGroundRayRoutine == null)
             _checkGroundRayRoutine = StartCoroutine(CheckGroundRayRoutine());
+
+        //임시 체력 확인용
+        hp = playerModel.hp;
     }
 
 
@@ -99,6 +103,9 @@ public partial class PlayerController : MonoBehaviour
             playerModel.DiePlayer();
             Debug.Log("죽음");
         }
+
+        //임시 체력 확인용
+        //hp = playerModel.hp;
 
     }
 

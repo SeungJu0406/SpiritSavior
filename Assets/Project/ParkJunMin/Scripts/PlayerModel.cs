@@ -14,9 +14,11 @@ public class PlayerModel
     public event Action OnPlayerDied;
     public event Action OnPlayerSpawn;
 
+
+    public bool invincibility = false;
     public Nature curNature;
     public int hp;
-    public int curMaxHP = 1; //임시값
+    public int curMaxHP = 2; //임시값
     private int _MaxHP = 3;
 
     public PlayerModel()
@@ -35,11 +37,17 @@ public class PlayerModel
 
     public void TakeDamage(int damage)
     {
-        if(hp > 0)
+        if(!invincibility && hp > 0)
         {
             hp -= damage;
             OnPlayerDamageTaken?.Invoke();
         }
+        else
+        {
+            Debug.Log("무적상태라 피격받지 않음");
+        }
+
+
 
         // 예외상황 발생 우려에 따라 일단 주석 처리
         //else
