@@ -1,9 +1,12 @@
-using System;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameOptionUI : BaseUI
 {
+    List<GameObject> optionBoxs = new List<GameObject>(2);
+
     int _menuButtonInHash;
     int _menuButtonOutHash;
 
@@ -12,13 +15,29 @@ public class GameOptionUI : BaseUI
         base.Awake();
 
         _menuButtonInHash = Animator.StringToHash("In");
-        _menuButtonInHash = Animator.StringToHash("Out");
+        _menuButtonInHash = Animator.StringToHash("Out");      
     }
 
     private void Start()
     {
         SubscribeEvent();
-        InitVolume();
+        Init();
+        InitOptionBox();
+    }
+
+    /// <summary>
+    /// 조작법 ON/OFF
+    /// </summary>
+    private void ToggleKeyOption()
+    {
+        GameObject keyOption = GetUI("KeyOption");
+        for (int i = 0; i < optionBoxs.Count; i++)
+        {
+            if (optionBoxs[i] == keyOption)
+                continue;
+            optionBoxs[i].SetActive(false);
+        }
+        keyOption.SetActive(!keyOption.activeSelf);
     }
 
     /// <summary>
@@ -26,14 +45,14 @@ public class GameOptionUI : BaseUI
     /// </summary>
     private void ToggleAudioOption()
     {
-        if (GetUI("AudioOption").activeSelf)
+        GameObject audioOption = GetUI("AudioOption");
+        for (int i = 0; i < optionBoxs.Count; i++)
         {
-            GetUI("AudioOption").SetActive(false);
-        }
-        else
-        {
-            GetUI("AudioOption").SetActive(true);
-        }
+            if (optionBoxs[i] == audioOption)
+                continue;
+            optionBoxs[i].SetActive(false);
+        }      
+        audioOption.SetActive(!audioOption.activeSelf);
     }
 
     private void SetVolumeMaster(float volume)
@@ -69,27 +88,6 @@ public class GameOptionUI : BaseUI
         Manager.Sound.SetVolumeSFX(volume);
     }
 
-
-    /// <summary>
-    /// 볼륨값 초기화
-    /// </summary>
-    private void InitVolume()
-    {
-        float masterVolume = GetUI<Slider>("MasterVolume").value;
-        if (Manager.Sound.GetVolumeBGM() > masterVolume)
-        {
-            SetVolumeBGM(masterVolume);
-        }
-        GetUI<Slider>("BGMVolume").value = Manager.Sound.GetVolumeBGM();
-
-        if (Manager.Sound.GetVolumeSFX() > masterVolume)
-        {
-            SetVolumeSFX(masterVolume);
-        }
-        GetUI<Slider>("SFXVolume").value = Manager.Sound.GetVolumeSFX();
-    }
-
-
     /// <summary>
     /// 게임 옵션 UI On/Off
     /// </summary>
@@ -107,7 +105,57 @@ public class GameOptionUI : BaseUI
 
             GetUI("AudioOption").SetActive(false);
         }
-       
+
+    }
+
+    private void BackTitle()
+    {
+        SceneManager.LoadSceneAsync("TitleScene");
+    }
+
+    /// <summary>
+    /// 설정 초기세팅
+    /// </summary>
+    private void Init()
+    {
+        InitVolume();
+        InitButton();
+    }
+
+    /// <summary>
+    /// 볼륨값 초기세팅
+    /// </summary>
+    private void InitVolume()
+    {
+        float masterVolume = GetUI<Slider>("MasterVolume").value;
+        if (Manager.Sound.GetVolumeBGM() > masterVolume)
+        {
+            SetVolumeBGM(masterVolume);
+        }
+        GetUI<Slider>("BGMVolume").value = Manager.Sound.GetVolumeBGM();
+
+        if (Manager.Sound.GetVolumeSFX() > masterVolume)
+        {
+            SetVolumeSFX(masterVolume);
+        }
+        GetUI<Slider>("SFXVolume").value = Manager.Sound.GetVolumeSFX();
+    }
+
+    private void InitButton()
+    {
+        if (GetUI("GameOptionUI").activeSelf) // 옵션UI 가 On일때는 꺼두기
+            ToggleGameOptionUI();
+    }
+
+    private void InitOptionBox()
+    {
+        optionBoxs.Add(GetUI("KeyOption"));
+        optionBoxs.Add(GetUI("AudioOption"));
+
+        foreach(GameObject optionBox in optionBoxs)
+        {
+            optionBox.SetActive(false);
+        }
     }
 
 
@@ -116,6 +164,8 @@ public class GameOptionUI : BaseUI
     /// </summary>
     private void SubscribeEvent()
     {
+        GetUI<Button>("KeyButton").onClick.AddListener(ToggleKeyOption);
+
         // 오디오 설정버튼 이벤트 구독
         GetUI<Button>("AudioButton").onClick.AddListener(ToggleAudioOption);
 
@@ -127,6 +177,9 @@ public class GameOptionUI : BaseUI
         // 메뉴 On/Off 이벤트 구독
         GetUI<Button>("BackButton").onClick.AddListener(ToggleGameOptionUI);
         GetUI<Button>("MenuButton").onClick.AddListener(ToggleGameOptionUI);
+
+        // 메인화면 버튼 이벤트 구독
+        GetUI<Button>("TitleButton").onClick.AddListener(BackTitle);
     }
 
 
