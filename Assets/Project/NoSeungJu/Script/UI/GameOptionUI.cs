@@ -1,7 +1,20 @@
+using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class GameOptionUI : BaseUI
 {
+    int _menuButtonInHash;
+    int _menuButtonOutHash;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        _menuButtonInHash = Animator.StringToHash("In");
+        _menuButtonInHash = Animator.StringToHash("Out");
+    }
+
     private void Start()
     {
         SubscribeEvent();
@@ -76,6 +89,28 @@ public class GameOptionUI : BaseUI
         GetUI<Slider>("SFXVolume").value = Manager.Sound.GetVolumeSFX();
     }
 
+
+    /// <summary>
+    /// 게임 옵션 UI On/Off
+    /// </summary>
+    private void ToggleGameOptionUI()
+    {
+        if (GetUI("GameOptionUI").activeSelf)
+        {
+            GetUI("GameOptionUI").SetActive(false);
+            GetUI<Animator>("MenuButton").Play("Out");
+        }
+        else
+        {
+            GetUI("GameOptionUI").SetActive(true);
+            GetUI<Animator>("MenuButton").Play("In");
+
+            GetUI("AudioOption").SetActive(false);
+        }
+       
+    }
+
+
     /// <summary>
     /// UI 이벤트 구독
     /// </summary>
@@ -89,5 +124,10 @@ public class GameOptionUI : BaseUI
         GetUI<Slider>("BGMVolume").onValueChanged.AddListener(SetVolumeBGM);
         GetUI<Slider>("SFXVolume").onValueChanged.AddListener(SetVolumeSFX);
 
+        // 메뉴 On/Off 이벤트 구독
+        GetUI<Button>("BackButton").onClick.AddListener(ToggleGameOptionUI);
+        GetUI<Button>("MenuButton").onClick.AddListener(ToggleGameOptionUI);
     }
+
+
 }
