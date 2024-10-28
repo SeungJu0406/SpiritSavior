@@ -15,10 +15,14 @@ public class PlayerTester : MonoBehaviour
 
     // DustEffect
     public ParticleSystem dust;
-
+    public ParticleSystem minidust;
     void CreateDust()
     {
         dust.Play();
+    }
+    void CreateMiniDust()
+    {
+        minidust.Play();
     }
 
 
@@ -32,6 +36,12 @@ public class PlayerTester : MonoBehaviour
     void Update()
     {
         Move();
+        if (Input.GetButtonDown("Horizontal") && IsGrounded())
+        {
+            CreateMiniDust();
+            // 위치 어디 잘보고 넣어야할듯.
+            // 임시로 그냥 잘 나오나 확인하려고 넣어둔거
+        }
 
 
         if (Input.GetButtonDown("Jump") && IsGrounded())

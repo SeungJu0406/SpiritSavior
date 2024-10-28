@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5753689002538849246}
   - component: {fileID: 5739219030544988490}
   - component: {fileID: 5721826446182640151}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'RockChunk_12 '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 5755422145856381914}
   - component: {fileID: 5745266214652429684}
   - component: {fileID: 5721870499218818141}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'RockChunk_4 '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -434,6 +434,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2324ff2276a19d43bc960661c05ab65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isDisposable: 0
   _platform: {fileID: 5723326506172801294}
   _rockPieceGroup: {fileID: 5723389145972452648}
   _particleGroup: {fileID: 5723390518655699524}
@@ -5200,7 +5201,7 @@ GameObject:
   - component: {fileID: 5755369724747482500}
   - component: {fileID: 5745202436861786602}
   - component: {fileID: 5723259246468862677}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'RockChunk_3 '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5583,7 +5584,7 @@ GameObject:
   - component: {fileID: 5753471464860659724}
   - component: {fileID: 5745159297339095572}
   - component: {fileID: 5723406636719964245}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'RockChunk_1 '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10466,7 +10467,7 @@ GameObject:
   - component: {fileID: 5753578510291392946}
   - component: {fileID: 5738717538736244944}
   - component: {fileID: 5723561691821816671}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'RockChunk_11 '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10602,7 +10603,7 @@ GameObject:
   - component: {fileID: 5753913099672503970}
   - component: {fileID: 5738956726896203868}
   - component: {fileID: 5723590924188817645}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'RockChunk_7 '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10738,7 +10739,7 @@ GameObject:
   - component: {fileID: 5755425515882648348}
   - component: {fileID: 5738820586052210332}
   - component: {fileID: 5723622308216649033}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RockChunk_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10874,7 +10875,7 @@ GameObject:
   - component: {fileID: 5753348815183051734}
   - component: {fileID: 5745131819383973900}
   - component: {fileID: 5723659020020389395}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'RockChunk_12 '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11010,7 +11011,7 @@ GameObject:
   - component: {fileID: 5755435971674676760}
   - component: {fileID: 5745371232039227430}
   - component: {fileID: 5723661443522033215}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'RockChunk_2 '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11146,7 +11147,7 @@ GameObject:
   - component: {fileID: 5753886038011987148}
   - component: {fileID: 5739036134862825006}
   - component: {fileID: 5723677917010271537}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'RockChunk_6 '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16029,7 +16030,7 @@ GameObject:
   - component: {fileID: 5753708276899263672}
   - component: {fileID: 5739256691122398218}
   - component: {fileID: 5723784472885718227}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'RockChunk_5 '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16165,7 +16166,7 @@ GameObject:
   - component: {fileID: 5753564542681383404}
   - component: {fileID: 5745376288137237916}
   - component: {fileID: 5723820619363752803}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RockChunk_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21048,7 +21049,7 @@ GameObject:
   - component: {fileID: 5755448562632761448}
   - component: {fileID: 5745357807205414316}
   - component: {fileID: 5723983642989191009}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'RockChunk_7 '
   m_TagString: Untagged
   m_Icon: {fileID: 0}

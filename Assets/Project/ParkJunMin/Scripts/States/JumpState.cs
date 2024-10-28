@@ -4,23 +4,24 @@ using UnityEngine;
 
 public class JumpState : PlayerState
 {
-
     public JumpState(PlayerController player) : base(player)
     {
     }
 
     public override void Enter()
     {
-        Debug.Log("점프 상태 진입");
-
+        //Debug.Log("점프 상태 진입");
+        animationIndex = (int)PlayerController.State.Jump;
+        player.playerView.PlayAnimation(animationIndex);
         player.isJumped = true;
         player.jumpChargingTime = 0f;
         player.rigid.velocity = new Vector2(player.rigid.velocity.x, player.lowJumpForce); // 1단점프
     }
 
     public override void Update()
-    {                                                                        // 스페이스바를 누르는 동안 점프력 증가
-        if (Input.GetKey(KeyCode.Space) && player.isJumped)
+    {   
+        PlayAnimationInUpdate();
+        if (Input.GetKey(KeyCode.Space) && player.isJumped) // 스페이스바를 누르는 동안 점프력 증가
         {
             player.jumpChargingTime += Time.deltaTime;
 
@@ -47,12 +48,18 @@ public class JumpState : PlayerState
             player.rigid.velocity += Vector2.up * Physics2D.gravity.y * (player.jumpStartSpeed - 1) * Time.deltaTime;
         }
 
-        MoveInAir();
+        player.MoveInAir();
+
+        // 점프 상태에서 더블점프로 상태변환
+        if (!player.isDoubleJumpUsed && Input.GetKeyDown(KeyCode.Space))
+        {
+            player.ChangeState(PlayerController.State.DoubleJump);
+        }
 
 
         if (player.rigid.velocity.y < 0)
         {
-            Debug.Log(player.rigid.velocity.y);
+            //Debug.Log(player.rigid.velocity.y);
             player.ChangeState(PlayerController.State.Fall);
         }
             
@@ -60,23 +67,7 @@ public class JumpState : PlayerState
 
     public override void Exit()
     {
-        Debug.Log("점프 상태 종료");
-    }
-
-    private void MoveInAir()
-    {
-        float moveInput = Input.GetAxis("Horizontal");
-        player.rigid.velocity = new Vector2(moveInput * player.moveSpeedInAir, player.rigid.velocity.y);
-
-        if (player.rigid.velocity.x > player.maxMoveSpeedInAir)
-        {
-            player.rigid.velocity = new Vector2(player.maxMoveSpeedInAir, player.rigid.velocity.y);
-        }
-        else if (player.rigid.velocity.x < -player.maxMoveSpeedInAir)
-        {
-            player.rigid.velocity = new Vector2(-(player.maxMoveSpeedInAir), player.rigid.velocity.y);
-        }
-        player.FlipRender(moveInput);
+        //Debug.Log("점프 상태 종료");
     }
 
 }

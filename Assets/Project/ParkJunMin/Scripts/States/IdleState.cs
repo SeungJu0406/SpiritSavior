@@ -10,12 +10,22 @@ public class IdleState : PlayerState
 
     public override void Enter()
     {
-        Debug.Log("Idle 상태 진입");
+        animationIndex = (int)PlayerController.State.Idle;
+        prevNature = player.playerModel.curNature;
+        //Debug.Log("Idle 상태 진입");
+        player.playerView.PlayAnimation(animationIndex);
     }
 
     public override void Update()
     {
-        if(Mathf.Abs(Input.GetAxisRaw("Horizontal")) > 0.1f)
+        PlayAnimationInUpdate();
+        //if (prevNature != player.playerModel.curNature)
+        //{
+        //    player.playerView.PlayAnimation(animationIndex);
+        //    prevNature = player.playerModel.curNature;
+        //}
+
+        if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) > 0.1f)
         {
             player.ChangeState(PlayerController.State.Run);
         }
@@ -28,7 +38,6 @@ public class IdleState : PlayerState
 
     public override void Exit()
     {
-        Debug.Log("Idle 상태 종료");
+        //Debug.Log("Idle 상태 종료");
     }
-
 }
