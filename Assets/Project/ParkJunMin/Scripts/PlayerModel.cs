@@ -6,16 +6,22 @@ using UnityEngine;
 public class PlayerModel
 {
     public enum Nature {Red, Blue}
+
     public event Action<Nature> OnPlayerTagged;
     public event Action OnPlayerDamageTaken;
+    public event Action OnPlayerHealth;
+    public event Action OnPlayerMaxHpUp;
     public event Action OnPlayerDied;
+    public event Action OnPlayerSpawn;
+
     public Nature curNature;
     public int hp;
-    public int MaxHP = 3; //임시값
+    public int curMaxHP = 1; //임시값
+    private int _MaxHP = 3;
 
     public PlayerModel()
     {
-        hp = 1;
+        hp = curMaxHP;
         //curNature = Nature.Red;
         curNature += 10;
     }
@@ -29,8 +35,34 @@ public class PlayerModel
 
     public void TakeDamage(int damage)
     {
-        hp -= damage;
-        OnPlayerDamageTaken?.Invoke();
+        if(hp > 0)
+        {
+            hp -= damage;
+            OnPlayerDamageTaken?.Invoke();
+        }
+
+        // 예외상황 발생 우려에 따라 일단 주석 처리
+        //else
+        //{
+        //    DiePlayer();
+        //}
+        
+    }
+
+    public void HealPlayer()
+    {
+        if (hp < curMaxHP)
+            hp++;
+        OnPlayerHealth?.Invoke();
+    }
+
+    public void AddMaxHP()
+    {
+        if(curMaxHP < _MaxHP)
+            curMaxHP++;
+        // 최대체력 증가 아이템을 습득 시 체력이 모두 회복될 지는 추후 결정
+        //hp = curMaxHP;
+        OnPlayerMaxHpUp?.Invoke();
     }
 
     

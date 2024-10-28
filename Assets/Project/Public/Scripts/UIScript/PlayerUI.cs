@@ -74,7 +74,7 @@ public class PlayerUI : BaseUI
     }
     void InitHpBar()
     {
-        GetUI<Slider>("HpBar").maxValue = Manager.Game.Player.playerModel.MaxHP;
+        GetUI<Slider>("HpBar").maxValue = Manager.Game.Player.playerModel.curMaxHP;
         SetHp(Manager.Game.Player.playerModel.hp);
     }
 }
