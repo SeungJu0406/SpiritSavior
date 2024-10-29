@@ -11,8 +11,8 @@ public class WarpPointController : MonoBehaviour
     [SerializeField] bool inWarp;
     [SerializeField] bool warpActive;
     [SerializeField] bool warpUIActive;
-    private GameObject _warpButton;
-    private SpriteRenderer spriteRenderer;
+    public GameObject _warpButton;
+    public SpriteRenderer spriteRenderer;
 
     private void Start()
     {
@@ -66,13 +66,14 @@ public class WarpPointController : MonoBehaviour
             warpUIActive = false;
         }
 
+        // 아직 이 부분 구현 안 됐습니다ㅠ
         if (warpUIActive)
         {
-            GameObject.FindWithTag("Warp").SetActive(true); // 모든 warp 활성화
+            // warpActive된 모든 button 활성화
         }
         else
         {
-            GameObject.FindWithTag("Warp").SetActive(false); // 모든 warp 비활성화
+            // warpActive된 모든 button 비활성화
         }
     }
 }
