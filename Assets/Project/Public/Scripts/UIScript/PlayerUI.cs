@@ -16,6 +16,7 @@ public class PlayerUI : BaseUI
 
     protected void Start()
     {
+        SubsCribeEvents();
         InitHpBar();
     }
 
@@ -49,9 +50,33 @@ public class PlayerUI : BaseUI
         GetUI("DeadFace").SetActive(true);
     }
 
-    public void SetHp(int hp)
+    public void SetHp()
     {
-        for(int i = 0; i < _lifesUI.Count; i++)
+        int hp = Manager.Game.Player.playerModel.hp;
+
+        for (int i = 0; i < _lifesUI.Count; i++)
+        {
+            if (i < hp)
+            {
+                _lifesUI[i].SetActive(true);
+            }
+            else
+            {
+                _lifesUI[i].SetActive(false);
+            }
+        }
+        GetUI<Slider>("HpBar").value = hp;
+    }
+
+    /// <summary>
+    /// 임시 오버로딩용. 지워야하는 메서드
+    /// </summary>
+    /// <param name="hp"></param>
+    public void SetHp(int hp)
+    {        
+        hp = Manager.Game.Player.playerModel.hp;
+
+        for (int i = 0; i < _lifesUI.Count; i++)
         {
             if (i < hp)
             {
@@ -75,6 +100,13 @@ public class PlayerUI : BaseUI
     void InitHpBar()
     {
         GetUI<Slider>("HpBar").maxValue = Manager.Game.Player.playerModel.curMaxHP;
-        SetHp(Manager.Game.Player.playerModel.hp);
+        SetHp();
+    }
+    
+    void SubsCribeEvents()
+    {
+        Manager.Game.Player.playerModel.OnPlayerDamageTaken += SetHp;
+        Manager.Game.Player.playerModel.OnPlayerHealth += SetHp;
+        Manager.Game.Player.playerModel.OnPlayerSpawn += SetHp;
     }
 }

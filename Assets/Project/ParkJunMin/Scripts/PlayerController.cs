@@ -5,15 +5,14 @@ using UnityEngine;
 
 public partial class PlayerController : MonoBehaviour
 {
-    public enum State {Idle, Run, Jump, DoubleJump, Fall, Damaged, WakeUp, Dead, Spawn, Size}
+    public enum State {Idle, Run, Jump, DoubleJump, Fall, WallGrab, WallSliding, WallJump, Damaged, WakeUp, Dead, Spawn, Size}
     [SerializeField] State _curState = State.Spawn;
     private BaseState[] _states = new BaseState[(int)State.Size];
 
     public PlayerModel playerModel = new PlayerModel();
     public PlayerView playerView;
 
-    private Coroutine _checkGroundRayRoutine;
-    [SerializeField] Transform _rayPoint;
+    
 
     public SpriteRenderer renderer;
     [Header("Player Setting")]
@@ -37,18 +36,30 @@ public partial class PlayerController : MonoBehaviour
 
     [Header("Checking")]
     public Rigidbody2D rigid;
-    public bool isGrounded = false;        // 캐릭터와 땅여부 체크
+    public float hp;
+    
     public bool isJumped = false;          // 점프중인지여부 체크
     public float jumpChargingTime = 0f;     // 스페이스바 누른시간 체크
     public bool isDoubleJumpUsed; // 더블점프 사용 유무를 나타내는 변수
     public bool isDead = false; // 죽었는지 확인
-
-    //벽감지
-    private float _wallCheckDistance = 0.1f;
-    public Vector2 wallCheckSize;
-    Coroutine _wallCheckRoutine;
     
-    public float hp;
+
+    [Header("Ground & Wall Checking")]
+    [SerializeField] Transform _groundCheckPoint;
+    public Transform _wallCheckPoint;
+    private float _wallCheckDistance = 0.15f;
+    private float _groundCheckDistance = 0.2f;
+    public int isPlayerRight = 1;
+    public bool isGrounded = false;        // 캐릭터가 땅에 붙어있는지 체크
+    [SerializeField] private bool _isWall;                  // 캐릭터가 벽에 붙어있는지 체크
+    public float wallSlidingSpeed = 0.5f; // 중력계수 조정으로 할지 결정해야함
+    public float wallJumpPower;
+    //public LayerMask wallLayer; // 사용 여부 확실치 않음
+    //public Vector2 wallCheckSize;
+    Coroutine _wallCheckRoutine;
+    Coroutine _groundCheckRoutine;
+
+
 
 
     private void Awake()
@@ -67,6 +78,9 @@ public partial class PlayerController : MonoBehaviour
         _states[(int)State.Jump] = new JumpState(this);
         _states[(int)State.DoubleJump] = new DoubleJumpState(this);
         _states[(int)State.Fall] = new FallState(this);
+        _states[(int)State.WallGrab] = new WallGrabState(this);
+        _states[(int)State.WallSliding] = new WallSlidingState(this);
+        _states[(int)State.WallJump] = new WallJumpState(this);
         _states[(int)State.Damaged] = new DamagedState(this, knockbackForce);
         _states[(int)State.WakeUp] = new WakeupState(this);
         _states[(int)State.Dead] = new DeadState(this);
@@ -75,11 +89,14 @@ public partial class PlayerController : MonoBehaviour
         maxMoveSpeedInAir = maxMoveSpeed * speedAdjustmentOffsetInAir;
         
 
-        if (_rayPoint == null)
-            _rayPoint = transform.Find("BottomPivot");
+        if (_groundCheckPoint == null)
+            _groundCheckPoint = transform.Find("BottomPivot");
 
-        if (_checkGroundRayRoutine == null)
-            _checkGroundRayRoutine = StartCoroutine(CheckGroundRayRoutine());
+        if (_wallCheckPoint == null)
+            _wallCheckPoint = transform.Find("WallCheckPoint");
+
+        if (_groundCheckRoutine == null)
+            _groundCheckRoutine = StartCoroutine(CheckGroundRayRoutine());
 
         //if (_wallCheckRoutine == null) // 작성중
         //    _wallCheckRoutine = StartCoroutine(CheckWallRoutine());
@@ -142,10 +159,11 @@ public partial class PlayerController : MonoBehaviour
         {
             rigid.velocity = new Vector2(-(maxMoveSpeedInAir), rigid.velocity.y);
         }
+
         playerView.FlipRender(moveInput);
 
-
-        // 벽에 끼었을때 그냥 떨어지는 로직을 추가해야함
+        if (_isWall)
+            ChangeState(State.WallGrab);
     }
 
     public void TagePlayer()
@@ -153,7 +171,7 @@ public partial class PlayerController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Tab))
         {
             playerView.ChangeSprite(); // 상시 애니메이션 재생 상태라 없어도 무방
-            playerModel.TagPlayer(); // 속성 열거형 형식의 curNature를 바꿔줌 + 태그 이벤트 Invoke
+            playerModel.TagPlayerEvent(); // 속성 열거형 형식의 curNature를 바꿔줌 + 태그 이벤트 Invoke
         }
     }
 
@@ -173,7 +191,7 @@ public partial class PlayerController : MonoBehaviour
     /// </summary>
     public void HandlePlayerSpawn()
     {
-        ChangeState(State.Spawn);
+        // ChangeState(State.Spawn);
         // _playerUI.SetHp(playerModel.hp); // 일단 주석처리, 순서상의 문제로 플레이어에서 해야할수도 있음
     }
 
@@ -181,8 +199,11 @@ public partial class PlayerController : MonoBehaviour
     {
         UnsubscribeEvents();
 
-        if (_checkGroundRayRoutine != null)
-            StopCoroutine(_checkGroundRayRoutine);
+        if (_groundCheckRoutine != null)
+            StopCoroutine(_groundCheckRoutine);
+
+        if(_wallCheckRoutine != null)
+            StopCoroutine(_wallCheckRoutine);
     }
 
     private void SubscribeEvents()
@@ -199,32 +220,27 @@ public partial class PlayerController : MonoBehaviour
         playerModel.OnPlayerSpawn -= HandlePlayerSpawn;
     }
 
-
-
-
     IEnumerator CheckGroundRayRoutine()
     {
-        WaitForSeconds delay = new WaitForSeconds(0.05f);
+        WaitForSeconds delay = new WaitForSeconds(0.1f);
         while (true)
         {
-            Debug.DrawRay(_rayPoint.position, Vector2.down * 0.2f, Color.green);
-            if (Physics2D.Raycast(_rayPoint.position, Vector2.down, 0.2f)) //_rayPoint.up * -1
-            {
-                isGrounded = true;
-            }
-            else
-            {
-                isGrounded= false;
-            }
+            Debug.DrawRay(_groundCheckPoint.position, Vector2.down * _groundCheckDistance, Color.green);
+            isGrounded = Physics2D.Raycast(_groundCheckPoint.position, Vector2.down, _groundCheckDistance); //_rayPoint.up * -1
             yield return delay;
         }
     }
 
     IEnumerator CheckWallRoutine()
     {
-        WaitForSeconds delay = new WaitForSeconds(0.05f);
-        //작성중
-        yield return delay;
+        WaitForSeconds delay = new WaitForSeconds(0.1f);
+
+        while (true)
+        {
+            Debug.DrawRay(_wallCheckPoint.position, Vector2.right * isPlayerRight * _wallCheckDistance, Color.green);
+            _isWall = Physics2D.Raycast(_wallCheckPoint.position, Vector2.right * isPlayerRight, _wallCheckDistance);
+            yield return delay;
+        }
     }
 
     // 레이어 땅 체크

@@ -1,10 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SceneChanger : MonoBehaviour
 {
     public static SceneChanger Instance;
+
+    [Header("플레이어 전용 씬")]
+    [SerializeField] SceneField _playerScene;
+    [Header("최초 스테이지")]
+    [SerializeField] SceneField _firstStage;
 
     Dictionary<Vector2, bool> _disPosableTrapDic = new Dictionary<Vector2, bool>(40);
 
@@ -16,6 +22,11 @@ public class SceneChanger : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
         else Destroy(gameObject);
+    }
+
+    private void Start()
+    {
+        InitScene();
     }
 
     /// <summary>
@@ -43,4 +54,18 @@ public class SceneChanger : MonoBehaviour
             _disPosableTrapDic[key] = value;
         }
     }
+
+    void InitScene()
+    {
+            AsyncOperation playerSceneOper = SceneManager.LoadSceneAsync(_playerScene);
+            playerSceneOper.allowSceneActivation = true;
+            AsyncOperation firstSceneOper = SceneManager.LoadSceneAsync(_firstStage, LoadSceneMode.Additive);
+            firstSceneOper.allowSceneActivation = true;
+        //StartCoroutine(LoadSceneRoutine());
+    }
+
+    //IEnumerator LoadSceneRoutine()
+    //{ 
+
+    //}
 }
