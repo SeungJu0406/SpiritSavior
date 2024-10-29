@@ -157,8 +157,8 @@ public partial class PlayerController : MonoBehaviour
 
         playerView.FlipRender(moveInput);
 
-        if(_isWall)
-            ChangeState(State.)
+        //if(_isWall)
+        //    ChangeState(State.)
         
 
         // 벽에 끼었을때 그냥 떨어지는 로직을 추가해야함
