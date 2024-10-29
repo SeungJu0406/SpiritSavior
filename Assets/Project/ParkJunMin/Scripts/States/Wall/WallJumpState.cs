@@ -8,12 +8,14 @@ public class WallJumpState : PlayerState
     public WallJumpState(PlayerController player) : base(player)
     {
         animationIndex = (int)PlayerController.State.WallJump;
-        wallJumpPower = player.wallJumpPower;
+        //wallJumpPower = player.wallJumpPower;
     }
     public override void Enter()
     {
+        player.isWallJumpUsed = true;
+        //player.Freeze();
         player.playerView.PlayAnimation(animationIndex);
-        player.rigid.velocity = new Vector2(-player.isPlayerRight, 0.9f * wallJumpPower); //0.9는 점프조절 임시값
+        player.rigid.velocity = new Vector2(-player.isPlayerRight* player.wallJumpPower, 0.9f * player.wallJumpPower); //0.9는 점프조절 임시값
         player.playerView.FlipRender(player.isPlayerRight);
         
     }
@@ -21,11 +23,21 @@ public class WallJumpState : PlayerState
     public override void Update()
     {
         //player.playerView.IsAnimationFinished()
-
+        
         //PlayAnimationInUpdate();
 
         //player.MoveInAir();
 
+        if (player.isGrounded)
+            player.ChangeState(PlayerController.State.Idle);
+
+        //if(player.isWall)
+        //    player.ChangeState(PlayerController.State.WallGrab);
+
+        if(player.rigid.velocity.y < 0)
+        {
+            player.ChangeState(PlayerController.State.Fall);
+        }
 
     }
 

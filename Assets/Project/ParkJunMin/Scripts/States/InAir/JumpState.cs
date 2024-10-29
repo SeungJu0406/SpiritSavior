@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class JumpState : PlayerState
 {
+    private bool _hasJumped;
     public JumpState(PlayerController player) : base(player)
     {
         animationIndex = (int)PlayerController.State.Jump;
@@ -15,39 +16,30 @@ public class JumpState : PlayerState
         
         player.playerView.PlayAnimation(animationIndex);
         player.playerModel.JumpPlayerEvent();
-        player.isJumped = true;
+        _hasJumped = true;
         player.jumpChargingTime = 0f;
-        player.rigid.velocity = new Vector2(player.rigid.velocity.x, player.lowJumpForce); // 1단점프
+        //player.rigid.velocity = new Vector2(player.rigid.velocity.x, player.lowJumpForce); // 1단점프
     }
 
     public override void Update()
     {   
         PlayAnimationInUpdate();
-        if (Input.GetKey(KeyCode.Space) && player.isJumped) // 스페이스바를 누르는 동안 점프력 증가
+        if (Input.GetKey(KeyCode.Space) && _hasJumped) // 스페이스바를 누르는 동안 점프력 증가
         {
             player.jumpChargingTime += Time.deltaTime;
-
-            if (player.jumpChargingTime < player.maxJumpTime && player.rigid.velocity.y > 0)  // 상승 중 추가 점프력
+            if(player.jumpChargingTime >= player.jumpCirticalPoint)
             {
-                float jumpForce = Mathf.Lerp(player.lowJumpForce, player.highJumpForce, player.jumpChargingTime / player.maxJumpTime);
-                player.rigid.velocity = new Vector2(player.rigid.velocity.x, jumpForce);  // 점프 강도
-            }
-            else
-            {
-                player.isJumped = false;
+                // 높은점프로 결정될만큼 스페이스바를 임계 시간 이상 누른경우
+                player.rigid.velocity = new Vector2(player.rigid.velocity.x, player.highJumpForce);
+                _hasJumped = false;
             }
         }
 
-        // 스페이스바 때면 점프 종료
-        if (Input.GetKeyUp(KeyCode.Space))
+        if (Input.GetKeyUp(KeyCode.Space) && _hasJumped)
         {
-            player.isJumped = false;
-        }
-
-        // 점프 속도를 빠르게
-        if (player.rigid.velocity.y > 0)  // 캐릭터가 상승 중
-        {
-            player.rigid.velocity += Vector2.up * Physics2D.gravity.y * (player.jumpStartSpeed - 1) * Time.deltaTime;
+            // 낮은점프 실행
+            player.rigid.velocity = new Vector2(player.rigid.velocity.x, player.lowJumpForce);
+            _hasJumped = false;
         }
 
         player.MoveInAir();

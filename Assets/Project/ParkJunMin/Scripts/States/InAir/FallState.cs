@@ -19,20 +19,13 @@ public class FallState : PlayerState
         
         player.playerView.PlayAnimation(animationIndex);
         _isFalling = true;
+        //player.rigid.gravityScale = 5;
         player.rigid.velocity += Vector2.up * Physics2D.gravity.y * (player.jumpEndSpeed - 1) * Time.deltaTime;
     }
     
     public override void Update()
     {
-        //RaycastHit2D rayHit = Physics2D.Raycast(player.rigid.position, Vector2.down, raycastDistance);
-        //Debug.DrawRay(player.rigid.position, Vector2.down * raycastDistance, Color.red);
-        //if (rayHit.collider != null)
-        //{
-        //    if (rayHit.collider != null && rayHit.distance < groundedrayHitDistance)
-        //    {
-        //        player.ChangeState(PlayerController.State.Idle);
-        //    }
-        //}
+        
         PlayAnimationInUpdate();
         player.MoveInAir();
 
@@ -55,5 +48,6 @@ public class FallState : PlayerState
     {
         //Debug.Log("Fall 상태 종료");
         _isFalling = false;
+        //player.rigid.gravityScale = 1;
     }
 }

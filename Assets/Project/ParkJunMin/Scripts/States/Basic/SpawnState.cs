@@ -33,7 +33,7 @@ public class SpawnState : PlayerState
 
     private void ResetPlayer()
     {
-        player.isJumped = false;
+        //player.hasJumped = false;
         player.isDead = false;
         player.playerModel.invincibility = false;
         if (Manager.Game.RespawnPoint != null )
