@@ -4,9 +4,12 @@ using UnityEngine;
 public class WarpPointController : MonoBehaviour
 {
     [SerializeField] private GameObject _warpUI;
-    private bool _inWarp;
-    private bool _warpActive;
-    private bool _warpUIActive;
+    [SerializeField] private Material unActiveWarp;
+    [SerializeField] private Material ActiveWarp;
+    [SerializeField] private bool _inWarp;
+    [SerializeField] private bool _warpActive;
+    [SerializeField] private bool _warpUIActive;
+    private Material material;
 
     void Start()
     {
@@ -55,6 +58,9 @@ public class WarpPointController : MonoBehaviour
             _warpUI.SetActive(false);
             _inWarp = false;
         }
-
+        if (_warpActive)
+        {
+            
+        }
     }
 }
