@@ -93,8 +93,8 @@ public partial class PlayerController : MonoBehaviour
         if (_groundCheckRoutine == null)
             _groundCheckRoutine = StartCoroutine(CheckGroundRayRoutine());
 
-        if (_wallCheckRoutine == null) // 작성중
-            _wallCheckRoutine = StartCoroutine(CheckWallRoutine());
+        //if (_wallCheckRoutine == null) // 작성중
+        //    _wallCheckRoutine = StartCoroutine(CheckWallRoutine());
 
         //임시 체력 확인용
         hp = playerModel.hp;

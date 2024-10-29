@@ -6,6 +6,6 @@ public class TestInteractable : SwichInteractable
 {
     public override void Interact()
     {
-        Debug.Log("선택");
+        Debug.Log("인터렉터블 상호작용");
     }
 }
