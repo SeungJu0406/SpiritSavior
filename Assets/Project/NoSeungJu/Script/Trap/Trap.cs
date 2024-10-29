@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Trap : MonoBehaviour
@@ -25,7 +26,7 @@ public class Trap : MonoBehaviour
         {
             if (collision.gameObject.tag == "Player")
             {
-                SceneChanger.Instance.SetKeepingTrap(transform.position, false);              
+                UnActiveTrap();
             }
         }
     }
@@ -35,8 +36,17 @@ public class Trap : MonoBehaviour
         {
             if (collision.gameObject.tag == "Player")
             {
-                SceneChanger.Instance.SetKeepingTrap(transform.position, false);
+                UnActiveTrap();
             }
         }
+    }
+
+    protected void ActiveTrap()
+    {
+        SceneChanger.Instance.SetKeepingTrap(transform.position, true);
+    }
+    protected void UnActiveTrap()
+    {
+        SceneChanger.Instance.SetKeepingTrap(transform.position, false);
     }
 }
