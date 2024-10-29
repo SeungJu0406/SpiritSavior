@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Trap : MonoBehaviour
 {
-    [Header("일회용?")]
+    [Header("게임에서 일회용인가?")]
     [SerializeField] bool _isDisposable;
 
     protected virtual void Start()
