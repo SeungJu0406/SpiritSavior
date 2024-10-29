@@ -11,6 +11,8 @@ public partial class PlayerController : MonoBehaviour
 
     public PlayerModel playerModel = new PlayerModel();
     public PlayerView playerView;
+    //private LayerMask wallLayer;
+    private int wallLayerMask; 
 
     
 
@@ -21,7 +23,8 @@ public partial class PlayerController : MonoBehaviour
     public float lowJumpForce;     // 낮은점프 힘
     public float highJumpForce;    // 높은점프 힘
     public float maxJumpTime;     // 최대점프 시간
-    public float jumpStartSpeed;   // 점프시작 속도
+    public float jumpCirticalPoint;
+    //public float jumpStartSpeed;   // 점프시작 속도
     public float jumpEndSpeed;     // 점프종료 속도
     public float doubleJumpForce; // 더블 점프시 얼마나 위로 올라갈지 결정
     public float knockbackForce; // 피격시 얼마나 뒤로 밀려날 지 결정
@@ -38,7 +41,7 @@ public partial class PlayerController : MonoBehaviour
     public Rigidbody2D rigid;
     public float hp;
     
-    public bool isJumped = false;          // 점프중인지여부 체크
+    //public bool hasJumped = false;          //
     public float jumpChargingTime = 0f;     // 스페이스바 누른시간 체크
     public bool isDoubleJumpUsed; // 더블점프 사용 유무를 나타내는 변수
     public bool isDead = false; // 죽었는지 확인
@@ -47,11 +50,12 @@ public partial class PlayerController : MonoBehaviour
     [Header("Ground & Wall Checking")]
     [SerializeField] Transform _groundCheckPoint;
     public Transform _wallCheckPoint;
-    private float _wallCheckDistance = 0.15f;
+    private float _wallCheckDistance = 0.01f;
     private float _groundCheckDistance = 0.2f;
     public int isPlayerRight = 1;
     public bool isGrounded = false;        // 캐릭터가 땅에 붙어있는지 체크
-    [SerializeField] private bool _isWall;                  // 캐릭터가 벽에 붙어있는지 체크
+    public bool isWall;                  // 캐릭터가 벽에 붙어있는지 체크
+    public bool isWallJumpUsed;         // 벽에서 벽점프를 사용 했는지 체크
     public float wallSlidingSpeed = 0.5f; // 중력계수 조정으로 할지 결정해야함
     public float wallJumpPower;
     //public LayerMask wallLayer; // 사용 여부 확실치 않음
@@ -98,8 +102,8 @@ public partial class PlayerController : MonoBehaviour
         if (_groundCheckRoutine == null)
             _groundCheckRoutine = StartCoroutine(CheckGroundRayRoutine());
 
-        //if (_wallCheckRoutine == null) // 작성중
-        //    _wallCheckRoutine = StartCoroutine(CheckWallRoutine());
+        if (_wallCheckRoutine == null) // 작성중
+            _wallCheckRoutine = StartCoroutine(CheckWallRoutine());
 
         //임시 체력 확인용
         hp = playerModel.hp;
@@ -112,6 +116,7 @@ public partial class PlayerController : MonoBehaviour
         playerView = GetComponent<PlayerView>();
         _states[(int)_curState].Enter();
         SubscribeEvents();
+        wallLayerMask = LayerMask.GetMask("Wall");
     }
 
     void Update()
@@ -160,10 +165,16 @@ public partial class PlayerController : MonoBehaviour
             rigid.velocity = new Vector2(-(maxMoveSpeedInAir), rigid.velocity.y);
         }
 
+        //if(_curState != State.WallJump)
         playerView.FlipRender(moveInput);
 
-        if (_isWall)
+        //if(moveInput > 0 && isWall)
+
+        if (isWall && _curState != State.WallJump && moveInput > 0)
+        {
             ChangeState(State.WallGrab);
+        }
+            
     }
 
     public void TagePlayer()
@@ -237,11 +248,22 @@ public partial class PlayerController : MonoBehaviour
 
         while (true)
         {
-            Debug.DrawRay(_wallCheckPoint.position, Vector2.right * isPlayerRight * _wallCheckDistance, Color.green);
-            _isWall = Physics2D.Raycast(_wallCheckPoint.position, Vector2.right * isPlayerRight, _wallCheckDistance);
+            Debug.DrawRay(_wallCheckPoint.position, Vector2.right * isPlayerRight * _wallCheckDistance, Color.red);
+            isWall = Physics2D.Raycast(_wallCheckPoint.position, Vector2.right * isPlayerRight, _wallCheckDistance, wallLayerMask);
             yield return delay;
         }
     }
+
+    public void Freeze()
+    {
+        Invoke("DelayWallJump", 0.3f);
+    }
+
+    public void DelayWallJump()
+    {
+        isWallJumpUsed = false;
+    }
+
 
     // 레이어 땅 체크
     //private void OnCollisionEnter2D(Collision2D collision)

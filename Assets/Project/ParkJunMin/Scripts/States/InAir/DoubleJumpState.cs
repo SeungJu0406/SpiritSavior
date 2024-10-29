@@ -15,6 +15,10 @@ public class DoubleJumpState : PlayerState
         
         player.playerView.PlayAnimation(animationIndex);
         player.playerModel.DoubleJumpPlayerEvent();
+
+        Vector2 curVelocity = player.rigid.velocity;
+        curVelocity.y = 0;
+        player.rigid.velocity = curVelocity;
         player.rigid.AddForce(new Vector2(player.rigid.velocity.x,player.doubleJumpForce),ForceMode2D.Impulse);
         player.isDoubleJumpUsed = true;
         
