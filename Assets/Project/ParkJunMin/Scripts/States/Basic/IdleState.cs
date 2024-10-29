@@ -13,6 +13,7 @@ public class IdleState : PlayerState
     {
         
         prevNature = player.playerModel.curNature;
+        player.isDoubleJumpUsed = false;
         //Debug.Log("Idle 상태 진입");
         player.playerView.PlayAnimation(animationIndex);
     }

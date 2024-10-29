@@ -18,29 +18,33 @@ public class PlayerView : MonoBehaviour
 
     private int[] _animationHash = new int[]
     {
+        //Red
         Animator.StringToHash("Idle_Red"),
         Animator.StringToHash("Run_Red"),
         Animator.StringToHash("Jump_Red"),
         Animator.StringToHash("DoubleJump_Red"),
         Animator.StringToHash("Fall_Red"),
+        Animator.StringToHash("WallGrabStart_Red"),
+        Animator.StringToHash("WallSliding_Red"),
+        Animator.StringToHash("WallJump_Red"),
         Animator.StringToHash("DamageStart_Red"),
-        Animator.StringToHash("DamageUp_Red"),
-        //Animator.StringToHash("WallClimbingStart_Red"),
+        Animator.StringToHash("WakeUp_Red"),
         Animator.StringToHash("Die_Red"),
-        Animator.StringToHash("Spawn_Red"),
+        Animator.StringToHash("Resurrection_Red"),
 
-
+        //Blue
         Animator.StringToHash("Idle_Blue"),
         Animator.StringToHash("Run_Blue"),
         Animator.StringToHash("Jump_Blue"),
         Animator.StringToHash("DoubleJump_Blue"),
         Animator.StringToHash("Fall_Blue"),
+        Animator.StringToHash("WallGrabStart_Blue"),
+        Animator.StringToHash("WallSliding_Blue"),
+        Animator.StringToHash("WallJump_Blue"),
         Animator.StringToHash("DamageStart_Blue"),
-        Animator.StringToHash("DamageUp_Blue"),
-        //Animator.StringToHash("WallClimbingStart_Blue"),
+        Animator.StringToHash("WakeUp_Blue"),
         Animator.StringToHash("Die_Blue"),
-        Animator.StringToHash("Spawn_Blue")
-
+        Animator.StringToHash("Resurrection_Blue")
     };
 
     // Animator.StringToHash("Fall_(string)")
