@@ -21,8 +21,7 @@ public class GameOptionUI : BaseUI
     private void Start()
     {
         SubscribeEvent();
-        Init();
-        InitOptionBox();
+        Init();     
     }
 
     private void Update()
@@ -40,15 +39,19 @@ public class GameOptionUI : BaseUI
     {
         if (GetUI("GameOptionUI").activeSelf)
         {
+            Time.timeScale = 1f;
+
             GetUI("GameOptionUI").SetActive(false);
             GetUI<Animator>("MenuButton").Play("Out");
         }
         else
         {
+            Time.timeScale = 0f;
+
             GetUI("GameOptionUI").SetActive(true);
             GetUI<Animator>("MenuButton").Play("In");
 
-            GetUI("AudioOption").SetActive(false);
+            CloseOptionBox();
         }
     }
 
@@ -130,6 +133,12 @@ public class GameOptionUI : BaseUI
     {
         InitVolume();
         InitButton();
+        InitOptionBox();
+
+        if (GetUI("GameOptionUI").activeSelf)
+        {
+            ToggleGameOptionUI();
+        }   
     }
 
     /// <summary>
@@ -162,7 +171,11 @@ public class GameOptionUI : BaseUI
         optionBoxs.Add(GetUI("KeyOption"));
         optionBoxs.Add(GetUI("AudioOption"));
 
-        foreach(GameObject optionBox in optionBoxs)
+        CloseOptionBox();
+    }
+    private void CloseOptionBox()
+    {
+        foreach (GameObject optionBox in optionBoxs)
         {
             optionBox.SetActive(false);
         }

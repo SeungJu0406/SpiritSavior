@@ -52,6 +52,7 @@ public class PlayerUI : BaseUI
 
     public void SetHp()
     {
+        Debug.Log("1");
         int hp = Manager.Game.Player.playerModel.hp;
 
         for (int i = 0; i < _lifesUI.Count; i++)
@@ -73,7 +74,7 @@ public class PlayerUI : BaseUI
     /// </summary>
     /// <param name="hp"></param>
     public void SetHp(int hp)
-    {
+    {        
         hp = Manager.Game.Player.playerModel.hp;
 
         for (int i = 0; i < _lifesUI.Count; i++)
