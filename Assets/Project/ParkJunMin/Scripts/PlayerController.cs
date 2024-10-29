@@ -191,7 +191,7 @@ public partial class PlayerController : MonoBehaviour
     /// </summary>
     public void HandlePlayerSpawn()
     {
-        ChangeState(State.Spawn);
+        // ChangeState(State.Spawn);
         // _playerUI.SetHp(playerModel.hp); // 일단 주석처리, 순서상의 문제로 플레이어에서 해야할수도 있음
     }
 

@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class NaturePlatform : MonoBehaviour
@@ -16,16 +13,21 @@ public class NaturePlatform : MonoBehaviour
         InitLayer();
     }
 
-    private void Start()
-    { 
+    private void OnEnable()
+    {
         PlayerController player = Manager.Game.Player;
         player.playerModel.OnPlayerTagged += SetActiveCollider;
         SetActiveCollider(player.playerModel.curNature);
     }
 
+    private void OnDisable()
+    {
+        if (Manager.Game.Player != null)
+            Manager.Game.Player.playerModel.OnPlayerTagged -= SetActiveCollider;
+    }
     private void SetActiveCollider(PlayerModel.Nature nature)
     {
-        if(nature == _platformNature)
+        if (nature == _platformNature)
         {
             gameObject.layer = _defaultLayer;
         }
