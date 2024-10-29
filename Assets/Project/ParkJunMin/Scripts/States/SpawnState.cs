@@ -13,6 +13,7 @@ public class SpawnState : PlayerState
     {
         animationIndex = (int)PlayerController.State.Spawn;
         player.playerView.PlayAnimation(animationIndex);
+        player.playerModel.SpawnPlayerEvent();
         ResetPlayer();
         
 

@@ -15,6 +15,7 @@ public class RunState : PlayerState
         //Debug.Log("Run 상태 진입");
         
         player.playerView.PlayAnimation(animationIndex);
+        player.playerModel.RunPlayerEvent();
         player.isGrounded = true;
     }
     public override void Update()

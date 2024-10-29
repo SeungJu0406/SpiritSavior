@@ -43,7 +43,7 @@ public class FallingTrapObject : MonoBehaviour
         {
             if (_canAttack)
             {
-                Manager.Game.Player.playerModel.TakeDamage(_damage);             
+                Manager.Game.Player.playerModel.TakeDamageEvent(_damage);             
             }
         }
         else
