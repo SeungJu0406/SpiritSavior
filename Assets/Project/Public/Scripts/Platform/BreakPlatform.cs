@@ -50,6 +50,11 @@ public class BreakPlatform : Trap
         }
     }
 
+    protected override void InteractTrap()
+    {
+        base.InteractTrap();
+    }
+
     void Break()
     {
         _platform.SetActive(false);
