@@ -5,7 +5,7 @@ using UnityEngine;
 
 public partial class PlayerController : MonoBehaviour
 {
-    public enum State {Idle, Run, Jump, DoubleJump, Fall, WallGrab, Damaged, WakeUp, Dead, Spawn, Size}
+    public enum State {Idle, Run, Jump, DoubleJump, Fall, WallGrab, WallSliding, WallJump, Damaged, WakeUp, Dead, Spawn, Size}
     [SerializeField] State _curState = State.Spawn;
     private BaseState[] _states = new BaseState[(int)State.Size];
 
@@ -47,11 +47,12 @@ public partial class PlayerController : MonoBehaviour
     [Header("Ground & Wall Checking")]
     [SerializeField] Transform _groundCheckPoint;
     public Transform _wallCheckPoint;
-    private float _wallCheckDistance = 0.2f;
+    private float _wallCheckDistance = 0.01f;
     private float _groundCheckDistance = 0.2f;
     public int isPlayerRight = 1;
     public bool isGrounded = false;        // 캐릭터가 땅에 붙어있는지 체크
-    private bool _isWall;                  // 캐릭터가 벽에 붙어있는지 체크
+    [SerializeField] private bool _isWall;                  // 캐릭터가 벽에 붙어있는지 체크
+    public float wallSlidingSpeed = 0.5f;
     //public LayerMask wallLayer; // 사용 여부 확실치 않음
     //public Vector2 wallCheckSize;
     Coroutine _wallCheckRoutine;
@@ -76,6 +77,9 @@ public partial class PlayerController : MonoBehaviour
         _states[(int)State.Jump] = new JumpState(this);
         _states[(int)State.DoubleJump] = new DoubleJumpState(this);
         _states[(int)State.Fall] = new FallState(this);
+        _states[(int)State.WallGrab] = new WallGrabState(this);
+        _states[(int)State.WallSliding] = new WallSlidingState(this);
+        _states[(int)State.WallJump] = new WallJumpState(this);
         _states[(int)State.Damaged] = new DamagedState(this, knockbackForce);
         _states[(int)State.WakeUp] = new WakeupState(this);
         _states[(int)State.Dead] = new DeadState(this);
@@ -157,11 +161,8 @@ public partial class PlayerController : MonoBehaviour
 
         playerView.FlipRender(moveInput);
 
-        //if(_isWall)
-        //    ChangeState(State.)
-        
-
-        // 벽에 끼었을때 그냥 떨어지는 로직을 추가해야함
+        if (_isWall)
+            ChangeState(State.WallGrab);
     }
 
     public void TagePlayer()
@@ -231,11 +232,11 @@ public partial class PlayerController : MonoBehaviour
 
     IEnumerator CheckWallRoutine()
     {
-        WaitForSeconds delay = new WaitForSeconds(0.2f);
+        WaitForSeconds delay = new WaitForSeconds(0.1f);
 
         while (true)
         {
-            Debug.DrawRay(_wallCheckPoint.position, Vector2.right * isPlayerRight, Color.green);
+            Debug.DrawRay(_wallCheckPoint.position, Vector2.right * isPlayerRight * _wallCheckDistance, Color.green);
             _isWall = Physics2D.Raycast(_wallCheckPoint.position, Vector2.right * isPlayerRight, _wallCheckDistance);
             yield return delay;
         }
