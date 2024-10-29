@@ -11,6 +11,11 @@ public class PlayerModel
     public event Action OnPlayerDamageTaken;
     public event Action OnPlayerHealth;
     public event Action OnPlayerMaxHpUp;
+
+    public event Action OnPlayerJumped;
+    public event Action OnPlayerRan;
+    public event Action OnPlayerDoubleJumped;
+    public event Action OnPlayerDashed;
     public event Action OnPlayerDied;
     public event Action OnPlayerSpawn;
 
@@ -27,7 +32,7 @@ public class PlayerModel
         //curNature = Nature.Red;
         curNature += 10;
     }
-    public void TagPlayer()
+    public void TagPlayerEvent()
     {
         //curNature = (Nature)(((int)curNature + 1) % (int)Nature.Size);
         //curNature = (curNature + 1) % (int)Nature.Size;
@@ -35,7 +40,7 @@ public class PlayerModel
         OnPlayerTagged?.Invoke(curNature);
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamageEvent(int damage)
     {
         if(!invincibility && hp > 0)
         {
@@ -46,25 +51,43 @@ public class PlayerModel
         {
             Debug.Log("무적상태라 피격받지 않음");
         }
-
-
-
         // 예외상황 발생 우려에 따라 일단 주석 처리
         //else
         //{
         //    DiePlayer();
         //}
-        
     }
 
-    public void HealPlayer()
+    public void JumpPlayerEvent()
+    {
+        OnPlayerJumped?.Invoke();
+    }
+
+    public void DoubleJumpPlayerEvent()
+    {
+        OnPlayerDoubleJumped?.Invoke();
+    }
+
+    public void DashPlayerEvent()
+    {
+        OnPlayerDashed?.Invoke();
+    }
+
+    public void RunPlayerEvent()
+    {
+        OnPlayerRan?.Invoke();
+    }
+
+    
+
+    public void HealPlayerEvent()
     {
         if (hp < curMaxHP)
             hp++;
         OnPlayerHealth?.Invoke();
     }
 
-    public void AddMaxHP()
+    public void AddMaxHPEvent()
     {
         if(curMaxHP < _MaxHP)
             curMaxHP++;
@@ -73,13 +96,13 @@ public class PlayerModel
         OnPlayerMaxHpUp?.Invoke();
     }
 
-    public void DiePlayer()
+    public void DiePlayerEvent()
     {
         hp = 0;
         OnPlayerDied?.Invoke();
     }
 
-    public void SpawnPlayer()
+    public void SpawnPlayerEvent()
     {
         OnPlayerSpawn?.Invoke();
     }

@@ -14,7 +14,7 @@ public class OnCollisionPlayer : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        _player.playerModel.TakeDamage(attackPower);
+        _player.playerModel.TakeDamageEvent(attackPower);
     }
 
     //private void OnCollisionEnter(Collision collision)

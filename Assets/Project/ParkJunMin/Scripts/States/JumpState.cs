@@ -14,6 +14,7 @@ public class JumpState : PlayerState
         //Debug.Log("점프 상태 진입");
         
         player.playerView.PlayAnimation(animationIndex);
+        player.playerModel.JumpPlayerEvent();
         player.isJumped = true;
         player.jumpChargingTime = 0f;
         player.rigid.velocity = new Vector2(player.rigid.velocity.x, player.lowJumpForce); // 1단점프
