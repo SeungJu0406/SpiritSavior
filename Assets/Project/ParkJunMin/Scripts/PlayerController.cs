@@ -47,12 +47,13 @@ public partial class PlayerController : MonoBehaviour
     [Header("Ground & Wall Checking")]
     [SerializeField] Transform _groundCheckPoint;
     public Transform _wallCheckPoint;
-    private float _wallCheckDistance = 0.01f;
+    private float _wallCheckDistance = 0.15f;
     private float _groundCheckDistance = 0.2f;
     public int isPlayerRight = 1;
     public bool isGrounded = false;        // 캐릭터가 땅에 붙어있는지 체크
     [SerializeField] private bool _isWall;                  // 캐릭터가 벽에 붙어있는지 체크
-    public float wallSlidingSpeed = 0.5f;
+    public float wallSlidingSpeed = 0.5f; // 중력계수 조정으로 할지 결정해야함
+    public float wallJumpPower;
     //public LayerMask wallLayer; // 사용 여부 확실치 않음
     //public Vector2 wallCheckSize;
     Coroutine _wallCheckRoutine;

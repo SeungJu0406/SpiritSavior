@@ -448,6 +448,7 @@ MonoBehaviour:
   isGrounded: 0
   _isWall: 0
   wallSlidingSpeed: 0.5
+  wallJumpPower: 10
 --- !u!1 &684765419
 GameObject:
   m_ObjectHideFlags: 0
@@ -763,6 +764,7 @@ MonoBehaviour:
   isGrounded: 0
   _isWall: 0
   wallSlidingSpeed: 0.5
+  wallJumpPower: 0
 --- !u!50 &1039534994
 Rigidbody2D:
   serializedVersion: 4

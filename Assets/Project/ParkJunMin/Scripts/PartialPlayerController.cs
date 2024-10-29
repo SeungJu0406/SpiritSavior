@@ -46,7 +46,7 @@ public partial class PlayerController : MonoBehaviour
     public void TakeHeal(int healAmount)
     {
         playerModel.hp += healAmount;
-        _playerUI.SetHp(playerModel.hp);
+        //_playerUI.SetHp(playerModel.hp);
         if (playerModel.hp > playerModel.curMaxHP)
         {
             playerModel.hp = playerModel.curMaxHP;
