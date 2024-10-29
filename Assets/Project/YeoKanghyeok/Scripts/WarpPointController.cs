@@ -55,5 +55,6 @@ public class WarpPointController : MonoBehaviour
             _warpUI.SetActive(false);
             _inWarp = false;
         }
+
     }
 }
