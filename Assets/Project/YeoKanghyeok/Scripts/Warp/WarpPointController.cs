@@ -2,26 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WarpPointController : MonoBehaviour
+public class WarpPointController : Warp
 {
-    [SerializeField] GameObject warpButton;
     [SerializeField] Transform warpLayout;
     [SerializeField] Material unActiveWarp;
     [SerializeField] Material ActiveWarp;
-    [SerializeField] bool inWarp;
-    [SerializeField] bool warpActive;
-    [SerializeField] bool warpUIActive;
-    public GameObject _warpButton;
-    public SpriteRenderer spriteRenderer;
+    private SpriteRenderer _spriteRenderer;
+    private bool _inWarp;
+    public bool warpActive;
+    
 
     private void Start()
     {
-        inWarp = false;
+        _inWarp = false;
         warpActive = false;
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        _warpButton = Instantiate(warpButton, warpLayout); // UI button 생성
-        _warpButton.gameObject.SetActive(false); // UI button 비활성화
-        spriteRenderer.material = unActiveWarp;
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _spriteRenderer.material = unActiveWarp;
     }
 
     // warp point 접근확인
@@ -29,26 +25,28 @@ public class WarpPointController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            inWarp = true;
+            _inWarp = true;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            inWarp = false;
+            _inWarp = false;
         }
     }
-
-    private void Update()
+    
+    // warpActive : 워프 활성화
+    // warpUIActive : 워프 UI 활성화(활성화된 워프로 향하는 button 활성화)
+    public void Update()
     {
-        if (inWarp)
+        if (_inWarp)
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
                 // E키 입력받아 워프 활성화
                 warpActive = true;
-                spriteRenderer.material = ActiveWarp;
+                _spriteRenderer.material = ActiveWarp;
 
                 // E키 입력으로 워프 UI(또는 버튼) 조종 
                 if (warpUIActive)
@@ -64,16 +62,6 @@ public class WarpPointController : MonoBehaviour
         else // 워프포인트 밖으로 나오면 자동으로 UI 종료
         {
             warpUIActive = false;
-        }
-
-        // 아직 이 부분 구현 안 됐습니다ㅠ
-        if (warpUIActive)
-        {
-            // warpActive된 모든 button 활성화
-        }
-        else
-        {
-            // warpActive된 모든 button 비활성화
         }
     }
 }
