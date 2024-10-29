@@ -165,7 +165,9 @@ public partial class PlayerController : MonoBehaviour
         //if(_curState != State.WallJump)
         playerView.FlipRender(moveInput);
 
-        if (isWall && _curState != State.WallJump)
+        //if(moveInput > 0 && isWall)
+
+        if (isWall && _curState != State.WallJump && moveInput > 0)
         {
             ChangeState(State.WallGrab);
         }
