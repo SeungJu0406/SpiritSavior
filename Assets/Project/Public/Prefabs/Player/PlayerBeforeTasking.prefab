@@ -166,6 +166,7 @@ MonoBehaviour:
   _playerUI: {fileID: 0}
   _curState: 0
   playerView: {fileID: 0}
+  _rayPoint: {fileID: 0}
   renderer: {fileID: 0}
   moveSpeed: 8
   maxMoveSpeed: 8
@@ -180,15 +181,13 @@ MonoBehaviour:
   maxMoveSpeedInAir: 0
   speedAdjustmentOffsetInAir: 0.8
   rigid: {fileID: 0}
-  hp: 0
+  isGrounded: 0
   isJumped: 0
   jumpChargingTime: 0
   isDoubleJumpUsed: 0
   isDead: 0
-  _groundCheckPoint: {fileID: 0}
-  _wallCheckPoint: {fileID: 0}
-  isPlayerRight: 1
-  isGrounded: 0
+  wallCheckSize: {x: 0, y: 0}
+  hp: 0
 --- !u!70 &4715417422207570104
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
