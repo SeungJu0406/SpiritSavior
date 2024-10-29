@@ -10083,6 +10083,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerBeforeTasking
       objectReference: {fileID: 0}
+    - target: {fileID: 8587055547340517911, guid: 20d3220ff9c14954ca1cd8c76e69b1fa, type: 3}
+      propertyPath: speedAdjustmentOffsetInAir
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20d3220ff9c14954ca1cd8c76e69b1fa, type: 3}
 --- !u!1001 &1248055819
