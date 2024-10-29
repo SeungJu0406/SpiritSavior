@@ -61,7 +61,7 @@ public class Switch : Trap
             if (Input.GetKeyDown(KeyCode.F))
             {
                 Interact();
-                UnActiveTrap();
+                _disposable.UnActiveTrap();
                 if(canManyInput == false)
                 {
                     Delete();
