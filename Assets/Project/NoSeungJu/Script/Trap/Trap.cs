@@ -1,19 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Trap : MonoBehaviour
 {
     [Header("게임에서 일회용인가?")]
-    [SerializeField] bool _isDisposable;
+    [SerializeField] protected bool _isDisposable;
 
     protected virtual void Start()
     {
-        if (_isDisposable) 
+        if (_isDisposable)
         {
             bool keeping = SceneChanger.Instance.CheckKeepingTrap(transform.position);
-            if (!keeping) 
+            if (!keeping)
             {
                 gameObject.SetActive(false);
             }
@@ -22,7 +19,7 @@ public class Trap : MonoBehaviour
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
-        if (_isDisposable) 
+        if (_isDisposable)
         {
             if (collision.gameObject.tag == "Player")
             {
@@ -43,10 +40,12 @@ public class Trap : MonoBehaviour
 
     protected void ActiveTrap()
     {
+        if (SceneChanger.Instance == null) return;
         SceneChanger.Instance.SetKeepingTrap(transform.position, true);
     }
     protected void UnActiveTrap()
     {
+        if (SceneChanger.Instance == null) return;
         SceneChanger.Instance.SetKeepingTrap(transform.position, false);
     }
 }

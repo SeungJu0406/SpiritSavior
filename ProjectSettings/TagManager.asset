@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Move Platform
   - Thron
+  - Warp
   layers:
   - Default
   - TransparentFX

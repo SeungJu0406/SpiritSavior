@@ -65,9 +65,8 @@ public class Switch : Trap
                 if(canManyInput == false)
                 {
                     Delete();
-                }
-                   
-                yield break;
+                    yield break;
+                }            
             }
             yield return null;
         }

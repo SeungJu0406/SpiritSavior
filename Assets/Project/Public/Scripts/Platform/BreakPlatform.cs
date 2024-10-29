@@ -63,6 +63,8 @@ public class BreakPlatform : Trap
 
     IEnumerator RespawnRoutine()
     {
+        if(_isDisposable == true) yield break;
+
         yield return _respawnDelay;
         _platform.SetActive(true);
         _platformCollider.enabled = true;
