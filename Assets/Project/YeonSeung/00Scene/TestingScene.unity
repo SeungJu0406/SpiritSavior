@@ -2842,6 +2842,9 @@ MonoBehaviour:
   _wallCheckPoint: {fileID: 0}
   isPlayerRight: 1
   isGrounded: 0
+  _isWall: 0
+  wallSlidingSpeed: 0.5
+  wallJumpPower: 0
 --- !u!4 &114135364197857640
 Transform:
   m_ObjectHideFlags: 0
@@ -24702,7 +24705,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7636938962065669795}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -16.7, y: -3.35, z: 0}
+  m_LocalPosition: {x: -15, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -24796,7 +24799,9 @@ MonoBehaviour:
   _movingPlatform: {fileID: 7636938962065669795}
   _movingSpeed: 5
   _movingDistance: 20
-  _direction: 1
+  _fourWay: 0
+  _horizontal: 1
+  _vertical: 0
 --- !u!60 &7714204442250860173
 PolygonCollider2D:
   m_ObjectHideFlags: 0
