@@ -153,7 +153,7 @@ public partial class PlayerController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Tab))
         {
             playerView.ChangeSprite(); // 상시 애니메이션 재생 상태라 없어도 무방
-            playerModel.TagPlayer(); // 속성 열거형 형식의 curNature를 바꿔줌 + 태그 이벤트 Invoke
+            playerModel.TagPlayerEvent(); // 속성 열거형 형식의 curNature를 바꿔줌 + 태그 이벤트 Invoke
         }
     }
 
