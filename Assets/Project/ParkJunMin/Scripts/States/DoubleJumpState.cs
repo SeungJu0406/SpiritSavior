@@ -22,9 +22,9 @@ public class DoubleJumpState : PlayerState
 
     public override void Update()
     {
-
-        player.MoveInAir();
         PlayAnimationInUpdate();
+        player.MoveInAir();
+
         if (player.rigid.velocity.y < 0)
         {
             //Debug.Log(player.rigid.velocity.y);
