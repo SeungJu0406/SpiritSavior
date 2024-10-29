@@ -14,6 +14,7 @@ public class DoubleJumpState : PlayerState
     {
         
         player.playerView.PlayAnimation(animationIndex);
+        player.playerModel.DoubleJumpPlayerEvent();
         player.rigid.AddForce(new Vector2(player.rigid.velocity.x,player.doubleJumpForce),ForceMode2D.Impulse);
         player.isDoubleJumpUsed = true;
         
@@ -21,9 +22,9 @@ public class DoubleJumpState : PlayerState
 
     public override void Update()
     {
-
-        player.MoveInAir();
         PlayAnimationInUpdate();
+        player.MoveInAir();
+
         if (player.rigid.velocity.y < 0)
         {
             //Debug.Log(player.rigid.velocity.y);

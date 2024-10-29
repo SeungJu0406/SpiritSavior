@@ -63,9 +63,18 @@ public class PlayerView : MonoBehaviour
     public void FlipRender(float _moveDirection)
     {
         if (_moveDirection < 0)
+        {
             renderer.flipX = true;
+            _player.isPlayerRight = -1;
+            //_player._wallCheckPoint.position = new Vector2(_player._wallCheckPoint.position.x * -1, _player._wallCheckPoint.position.y);
+        }
+
         if (_moveDirection > 0)
+        {
             renderer.flipX = false;
+            _player.isPlayerRight = 1;
+        }
+            
     }
 
     public void PlayAnimation(int animationIndex)
