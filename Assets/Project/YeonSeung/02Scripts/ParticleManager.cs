@@ -17,6 +17,9 @@ public class ParticleManager : MonoBehaviour
     [SerializeField] GameObject hitFX;
     [Header("ภÜต๐ นโดย FX ")]
     [SerializeField] GameObject GrassFX;
+
+    PlayerModel playerModel;
+    
     private void Awake()
     {
         if (Instance == null)
@@ -27,6 +30,12 @@ public class ParticleManager : MonoBehaviour
         else Destroy(gameObject);
     }
 
+    public void TestTest()
+    {
+        playerModel.OnPlayerJumped += (PlayJumpFX);
+
+
+    }
 
     public void PlayRunFX()
     {
@@ -48,12 +57,12 @@ public class ParticleManager : MonoBehaviour
 
     void Start()
     {
-        
+
     }
 
 
     void Update()
     {
-        
+
     }
 }

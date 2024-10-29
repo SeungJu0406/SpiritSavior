@@ -13,23 +13,75 @@ public class MovingPlatform : Trap
     [Header("움직일 거리: ")]
     [SerializeField] float _movingDistance;
     private float _movingDirection;
-    [Header("왼쪽 = 빈칸 / 오른쪽 체크")]
-    [SerializeField] bool _direction; // F = 왼쪽(-) T = 오른쪽(+)
 
+    [Header("좌우 = 빈칸 / 위아래 = 체크")]
+    [SerializeField] bool _fourWay;
+    [Header("왼쪽 = 빈칸 / 오른쪽 = 체크")]
+    [SerializeField] bool _horizontal; // F = 왼쪽(-) T = 오른쪽(+)
+    [Header("아래 = 빈칸 / 위 = 체크")]
+    [SerializeField] bool _vertical; // F = 왼쪽(-) T = 오른쪽(+)
+
+
+    Vector2 finalTarget;
     Vector2 target;
     private void Awake()
     {
         //_movingPlatform = GetComponent<GameObject>();
         _movingPlatformCollider = GetComponent<PolygonCollider2D>();
-        if (_direction == false)
+
+        if (_fourWay == false) // F = 좌우
         {
-            _movingDirection = -1;
+
+            // 좌우 움직임 Check
+            if (_horizontal == false)
+            {
+                _movingDirection = -1;
+            }
+            else
+            {
+                _movingDirection = 1;
+            }
+        }
+        else if (_fourWay == true)// 위아래
+        {
+            // 위아래 움직임 Check
+            if (_vertical == false)
+            {
+                _movingDirection = -1;
+            }
+            else
+            {
+                _movingDirection = 1;
+            }
         }
         else
-        {
-            _movingDirection = 1;
-        }
-        SetDestination();
+            return;
+
+
+     //   // 좌우 움직임 Check
+     //   if (_horizontal == false)
+     //   {
+     //       _movingDirection = -1;
+     //   }
+     //   else
+     //   {
+     //       _movingDirection = 1;
+     //   }
+
+     //   // 위아래 움직임 Check
+     //   if (_vertical == false)
+     //   {
+     //       _movingDirection = -1;
+     //   }
+     //   else
+     //   {
+     //       _movingDirection = 1;
+     //   }
+
+
+
+        SetDestinationX();
+        SetDestinationY();
 
     }
     void Start()
@@ -47,9 +99,25 @@ public class MovingPlatform : Trap
     {
         // Left or Right
         _movingDistance = _movingDirection * _movingDistance + transform.position.x;
-        target = new Vector2(_movingDistance, transform.position.y);
-        // 올라가는 발판이 필요하려나
+        target = new Vector2(_movingDistance, transform.position.x);
+
     }
+    private void SetDestinationX()
+    {
+        // Left or Right
+        _movingDistance = _movingDirection * _movingDistance + transform.position.x;
+        target = new Vector2(_movingDistance, transform.position.x);
+    }
+
+    private void SetDestinationY()
+    {
+
+        // UP or Down
+        _movingDistance = _movingDirection * _movingDistance + transform.position.y;
+        target = new Vector2(_movingDistance, transform.position.y);
+    }
+
+
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
         base.OnCollisionEnter2D(collision);
