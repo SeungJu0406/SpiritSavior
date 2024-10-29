@@ -57,10 +57,10 @@ public class SceneChanger : MonoBehaviour
 
     void InitScene()
     {
-        AsyncOperation playerSceneOper = SceneManager.LoadSceneAsync(_playerScene);
-        AsyncOperation firstSceneOper = SceneManager.LoadSceneAsync(_firstStage,LoadSceneMode.Additive);
-        playerSceneOper.allowSceneActivation = true;
-        firstSceneOper.allowSceneActivation = true;
+            AsyncOperation playerSceneOper = SceneManager.LoadSceneAsync(_playerScene);
+            playerSceneOper.allowSceneActivation = true;
+            AsyncOperation firstSceneOper = SceneManager.LoadSceneAsync(_firstStage, LoadSceneMode.Additive);
+            firstSceneOper.allowSceneActivation = true;
         //StartCoroutine(LoadSceneRoutine());
     }
 
