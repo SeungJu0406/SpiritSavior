@@ -1,14 +1,20 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class WarpPointController : MonoBehaviour
 {
     [SerializeField] private GameObject _warpUI;
-    private bool _warpActivate;
-    private bool _warpUIActive;
+    [SerializeField] private Material unActiveWarp;
+    [SerializeField] private Material ActiveWarp;
+    [SerializeField] private bool _inWarp;
+    [SerializeField] private bool _warpActive;
+    [SerializeField] private bool _warpUIActive;
+    private Material material;
 
     void Start()
     {
-        _warpActivate = false; // warp 面倒咯何
+        _inWarp = false; // warp 立盟咯何
+        _warpActive = false; // warp 劝己拳
         _warpUIActive = false; // warp UI 劝己拳 咯何
         _warpUI.SetActive(false); // warp UI 积己咯何
     }
@@ -17,23 +23,24 @@ public class WarpPointController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            _warpActivate = true;
+            _inWarp = true;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            _warpActivate = false;
+            _inWarp = false;
         }
     }
 
     private void Update()
     {
-        if (_warpActivate)
+        if (_inWarp)
         {
             if(Input.GetKeyDown(KeyCode.E))
             {
+                if (!_warpActive) { _warpActive = true; }
                 if (_warpUIActive)
                 {
                     _warpUI.SetActive(false);
@@ -49,7 +56,11 @@ public class WarpPointController : MonoBehaviour
         else
         {
             _warpUI.SetActive(false);
-            _warpActivate = false;
+            _inWarp = false;
+        }
+        if (_warpActive)
+        {
+            
         }
     }
 }
