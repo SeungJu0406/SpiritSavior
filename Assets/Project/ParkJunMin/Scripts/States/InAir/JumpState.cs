@@ -56,6 +56,11 @@ public class JumpState : PlayerState
             //Debug.Log(player.rigid.velocity.y);
             player.ChangeState(PlayerController.State.Fall);
         }
+
+        //if(player.isGrounded)
+        //{
+        //    player.ChangeState(PlayerController.State.Idle);
+        //}
             
     }
 

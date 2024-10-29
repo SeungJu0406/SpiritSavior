@@ -48,6 +48,6 @@ public class FallState : PlayerState
     {
         //Debug.Log("Fall 상태 종료");
         _isFalling = false;
-        //player.rigid.gravityScale = 1;
+       // player.rigid.gravityScale = 1;
     }
 }

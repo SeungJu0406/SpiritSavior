@@ -11,6 +11,8 @@ public partial class PlayerController : MonoBehaviour
 
     public PlayerModel playerModel = new PlayerModel();
     public PlayerView playerView;
+    //private LayerMask wallLayer;
+    private int wallLayerMask; 
 
     
 
@@ -114,6 +116,7 @@ public partial class PlayerController : MonoBehaviour
         playerView = GetComponent<PlayerView>();
         _states[(int)_curState].Enter();
         SubscribeEvents();
+        wallLayerMask = LayerMask.GetMask("Wall");
     }
 
     void Update()
@@ -246,7 +249,7 @@ public partial class PlayerController : MonoBehaviour
         while (true)
         {
             Debug.DrawRay(_wallCheckPoint.position, Vector2.right * isPlayerRight * _wallCheckDistance, Color.red);
-            isWall = Physics2D.Raycast(_wallCheckPoint.position, Vector2.right * isPlayerRight, _wallCheckDistance);
+            isWall = Physics2D.Raycast(_wallCheckPoint.position, Vector2.right * isPlayerRight, _wallCheckDistance, wallLayerMask);
             yield return delay;
         }
     }
