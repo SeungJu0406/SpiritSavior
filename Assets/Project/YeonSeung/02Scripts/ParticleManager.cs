@@ -6,11 +6,17 @@ public class ParticleManager : MonoBehaviour
 {
     public static ParticleManager Instance;
 
-    [SerializeField] GameObject runFX;
-    [SerializeField] GameObject jumpFX;
-    [SerializeField] GameObject dJumpFX;
-    [SerializeField] GameObject hitFX;
 
+    [Header("달리기 FX ")]
+    [SerializeField] GameObject runFX;
+    [Header("점프 FX ")]
+    [SerializeField] GameObject jumpFX;
+    [Header("이단 점프 FX ")]
+    [SerializeField] GameObject dJumpFX;
+    [Header("피격 FX ")]
+    [SerializeField] GameObject hitFX;
+    [Header("잔디 밟는 FX ")]
+    [SerializeField] GameObject GrassFX;
     private void Awake()
     {
         if (Instance == null)
