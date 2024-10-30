@@ -20,7 +20,7 @@ public class FallState : PlayerState
         player.playerView.PlayAnimation(animationIndex);
         _isFalling = true;
         //player.rigid.gravityScale = 5;
-        player.rigid.velocity += Vector2.up * Physics2D.gravity.y * (player.jumpEndSpeed - 1) * Time.deltaTime;
+        //player.rigid.velocity += Vector2.up * Physics2D.gravity.y * (player.jumpEndSpeed - 1) * Time.deltaTime;
     }
     
     public override void Update()
