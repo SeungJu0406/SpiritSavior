@@ -112,7 +112,7 @@ public class PlayerTester : MonoBehaviour
         else 
         {
             ParticleManager.Instance.PlayHitFX();
-            ParticleManager.Instance.PlayDoubleJumpFX(_target.transform);
+            ParticleManager.Instance.PlayDoubleJumpFX();
         }
         //ObjectPool.SpawnObject(gameobject, transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
         // pm.PlayDoubleJumpFX();

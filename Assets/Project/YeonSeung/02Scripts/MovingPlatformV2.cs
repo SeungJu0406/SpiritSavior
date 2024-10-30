@@ -80,11 +80,17 @@ public class MovingPlatformV2 : SwichInteractable
         _isMoving = true;
     }
 
+    /// <summary>
+    /// 플레이어 움직이는 메서드
+    /// </summary>
     public void MovePlatform()
     {
         Debug.Log("start moving");
         transform.position = Vector3.MoveTowards(transform.position, nextPosition, moveSpeed * Time.deltaTime);
     }
+    /// <summary>
+    /// 처음 위치로 돌아가는 메서드
+    /// </summary>
     public void RetreatPlatform()
     {
         // A(시작점)로 복귀
