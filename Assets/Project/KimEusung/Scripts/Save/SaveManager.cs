@@ -6,28 +6,48 @@ using UnityEngine;
 public class SaveManager : MonoBehaviour
 {
     private string saveFilePath; // 저장할 파일 경로
-
+    private Coroutine autoSave;  // 자동 저장
+    public PlayerController playerController;
     void Start()
     {
         // 저장 파일 경로
         saveFilePath = Path.Combine(Application.persistentDataPath, "savedata.json");
+        // 자동 저장 시작
+        autoSave = StartCoroutine(AutoSaveTime());
     }
 
-    // 게임 저장
-    public void SaveGame(int playerLives, Vector3 playerPosition /*, List<string> items, List<bool> traps */)
+    private IEnumerator AutoSaveTime()
     {
-        GameData gameData = new GameData
+        while (true)
         {
-            playerHp = playerLives,
-            playerPosition = playerPosition,
-            // items = items, // 아이템 목록 (추후 구현)
-            // traps = traps // 함정 상태 (추후 구현)
-        };
+            yield return new WaitForSeconds(180f);
 
-        // JSON으로 변환하여 파일에 저장
-        string json = JsonUtility.ToJson(gameData, true);
-        File.WriteAllText(saveFilePath, json);
-        Debug.Log("저장 완료"); // 저장 완료 로그
+            SaveGame(playerController);
+        }
+    }
+    // 게임 저장
+    public void SaveGame(PlayerController playerController)
+    {
+        if (playerController != null)
+        {
+            GameData gameData = new GameData
+            {
+                playerHp = playerController.hp,                       // 현재 hp저장 (플레이어 컨트롤러에서 생명 관련 추가구현 필요시 알려줘야함)
+                playerPosition = playerController.transform.position, // 현재 플레이어의 위치를 저장
+                // items = items, // 아이템 목록 (추후 구현)
+                // traps = traps // 함정 상태 (추후 구현)
+            };
+
+            // JSON으로 변환하여 파일에 저장
+            string json = JsonUtility.ToJson(gameData, true);
+            File.WriteAllText(saveFilePath, json);
+            Debug.Log("저장 완료");
+        }
+        else
+        {
+            Debug.Log("플레이어 컨트롤러가 없습니다");
+        }
+        
     }
 
     // 게임 불러오기
