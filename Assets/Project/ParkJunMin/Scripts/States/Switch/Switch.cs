@@ -42,10 +42,7 @@ public class Switch : Trap
         }
     }
 
-    /// <summary>
-    /// 스위치 기믹과 상호작용
-    /// </summary>
-    void Interact()
+    protected override void ProcessActive()
     {
         _swichInteractable.Interact();
     }
@@ -60,8 +57,7 @@ public class Switch : Trap
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
-                Interact();
-                _disposable.UnActiveTrap();
+                Active();
                 if(canManyInput == false)
                 {
                     Delete();

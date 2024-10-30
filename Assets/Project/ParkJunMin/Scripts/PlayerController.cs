@@ -12,6 +12,8 @@ public partial class PlayerController : MonoBehaviour
     public PlayerModel playerModel = new PlayerModel();
     public PlayerView playerView;
     //private LayerMask wallLayer;
+
+    private Collider2D _playerCollider;
     private int wallLayerMask; 
 
     
@@ -46,11 +48,17 @@ public partial class PlayerController : MonoBehaviour
     public bool isDoubleJumpUsed; // 더블점프 사용 유무를 나타내는 변수
     public bool isDead = false; // 죽었는지 확인
     
+    //[HideInInspector] public float lastMoveDirection = 0f;
+    
+
+
+
 
     [Header("Ground & Wall Checking")]
     [SerializeField] Transform _groundCheckPoint;
     public Transform _wallCheckPoint;
     private float _wallCheckDistance = 0.01f;
+    private float _wallCheckHeight = 1.2f;
     private float _groundCheckDistance = 0.2f;
     public int isPlayerRight = 1;
     public bool isGrounded = false;        // 캐릭터가 땅에 붙어있는지 체크
@@ -58,6 +66,8 @@ public partial class PlayerController : MonoBehaviour
     public bool isWallJumpUsed;         // 벽에서 벽점프를 사용 했는지 체크
     public float wallSlidingSpeed = 0.5f; // 중력계수 조정으로 할지 결정해야함
     public float wallJumpPower;
+
+    private Vector2 _wallCheckBoxSize;
     //public LayerMask wallLayer; // 사용 여부 확실치 않음
     //public Vector2 wallCheckSize;
     Coroutine _wallCheckRoutine;
@@ -76,6 +86,8 @@ public partial class PlayerController : MonoBehaviour
         {
             Debug.LogError("모델 생성 오류");
         }
+
+        _playerCollider = GetComponent<CapsuleCollider2D>();
 
         _states[(int)State.Idle] = new IdleState(this);
         _states[(int)State.Run] = new RunState(this);
@@ -105,6 +117,8 @@ public partial class PlayerController : MonoBehaviour
         if (_wallCheckRoutine == null) // 작성중
             _wallCheckRoutine = StartCoroutine(CheckWallRoutine());
 
+        _wallCheckBoxSize = new Vector2(_wallCheckDistance, _wallCheckHeight);
+
         //임시 체력 확인용
         hp = playerModel.hp;
     }
@@ -124,23 +138,30 @@ public partial class PlayerController : MonoBehaviour
         _states[(int)_curState].Update();
         TagePlayer();
 
-        ////임시 피격 트리거
-        //if (Input.GetKeyDown(KeyCode.O))
-        //{
-        //    playerModel.TakeDamage(1); // 임시
-        //}
 
-        ////임시 죽음 트리거
-        //if (Input.GetKeyDown(KeyCode.P))
-        //{
-        //    playerModel.DiePlayer();
-        //    Debug.Log("죽음");
-        //}
+            ////임시 피격 트리거
+            //if (Input.GetKeyDown(KeyCode.O))
+            //{
+            //    playerModel.TakeDamage(1); // 임시
+            //}
 
-        //임시 체력 확인용
-        //hp = playerModel.hp;
+            ////임시 죽음 트리거
+            //if (Input.GetKeyDown(KeyCode.P))
+            //{
+            //    playerModel.DiePlayer();
+            //    Debug.Log("죽음");
+            //}
 
+            //임시 체력 확인용
+            //hp = playerModel.hp;
+
+        }
+
+    private void FixedUpdate()
+    {
+        _states[(int)(_curState)].FixedUpdate();
     }
+
 
     public void ChangeState(State nextState)
     {
@@ -153,7 +174,7 @@ public partial class PlayerController : MonoBehaviour
 
     public void MoveInAir()
     {
-        float moveInput = Input.GetAxis("Horizontal");
+        float moveInput = Input.GetAxisRaw("Horizontal");
         rigid.velocity = new Vector2(moveInput * moveSpeedInAir, rigid.velocity.y);
 
         if (rigid.velocity.x > maxMoveSpeedInAir)
@@ -166,16 +187,39 @@ public partial class PlayerController : MonoBehaviour
         }
 
         //if(_curState != State.WallJump)
-        playerView.FlipRender(moveInput);
+
+        //playerView.FlipRender(moveInput);
+        FlipPlayer(moveInput);
 
         //if(moveInput > 0 && isWall)
 
-        if (isWall && _curState != State.WallJump && moveInput > 0)
+        if (isWall && _curState != State.WallJump)
         {
+            if (moveInput == isPlayerRight && moveInput != 0)
             ChangeState(State.WallGrab);
         }
             
     }
+
+    public void FlipPlayer(float _moveDirection)
+    {
+        playerView.FlipRender(_moveDirection);
+        AdjustWallCheckPoint();
+        AdjustColliderOffset();
+    }
+
+    private void AdjustWallCheckPoint()
+    {
+        _wallCheckPoint.localPosition = new Vector2(Mathf.Abs(_wallCheckPoint.localPosition.x) * isPlayerRight, _wallCheckPoint.localPosition.y);
+    }
+
+    private void AdjustColliderOffset()
+    {
+        _playerCollider.offset = new Vector2(Mathf.Abs(_playerCollider.offset.x) * isPlayerRight, _playerCollider.offset.y);
+    }
+
+
+
 
     public void TagePlayer()
     {
@@ -202,7 +246,7 @@ public partial class PlayerController : MonoBehaviour
     /// </summary>
     public void HandlePlayerSpawn()
     {
-        // ChangeState(State.Spawn);
+        ChangeState(State.Spawn);
         // _playerUI.SetHp(playerModel.hp); // 일단 주석처리, 순서상의 문제로 플레이어에서 해야할수도 있음
     }
 
@@ -244,14 +288,38 @@ public partial class PlayerController : MonoBehaviour
 
     IEnumerator CheckWallRoutine()
     {
-        WaitForSeconds delay = new WaitForSeconds(0.1f);
+        WaitForSeconds delay = new WaitForSeconds(0.01f);
 
+        //while (true)
+        //{
+        //    Debug.DrawRay(_wallCheckPoint.position, Vector2.right * isPlayerRight * _wallCheckDistance, Color.red);
+        //    isWall = Physics2D.Raycast(_wallCheckPoint.position, Vector2.right * isPlayerRight, _wallCheckDistance, wallLayerMask);
+        //    yield return delay;
+        //}
+
+        //BoxCast를 통해 벽 체크
         while (true)
         {
-            Debug.DrawRay(_wallCheckPoint.position, Vector2.right * isPlayerRight * _wallCheckDistance, Color.red);
-            isWall = Physics2D.Raycast(_wallCheckPoint.position, Vector2.right * isPlayerRight, _wallCheckDistance, wallLayerMask);
+            Vector2 origin = _wallCheckPoint.position;
+            Vector2 direction = Vector2.right * isPlayerRight;
+            Vector2 offset = direction * _wallCheckDistance;
+
+            Vector2 topLeft = origin + (Vector2.up * _wallCheckBoxSize.y / 2) + (Vector2.left * _wallCheckBoxSize.x / 2 * isPlayerRight) + offset;
+            Vector2 topRight = origin + (Vector2.up * _wallCheckBoxSize.y / 2) + (Vector2.right * _wallCheckBoxSize.x / 2 * isPlayerRight) + offset;
+            Vector2 bottomLeft = origin + (Vector2.down * _wallCheckBoxSize.y / 2) + (Vector2.left * _wallCheckBoxSize.x / 2 * isPlayerRight) + offset;
+            Vector2 bottomRight = origin + (Vector2.down * _wallCheckBoxSize.y / 2) + (Vector2.right * _wallCheckBoxSize.x / 2 * isPlayerRight) + offset;
+
+            Debug.DrawLine(topLeft, topRight, Color.red);
+            Debug.DrawLine(topRight, bottomRight, Color.red);
+            Debug.DrawLine(bottomRight, bottomLeft, Color.red);
+            Debug.DrawLine(bottomLeft, topLeft, Color.red);
+
+
+            isWall = Physics2D.BoxCast(_wallCheckPoint.position, _wallCheckBoxSize, 0, direction, _wallCheckDistance, wallLayerMask);
+            //isWall = Physics2D.BoxCast(_wallCheckPoint.position, _wallCheckBoxSize, 0, Vector2.right * isPlayerRight, _wallCheckDistance, wallLayerMask);
             yield return delay;
         }
+
     }
 
     public void Freeze()

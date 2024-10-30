@@ -37,8 +37,13 @@ public class TriggerTrap : Trap
 
         if(collision.gameObject.tag == "Player")
         {
-            ActiveTrap();
+            Active();
         }
+    }
+
+    protected override void ProcessActive()
+    {
+        ActiveTrap();
     }
 
     void ActiveTrap()

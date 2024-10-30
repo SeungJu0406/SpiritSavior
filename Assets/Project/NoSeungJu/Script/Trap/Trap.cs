@@ -1,19 +1,17 @@
 using UnityEngine;
+using UnityEngine.Events;
 
-[RequireComponent(typeof(Disposable))]
-public class Trap : MonoBehaviour
+/// <summary>
+/// 무조건 Active에서 트랩활성화 로직을 작성할 것
+/// </summary>
+public abstract class Trap : MonoBehaviour
 {
+
     [Header("게임에서 일회용인가?")]
     [SerializeField] protected bool _isDisposable;
 
-
-    protected Disposable _disposable;
-
     protected virtual void Start()
     {
-        _disposable = GetComponent<Disposable>();
-        _disposable.SetIsDisposable(_isDisposable);
-
         if (_isDisposable)
         {
             bool keeping = SceneChanger.Instance.CheckKeepingTrap(transform.position);
@@ -24,31 +22,51 @@ public class Trap : MonoBehaviour
         }
     }
 
-    protected virtual void OnCollisionEnter2D(Collision2D collision)
+    /// <summary>
+    /// 여기서 로직을 작성하고 Active로 호출할 것
+    /// </summary>
+    protected abstract void ProcessActive();
+
+    protected void Active()
     {
+        ProcessActive();
         if (_isDisposable)
-        {
-            if (collision.gameObject.tag == "Player")
-            {
-                _disposable.UnActiveTrap();
-            }
-        }
-    }
-    protected virtual void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (_isDisposable)
-        {
-            if (collision.gameObject.tag == "Player")
-            {
-                _disposable.UnActiveTrap();
-            }
-        }
+            UnActiveFromGame();
     }
 
-    protected virtual void InteractTrap()
+    protected void UnActive()
     {
-        _disposable.UnActiveTrap();
+        ProcessUnActive();
     }
 
+    protected virtual void ProcessUnActive() { }
+    /// <summary>
+    /// 일회용 bool 값 세팅
+    /// </summary>
+    /// <param name="value"></param>
+    public void SetIsDisposable(bool value)
+    {
+        _isDisposable = value;
+    }
+
+    /// <summary>
+    /// 게임에서 삭제 X
+    /// </summary>
+    public void ActiveFromGame()
+    {
+        if (SceneChanger.Instance == null) return;
+        SceneChanger.Instance.SetKeepingTrap(transform.position, true);
+    }
+
+    /// <summary>
+    /// 게임에서 삭제
+    /// </summary>
+    public void UnActiveFromGame()
+    {
+        if (SceneChanger.Instance == null) return;
+        SceneChanger.Instance.SetKeepingTrap(transform.position, false);
+    }
+    protected virtual void OnCollisionEnter2D(Collision2D collision) { }
+    protected virtual void OnTriggerEnter2D(Collider2D collision) { }
 
 }

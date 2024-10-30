@@ -66,20 +66,27 @@ public class PlayerView : MonoBehaviour
 
     public void FlipRender(float _moveDirection)
     {
-
+        // 이전에 움직였던 방향과 다를때만 수행
+        //if( _moveDirection !=0 && _moveDirection != _player.lastMoveDirection)
+        //{
         if (_moveDirection < 0)
         {
             renderer.flipX = true;
-            //_player.isPlayerRight = -1;
-            //_player._wallCheckPoint.position = new Vector2(_player._wallCheckPoint.position.x * -1, _player._wallCheckPoint.position.y);
+            _player.isPlayerRight = -1;
         }
 
         if (_moveDirection > 0)
         {
             renderer.flipX = false;
-            //_player.isPlayerRight = 1;
+            _player.isPlayerRight = 1;
         }
-            
+
+        
+        //_player._wallCheckPoint.localPosition = new Vector2(Mathf.Abs(_player._wallCheckPoint.localPosition.x) * _player.isPlayerRight, _player._wallCheckPoint.localPosition.y);
+
+        //_player.lastMoveDirection = _moveDirection;
+
+
     }
 
     public void PlayAnimation(int animationIndex)

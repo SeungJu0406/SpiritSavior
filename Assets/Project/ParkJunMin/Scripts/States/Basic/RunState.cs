@@ -63,7 +63,7 @@ public class RunState : PlayerState
 
     private void Run()
     {
-        float moveInput = Input.GetAxis("Horizontal"); // getaxisraw 쪽도 고려
+        float moveInput = Input.GetAxisRaw("Horizontal"); // getaxisraw 쪽도 고려
         player.rigid.velocity = new Vector2(moveInput * player.moveSpeed, player.rigid.velocity.y);
 
         if (player.rigid.velocity.x > player.maxMoveSpeed)
@@ -76,7 +76,8 @@ public class RunState : PlayerState
         }
 
         //Debug.Log(player.rigid.velocity);
-        player.playerView.FlipRender(moveInput);
+        //player.playerView.FlipRender(moveInput);
+        player.FlipPlayer(moveInput);
     }
 
     public override void Exit()
