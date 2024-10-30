@@ -10,6 +10,7 @@ public class GameOptionUI : BaseUI
     int _menuButtonInHash;
     int _menuButtonOutHash;
 
+    [SerializeField] public Animator playerAnimator;
     protected override void Awake()
     {
         base.Awake();
@@ -43,6 +44,8 @@ public class GameOptionUI : BaseUI
 
             GetUI("GameOptionUI").SetActive(false);
             GetUI<Animator>("MenuButton").Play("Out");
+
+            playerAnimator.enabled = true;
         }
         else
         {
@@ -51,6 +54,7 @@ public class GameOptionUI : BaseUI
             GetUI("GameOptionUI").SetActive(true);
             GetUI<Animator>("MenuButton").Play("In");
 
+            playerAnimator.enabled = false;
             CloseOptionBox();
         }
     }
