@@ -16,7 +16,8 @@ public class WallJumpState : PlayerState
         //player.Freeze();
         player.playerView.PlayAnimation(animationIndex);
         player.rigid.velocity = new Vector2(-player.isPlayerRight* player.wallJumpPower, 0.9f * player.wallJumpPower); //0.9는 점프조절 임시값
-        player.playerView.FlipRender(player.isPlayerRight);
+        player.FlipPlayer(player.isPlayerRight);
+        //player.playerView.FlipRender(player.isPlayerRight);
         
     }
 
