@@ -192,8 +192,11 @@ public partial class PlayerController : MonoBehaviour
     //    }
     //}
 
+    //임시주석
+
     public void MoveInAir()
     {     // 기존 메서드
+
         float moveInput = Input.GetAxisRaw("Horizontal");
 
         rigid.velocity = new Vector2(moveInput * moveSpeedInAir, rigid.velocity.y);
