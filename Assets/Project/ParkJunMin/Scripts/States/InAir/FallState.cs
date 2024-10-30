@@ -46,7 +46,7 @@ public class FallState : PlayerState
 
     public override void Exit()
     {
-        //Debug.Log("Fall 상태 종료");
+        Debug.Log("Fall 상태 종료");
         _isFalling = false;
 
         // 벽에 끼임 현상을 방지하기 위해 벽타기 불가능한 벽에선 0으로 주고

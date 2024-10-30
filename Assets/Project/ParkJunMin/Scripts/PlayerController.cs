@@ -57,8 +57,14 @@ public partial class PlayerController : MonoBehaviour
     public bool isSlope;
     public float maxAngle; // 이동 가능한 최대 각도
 
+    [HideInInspector] public float maxFlightTime; // 점프 후 바로 fall 상태로 들어가지 않기 위한 변수
+
     public int isPlayerRight = 1;
     public bool isGrounded;        // 캐릭터가 땅에 붙어있는지 체크
+
+    public RaycastHit2D groundHit;
+
+
     //public bool isWall;                  // 캐릭터가 벽에 붙어있는지 체크
     public bool isWallJumpUsed;         // 벽에서 벽점프를 사용 했는지 체크
     public float wallSlidingSpeed = 0.5f; // 중력계수 조정으로 할지 결정해야함
@@ -135,7 +141,7 @@ public partial class PlayerController : MonoBehaviour
         _states[(int)_curState].Update();
         TagePlayer();
 
-        CheckGroundRaycast();
+        //CheckGroundRaycast();
 
 
 
@@ -175,6 +181,8 @@ public partial class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         _states[(int)(_curState)].FixedUpdate();
+        //여기서 바닥체크를 하니까 하나는 해결됨..
+        CheckGroundRaycast();
     }
 
 
@@ -187,27 +195,27 @@ public partial class PlayerController : MonoBehaviour
 
     private void CheckGroundRaycast()
     {
-        RaycastHit2D hit = Physics2D.Raycast(_groundCheckPoint.position, Vector2.down, _groundCheckDistance, groundLayerMask);
+        groundHit = Physics2D.Raycast(_groundCheckPoint.position, Vector2.down, _groundCheckDistance, groundLayerMask);
         //노멀벡터로 각도를 구함
-        isGrounded = hit;
+        isGrounded = groundHit;
         // Vector2.Perpendicular(Vector2 A) : A의 값에서 반시계 방향으로 90도 회전한 벡터값을 반환
 
-        if(hit)
+        if(isGrounded)
         {
-            perpAngle = Vector2.Perpendicular(hit.normal).normalized; // 
-            groundAngle = Vector2.Angle(hit.normal, Vector2.up);
+            perpAngle = Vector2.Perpendicular(groundHit.normal).normalized; // 
+            groundAngle = Vector2.Angle(groundHit.normal, Vector2.up);
 
             if(groundAngle != 0)
                 isSlope = true;
             else
                 isSlope = false;
 
-            Debug.DrawLine(hit.point, hit.point + hit.normal, Color.blue);
-            Debug.DrawLine(hit.point, hit.point + perpAngle, Color.red);
+            //법선벡터, 지면에서 수직
+            Debug.DrawLine(groundHit.point, groundHit.point + groundHit.normal, Color.blue);
+
+            // 법선벡터의 수직인 벡터, 경사면
+            Debug.DrawLine(groundHit.point, groundHit.point + perpAngle, Color.red);
         }
-
-
-        
     }
 
 

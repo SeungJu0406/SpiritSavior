@@ -314,12 +314,10 @@ MonoBehaviour:
   playerView: {fileID: 0}
   renderer: {fileID: 0}
   moveSpeed: 8
-  maxMoveSpeed: 8
   lowJumpForce: 5
   highJumpForce: 15
   maxJumpTime: 0.2
   jumpCirticalPoint: 0.2
-  jumpEndSpeed: 15
   doubleJumpForce: 15
   knockbackForce: 3
   moveSpeedInAir: 0
@@ -332,12 +330,17 @@ MonoBehaviour:
   isDead: 0
   _groundCheckPoint: {fileID: 0}
   _wallCheckPoint: {fileID: 0}
+  _groundCheckDistance: 0
+  groundAngle: 0
+  perpAngle: {x: 0, y: 0}
+  isSlope: 0
+  maxAngle: 0
   isPlayerRight: 1
   isGrounded: 0
-  isWall: 0
   isWallJumpUsed: 0
   wallSlidingSpeed: 0.5
   wallJumpPower: 10
+  moveInput: 0
 --- !u!1 &684765419
 GameObject:
   m_ObjectHideFlags: 0
@@ -1077,7 +1080,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 2923a0ba93c786d459603d02cecbcbfa, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
