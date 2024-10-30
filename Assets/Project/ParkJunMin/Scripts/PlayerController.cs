@@ -11,7 +11,6 @@ public partial class PlayerController : MonoBehaviour
 
     public PlayerModel playerModel = new PlayerModel();
     public PlayerView playerView;
-    //private LayerMask wallLayer;
 
     private Collider2D _playerCollider;
     private int wallLayerMask; 
@@ -26,11 +25,8 @@ public partial class PlayerController : MonoBehaviour
     public float highJumpForce;    // 높은점프 힘
     public float maxJumpTime;     // 최대점프 시간
     public float jumpCirticalPoint;
-    //public float jumpStartSpeed;   // 점프시작 속도
-    public float jumpEndSpeed;     // 점프종료 속도
     public float doubleJumpForce; // 더블 점프시 얼마나 위로 올라갈지 결정
     public float knockbackForce; // 피격시 얼마나 뒤로 밀려날 지 결정
-    
 
     //기본 이동속도에 따라 변화되는 변수 변경x
     [HideInInspector] public float moveSpeedInAir;    // 공중에서 플레이어의 속도
@@ -48,12 +44,6 @@ public partial class PlayerController : MonoBehaviour
     public bool isDoubleJumpUsed; // 더블점프 사용 유무를 나타내는 변수
     public bool isDead = false; // 죽었는지 확인
     
-    //[HideInInspector] public float lastMoveDirection = 0f;
-    
-
-
-
-
     [Header("Ground & Wall Checking")]
     [SerializeField] Transform _groundCheckPoint;
     public Transform _wallCheckPoint;
@@ -68,13 +58,8 @@ public partial class PlayerController : MonoBehaviour
     public float wallJumpPower;
 
     private Vector2 _wallCheckBoxSize;
-    //public LayerMask wallLayer; // 사용 여부 확실치 않음
-    //public Vector2 wallCheckSize;
     Coroutine _wallCheckRoutine;
     Coroutine _groundCheckRoutine;
-
-
-
 
     private void Awake()
     {
@@ -87,7 +72,11 @@ public partial class PlayerController : MonoBehaviour
             Debug.LogError("모델 생성 오류");
         }
 
+        rigid = GetComponent<Rigidbody2D>();
+        if (rigid == null)
+            Debug.LogError("rigidBody없음");
         _playerCollider = GetComponent<CapsuleCollider2D>();
+        
 
         _states[(int)State.Idle] = new IdleState(this);
         _states[(int)State.Run] = new RunState(this);
@@ -126,9 +115,6 @@ public partial class PlayerController : MonoBehaviour
 
     void Start()
     {
-        rigid = GetComponent<Rigidbody2D>();
-        if (rigid == null)
-            Debug.LogError("rigidBody없음");
         playerView = GetComponent<PlayerView>();
         _states[(int)_curState].Enter();
         SubscribeEvents();
@@ -197,30 +183,16 @@ public partial class PlayerController : MonoBehaviour
     //임시주석
 
     public void MoveInAir()
-    {     // 기존 메서드
+    {     
+        // 벽 끼임 방지 현상을 위해
+        // 마찰력을 0으로 두는곳과 원래대로 돌리는곳을 정확히 정할 필요가 있음
+        rigid.sharedMaterial.friction = 0f;
 
         float moveInput = Input.GetAxisRaw("Horizontal");
 
         rigid.velocity = new Vector2(moveInput * moveSpeedInAir, rigid.velocity.y);
 
-        if (rigid.velocity.x > maxMoveSpeedInAir)
-        {
-            rigid.velocity = new Vector2(maxMoveSpeedInAir, rigid.velocity.y);
-        }
-        else if (rigid.velocity.x < -maxMoveSpeedInAir)
-        {
-            rigid.velocity = new Vector2(-(maxMoveSpeedInAir), rigid.velocity.y);
-        }
-
-        //if(_curState != State.WallJump)
-
-        //playerView.FlipRender(moveInput);
         FlipPlayer(moveInput);
-
-        //if(moveInput > 0 && isWall)
-
-
-        //isWall = Physics2D.BoxCast(_wallCheckPoint.position, _wallCheckBoxSize, 0, Vector2.right * isPlayerRight, _wallCheckDistance, wallLayerMask);
 
         RaycastHit2D hit = Physics2D.BoxCast(_wallCheckPoint.position, _wallCheckBoxSize, 0, Vector2.right * isPlayerRight, _wallCheckDistance);
 
@@ -239,13 +211,6 @@ public partial class PlayerController : MonoBehaviour
         {
             //rigid.sharedMaterial.friction = 0f;
         }
-
-        //if (isWall && _curState != State.WallJump)
-        //{
-        //    if (moveInput == isPlayerRight && moveInput != 0)
-        //        ChangeState(State.WallGrab);
-        //}
-
     }
     public void FlipPlayer(float _moveDirection)
     {

@@ -7,12 +7,12 @@ public class IdleState : PlayerState
     public IdleState(PlayerController player) : base(player)
     {
         animationIndex = (int)PlayerController.State.Idle;
-        //player.rigid.sharedMaterial.friction = 1.0f;
+
     }
 
     public override void Enter()
     {
-        
+        player.rigid.velocity = Vector2.zero;
         prevNature = player.playerModel.curNature;
         player.isDoubleJumpUsed = false;
         //Debug.Log("Idle 상태 진입");

@@ -205,7 +205,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &36837260
 BoxCollider2D:
@@ -402,12 +402,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 210251936}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.33, y: 10.37, z: 0}
+  m_LocalPosition: {x: -6.33, y: 18.81, z: 0}
   m_LocalScale: {x: 4.2446527, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &475178999
 GameObject:
@@ -453,7 +453,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &610238412
 MonoBehaviour:
@@ -495,7 +495,6 @@ MonoBehaviour:
   highJumpForce: 10
   maxJumpTime: 0.2
   jumpCirticalPoint: 0.2
-  jumpEndSpeed: 15
   doubleJumpForce: 5
   knockbackForce: 3
   moveSpeedInAir: 0
@@ -759,12 +758,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 744020166}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -11.22, y: 11.44, z: 0}
+  m_LocalPosition: {x: -11.22, y: 17.6, z: 0}
   m_LocalScale: {x: -8.03, y: -1, z: -1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!1 &856752989
 GameObject:
@@ -870,12 +869,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 856752989}
   m_LocalRotation: {x: -0, y: -0, z: 0.34047437, w: 0.9402538}
-  m_LocalPosition: {x: -43.25, y: 0.62, z: 0}
+  m_LocalPosition: {x: -42.15, y: 0.22, z: 0}
   m_LocalScale: {x: 16.3355, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 39.812}
 --- !u!1 &952933757
 GameObject:
@@ -980,14 +979,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 952933757}
-  m_LocalRotation: {x: 0, y: 0, z: -0.8800633, w: 0.47485644}
-  m_LocalPosition: {x: -11.77, y: 0.62, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0.97635293, w: 0.21618271}
+  m_LocalPosition: {x: -6.77, y: -0.85, z: 0}
   m_LocalScale: {x: 16.3355, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 17
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -123.3}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -155.03}
 --- !u!1001 &1006240284
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1153,12 +1152,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1031690794}
   m_LocalRotation: {x: -0, y: -0, z: -0.31209564, w: 0.9500507}
-  m_LocalPosition: {x: -30.59, y: 0.62, z: 0}
+  m_LocalPosition: {x: -29.99, y: 0.62, z: 0}
   m_LocalScale: {x: 16.3355, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -36.371}
 --- !u!1 &1039534992
 GameObject:
@@ -1204,7 +1203,6 @@ MonoBehaviour:
   highJumpForce: 10
   maxJumpTime: 0.2
   jumpCirticalPoint: 0
-  jumpEndSpeed: 15
   doubleJumpForce: 0
   knockbackForce: 0
   moveSpeedInAir: 0
@@ -1324,7 +1322,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1039534998
 Animator:
@@ -1447,7 +1445,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 15.206749
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1471,12 +1469,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1106110308}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -20.02, y: -2.3700004, z: -10}
+  m_LocalPosition: {x: -16.95, y: 3.09, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1642793102
 GameObject:
@@ -1587,7 +1585,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 80.988}
 --- !u!1 &2142638634
 GameObject:
@@ -1618,7 +1616,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2143839753
 GameObject:
@@ -1729,7 +1727,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1389921786742826793
 Rigidbody2D:
@@ -1921,7 +1919,6 @@ MonoBehaviour:
   highJumpForce: 15
   maxJumpTime: 0.2
   jumpCirticalPoint: 0.2
-  jumpEndSpeed: 15
   doubleJumpForce: 15
   knockbackForce: 10
   moveSpeedInAir: 0
@@ -2054,7 +2051,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!50 &2702049323639258070
 Rigidbody2D:
   serializedVersion: 4
