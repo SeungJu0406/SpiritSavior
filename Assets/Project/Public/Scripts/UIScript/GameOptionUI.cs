@@ -43,6 +43,8 @@ public class GameOptionUI : BaseUI
 
             GetUI("GameOptionUI").SetActive(false);
             GetUI<Animator>("MenuButton").Play("Out");
+
+            Manager.Game.Player.GetComponent<Animator>().enabled = true;
         }
         else
         {
@@ -51,6 +53,7 @@ public class GameOptionUI : BaseUI
             GetUI("GameOptionUI").SetActive(true);
             GetUI<Animator>("MenuButton").Play("In");
 
+            Manager.Game.Player.GetComponent<Animator>().enabled = false;
             CloseOptionBox();
         }
     }
