@@ -172,7 +172,7 @@ MonoBehaviour:
   lowJumpForce: 5
   highJumpForce: 10
   maxJumpTime: 0.2
-  jumpStartSpeed: 8
+  jumpCirticalPoint: 0
   jumpEndSpeed: 15
   doubleJumpForce: 8
   knockbackForce: 3
@@ -181,7 +181,6 @@ MonoBehaviour:
   speedAdjustmentOffsetInAir: 0.8
   rigid: {fileID: 0}
   hp: 0
-  isJumped: 0
   jumpChargingTime: 0
   isDoubleJumpUsed: 0
   isDead: 0
@@ -189,8 +188,10 @@ MonoBehaviour:
   _wallCheckPoint: {fileID: 0}
   isPlayerRight: 1
   isGrounded: 0
-  _isWall: 0
+  isWall: 0
+  isWallJumpUsed: 0
   wallSlidingSpeed: 0.5
+  wallJumpPower: 0
 --- !u!70 &5009256457903946316
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

@@ -34,6 +34,12 @@ public abstract class Trap : MonoBehaviour
             UnActiveFromGame();
     }
 
+    protected void UnActive()
+    {
+        ProcessUnActive();
+    }
+
+    protected virtual void ProcessUnActive() { }
     /// <summary>
     /// 일회용 bool 값 세팅
     /// </summary>
