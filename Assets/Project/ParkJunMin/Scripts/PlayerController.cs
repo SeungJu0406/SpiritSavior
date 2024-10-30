@@ -138,23 +138,24 @@ public partial class PlayerController : MonoBehaviour
         _states[(int)_curState].Update();
         TagePlayer();
 
-        ////임시 피격 트리거
-        //if (Input.GetKeyDown(KeyCode.O))
-        //{
-        //    playerModel.TakeDamage(1); // 임시
-        //}
 
-        ////임시 죽음 트리거
-        //if (Input.GetKeyDown(KeyCode.P))
-        //{
-        //    playerModel.DiePlayer();
-        //    Debug.Log("죽음");
-        //}
+            ////임시 피격 트리거
+            //if (Input.GetKeyDown(KeyCode.O))
+            //{
+            //    playerModel.TakeDamage(1); // 임시
+            //}
 
-        //임시 체력 확인용
-        //hp = playerModel.hp;
+            ////임시 죽음 트리거
+            //if (Input.GetKeyDown(KeyCode.P))
+            //{
+            //    playerModel.DiePlayer();
+            //    Debug.Log("죽음");
+            //}
 
-    }
+            //임시 체력 확인용
+            //hp = playerModel.hp;
+
+        }
 
     private void FixedUpdate()
     {
@@ -192,8 +193,9 @@ public partial class PlayerController : MonoBehaviour
 
         //if(moveInput > 0 && isWall)
 
-        if (isWall && _curState != State.WallJump) //&& moveInput > 0)
+        if (isWall && _curState != State.WallJump)
         {
+            if (moveInput == isPlayerRight && moveInput != 0)
             ChangeState(State.WallGrab);
         }
             
@@ -286,7 +288,7 @@ public partial class PlayerController : MonoBehaviour
 
     IEnumerator CheckWallRoutine()
     {
-        WaitForSeconds delay = new WaitForSeconds(0.1f);
+        WaitForSeconds delay = new WaitForSeconds(0.01f);
 
         //while (true)
         //{
@@ -295,8 +297,8 @@ public partial class PlayerController : MonoBehaviour
         //    yield return delay;
         //}
 
-        // BoxCast를 통해 벽 체크
-        while(true)
+        //BoxCast를 통해 벽 체크
+        while (true)
         {
             Vector2 origin = _wallCheckPoint.position;
             Vector2 direction = Vector2.right * isPlayerRight;
@@ -313,11 +315,11 @@ public partial class PlayerController : MonoBehaviour
             Debug.DrawLine(bottomLeft, topLeft, Color.red);
 
 
-
-            isWall = Physics2D.BoxCast(_wallCheckPoint.position, _wallCheckBoxSize, 0, Vector2.right, _wallCheckDistance, wallLayerMask);
+            isWall = Physics2D.BoxCast(_wallCheckPoint.position, _wallCheckBoxSize, 0, direction, _wallCheckDistance, wallLayerMask);
+            //isWall = Physics2D.BoxCast(_wallCheckPoint.position, _wallCheckBoxSize, 0, Vector2.right * isPlayerRight, _wallCheckDistance, wallLayerMask);
             yield return delay;
         }
-        
+
     }
 
     public void Freeze()
