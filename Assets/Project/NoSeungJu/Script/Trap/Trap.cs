@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 /// <summary>
-/// 무조건 Active에서 트랩활성화 로직을 작성할 것
+/// 무조건 ProcessActive에서 로직을 작성한 후, Active 함수로 실행시킬 것
 /// </summary>
 public abstract class Trap : MonoBehaviour
 {
