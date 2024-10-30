@@ -62,7 +62,7 @@ public partial class PlayerController : MonoBehaviour
     private float _groundCheckDistance = 0.2f;
     public int isPlayerRight = 1;
     public bool isGrounded = false;        // 캐릭터가 땅에 붙어있는지 체크
-    public bool isWall;                  // 캐릭터가 벽에 붙어있는지 체크
+    //public bool isWall;                  // 캐릭터가 벽에 붙어있는지 체크
     public bool isWallJumpUsed;         // 벽에서 벽점프를 사용 했는지 체크
     public float wallSlidingSpeed = 0.5f; // 중력계수 조정으로 할지 결정해야함
     public float wallJumpPower;
@@ -127,6 +127,8 @@ public partial class PlayerController : MonoBehaviour
     void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
+        if (rigid == null)
+            Debug.LogError("rigidBody없음");
         playerView = GetComponent<PlayerView>();
         _states[(int)_curState].Enter();
         SubscribeEvents();
@@ -217,17 +219,34 @@ public partial class PlayerController : MonoBehaviour
 
         //if(moveInput > 0 && isWall)
 
-        //추후 개선방안을 찾아야함
-        isWall = Physics2D.BoxCast(_wallCheckPoint.position, _wallCheckBoxSize, 0, Vector2.right * isPlayerRight, _wallCheckDistance, wallLayerMask);
 
-        if (isWall && _curState != State.WallJump)
+        //isWall = Physics2D.BoxCast(_wallCheckPoint.position, _wallCheckBoxSize, 0, Vector2.right * isPlayerRight, _wallCheckDistance, wallLayerMask);
+
+        RaycastHit2D hit = Physics2D.BoxCast(_wallCheckPoint.position, _wallCheckBoxSize, 0, Vector2.right * isPlayerRight, _wallCheckDistance);
+
+        if(hit.collider == null)
+            return;
+
+        if ((wallLayerMask & (1 << hit.collider.gameObject.layer)) != 0) //비트연산으로 레이어 일치 여부 확인 (제일 빠를것)
         {
-            if (moveInput == isPlayerRight && moveInput != 0)
+            if (_curState == State.WallJump)
+                return;
+
+            if(moveInput == isPlayerRight && moveInput != 0)
                 ChangeState(State.WallGrab);
         }
+        else
+        {
+            //rigid.sharedMaterial.friction = 0f;
+        }
+
+        //if (isWall && _curState != State.WallJump)
+        //{
+        //    if (moveInput == isPlayerRight && moveInput != 0)
+        //        ChangeState(State.WallGrab);
+        //}
 
     }
-
     public void FlipPlayer(float _moveDirection)
     {
         playerView.FlipRender(_moveDirection);
@@ -245,9 +264,6 @@ public partial class PlayerController : MonoBehaviour
         _playerCollider.offset = new Vector2(Mathf.Abs(_playerCollider.offset.x) * isPlayerRight, _playerCollider.offset.y);
     }
 
-
-
-
     public void TagePlayer()
     {
         if(Input.GetKeyDown(KeyCode.Tab))
@@ -256,6 +272,7 @@ public partial class PlayerController : MonoBehaviour
             playerModel.TagPlayerEvent(); // 속성 열거형 형식의 curNature를 바꿔줌 + 태그 이벤트 Invoke
         }
     }
+
 
     private void HandlePlayerDied()
     {
@@ -275,6 +292,16 @@ public partial class PlayerController : MonoBehaviour
     {
         ChangeState(State.Spawn);
         // _playerUI.SetHp(playerModel.hp); // 일단 주석처리, 순서상의 문제로 플레이어에서 해야할수도 있음
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        //NaturePlatform naturePlatform = collision.gameObject.GetComponent<NaturePlatform>();
+
+        //if (naturePlatform != null)
+        //{
+        //    if(playerModel.curNature == )
+        //}
     }
 
     private void OnDestroy()
@@ -315,7 +342,7 @@ public partial class PlayerController : MonoBehaviour
 
     IEnumerator CheckWallRoutine()
     {
-        WaitForSeconds delay = new WaitForSeconds(0.01f);
+        WaitForSeconds delay = new WaitForSeconds(0.1f);
 
         //while (true)
         //{
@@ -324,7 +351,7 @@ public partial class PlayerController : MonoBehaviour
         //    yield return delay;
         //}
 
-        //BoxCast를 통해 벽 체크
+        //BoxCast를 통해 벽을 체크한 범위를 보여줌
         while (true)
         {
             Vector2 origin = _wallCheckPoint.position;
@@ -341,7 +368,6 @@ public partial class PlayerController : MonoBehaviour
             Debug.DrawLine(bottomRight, bottomLeft, Color.red);
             Debug.DrawLine(bottomLeft, topLeft, Color.red);
 
-            
             //isWall = Physics2D.BoxCast(_wallCheckPoint.position, _wallCheckBoxSize, 0, Vector2.right * isPlayerRight, _wallCheckDistance, wallLayerMask);
             yield return delay;
         }
