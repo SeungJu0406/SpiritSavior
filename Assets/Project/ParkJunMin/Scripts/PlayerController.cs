@@ -172,9 +172,30 @@ public partial class PlayerController : MonoBehaviour
 
 
 
+    //public void MoveInAir()
+    //{
+    //    float moveInput = Input.GetAxisRaw("Horizontal");
+
+    //    Vector2 targetVelocity = rigid.velocity + new Vector2(moveInput * moveSpeed*Time.deltaTime, 0);
+    //    targetVelocity = Vector2.ClampMagnitude(targetVelocity, maxMoveSpeedInAir); // 속도제한
+    //    rigid.velocity = targetVelocity;
+
+    //    FlipPlayer(moveInput);
+
+    //    //추후 개선방안을 찾아야함
+    //    isWall = Physics2D.BoxCast(_wallCheckPoint.position, _wallCheckBoxSize, 0, Vector2.right * isPlayerRight, _wallCheckDistance, wallLayerMask);
+
+    //    if (isWall && _curState != State.WallJump)
+    //    {
+    //        if (moveInput == isPlayerRight && moveInput != 0)
+    //        ChangeState(State.WallGrab);
+    //    }
+    //}
+
     public void MoveInAir()
-    {
+    {     // 기존 메서드
         float moveInput = Input.GetAxisRaw("Horizontal");
+
         rigid.velocity = new Vector2(moveInput * moveSpeedInAir, rigid.velocity.y);
 
         if (rigid.velocity.x > maxMoveSpeedInAir)
@@ -193,12 +214,15 @@ public partial class PlayerController : MonoBehaviour
 
         //if(moveInput > 0 && isWall)
 
+        //추후 개선방안을 찾아야함
+        isWall = Physics2D.BoxCast(_wallCheckPoint.position, _wallCheckBoxSize, 0, Vector2.right * isPlayerRight, _wallCheckDistance, wallLayerMask);
+
         if (isWall && _curState != State.WallJump)
         {
             if (moveInput == isPlayerRight && moveInput != 0)
-            ChangeState(State.WallGrab);
+                ChangeState(State.WallGrab);
         }
-            
+
     }
 
     public void FlipPlayer(float _moveDirection)
@@ -314,8 +338,7 @@ public partial class PlayerController : MonoBehaviour
             Debug.DrawLine(bottomRight, bottomLeft, Color.red);
             Debug.DrawLine(bottomLeft, topLeft, Color.red);
 
-
-            isWall = Physics2D.BoxCast(_wallCheckPoint.position, _wallCheckBoxSize, 0, direction, _wallCheckDistance, wallLayerMask);
+            
             //isWall = Physics2D.BoxCast(_wallCheckPoint.position, _wallCheckBoxSize, 0, Vector2.right * isPlayerRight, _wallCheckDistance, wallLayerMask);
             yield return delay;
         }

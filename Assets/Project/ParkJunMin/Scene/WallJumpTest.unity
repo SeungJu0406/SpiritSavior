@@ -205,7 +205,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &36837260
 BoxCollider2D:
@@ -277,7 +277,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &610238412
 MonoBehaviour:
@@ -316,11 +316,11 @@ MonoBehaviour:
   moveSpeed: 8
   maxMoveSpeed: 8
   lowJumpForce: 5
-  highJumpForce: 10
+  highJumpForce: 15
   maxJumpTime: 0.2
   jumpCirticalPoint: 0.2
   jumpEndSpeed: 15
-  doubleJumpForce: 10
+  doubleJumpForce: 15
   knockbackForce: 3
   moveSpeedInAir: 0
   maxMoveSpeedInAir: 0
@@ -478,7 +478,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!1 &856752989
 GameObject:
@@ -589,7 +589,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &942130321
 GameObject:
@@ -700,7 +700,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!1 &1044693725
 GameObject:
@@ -810,12 +810,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1106110308}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.09000015, y: 1.91, z: -10}
+  m_LocalPosition: {x: -17, y: -1.91, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3652188071181039508}
-  m_RootOrder: 2
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1642793102
 GameObject:
@@ -926,7 +926,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 80.988}
 --- !u!1 &2143839753
 GameObject:
@@ -1037,7 +1037,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3652188071181039503
 GameObject:
@@ -1055,7 +1055,7 @@ GameObject:
   - component: {fileID: 610238413}
   - component: {fileID: 3652188071181039510}
   m_Layer: 0
-  m_Name: PlayerBeforeTasking
+  m_Name: PlayerTemp
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1148,9 +1148,8 @@ Transform:
   m_Children:
   - {fileID: 1044693726}
   - {fileID: 684765420}
-  - {fileID: 1106110311}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &3652188071181039509
 Animator:

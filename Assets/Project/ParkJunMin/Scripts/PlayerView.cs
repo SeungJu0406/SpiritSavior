@@ -81,6 +81,12 @@ public class PlayerView : MonoBehaviour
             _player.isPlayerRight = 1;
         }
 
+        // 추후 해결 방법을 위함
+        //if( _moveDirection == 0)
+        //{
+        //    _player.isPlayerRight = 0;
+        //}
+
         
         //_player._wallCheckPoint.localPosition = new Vector2(Mathf.Abs(_player._wallCheckPoint.localPosition.x) * _player.isPlayerRight, _player._wallCheckPoint.localPosition.y);
 

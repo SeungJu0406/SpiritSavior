@@ -13,9 +13,10 @@ public class WallJumpState : PlayerState
     public override void Enter()
     {
         player.isWallJumpUsed = true;
+        player.isDoubleJumpUsed = false;
         //player.Freeze();
         player.playerView.PlayAnimation(animationIndex);
-        player.rigid.velocity = new Vector2(-player.isPlayerRight* player.wallJumpPower, 0.9f * player.wallJumpPower); //0.9는 점프조절 임시값
+        player.rigid.velocity = new Vector2(-player.isPlayerRight* player.wallJumpPower, 1.5f * player.wallJumpPower); //0.9는 점프조절 임시값
         player.FlipPlayer(player.isPlayerRight);
         //player.playerView.FlipRender(player.isPlayerRight);
         
@@ -32,10 +33,14 @@ public class WallJumpState : PlayerState
         if (player.isGrounded)
             player.ChangeState(PlayerController.State.Idle);
 
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            player.ChangeState(PlayerController.State.DoubleJump);
+        }
         //if(player.isWall)
         //    player.ChangeState(PlayerController.State.WallGrab);
 
-        if(player.rigid.velocity.y < 0)
+        if(player.rigid.velocity.y < -5.0f)
         {
             player.ChangeState(PlayerController.State.Fall);
         }
