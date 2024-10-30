@@ -12,6 +12,8 @@ public partial class PlayerController : MonoBehaviour
     public PlayerModel playerModel = new PlayerModel();
     public PlayerView playerView;
     //private LayerMask wallLayer;
+
+    private Collider2D _playerCollider;
     private int wallLayerMask; 
 
     
@@ -45,6 +47,7 @@ public partial class PlayerController : MonoBehaviour
     public float jumpChargingTime = 0f;     // 스페이스바 누른시간 체크
     public bool isDoubleJumpUsed; // 더블점프 사용 유무를 나타내는 변수
     public bool isDead = false; // 죽었는지 확인
+    
     //[HideInInspector] public float lastMoveDirection = 0f;
     
 
@@ -83,6 +86,8 @@ public partial class PlayerController : MonoBehaviour
         {
             Debug.LogError("모델 생성 오류");
         }
+
+        _playerCollider = GetComponent<CapsuleCollider2D>();
 
         _states[(int)State.Idle] = new IdleState(this);
         _states[(int)State.Run] = new RunState(this);
@@ -181,16 +186,38 @@ public partial class PlayerController : MonoBehaviour
         }
 
         //if(_curState != State.WallJump)
-        playerView.FlipRender(moveInput);
+
+        //playerView.FlipRender(moveInput);
+        FlipPlayer(moveInput);
 
         //if(moveInput > 0 && isWall)
 
-        if (isWall && _curState != State.WallJump && moveInput > 0)
+        if (isWall && _curState != State.WallJump) //&& moveInput > 0)
         {
             ChangeState(State.WallGrab);
         }
             
     }
+
+    public void FlipPlayer(float _moveDirection)
+    {
+        playerView.FlipRender(_moveDirection);
+        AdjustWallCheckPoint();
+        AdjustColliderOffset();
+    }
+
+    private void AdjustWallCheckPoint()
+    {
+        _wallCheckPoint.localPosition = new Vector2(Mathf.Abs(_wallCheckPoint.localPosition.x) * isPlayerRight, _wallCheckPoint.localPosition.y);
+    }
+
+    private void AdjustColliderOffset()
+    {
+        _playerCollider.offset = new Vector2(Mathf.Abs(_playerCollider.offset.x) * isPlayerRight, _playerCollider.offset.y);
+    }
+
+
+
 
     public void TagePlayer()
     {

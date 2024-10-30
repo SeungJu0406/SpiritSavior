@@ -81,7 +81,8 @@ public class PlayerView : MonoBehaviour
             _player.isPlayerRight = 1;
         }
 
-        _player._wallCheckPoint.localPosition = new Vector2(Mathf.Abs(_player._wallCheckPoint.localPosition.x) * _player.isPlayerRight, _player._wallCheckPoint.localPosition.y);
+        
+        //_player._wallCheckPoint.localPosition = new Vector2(Mathf.Abs(_player._wallCheckPoint.localPosition.x) * _player.isPlayerRight, _player._wallCheckPoint.localPosition.y);
 
         //_player.lastMoveDirection = _moveDirection;
 

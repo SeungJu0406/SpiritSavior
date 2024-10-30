@@ -76,7 +76,8 @@ public class RunState : PlayerState
         }
 
         //Debug.Log(player.rigid.velocity);
-        player.playerView.FlipRender(moveInput);
+        //player.playerView.FlipRender(moveInput);
+        player.FlipPlayer(moveInput);
     }
 
     public override void Exit()
