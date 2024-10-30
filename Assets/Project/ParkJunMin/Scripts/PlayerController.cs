@@ -173,7 +173,7 @@ public partial class PlayerController : MonoBehaviour
 
     public void MoveInAir()
     {
-        float moveInput = Input.GetAxis("Horizontal");
+        float moveInput = Input.GetAxisRaw("Horizontal");
         rigid.velocity = new Vector2(moveInput * moveSpeedInAir, rigid.velocity.y);
 
         if (rigid.velocity.x > maxMoveSpeedInAir)
