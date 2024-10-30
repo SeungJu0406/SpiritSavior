@@ -44,6 +44,7 @@ public class DarkArea : Trap
 
     protected override void ProcessActive()
     {
+        // 하위 스프라이트 오브젝트들 비활성화
         foreach (SpriteRenderer sprite in _areas) 
         {
             sprite.gameObject.SetActive(false);
@@ -53,6 +54,7 @@ public class DarkArea : Trap
 
     protected override void ProcessUnActive()
     {
+        // 하위 스프라이트 오브젝트들 활성화
         foreach (SpriteRenderer sprite in _areas)
         {
             sprite.gameObject.SetActive(true);
