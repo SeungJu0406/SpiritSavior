@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class NaturePlatform : MonoBehaviour
@@ -5,19 +6,37 @@ public class NaturePlatform : MonoBehaviour
     [Space(10)]
     [SerializeField] PlayerModel.Nature _platformNature;
 
+    List<GameObject> objectList = new List<GameObject>();
+    PlayerController _player;
     int _defaultLayer;
     int _ignorePlayerLayer;
 
     private void Awake()
     {
         InitLayer();
+
+        objectList.Add(gameObject);
+        Transform[] childObjects = GetComponentsInChildren<Transform>();
+        foreach (Transform obj in childObjects) 
+        {
+            objectList.Add(obj.gameObject);
+        }
+    }
+
+    private void Start()
+    {
+        if (_player != null) return;
+        _player = Manager.Game.Player;
+        _player.playerModel.OnPlayerTagged += SetActiveCollider;
+        SetActiveCollider(_player.playerModel.curNature);
     }
 
     private void OnEnable()
     {
-        PlayerController player = Manager.Game.Player;
-        player.playerModel.OnPlayerTagged += SetActiveCollider;
-        SetActiveCollider(player.playerModel.curNature);
+        if (Manager.Game == null) return;
+        _player = Manager.Game.Player;
+        _player.playerModel.OnPlayerTagged += SetActiveCollider;
+        SetActiveCollider(_player.playerModel.curNature);
     }
 
     private void OnDisable()
@@ -29,11 +48,18 @@ public class NaturePlatform : MonoBehaviour
     {
         if (nature == _platformNature)
         {
-            gameObject.layer = _defaultLayer;
+            foreach(GameObject obj in objectList)
+            {
+                obj.layer = _defaultLayer;
+            }
+            
         }
         else
         {
-            gameObject.layer = _ignorePlayerLayer;
+            foreach (GameObject obj in objectList)
+            {
+                obj.layer = _ignorePlayerLayer;
+            }
         }
     }
 
