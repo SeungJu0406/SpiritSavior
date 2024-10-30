@@ -14,13 +14,7 @@ public class NaturePlatform : MonoBehaviour
     private void Awake()
     {
         InitLayer();
-
-        objectList.Add(gameObject);
-        Transform[] childObjects = GetComponentsInChildren<Transform>();
-        foreach (Transform obj in childObjects) 
-        {
-            objectList.Add(obj.gameObject);
-        }
+        InitObjectList();
     }
 
     private void Start()
@@ -65,7 +59,17 @@ public class NaturePlatform : MonoBehaviour
 
     void InitLayer()
     {
-        _defaultLayer = LayerMask.NameToLayer("Default");
+        _defaultLayer = gameObject.layer;
         _ignorePlayerLayer = LayerMask.NameToLayer("Ignore Player");
+    }
+
+    void InitObjectList()
+    {
+        objectList.Add(gameObject);
+        Transform[] childObjects = GetComponentsInChildren<Transform>();
+        foreach (Transform obj in childObjects)
+        {
+            objectList.Add(obj.gameObject);
+        }
     }
 }
