@@ -22,9 +22,17 @@ public class MovingPlatformV2 : SwichInteractable
 
     public override void Interact()
     {
+        if (_isMoving == false)
+        {
+            _isMoving = true;
+        }
+        else
+        {
+            _isMoving = false;
+        }
         // _isMoving이 활성화 안되면 아마 안될것
         // 그전에 switch되나 확인차 했던것.
-        MovePlatform();
+        // MovePlatform();
     }
 
     private void Awake()
@@ -44,18 +52,20 @@ public class MovingPlatformV2 : SwichInteractable
         {
             if (_delayMove == null)
             {
-                _delayMove = StartCoroutine(DelayMove());
+                
+                
                 MovePlatform();
             }
             else if (_delayMove != null)
             {
-                StopCoroutine(_delayMove);
                 Debug.Log("코루틴끝");
+                StopCoroutine(_delayMove);
                 _delayMove = null;
             }
         }
         else if (_isMoving == false)
         {
+            
             RetreatPlatform();
         }
 
@@ -64,13 +74,23 @@ public class MovingPlatformV2 : SwichInteractable
     {
         Debug.Log("Coroutine STARTS!");
         yield return new WaitForSeconds(delay);
-        Debug.Log($"{delay}후 Coroutine 끝");
+       
+        Debug.Log($"{delay}초 지남");
+        // 여기서 활성화 해서 MovePlatform();
+        _isMoving = true;
     }
 
+    /// <summary>
+    /// 플레이어 움직이는 메서드
+    /// </summary>
     public void MovePlatform()
     {
+        Debug.Log("start moving");
         transform.position = Vector3.MoveTowards(transform.position, nextPosition, moveSpeed * Time.deltaTime);
     }
+    /// <summary>
+    /// 처음 위치로 돌아가는 메서드
+    /// </summary>
     public void RetreatPlatform()
     {
         // A(시작점)로 복귀
@@ -81,7 +101,8 @@ public class MovingPlatformV2 : SwichInteractable
     {
         if (collision.gameObject.tag == "Player")
         {
-            _isMoving = true;
+            _delayMove = StartCoroutine(DelayMove());
+            // _isMoving = true;
             collision.transform.SetParent(transform);
         }
     }
@@ -90,8 +111,9 @@ public class MovingPlatformV2 : SwichInteractable
         if (collision.gameObject.tag == "Player")
         {
             collision.gameObject.transform.parent = null;
+            // 떨어지면 isMoving비활성화
             _isMoving = false;
-            Debug.Log(_isMoving);
+            Debug.Log($"isMoving {_isMoving}");
         }
     }
 }

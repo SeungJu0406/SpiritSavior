@@ -16,6 +16,11 @@ public class PlayerTester : MonoBehaviour
     // DustEffect
     public ParticleSystem dust;
     public ParticleSystem minidust;
+    [SerializeField] GameObject gameobject;
+
+    [SerializeField] Transform _target;
+    [SerializeField] 
+ 
     void CreateDust()
     {
         dust.Play();
@@ -25,16 +30,19 @@ public class PlayerTester : MonoBehaviour
         minidust.Play();
     }
 
-
-
     void Start()
     {
         renderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
+        // ParticleManager.Instance.GetComponent<ParticleManager>();
+
+        
+        
     }
 
     void Update()
     {
+        //_target = transform;
         Move();
         if (Input.GetButtonDown("Horizontal") && IsGrounded())
         {
@@ -97,9 +105,19 @@ public class PlayerTester : MonoBehaviour
         float jumpAmount = jumpForce * (_jumpTime / maxJumpTime);
         rb.velocity = new Vector2(rb.velocity.x, jumpAmount);
         
-        
+        if (ParticleManager.Instance == null)
+        {
+            Debug.Log("PM is null"); 
+        }
+        else 
+        {
+            ParticleManager.Instance.PlayHitFX();
+            ParticleManager.Instance.PlayDoubleJumpFX();
+        }
+        //ObjectPool.SpawnObject(gameobject, transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
+        // pm.PlayDoubleJumpFX();
         // DustEffect
-        CreateDust();
+        // CreateDust();
     }
 
     private bool IsGrounded()

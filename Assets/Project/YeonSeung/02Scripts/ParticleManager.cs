@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ParticleManager : MonoBehaviour
@@ -18,51 +20,78 @@ public class ParticleManager : MonoBehaviour
     [Header("잔디 밟는 FX ")]
     [SerializeField] GameObject GrassFX;
 
-    PlayerModel playerModel;
+    public Transform location;
+
+    PlayerModel pModel;
     
     private void Awake()
     {
+
         if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
         else Destroy(gameObject);
+
+
+        this.location = transform;
     }
 
-    public void TestTest()
-    {
-        playerModel.OnPlayerJumped += (PlayJumpFX);
 
-
-    }
-
+    #region 함수리스트
     public void PlayRunFX()
     {
-        ObjectPool.SpawnObject(runFX, transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
+        Debug.Log("1. RUNFX_PM_Manager");
+        ObjectPool.SpawnObject(runFX, this.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
     }
     public void PlayJumpFX()
     {
-        ObjectPool.SpawnObject(runFX, transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
+        Debug.Log("2. JumpFX_PM_Manager");
+        ObjectPool.SpawnObject(jumpFX, transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
     }
     public void PlayDoubleJumpFX()
     {
-        ObjectPool.SpawnObject(runFX, transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
+        Debug.Log("3. DoubleJump_PM_Manager");
+        ObjectPool.SpawnObject(dJumpFX, this.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
     }
     public void PlayHitFX()
     {
-        ObjectPool.SpawnObject(runFX, transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
+        Debug.Log("4. Hit_FX_PM_Manager");
+        ObjectPool.SpawnObject(hitFX, transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
     }
+    public void PlayGrassFX()
+    {
+        Debug.Log("5. GrassFX_PM_Manager");
+        ObjectPool.SpawnObject(GrassFX, transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
+    }
+
+    #endregion
 
 
     void Start()
     {
-
+           SubscribeEvents();
     }
-
 
     void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("SpaceBar EventTest");
+        }
     }
+    void SubscribeEvents()
+    {
+        Manager.Game.Player.playerModel.OnPlayerRan += PlayRunFX;
+        Manager.Game.Player.playerModel.OnPlayerJumped += PlayRunFX;
+        Manager.Game.Player.playerModel.OnPlayerDoubleJumped += PlayDoubleJumpFX;
+        Manager.Game.Player.playerModel.OnPlayerDamageTaken += PlayHitFX;
+    }
+  //  private void PlayerModel_OnPlayerJumped()
+  //  {
+  //      Debug.Log("EventJUMP되나");
+  //      PlayJumpFX();
+  //      throw new NotImplementedException();
+  //  }
 }
