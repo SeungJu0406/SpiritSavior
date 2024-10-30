@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class RunState : PlayerState
 {
+    //float inputX;
     public RunState(PlayerController player) : base(player)
     {
         animationIndex = (int)PlayerController.State.Run;
@@ -20,27 +21,25 @@ public class RunState : PlayerState
     }
     public override void Update()
     {
-        if(player.isGrounded)
-        {
-            Run();
-        }
-        else
-        {
-            player.ChangeState(PlayerController.State.Fall);
-            //player.MoveInAir();
-        }
-        
-        
+        //InputMove();
+        Run();
 
         PlayAnimationInUpdate();
         // Idle 상태로 전환
+
         if (Mathf.Abs(player.rigid.velocity.x) < 0.01f)
         {
             player.ChangeState(PlayerController.State.Idle);
         }
+        
+        if(!player.isSlope && !player.isGrounded)
+        {
+            player.ChangeState(PlayerController.State.Fall);
+        }
+        
 
         // Jump 상태로 전환
-        if (Input.GetKeyDown(KeyCode.Space)) //&& player.isGrounded) // 조건 나중에 뺄 수도 있음
+        if (Input.GetKeyDown(KeyCode.Space))//&& player.isGrounded) // 조건 나중에 뺄 수도 있음
         {
             player.ChangeState(PlayerController.State.Jump);
         }
@@ -61,33 +60,34 @@ public class RunState : PlayerState
 
     }
 
+    //public override void FixedUpdate()
+    //{
+    //    
+    //}
+
+    //private void InputMove()
+    //{
+    //    //inputX = Input.GetAxisRaw("Horizontal");
+    //}
+
     private void Run()
     {
-        float moveInput = Input.GetAxisRaw("Horizontal"); // getaxisraw 쪽도 고려
-        player.rigid.velocity = new Vector2(moveInput * player.moveSpeed, player.rigid.velocity.y);
+        player.moveInput = Input.GetAxisRaw("Horizontal"); 
 
-        //if (player.rigid.velocity.x > player.maxMoveSpeed)
-        //{
-        //    player.rigid.velocity = new Vector2(player.maxMoveSpeed, player.rigid.velocity.y);
-        //}
-        //else if (player.rigid.velocity.x < -player.maxMoveSpeed)
-        //{
-        //    player.rigid.velocity = new Vector2(-(player.maxMoveSpeed), player.rigid.velocity.y);
-        //}
-
-        // 미끄러짐 방지
-        if(moveInput == 0)
+        if (player.isSlope && player.isGrounded && player.groundAngle < player.maxAngle)
         {
-            player.rigid.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
+            player.rigid.velocity = player.perpAngle * player.moveSpeed * player.moveInput * -1.0f;
         }
-        else
+        else if (!player.isSlope && player.isGrounded)
         {
-            player.rigid.constraints = RigidbodyConstraints2D.FreezeRotation;
+            player.rigid.velocity = new Vector2(player.moveInput * player.moveSpeed, player.rigid.velocity.y);
         }
+        //else
+        //{
+        //    player.ChangeState(PlayerController.State.Fall);
+        //}
 
-        //Debug.Log(player.rigid.velocity);
-        //player.playerView.FlipRender(moveInput);
-        player.FlipPlayer(moveInput);
+        player.FlipPlayer(player.moveInput);
     }
 
     public override void Exit()
