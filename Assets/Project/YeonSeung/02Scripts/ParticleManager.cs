@@ -84,7 +84,7 @@ public class ParticleManager : MonoBehaviour
     void SubscribeEvents()
     {
         Manager.Game.Player.playerModel.OnPlayerRan += PlayRunFX;
-        Manager.Game.Player.playerModel.OnPlayerJumped += PlayRunFX;
+        Manager.Game.Player.playerModel.OnPlayerJumped += PlayJumpFX;
         Manager.Game.Player.playerModel.OnPlayerDoubleJumped += PlayDoubleJumpFX;
         Manager.Game.Player.playerModel.OnPlayerDamageTaken += PlayHitFX;
     }
