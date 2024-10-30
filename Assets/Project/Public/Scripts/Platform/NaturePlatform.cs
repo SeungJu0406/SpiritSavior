@@ -3,8 +3,12 @@ using UnityEngine;
 
 public class NaturePlatform : MonoBehaviour
 {
+    public enum Type{ Platform, Wall}
+
     [Space(10)]
     [SerializeField] PlayerModel.Nature _platformNature;
+    [Space(10)]
+    [SerializeField] Type _type;
 
     List<GameObject> objectList = new List<GameObject>();
     PlayerController _player;
@@ -40,21 +44,43 @@ public class NaturePlatform : MonoBehaviour
     }
     private void SetActiveCollider(PlayerModel.Nature nature)
     {
-        if (nature == _platformNature)
+        if(_type== Type.Platform)
         {
-            foreach(GameObject obj in objectList)
+            if (nature == _platformNature)
             {
-                obj.layer = _defaultLayer;
+                foreach (GameObject obj in objectList)
+                {
+                    obj.layer = _defaultLayer;
+                }
+
             }
-            
+            else
+            {
+                foreach (GameObject obj in objectList)
+                {
+                    obj.layer = _ignorePlayerLayer;
+                }
+            }
         }
-        else
+        else if(_type == Type.Wall)
         {
-            foreach (GameObject obj in objectList)
+            if (nature == _platformNature)
             {
-                obj.layer = _ignorePlayerLayer;
+                foreach (GameObject obj in objectList)
+                {                  
+                    obj.layer = _ignorePlayerLayer;
+                }
+
+            }
+            else
+            {
+                foreach (GameObject obj in objectList)
+                {
+                    obj.layer = _defaultLayer;
+                }
             }
         }
+
     }
 
     void InitLayer()
