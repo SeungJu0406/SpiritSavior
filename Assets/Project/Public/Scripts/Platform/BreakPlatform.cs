@@ -24,15 +24,19 @@ public class BreakPlatform : Trap
     [SerializeField] bool _canRespawn;
     [SerializeField] float _respawnTime;
 
+    [Space(10)]
+    [SerializeField] float _breakDelayTime = 0.2f;
 
     PolygonCollider2D _platformCollider;
     BrokenRockPiece[] _rockPieces;
     WaitForSeconds _respawnDelay;
+    WaitForSeconds _breakDelay;
      
     private void Awake()
     {
         _platformCollider = GetComponent<PolygonCollider2D>();   
         _respawnDelay = new WaitForSeconds(_respawnTime);
+        _breakDelay = new WaitForSeconds(_breakDelayTime);
     }
     protected override void Start()
     {
@@ -50,7 +54,14 @@ public class BreakPlatform : Trap
 
     protected override void ProcessActive()
     {
-        Break();
+        StartCoroutine(BreakDelayRoutine());
+    }
+
+
+    IEnumerator BreakDelayRoutine()
+    {
+       yield return _breakDelay;
+       Break();
     }
 
     void Break()
