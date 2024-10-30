@@ -438,7 +438,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36fb14c953209644587b23678c30687e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
+  Player: {fileID: 2442872065025683317}
   RespawnPoint: {x: 0, y: 0}
 --- !u!4 &475179001
 Transform:
@@ -510,7 +510,6 @@ MonoBehaviour:
   _wallCheckPoint: {fileID: 0}
   isPlayerRight: 1
   isGrounded: 0
-  isWall: 0
   isWallJumpUsed: 0
   wallSlidingSpeed: 0.5
   wallJumpPower: 10
@@ -998,7 +997,6 @@ MonoBehaviour:
   _wallCheckPoint: {fileID: 0}
   isPlayerRight: 1
   isGrounded: 0
-  isWall: 0
   isWallJumpUsed: 0
   wallSlidingSpeed: 0.5
   wallJumpPower: 0
@@ -1816,7 +1814,6 @@ MonoBehaviour:
   _wallCheckPoint: {fileID: 0}
   isPlayerRight: 1
   isGrounded: 0
-  isWall: 0
   isWallJumpUsed: 0
   wallSlidingSpeed: 0.5
   wallJumpPower: 10

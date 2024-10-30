@@ -62,7 +62,7 @@ public partial class PlayerController : MonoBehaviour
     private float _groundCheckDistance = 0.2f;
     public int isPlayerRight = 1;
     public bool isGrounded = false;        // 캐릭터가 땅에 붙어있는지 체크
-    public bool isWall;                  // 캐릭터가 벽에 붙어있는지 체크
+    //public bool isWall;                  // 캐릭터가 벽에 붙어있는지 체크
     public bool isWallJumpUsed;         // 벽에서 벽점프를 사용 했는지 체크
     public float wallSlidingSpeed = 0.5f; // 중력계수 조정으로 할지 결정해야함
     public float wallJumpPower;
