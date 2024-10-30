@@ -42,17 +42,15 @@ public class BreakPlatform : Trap
 
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
-        base.OnTriggerEnter2D(collision);
-
         if (collision.gameObject.tag == "Player")
         {
-            Break();
+            Active();
         }
     }
 
-    protected override void InteractTrap()
+    protected override void ProcessActive()
     {
-        base.InteractTrap();
+        Break();
     }
 
     void Break()

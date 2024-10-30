@@ -113,4 +113,9 @@ public class MovingPlatform : Trap
         }
 
     }
+
+    protected override void ProcessActive()
+    {
+        throw new System.NotImplementedException();
+    }
 }
