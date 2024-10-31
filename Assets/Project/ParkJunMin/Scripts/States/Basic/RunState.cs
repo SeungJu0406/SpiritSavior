@@ -31,15 +31,12 @@ public class RunState : PlayerState
         {
             player.ChangeState(PlayerController.State.Idle);
         }
-        
-        if(!player.isSlope && !player.isGrounded)
+        else if(!player.isGrounded && player.rigid.velocity.y < -1.0f) // !player.isSlope && 어차피 Slope면 Ground임
         {
             player.ChangeState(PlayerController.State.Fall);
         }
-        
-
         // Jump 상태로 전환
-        if (Input.GetKeyDown(KeyCode.Space))//&& player.isGrounded) // 조건 나중에 뺄 수도 있음
+        else if (Input.GetKeyDown(KeyCode.Space))//&& player.isGrounded) // 조건 나중에 뺄 수도 있음
         {
             player.ChangeState(PlayerController.State.Jump);
         }
