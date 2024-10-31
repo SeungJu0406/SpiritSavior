@@ -44,7 +44,7 @@ public class SpawnState : PlayerState
         }
         else
         {
-            Debug.Log("¸®½ºÆù Æ÷ÀÎÆ® ¾øÀ½");
+            Debug.Log("Â¸Â®Â½ÂºÃ†Ã¹ Ã†Ã·Ã€ÃŽÃ†Â® Â¾Ã¸Ã€Â½");
         }
 
         

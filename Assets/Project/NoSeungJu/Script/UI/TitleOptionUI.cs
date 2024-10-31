@@ -1,32 +1,25 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
-public class GameOptionUI : BaseUI
+public class TitleOptionUI : BaseUI
 {
     List<GameObject> optionBoxs = new List<GameObject>(2);
-   
+
     int _menuButtonInHash;
     int _menuButtonOutHash;
-
-    protected override void Awake()
-    {
-        base.Awake();
-
-        _menuButtonInHash = Animator.StringToHash("In");
-        _menuButtonInHash = Animator.StringToHash("Out");      
-    }
 
     private void Start()
     {
         SubscribeEvent();
-        Init();     
+        Init();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) 
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             ToggleGameOptionUI();
         }
@@ -85,7 +78,7 @@ public class GameOptionUI : BaseUI
             if (optionBoxs[i] == audioOption)
                 continue;
             optionBoxs[i].SetActive(false);
-        }      
+        }
         audioOption.SetActive(!audioOption.activeSelf);
     }
 
@@ -141,7 +134,7 @@ public class GameOptionUI : BaseUI
         if (GetUI("GameOptionUI").activeSelf)
         {
             ToggleGameOptionUI();
-        }   
+        }
     }
 
     /// <summary>

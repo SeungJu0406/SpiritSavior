@@ -9,6 +9,10 @@ public class HpItem : Item
 
     protected override void Use(PlayerController player)
     {
-        player.TakeHeal(_healAmount);
+        //player.playerModel.HealPlayerEvent(_healAmount);
+        for (int i = 0; i < _healAmount; i++)
+        {
+            player.playerModel.HealPlayerEvent();
+        }
     }
 }
