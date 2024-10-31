@@ -21,8 +21,8 @@ public class PointController : MonoBehaviour
         _inPoint = false;
         _pointActive = false;
 
-        _pointParticle = GetComponent<ParticleSystem>();
-        _pointParticle = unActivePrefab;
+        _pointObject = GetComponent<GameObject>();
+        _pointObject = unActivePrefab;
 
         buttonCanvas.SetActive(false);
 
@@ -106,7 +106,7 @@ public class PointController : MonoBehaviour
 
     private void ActivePoint()
     {
-        _pointParticle = activePrefab;
+        _pointObject = activePrefab;
 
         _buttonObject = Instantiate(buttonPrefab, buttonLayout) as GameObject; // button »ý¼º
         _button = _buttonObject.GetComponent<ButtonController>();
