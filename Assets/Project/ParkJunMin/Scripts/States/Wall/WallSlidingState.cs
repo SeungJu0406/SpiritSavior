@@ -21,7 +21,7 @@ public class WallSlidingState : PlayerState
         PlayAnimationInUpdate();
 
         // WallJump 상태로 전환
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.C))
         {
             player.ChangeState(PlayerController.State.WallJump);
         }

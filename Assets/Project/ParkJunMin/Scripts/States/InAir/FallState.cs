@@ -25,12 +25,11 @@ public class FallState : PlayerState
     
     public override void Update()
     {
-        
         PlayAnimationInUpdate();
         player.MoveInAir();
 
         // 떨어지는 상태에서 더블점프로 상태변환 (더블점프를 안썼을 경우)
-        if (!player.isDoubleJumpUsed && Input.GetKeyDown(KeyCode.Space))
+        if (!player.isDoubleJumpUsed && Input.GetKeyDown(KeyCode.C))
         {
             player.ChangeState(PlayerController.State.DoubleJump);
         }

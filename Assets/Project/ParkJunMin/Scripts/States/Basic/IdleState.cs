@@ -33,7 +33,7 @@ public class IdleState : PlayerState
             player.ChangeState(PlayerController.State.Run);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.C))
         {
             player.ChangeState(PlayerController.State.Jump);
         }

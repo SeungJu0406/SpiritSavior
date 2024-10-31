@@ -36,9 +36,13 @@ public class RunState : PlayerState
             player.ChangeState(PlayerController.State.Fall);
         }
         // Jump 상태로 전환
-        else if (Input.GetKeyDown(KeyCode.Space))//&& player.isGrounded) // 조건 나중에 뺄 수도 있음
+        else if (Input.GetKeyDown(KeyCode.C))//&& player.isGrounded) // 조건 나중에 뺄 수도 있음
         {
             player.ChangeState(PlayerController.State.Jump);
+        }
+        else if(Input.GetKeyDown(KeyCode.X))
+        {
+            player.ChangeState(PlayerController.State.Dash);
         }
 
         ////Fall 상태로 전환 // 경사면은 어떻게?

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public partial class PlayerController : MonoBehaviour
 {
-    public enum State {Idle, Run, Jump, DoubleJump, Fall, WallGrab, WallSliding, WallJump, Damaged, WakeUp, Dead, Spawn, Size}
+    public enum State {Idle, Run, Dash, Jump, DoubleJump, Fall, WallGrab, WallSliding, WallJump, Damaged, WakeUp, Dead, Spawn, Size}
     [SerializeField] State _curState;
     private BaseState[] _states = new BaseState[(int)State.Size];
 
@@ -22,6 +22,7 @@ public partial class PlayerController : MonoBehaviour
     [Header("Player Setting")]
     public float moveSpeed;        // 이동속도
     //public float maxMoveSpeed;     // 이동속도의 최대값
+    public float dashForce;
     public float lowJumpForce;     // 낮은점프 힘
     public float highJumpForce;    // 높은점프 힘
     public float maxJumpTime;     // 최대점프 시간
@@ -96,6 +97,7 @@ public partial class PlayerController : MonoBehaviour
 
         _states[(int)State.Idle] = new IdleState(this);
         _states[(int)State.Run] = new RunState(this);
+        _states[(int)State.Dash] = new DashState(this);
         _states[(int)State.Jump] = new JumpState(this);
         _states[(int)State.DoubleJump] = new DoubleJumpState(this);
         _states[(int)State.Fall] = new FallState(this);
@@ -331,7 +333,7 @@ public partial class PlayerController : MonoBehaviour
 
     public void TagePlayer()
     {
-        if(Input.GetKeyDown(KeyCode.Tab))
+        if(Input.GetKeyDown(KeyCode.Z))
         {
             playerView.ChangeSprite(); // 상시 애니메이션 재생 상태라 없어도 무방
             playerModel.TagPlayerEvent(); // 속성 열거형 형식의 curNature를 바꿔줌 + 태그 이벤트 Invoke

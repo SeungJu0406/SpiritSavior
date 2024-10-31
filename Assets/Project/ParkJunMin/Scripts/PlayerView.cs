@@ -21,6 +21,7 @@ public class PlayerView : MonoBehaviour
         //Red
         Animator.StringToHash("Idle_Red"),
         Animator.StringToHash("Run_Red"),
+        Animator.StringToHash("Dash_Red"),
         Animator.StringToHash("Jump_Red"),
         Animator.StringToHash("DoubleJump_Red"),
         Animator.StringToHash("Fall_Red"),
@@ -35,6 +36,7 @@ public class PlayerView : MonoBehaviour
         //Blue
         Animator.StringToHash("Idle_Blue"),
         Animator.StringToHash("Run_Blue"),
+        Animator.StringToHash("Dash_Blue"),
         Animator.StringToHash("Jump_Blue"),
         Animator.StringToHash("DoubleJump_Blue"),
         Animator.StringToHash("Fall_Blue"),

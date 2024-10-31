@@ -33,7 +33,7 @@ public class WallJumpState : PlayerState
         if (player.isGrounded)
             player.ChangeState(PlayerController.State.Idle);
 
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.C))
         {
             player.ChangeState(PlayerController.State.DoubleJump);
         }

@@ -29,7 +29,7 @@ public class JumpState : PlayerState
     public override void Update()
     {   
         PlayAnimationInUpdate();
-        if (Input.GetKey(KeyCode.Space) && _hasJumped) // 스페이스바를 누르는 동안 점프력 증가
+        if (Input.GetKey(KeyCode.C) && _hasJumped) // 스페이스바를 누르는 동안 점프력 증가
         {
             player.jumpChargingTime += Time.deltaTime;
             if(player.jumpChargingTime >= player.jumpCirticalPoint)
@@ -72,7 +72,7 @@ public class JumpState : PlayerState
             }
         }
 
-        if (Input.GetKeyUp(KeyCode.Space) && _hasJumped)
+        if (Input.GetKeyUp(KeyCode.C) && _hasJumped)
         {
             // 낮은점프 실행
             if (player.isSlope) //&& player.isGrounded)
@@ -117,7 +117,7 @@ public class JumpState : PlayerState
         //    player.maxFlightTime -= Time.deltaTime; // 이런거 오르막길에 의미없음
         //}
         // 점프 상태에서 더블점프로 상태변환
-        if (!player.isDoubleJumpUsed && Input.GetKeyDown(KeyCode.Space))
+        if (!player.isDoubleJumpUsed && Input.GetKeyDown(KeyCode.C))
         {
             player.ChangeState(PlayerController.State.DoubleJump);
         }
