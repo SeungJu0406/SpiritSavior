@@ -6,27 +6,16 @@ using UnityEngine;
 public class SaveManager : MonoBehaviour
 {
     private string saveFilePath; // 저장할 파일 경로
-    private Coroutine autoSave;  // 자동 저장
     public PlayerController playerController;
-    void Start()
+    private void Start()
     {
         // 저장 파일 경로
         saveFilePath = Path.Combine(Application.persistentDataPath, "savedata.json");
         // 자동 저장 시작
-        autoSave = StartCoroutine(AutoSaveTime());
-    }
-
-    private IEnumerator AutoSaveTime()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(180f);
-
-            SaveGame(playerController);
-        }
+        InvokeRepeating("SaveGame", 180f, 180f);
     }
     // 게임 저장
-    public void SaveGame(PlayerController playerController)
+    public void SaveGame()
     {
         if (playerController != null)
         {
@@ -36,6 +25,7 @@ public class SaveManager : MonoBehaviour
                 playerPosition = playerController.transform.position, // 현재 플레이어의 위치를 저장
                 // items = items, // 아이템 목록 (추후 구현)
                 // traps = traps // 함정 상태 (추후 구현)
+                // 여기에 저장할부분 추가해주시면 됩니다.
             };
 
             // JSON으로 변환하여 파일에 저장

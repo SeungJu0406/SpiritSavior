@@ -29,9 +29,15 @@ public class GameOptionUI : BaseUI
         if (Input.GetKeyDown(KeyCode.Escape)) 
         {
             ToggleGameOptionUI();
+            
+        }
+        // 키입력 차단 (테스트 필요)
+        if (Time.timeScale == 0)
+        {
+            return;
         }
     }
-
+    
     /// <summary>
     /// 게임 옵션 UI On/Off
     /// </summary>
