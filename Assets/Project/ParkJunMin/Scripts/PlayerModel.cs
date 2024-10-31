@@ -30,7 +30,7 @@ public class PlayerModel
     {
         hp = curMaxHP;
         //curNature = Nature.Red;
-        curNature += 10;
+        //curNature += 10;
     }
     public void TagPlayerEvent()
     {
@@ -98,7 +98,6 @@ public class PlayerModel
 
     public void DiePlayerEvent()
     {
-        hp = 0;
         OnPlayerDied?.Invoke();
     }
 

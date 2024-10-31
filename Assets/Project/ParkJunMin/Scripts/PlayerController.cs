@@ -6,7 +6,7 @@ using UnityEngine;
 public partial class PlayerController : MonoBehaviour
 {
     public enum State {Idle, Run, Jump, DoubleJump, Fall, WallGrab, WallSliding, WallJump, Damaged, WakeUp, Dead, Spawn, Size}
-    [SerializeField] State _curState = State.Spawn;
+    [SerializeField] State _curState;
     private BaseState[] _states = new BaseState[(int)State.Size];
 
     public PlayerModel playerModel = new PlayerModel();
@@ -25,6 +25,7 @@ public partial class PlayerController : MonoBehaviour
     public float lowJumpForce;     // 낮은점프 힘
     public float highJumpForce;    // 높은점프 힘
     public float maxJumpTime;     // 최대점프 시간
+    public float slopeJumpBoost; // 경사면에서의 추가 점프 오프셋 값
     public float jumpCirticalPoint;
     public float doubleJumpForce; // 더블 점프시 얼마나 위로 올라갈지 결정
     public float knockbackForce; // 피격시 얼마나 뒤로 밀려날 지 결정
@@ -43,6 +44,7 @@ public partial class PlayerController : MonoBehaviour
     //public bool hasJumped = false;          //
     public float jumpChargingTime = 0f;     // 스페이스바 누른시간 체크
     public bool isDoubleJumpUsed; // 더블점프 사용 유무를 나타내는 변수
+    private bool _isStuck; // 벽에 끼었는지 확인
     public bool isDead = false; // 죽었는지 확인
     
     [Header("Ground & Slope & Wall Checking")]
@@ -57,8 +59,14 @@ public partial class PlayerController : MonoBehaviour
     public bool isSlope;
     public float maxAngle; // 이동 가능한 최대 각도
 
+    //[HideInInspector] public float maxFlightTime; // 점프 후 바로 fall 상태로 들어가지 않기 위한 변수
+
     public int isPlayerRight = 1;
     public bool isGrounded;        // 캐릭터가 땅에 붙어있는지 체크
+
+    public RaycastHit2D groundHit;
+
+
     //public bool isWall;                  // 캐릭터가 벽에 붙어있는지 체크
     public bool isWallJumpUsed;         // 벽에서 벽점프를 사용 했는지 체크
     public float wallSlidingSpeed = 0.5f; // 중력계수 조정으로 할지 결정해야함
@@ -94,7 +102,7 @@ public partial class PlayerController : MonoBehaviour
         _states[(int)State.WallGrab] = new WallGrabState(this);
         _states[(int)State.WallSliding] = new WallSlidingState(this);
         _states[(int)State.WallJump] = new WallJumpState(this);
-        _states[(int)State.Damaged] = new DamagedState(this, knockbackForce);
+        _states[(int)State.Damaged] = new DamagedState(this);
         _states[(int)State.WakeUp] = new WakeupState(this);
         _states[(int)State.Dead] = new DeadState(this);
         _states[(int)State.Spawn] = new SpawnState(this);
@@ -112,7 +120,7 @@ public partial class PlayerController : MonoBehaviour
         //    _groundCheckRoutine = StartCoroutine(CheckGroundRayRoutine());
 
         if (_wallCheckRoutine == null) // 작성중
-            _wallCheckRoutine = StartCoroutine(CheckWallRoutine());
+            _wallCheckRoutine = StartCoroutine(CheckWallDisplayRoutine());
 
         _wallCheckBoxSize = new Vector2(_wallCheckDistance, _wallCheckHeight);
 
@@ -124,10 +132,12 @@ public partial class PlayerController : MonoBehaviour
     void Start()
     {
         playerView = GetComponent<PlayerView>();
+        _curState = State.Spawn;
         _states[(int)_curState].Enter();
         SubscribeEvents();
         wallLayerMask = LayerMask.GetMask("Wall");
         groundLayerMask = LayerMask.GetMask("Ground");
+        
     }
 
     void Update()
@@ -135,7 +145,7 @@ public partial class PlayerController : MonoBehaviour
         _states[(int)_curState].Update();
         TagePlayer();
 
-        CheckGroundRaycast();
+        //CheckGroundRaycast();
 
 
 
@@ -175,6 +185,8 @@ public partial class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         _states[(int)(_curState)].FixedUpdate();
+        //여기서 바닥체크를 하니까 하나는 해결됨..
+        CheckGroundRaycast();
     }
 
 
@@ -187,27 +199,28 @@ public partial class PlayerController : MonoBehaviour
 
     private void CheckGroundRaycast()
     {
-        RaycastHit2D hit = Physics2D.Raycast(_groundCheckPoint.position, Vector2.down, _groundCheckDistance, groundLayerMask);
+        groundHit = Physics2D.Raycast(_groundCheckPoint.position, Vector2.down, _groundCheckDistance, groundLayerMask);
         //노멀벡터로 각도를 구함
-        isGrounded = hit;
+        isGrounded = groundHit;
         // Vector2.Perpendicular(Vector2 A) : A의 값에서 반시계 방향으로 90도 회전한 벡터값을 반환
 
-        if(hit)
+        if(isGrounded)
         {
-            perpAngle = Vector2.Perpendicular(hit.normal).normalized; // 
-            groundAngle = Vector2.Angle(hit.normal, Vector2.up);
+            perpAngle = Vector2.Perpendicular(groundHit.normal).normalized; // 
+            groundAngle = Vector2.Angle(groundHit.normal, Vector2.up);
 
             if(groundAngle != 0)
                 isSlope = true;
             else
                 isSlope = false;
 
-            Debug.DrawLine(hit.point, hit.point + hit.normal, Color.blue);
-            Debug.DrawLine(hit.point, hit.point + perpAngle, Color.red);
+            //법선벡터, 지면에서 수직
+            Debug.DrawLine(groundHit.point, groundHit.point + groundHit.normal, Color.blue);
+
+            // 법선벡터의 수직인 벡터, 경사면
+            Debug.DrawLine(groundHit.point, groundHit.point + perpAngle, Color.red);
+
         }
-
-
-        
     }
 
 
@@ -237,7 +250,7 @@ public partial class PlayerController : MonoBehaviour
     {     
         // 벽 끼임 방지 현상을 위해
         // 마찰력을 0으로 두는곳과 원래대로 돌리는곳을 정확히 정할 필요가 있음
-        rigid.sharedMaterial.friction = 0f;
+        //rigid.sharedMaterial.friction = 0f;
 
         moveInput = Input.GetAxisRaw("Horizontal");
 
@@ -250,7 +263,7 @@ public partial class PlayerController : MonoBehaviour
         if(hit.collider == null)
             return;
 
-        if ((wallLayerMask & (1 << hit.collider.gameObject.layer)) != 0) //비트연산으로 레이어 일치 여부 확인 (제일 빠를것)
+        if ((wallLayerMask & (1 << hit.collider.gameObject.layer)) != 0) //비트연산으로 레이어 일치 여부 확인 (제일 빠를것) // 벽타기 가능한 벽일경우
         {
             if (_curState == State.WallJump)
                 return;
@@ -258,9 +271,45 @@ public partial class PlayerController : MonoBehaviour
             if(moveInput == isPlayerRight && moveInput != 0)
                 ChangeState(State.WallGrab);
         }
+        else // 벽타기 불가능한 벽이었을 경우
+        {
+            Debug.Log($"벽에 끼임 {rigid.velocity}");
+            // 벽에 끼었을 때
+            
+            if (moveInput != 0 && rigid.velocity.y == Vector2.zero.y)
+            {
+                if(moveInput == Mathf.Sign(-hit.normal.x))
+                {
+                    // 이래도 벽감지가 끝나면 끼어버림
+                    rigid.velocity = new Vector2(0, rigid.velocity.y);
+                }
+            }
+        }
+    }
+
+    private void CheckWall()
+    {
+        RaycastHit2D hit = Physics2D.BoxCast(_wallCheckPoint.position, _wallCheckBoxSize, 0, Vector2.right * isPlayerRight, _wallCheckDistance);
+
+        if (hit.collider == null)
+            return;
+
+        if ((wallLayerMask & (1 << hit.collider.gameObject.layer)) != 0) //비트연산으로 레이어 일치 여부 확인 (제일 빠를것)
+        {
+            if (_curState == State.WallJump)
+                return;
+
+            if (moveInput == isPlayerRight && moveInput != 0)
+                ChangeState(State.WallGrab);
+        }
         else
         {
             //rigid.sharedMaterial.friction = 0f;
+        }
+
+        if (moveInput != 0 && rigid.velocity == Vector2.zero)
+        {
+
         }
     }
     public void FlipPlayer(float _moveDirection)
@@ -292,8 +341,7 @@ public partial class PlayerController : MonoBehaviour
 
     private void HandlePlayerDied()
     {
-        isDead = true;
-        ChangeState(State.Dead);
+        //ChangeState(State.Dead);
     }
 
     private void HandlePlayerDamaged()
@@ -312,12 +360,7 @@ public partial class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //NaturePlatform naturePlatform = collision.gameObject.GetComponent<NaturePlatform>();
 
-        //if (naturePlatform != null)
-        //{
-        //    if(playerModel.curNature == )
-        //}
     }
 
     private void OnDestroy()
@@ -357,7 +400,7 @@ public partial class PlayerController : MonoBehaviour
         }
     }
 
-    IEnumerator CheckWallRoutine()
+    IEnumerator CheckWallDisplayRoutine()
     {
         WaitForSeconds delay = new WaitForSeconds(0.1f);
 
@@ -391,15 +434,15 @@ public partial class PlayerController : MonoBehaviour
 
     }
 
-    public void Freeze()
-    {
-        Invoke("DelayWallJump", 0.3f);
-    }
+    //public void Freeze()
+    //{
+    //    Invoke("DelayWallJump", 0.3f);
+    //}
 
-    public void DelayWallJump()
-    {
-        isWallJumpUsed = false;
-    }
+    //public void DelayWallJump()
+    //{
+    //    isWallJumpUsed = false;
+    //}
 
 
     // 레이어 땅 체크

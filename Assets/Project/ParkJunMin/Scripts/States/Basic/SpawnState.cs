@@ -7,15 +7,16 @@ public class SpawnState : PlayerState
 {
     public SpawnState(PlayerController player) : base(player)
     {
+        animationIndex = (int)PlayerController.State.Spawn;
     }
 
     public override void Enter()
     {
         ResetPlayer();
         player.playerView.PlayAnimation(animationIndex);
-
+        
         player.playerModel.SpawnPlayerEvent();
-
+        
     }
 
     public override void Update()
@@ -32,19 +33,21 @@ public class SpawnState : PlayerState
 
     private void ResetPlayer()
     {
-        //player.hasJumped = false;
+        prevNature = player.playerModel.curNature;
+        player.playerModel.hp = player.playerModel.curMaxHP;
         player.isDead = false;
         player.playerModel.invincibility = false;
+
         if (Manager.Game.RespawnPoint != null )
         {
             player.transform.position = Manager.Game.RespawnPoint;
         }
         else
         {
-            Debug.Log("¸®½ºÆù Æ÷ÀÎÆ® ¾øÀ½");
+            Debug.Log("Â¸Â®Â½ÂºÃ†Ã¹ Ã†Ã·Ã€ÃŽÃ†Â® Â¾Ã¸Ã€Â½");
         }
-        //player.playerModel.curNature = PlayerModel.Nature.Red;
-        player.playerModel.hp = player.playerModel.curMaxHP;
+
+        
 
     }
 
