@@ -6,7 +6,7 @@ using UnityEngine;
 public partial class PlayerController : MonoBehaviour
 {
     public enum State {Idle, Run, Jump, DoubleJump, Fall, WallGrab, WallSliding, WallJump, Damaged, WakeUp, Dead, Spawn, Size}
-    [SerializeField] State _curState = State.Spawn;
+    [SerializeField] State _curState;
     private BaseState[] _states = new BaseState[(int)State.Size];
 
     public PlayerModel playerModel = new PlayerModel();
@@ -102,7 +102,7 @@ public partial class PlayerController : MonoBehaviour
         _states[(int)State.WallGrab] = new WallGrabState(this);
         _states[(int)State.WallSliding] = new WallSlidingState(this);
         _states[(int)State.WallJump] = new WallJumpState(this);
-        _states[(int)State.Damaged] = new DamagedState(this, knockbackForce);
+        _states[(int)State.Damaged] = new DamagedState(this);
         _states[(int)State.WakeUp] = new WakeupState(this);
         _states[(int)State.Dead] = new DeadState(this);
         _states[(int)State.Spawn] = new SpawnState(this);
@@ -120,7 +120,7 @@ public partial class PlayerController : MonoBehaviour
         //    _groundCheckRoutine = StartCoroutine(CheckGroundRayRoutine());
 
         if (_wallCheckRoutine == null) // 작성중
-            _wallCheckRoutine = StartCoroutine(CheckWallRoutine());
+            _wallCheckRoutine = StartCoroutine(CheckWallDisplayRoutine());
 
         _wallCheckBoxSize = new Vector2(_wallCheckDistance, _wallCheckHeight);
 
@@ -132,10 +132,12 @@ public partial class PlayerController : MonoBehaviour
     void Start()
     {
         playerView = GetComponent<PlayerView>();
+        _curState = State.Spawn;
         _states[(int)_curState].Enter();
         SubscribeEvents();
         wallLayerMask = LayerMask.GetMask("Wall");
         groundLayerMask = LayerMask.GetMask("Ground");
+        
     }
 
     void Update()
@@ -248,7 +250,7 @@ public partial class PlayerController : MonoBehaviour
     {     
         // 벽 끼임 방지 현상을 위해
         // 마찰력을 0으로 두는곳과 원래대로 돌리는곳을 정확히 정할 필요가 있음
-        rigid.sharedMaterial.friction = 0f;
+        //rigid.sharedMaterial.friction = 0f;
 
         moveInput = Input.GetAxisRaw("Horizontal");
 
@@ -280,7 +282,6 @@ public partial class PlayerController : MonoBehaviour
                 {
                     // 이래도 벽감지가 끝나면 끼어버림
                     rigid.velocity = new Vector2(0, rigid.velocity.y);
-
                 }
             }
         }
@@ -340,8 +341,7 @@ public partial class PlayerController : MonoBehaviour
 
     private void HandlePlayerDied()
     {
-        isDead = true;
-        ChangeState(State.Dead);
+        //ChangeState(State.Dead);
     }
 
     private void HandlePlayerDamaged()
@@ -354,18 +354,13 @@ public partial class PlayerController : MonoBehaviour
     /// </summary>
     public void HandlePlayerSpawn()
     {
-        ChangeState(State.Spawn);
+        //ChangeState(State.Spawn);
         // _playerUI.SetHp(playerModel.hp); // 일단 주석처리, 순서상의 문제로 플레이어에서 해야할수도 있음
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //NaturePlatform naturePlatform = collision.gameObject.GetComponent<NaturePlatform>();
 
-        //if (naturePlatform != null)
-        //{
-        //    if(playerModel.curNature == )
-        //}
     }
 
     private void OnDestroy()
@@ -405,7 +400,7 @@ public partial class PlayerController : MonoBehaviour
         }
     }
 
-    IEnumerator CheckWallRoutine()
+    IEnumerator CheckWallDisplayRoutine()
     {
         WaitForSeconds delay = new WaitForSeconds(0.1f);
 
@@ -439,15 +434,15 @@ public partial class PlayerController : MonoBehaviour
 
     }
 
-    public void Freeze()
-    {
-        Invoke("DelayWallJump", 0.3f);
-    }
+    //public void Freeze()
+    //{
+    //    Invoke("DelayWallJump", 0.3f);
+    //}
 
-    public void DelayWallJump()
-    {
-        isWallJumpUsed = false;
-    }
+    //public void DelayWallJump()
+    //{
+    //    isWallJumpUsed = false;
+    //}
 
 
     // 레이어 땅 체크

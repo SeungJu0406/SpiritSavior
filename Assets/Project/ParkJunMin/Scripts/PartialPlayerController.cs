@@ -56,23 +56,23 @@ public partial class PlayerController : MonoBehaviour
     /// <summary>
     /// 캐릭터 죽음 메서드
     /// </summary>
-    void Die()
-    {
-        _playerUI.ShowDeadFace();
-        StartCoroutine(DieRoutine());
-    }
+    //void Die()
+    //{
+    //    _playerUI.ShowDeadFace();
+    //    StartCoroutine(DieRoutine());
+    //}
 
-    /// <summary>
-    /// 캐릭터 죽음 애니메이션 딜레이 코루틴
-    /// </summary>
-    /// <returns></returns>
-    IEnumerator DieRoutine()
-    {
-        _isDead = true;
-        ChangeState(State.Dead);
-        yield return _dieDelay;
-        gameObject.SetActive(false);
-    }
+    ///// <summary>
+    ///// 캐릭터 죽음 애니메이션 딜레이 코루틴
+    ///// </summary>
+    ///// <returns></returns>
+    //IEnumerator DieRoutine()
+    //{
+    //    _isDead = true;
+    //    ChangeState(State.Dead);
+    //    yield return _dieDelay;
+    //    gameObject.SetActive(false);
+    //}
 
     /// <summary>
     /// 피격무적시간 코루틴
