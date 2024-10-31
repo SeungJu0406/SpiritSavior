@@ -11,16 +11,6 @@ public class ButtonController : MonoBehaviour
     {
         GameObject playerObject = GameObject.FindWithTag("Player");
         _player = playerObject.GetComponent<PlayerController>();
-        ActiveButton = false;
-    }
-    public void OnActive()
-    {
-        gameObject.SetActive(true);
-    }
-
-    public void OffActive()
-    {
-        gameObject.SetActive(false);
     }
 
     public void Warp()
