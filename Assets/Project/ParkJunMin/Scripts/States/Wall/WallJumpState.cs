@@ -12,6 +12,8 @@ public class WallJumpState : PlayerState
     }
     public override void Enter()
     {
+        player.rigid.gravityScale = 1;
+
         player.isWallJumpUsed = true;
         player.isDoubleJumpUsed = false;
         //player.Freeze();
