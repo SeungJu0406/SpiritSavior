@@ -169,7 +169,6 @@ public class JumpState : PlayerState
 
     public override void Exit()
     {
-        Debug.Log("점프 상태 종료");
         _slopeDetectionDelayTimer = 0.2f;
         _velocityDirection = Vector2.zero;
         player.jumpChargingTime = 0;

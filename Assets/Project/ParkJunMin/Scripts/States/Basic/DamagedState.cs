@@ -15,8 +15,6 @@ public class DamagedState : PlayerState
 
     public override void Enter()
     {
-        Debug.Log("피격 상태 진입");
-
         player.rigid.sharedMaterial.friction = 0.6f;
 
         KnockbackPlayer();
@@ -48,7 +46,6 @@ public class DamagedState : PlayerState
 
     public override void Exit()
     {
-        Debug.Log("피격 상태 탈출");
         knockbackDirection = Vector2.zero;
     }
 

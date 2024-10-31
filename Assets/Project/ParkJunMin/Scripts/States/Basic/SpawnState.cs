@@ -12,7 +12,6 @@ public class SpawnState : PlayerState
 
     public override void Enter()
     {
-        Debug.Log("½ºÆù");
         ResetPlayer();
         player.playerView.PlayAnimation(animationIndex);
         
