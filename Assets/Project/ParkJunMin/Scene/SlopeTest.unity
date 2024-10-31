@@ -604,6 +604,7 @@ MonoBehaviour:
   lowJumpForce: 5
   highJumpForce: 10
   maxJumpTime: 0.2
+  slopeJumpBoost: 0
   jumpCirticalPoint: 0.2
   doubleJumpForce: 5
   knockbackForce: 3
@@ -622,7 +623,6 @@ MonoBehaviour:
   perpAngle: {x: 0, y: 0}
   isSlope: 0
   maxAngle: 0
-  maxFlightTime: 0
   isPlayerRight: 1
   isGrounded: 0
   isWallJumpUsed: 0
@@ -1429,6 +1429,7 @@ MonoBehaviour:
   lowJumpForce: 5
   highJumpForce: 10
   maxJumpTime: 0.2
+  slopeJumpBoost: 0
   jumpCirticalPoint: 0
   doubleJumpForce: 0
   knockbackForce: 0
@@ -1447,7 +1448,6 @@ MonoBehaviour:
   perpAngle: {x: 0, y: 0}
   isSlope: 0
   maxAngle: 0
-  maxFlightTime: 0
   isPlayerRight: 1
   isGrounded: 0
   isWallJumpUsed: 0
@@ -2327,8 +2327,8 @@ GameObject:
   - component: {fileID: 2442872065025683316}
   - component: {fileID: 2442872065025683317}
   - component: {fileID: 1389921786742826798}
-  m_Layer: 0
-  m_Name: PlayerTemp
+  m_Layer: 7
+  m_Name: Player_Slope
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2372,6 +2372,7 @@ MonoBehaviour:
   lowJumpForce: 10
   highJumpForce: 15
   maxJumpTime: 0.2
+  slopeJumpBoost: 5
   jumpCirticalPoint: 0.2
   doubleJumpForce: 15
   knockbackForce: 10
@@ -2390,7 +2391,6 @@ MonoBehaviour:
   perpAngle: {x: 0, y: 0}
   isSlope: 0
   maxAngle: 60
-  maxFlightTime: 0
   isPlayerRight: 1
   isGrounded: 0
   isWallJumpUsed: 0

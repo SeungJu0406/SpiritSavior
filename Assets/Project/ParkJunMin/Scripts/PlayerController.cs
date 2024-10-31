@@ -25,6 +25,7 @@ public partial class PlayerController : MonoBehaviour
     public float lowJumpForce;     // 낮은점프 힘
     public float highJumpForce;    // 높은점프 힘
     public float maxJumpTime;     // 최대점프 시간
+    public float slopeJumpBoost; // 경사면에서의 추가 점프 오프셋 값
     public float jumpCirticalPoint;
     public float doubleJumpForce; // 더블 점프시 얼마나 위로 올라갈지 결정
     public float knockbackForce; // 피격시 얼마나 뒤로 밀려날 지 결정
@@ -57,7 +58,7 @@ public partial class PlayerController : MonoBehaviour
     public bool isSlope;
     public float maxAngle; // 이동 가능한 최대 각도
 
-    [HideInInspector] public float maxFlightTime; // 점프 후 바로 fall 상태로 들어가지 않기 위한 변수
+    //[HideInInspector] public float maxFlightTime; // 점프 후 바로 fall 상태로 들어가지 않기 위한 변수
 
     public int isPlayerRight = 1;
     public bool isGrounded;        // 캐릭터가 땅에 붙어있는지 체크
@@ -215,6 +216,7 @@ public partial class PlayerController : MonoBehaviour
 
             // 법선벡터의 수직인 벡터, 경사면
             Debug.DrawLine(groundHit.point, groundHit.point + perpAngle, Color.red);
+
         }
     }
 

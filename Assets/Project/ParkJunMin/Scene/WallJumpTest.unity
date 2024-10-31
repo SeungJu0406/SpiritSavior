@@ -233,6 +233,63 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!1001 &268473607
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8905763936823005802, guid: 3bf1eb5ff8956724db555f94e01add88, type: 3}
+      propertyPath: m_Name
+      value: Player_Slope
+      objectReference: {fileID: 0}
+    - target: {fileID: 8905763936823005809, guid: 3bf1eb5ff8956724db555f94e01add88, type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8905763936823005809, guid: 3bf1eb5ff8956724db555f94e01add88, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -21.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 8905763936823005809, guid: 3bf1eb5ff8956724db555f94e01add88, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.23
+      objectReference: {fileID: 0}
+    - target: {fileID: 8905763936823005809, guid: 3bf1eb5ff8956724db555f94e01add88, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8905763936823005809, guid: 3bf1eb5ff8956724db555f94e01add88, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8905763936823005809, guid: 3bf1eb5ff8956724db555f94e01add88, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8905763936823005809, guid: 3bf1eb5ff8956724db555f94e01add88, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8905763936823005809, guid: 3bf1eb5ff8956724db555f94e01add88, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8905763936823005809, guid: 3bf1eb5ff8956724db555f94e01add88, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8905763936823005809, guid: 3bf1eb5ff8956724db555f94e01add88, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8905763936823005809, guid: 3bf1eb5ff8956724db555f94e01add88, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3bf1eb5ff8956724db555f94e01add88, type: 3}
 --- !u!1 &475178999
 GameObject:
   m_ObjectHideFlags: 0
@@ -317,6 +374,7 @@ MonoBehaviour:
   lowJumpForce: 5
   highJumpForce: 15
   maxJumpTime: 0.2
+  slopeJumpBoost: 0
   jumpCirticalPoint: 0.2
   doubleJumpForce: 15
   knockbackForce: 3
@@ -1063,7 +1121,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!50 &3652188071181039505
 Rigidbody2D:
   serializedVersion: 4
