@@ -625,11 +625,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1389921785819388568, guid: 18bc36571f149f8479cdd557b0d4a467, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.77
+      value: 1.23
       objectReference: {fileID: 0}
     - target: {fileID: 1389921785819388568, guid: 18bc36571f149f8479cdd557b0d4a467, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.97
+      value: -3.76
       objectReference: {fileID: 0}
     - target: {fileID: 2657077013223409421, guid: 18bc36571f149f8479cdd557b0d4a467, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1174,5 +1174,32 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3394352389490468117, guid: c843c960512b61f42b248990bf1705f8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c843c960512b61f42b248990bf1705f8, type: 3}
+--- !u!1 &3394352389350915539 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3394352389490468116, guid: c843c960512b61f42b248990bf1705f8, type: 3}
+  m_PrefabInstance: {fileID: 3394352389350915538}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3394352389350915540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3394352389350915539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82375d70927447947a675e72036576ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonPrefab: {fileID: 7323890319191208498, guid: e99689411d6caf24e893c7fb5f85882b, type: 3}
+  buttonCanvas: {fileID: 467030935}
+  buttonLayout: {fileID: 281007295}
+  unActivePrefab: {fileID: 0}
+  activePrefab: {fileID: 0}
+  _inPoint: 0
+  _pointActive: 0
+  _uiActive: 0
+  _button: {fileID: 0}
