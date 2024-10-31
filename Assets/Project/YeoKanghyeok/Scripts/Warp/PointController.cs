@@ -1,3 +1,5 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PointController : MonoBehaviour
@@ -5,13 +7,13 @@ public class PointController : MonoBehaviour
     [SerializeField] GameObject buttonPrefab;
     [SerializeField] GameObject buttonCanvas;
     [SerializeField] Transform buttonLayout;
-    [SerializeField] Material unActiveMaterial;
-    [SerializeField] Material activeMaterial;
+    [SerializeField] GameObject unActivePrefab;
+    [SerializeField] GameObject activePrefab;
     [SerializeField] bool _inPoint; // point 立辟咯何
     [SerializeField] bool _pointActive; // point 劝己拳 咯何
     [SerializeField] bool _uiActive; // ui canvas 劝己拳 咯何
     private GameObject _buttonObject;
-    private SpriteRenderer _spriteRenderer;
+    private GameObject _pointObject;
     public ButtonController _button;
     private Transform _transform;
     void Start()
@@ -19,8 +21,8 @@ public class PointController : MonoBehaviour
         _inPoint = false;
         _pointActive = false;
 
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-        _spriteRenderer.material = unActiveMaterial;
+        _pointParticle = GetComponent<ParticleSystem>();
+        _pointParticle = unActivePrefab;
 
         buttonCanvas.SetActive(false);
 
@@ -34,22 +36,35 @@ public class PointController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            _inPoint = true;
-        }
+            //_inPoint = true;
+            _inputRoutine = _inputRoutine==null ? StartCoroutine(InputRoutine()) : _inputRoutine;
+        }       
     }
+
+    
+
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            _inPoint = false;
+            //_inPoint = false;
+            if (_inputRoutine != null)
+            {
+                StopCoroutine(_inputRoutine);
+                _inputRoutine = null;
+            }
+
+            buttonCanvas.SetActive(false);
+            _uiActive = false;
         }
     }
     #endregion
 
 
-    void Update()
+    Coroutine _inputRoutine;
+    IEnumerator InputRoutine()
     {
-        if (_inPoint)
+        while (true)
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
@@ -72,17 +87,26 @@ public class PointController : MonoBehaviour
                     _uiActive = false;
                 }
             }
+            yield return null;
+        }
+    }
+
+
+    void Update()
+    {
+        if (_inPoint)
+        {
+           
         }
         else
         {
-            buttonCanvas.SetActive(false);
-            _uiActive = false;
+
         }
     }
 
     private void ActivePoint()
     {
-        _spriteRenderer.material = activeMaterial;
+        _pointParticle = activePrefab;
 
         _buttonObject = Instantiate(buttonPrefab, buttonLayout) as GameObject; // button 积己
         _button = _buttonObject.GetComponent<ButtonController>();

@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3394352389490468123}
   - component: {fileID: 3394352389490468122}
-  - component: {fileID: 3394352389490468117}
   - component: {fileID: 3394352389490468120}
+  - component: {fileID: 8905209044864004443}
   m_Layer: 0
   m_Name: WarpPoint
   m_TagString: Untagged
@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3394352389490468116}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.44, y: -2.47, z: 0}
+  m_LocalPosition: {x: 8.49, y: -2.47, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -86,26 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3394352389490468117
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3394352389490468116}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82375d70927447947a675e72036576ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buttonPrefab: {fileID: 7323890319191208498, guid: e99689411d6caf24e893c7fb5f85882b, type: 3}
-  buttonCanvas: {fileID: 0}
-  buttonLayout: {fileID: 0}
-  unActiveMaterial: {fileID: 2100000, guid: 5b6ab5879b8ceb444bd73df3295b560d, type: 2}
-  activeMaterial: {fileID: 2100000, guid: 82a6f35c3594aea479ef2fa861306a04, type: 2}
-  _inPoint: 0
-  _pointActive: 0
-  _button: {fileID: 0}
 --- !u!58 &3394352389490468120
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -122,3 +102,24 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &8905209044864004443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3394352389490468116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df7be27474e3fba4194bbced80885cce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonPrefab: {fileID: 7323890319191208498, guid: e99689411d6caf24e893c7fb5f85882b, type: 3}
+  buttonCanvas: {fileID: 0}
+  buttonLayout: {fileID: 0}
+  unActivePrefab: {fileID: 1831438794741178394, guid: 19ba19c1b56c6e94096a9369a114b0d2, type: 3}
+  activePrefab: {fileID: 2837777808389433491, guid: 719e14f760f34be4cb0cc868e5eb25b8, type: 3}
+  _inPoint: 0
+  _pointActive: 0
+  _uiActive: 0
+  _button: {fileID: 0}
