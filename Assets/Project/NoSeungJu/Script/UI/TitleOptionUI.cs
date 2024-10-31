@@ -32,21 +32,11 @@ public class TitleOptionUI : BaseUI
     {
         if (GetUI("GameOptionUI").activeSelf)
         {
-            Time.timeScale = 1f;
-
             GetUI("GameOptionUI").SetActive(false);
-            GetUI<Animator>("MenuButton").Play("Out");
-
-            Manager.Game.Player.GetComponent<Animator>().enabled = true;
         }
         else
         {
-            Time.timeScale = 0f;
-
             GetUI("GameOptionUI").SetActive(true);
-            GetUI<Animator>("MenuButton").Play("In");
-
-            Manager.Game.Player.GetComponent<Animator>().enabled = false;
             CloseOptionBox();
         }
     }
@@ -195,10 +185,6 @@ public class TitleOptionUI : BaseUI
 
         // 메뉴 On/Off 이벤트 구독
         GetUI<Button>("BackButton").onClick.AddListener(ToggleGameOptionUI);
-        GetUI<Button>("MenuButton").onClick.AddListener(ToggleGameOptionUI);
-
-        // 메인화면 버튼 이벤트 구독
-        GetUI<Button>("TitleButton").onClick.AddListener(BackTitle);
     }
 
 
