@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1266297610116616399}
   - component: {fileID: 1266297610116616396}
   - component: {fileID: 1266297610116616397}
+  - component: {fileID: -2709453143424368427}
   m_Layer: 0
   m_Name: LightningRed
   m_TagString: Untagged
@@ -46,7 +47,7 @@ ParticleSystem:
   serializedVersion: 8
   lengthInSec: 1
   simulationSpeed: 1
-  stopAction: 0
+  stopAction: 3
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
@@ -4885,6 +4886,18 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &-2709453143424368427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1266297610116616394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57b9c360677b265478008e5613058ead, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2161572443989264800
 GameObject:
   m_ObjectHideFlags: 0
@@ -14607,7 +14620,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &357482005653598059
 Transform:
   m_ObjectHideFlags: 0
