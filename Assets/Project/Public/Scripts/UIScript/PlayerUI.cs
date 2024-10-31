@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,20 @@ public class PlayerUI : BaseUI
 {
 
     List<GameObject> _lifesUI = new List<GameObject>();
+
+
+    [SerializeField] bool _canTag;
+    public bool CanTag { get { return _canTag; } set { _canTag = value; OnChangeCanTag.Invoke(); } }
+    public event Action OnChangeCanTag;
+    [SerializeField] bool _canWallJump;
+    public bool CanWallJump { get { return _canWallJump; } set { _canWallJump = value; OnChangeCanWallJump.Invoke(); } }
+    public event Action OnChangeCanWallJump;
+    [SerializeField] bool _canDoubleJump;
+    public bool CanDoubleJump { get { return _canDoubleJump; } set { _canDoubleJump = value; OnChangeCanDoubleJump.Invoke(); } }
+    public event Action OnChangeCanDoubleJump;
+    [SerializeField] bool _canDash;
+    public bool CanDash { get { return _canDash; } set { _canDash = value; OnChangeCanDash.Invoke(); } }
+    public event Action OnChangeCanDash;
 
     protected override void Awake()
     {
@@ -20,6 +35,7 @@ public class PlayerUI : BaseUI
         InitHpBar();
     }
 
+    #region 캐릭터 초상화 UI
     /// <summary>
     /// 레드 캐릭터 UI 활성화
     /// </summary>
@@ -49,7 +65,7 @@ public class PlayerUI : BaseUI
         GetUI("BlueFace").SetActive(false);
         GetUI("DeadFace").SetActive(true);
     }
-
+    #endregion
     public void SetHp()
     {
         int hp = Manager.Game.Player.playerModel.hp;
@@ -65,30 +81,80 @@ public class PlayerUI : BaseUI
                 _lifesUI[i].SetActive(false);
             }
         }
-        GetUI<Slider>("HpBar").value = hp;
     }
 
+    #region 태그 능력
     /// <summary>
-    /// 임시 오버로딩용. 지워야하는 메서드
+    /// 태그 능력 활성화 UI
     /// </summary>
-    /// <param name="hp"></param>
-    public void SetHp(int hp)
-    {        
-        hp = Manager.Game.Player.playerModel.hp;
-
-        for (int i = 0; i < _lifesUI.Count; i++)
-        {
-            if (i < hp)
-            {
-                _lifesUI[i].SetActive(true);
-            }
-            else
-            {
-                _lifesUI[i].SetActive(false);
-            }
-        }
-        GetUI<Slider>("HpBar").value = hp;
+    public void ShowTagSkill()
+    {
+        GetUI("TagOff").gameObject.SetActive(false);
+        GetUI("TagOn").gameObject.SetActive(true);
     }
+    /// <summary>
+    /// 태그 능력 비활성화 UI
+    /// </summary>
+    public void HideTagSkill()
+    {
+        GetUI("TagOff").gameObject.SetActive(true);
+        GetUI("TagOn").gameObject.SetActive(false);
+    }
+    #endregion
+    #region 벽 점프 능력
+    /// <summary>
+    /// 벽 점프 능력 활성화 UI
+    /// </summary>
+    public void ShowWallJumpSkill()
+    {
+        GetUI("WallJumpOff").gameObject.SetActive(false);
+        GetUI("WallJumpOn").gameObject.SetActive(true);
+    }
+    /// <summary>
+    /// 벽 점프 능력 비활성화 UI
+    /// </summary>
+    public void HideWallJumpSkill()
+    {
+        GetUI("WallJumpOff").gameObject.SetActive(true);
+        GetUI("WallJumpOn").gameObject.SetActive(false);
+    }
+    #endregion
+    #region 더블 점프 능력
+    /// <summary>
+    /// 더블 점프 능력 활성화 UI
+    /// </summary>
+    public void ShowDoubleJumpSkill()
+    {
+        GetUI("DoubleJumpOff").gameObject.SetActive(false);
+        GetUI("DoubleJumpOn").gameObject.SetActive(true);
+    }
+    /// <summary>
+    /// 더블 점프 능력 비활성화 UI
+    /// </summary>
+    public void HideDoubleJumpSkill()
+    {
+        GetUI("DoubleJumpOff").gameObject.SetActive(true);
+        GetUI("DoubleJumpOn").gameObject.SetActive(false);
+    }
+    #endregion
+    #region 대쉬 능력
+    /// <summary>
+    /// 대쉬 능력 활성화 UI
+    /// </summary>
+    public void ShowDashSkill()
+    {
+        GetUI("DashOff").gameObject.SetActive(false);
+        GetUI("DashOn").gameObject.SetActive(true);
+    }
+    /// <summary>
+    /// 대쉬 능력 비활성화 UI
+    /// </summary>
+    public void HideDashSkill()
+    {
+        GetUI("DashOff").gameObject.SetActive(true);
+        GetUI("DashOn").gameObject.SetActive(false);
+    }
+    #endregion
 
 
     void InitLifesUI()
@@ -99,7 +165,6 @@ public class PlayerUI : BaseUI
     }
     void InitHpBar()
     {
-        GetUI<Slider>("HpBar").maxValue = Manager.Game.Player.playerModel.curMaxHP;
         SetHp();
     }
     
