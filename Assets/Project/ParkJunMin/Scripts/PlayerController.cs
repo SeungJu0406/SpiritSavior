@@ -22,12 +22,12 @@ public partial class PlayerController : MonoBehaviour
     [Header("Player Setting")]
     public float moveSpeed;        // 이동속도
     //public float maxMoveSpeed;     // 이동속도의 최대값
-    public float dashForce;
+    public float dashForce;         // 대시 힘
     public float lowJumpForce;     // 낮은점프 힘
     public float highJumpForce;    // 높은점프 힘
     public float maxJumpTime;     // 최대점프 시간
     public float slopeJumpBoost; // 경사면에서의 추가 점프 오프셋 값
-    public float jumpCirticalPoint;
+    public float jumpCirticalPoint; // 낮은점프, 높은점프를 가르는 시점
     public float doubleJumpForce; // 더블 점프시 얼마나 위로 올라갈지 결정
     public float knockbackForce; // 피격시 얼마나 뒤로 밀려날 지 결정
 
@@ -45,6 +45,9 @@ public partial class PlayerController : MonoBehaviour
     //public bool hasJumped = false;          //
     public float jumpChargingTime = 0f;     // 스페이스바 누른시간 체크
     public bool isDoubleJumpUsed; // 더블점프 사용 유무를 나타내는 변수
+    public bool isDashUsed; // 대시를 사용했는지 유무를 나타내는 변수
+    public float dashCoolTime; // 대시 사용 후 쿨타임
+    [HideInInspector] public float dashDeltaTime;
     private bool _isStuck; // 벽에 끼었는지 확인
     public bool isDead = false; // 죽었는지 확인
     
@@ -52,7 +55,7 @@ public partial class PlayerController : MonoBehaviour
     [SerializeField] Transform _groundCheckPoint;
     public Transform _wallCheckPoint;
     private float _wallCheckDistance = 0.01f;
-    private float _wallCheckHeight = 1.2f;
+    private float _wallCheckHeight = 2.25f; // 너무 길면 경사도 벽으로 인식함
 
     [SerializeField] private float _groundCheckDistance;
     public float groundAngle;
@@ -66,9 +69,10 @@ public partial class PlayerController : MonoBehaviour
     public bool isGrounded;        // 캐릭터가 땅에 붙어있는지 체크
 
     public RaycastHit2D groundHit;
+    public RaycastHit2D wallHit;
 
 
-    //public bool isWall;                  // 캐릭터가 벽에 붙어있는지 체크
+    public bool isWall;                  // 캐릭터가 벽에 붙어있는지 체크
     public bool isWallJumpUsed;         // 벽에서 벽점프를 사용 했는지 체크
     public float wallSlidingSpeed = 0.5f; // 중력계수 조정으로 할지 결정해야함
     public float wallJumpPower;
@@ -139,14 +143,16 @@ public partial class PlayerController : MonoBehaviour
         SubscribeEvents();
         wallLayerMask = LayerMask.GetMask("Wall");
         groundLayerMask = LayerMask.GetMask("Ground");
-        
     }
 
     void Update()
     {
+        if (Time.timeScale == 0)
+            return;
+
         _states[(int)_curState].Update();
         TagePlayer();
-
+        CheckDashCoolTime();
         //CheckGroundRaycast();
 
 
@@ -186,11 +192,30 @@ public partial class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (Time.timeScale == 0) 
+            return;
         _states[(int)(_curState)].FixedUpdate();
         //여기서 바닥체크를 하니까 하나는 해결됨..
         CheckGroundRaycast();
+        CheckWall();
     }
 
+    public void CheckDashCoolTime()
+    {
+        if (!isDashUsed)
+            return;
+
+        // 대쉬를 쓰고 쿨타임만큼 지난경우
+        if(dashDeltaTime >= dashCoolTime)
+        {
+            isDashUsed = false;
+            //dashDeltaTime을 0으로 초기화해주는건 대시진입시 해줌
+        }
+        else
+        {
+            dashDeltaTime += Time.deltaTime;
+        }
+    }
 
     public void ChangeState(State nextState)
     {
@@ -224,29 +249,39 @@ public partial class PlayerController : MonoBehaviour
 
         }
     }
+    private void CheckWall()
+    {
+        wallHit = Physics2D.BoxCast(_wallCheckPoint.position, _wallCheckBoxSize, 0, Vector2.right * isPlayerRight, _wallCheckDistance);
+        isWall = wallHit;
 
+        if (wallHit.collider == null)
+            return;
 
-    //public void MoveInAir()
-    //{
-    //    float moveInput = Input.GetAxisRaw("Horizontal");
+        if ((wallLayerMask & (1 << wallHit.collider.gameObject.layer)) != 0) //비트연산으로 레이어 일치 여부 확인 (제일 빠를것) // 벽타기 가능한 벽일 경우
+        {
+            if (isGrounded || _curState == State.WallJump || _curState == State.WallGrab || _curState == State.WallSliding ) //너무 긴데
+                return;
 
-    //    Vector2 targetVelocity = rigid.velocity + new Vector2(moveInput * moveSpeed*Time.deltaTime, 0);
-    //    targetVelocity = Vector2.ClampMagnitude(targetVelocity, maxMoveSpeedInAir); // 속도제한
-    //    rigid.velocity = targetVelocity;
+            //조건 임시방편.. 고쳐야함
+            if (moveInput == isPlayerRight && moveInput != 0) //&& _curState != State.WallGrab && _curState != State.WallSliding)
+                ChangeState(State.WallGrab);
+        }
+        else // 벽타기 불가능한 벽이었을 경우
+        {
+            Debug.Log($"벽에 끼임 {rigid.velocity}");
+            // 벽에 끼었을 때
 
-    //    FlipPlayer(moveInput);
-
-    //    //추후 개선방안을 찾아야함
-    //    isWall = Physics2D.BoxCast(_wallCheckPoint.position, _wallCheckBoxSize, 0, Vector2.right * isPlayerRight, _wallCheckDistance, wallLayerMask);
-
-    //    if (isWall && _curState != State.WallJump)
-    //    {
-    //        if (moveInput == isPlayerRight && moveInput != 0)
-    //        ChangeState(State.WallGrab);
-    //    }
-    //}
-
-    //임시주석
+            if (moveInput != 0 && rigid.velocity.y == Vector2.zero.y)
+            {
+                if (moveInput == Mathf.Sign(-wallHit.normal.x))
+                {
+                    // 이래도 벽감지가 끝나면 끼어버림
+                    rigid.velocity = new Vector2(0, -5.0f);  //rigid.velocity.y*2.0f);
+                    // 너무 무식한 방법인데 다른방법이 없을까
+                }
+            }
+        }
+    }
 
     public void MoveInAir()
     {     
@@ -260,59 +295,10 @@ public partial class PlayerController : MonoBehaviour
 
         FlipPlayer(moveInput);
 
-        RaycastHit2D hit = Physics2D.BoxCast(_wallCheckPoint.position, _wallCheckBoxSize, 0, Vector2.right * isPlayerRight, _wallCheckDistance);
-
-        if(hit.collider == null)
-            return;
-
-        if ((wallLayerMask & (1 << hit.collider.gameObject.layer)) != 0) //비트연산으로 레이어 일치 여부 확인 (제일 빠를것) // 벽타기 가능한 벽일경우
-        {
-            if (_curState == State.WallJump)
-                return;
-
-            if(moveInput == isPlayerRight && moveInput != 0)
-                ChangeState(State.WallGrab);
-        }
-        else // 벽타기 불가능한 벽이었을 경우
-        {
-            Debug.Log($"벽에 끼임 {rigid.velocity}");
-            // 벽에 끼었을 때
-            
-            if (moveInput != 0 && rigid.velocity.y == Vector2.zero.y)
-            {
-                if(moveInput == Mathf.Sign(-hit.normal.x))
-                {
-                    // 이래도 벽감지가 끝나면 끼어버림
-                    rigid.velocity = new Vector2(0, rigid.velocity.y);
-                }
-            }
-        }
-    }
-
-    private void CheckWall()
-    {
-        RaycastHit2D hit = Physics2D.BoxCast(_wallCheckPoint.position, _wallCheckBoxSize, 0, Vector2.right * isPlayerRight, _wallCheckDistance);
-
-        if (hit.collider == null)
-            return;
-
-        if ((wallLayerMask & (1 << hit.collider.gameObject.layer)) != 0) //비트연산으로 레이어 일치 여부 확인 (제일 빠를것)
-        {
-            if (_curState == State.WallJump)
-                return;
-
-            if (moveInput == isPlayerRight && moveInput != 0)
-                ChangeState(State.WallGrab);
-        }
-        else
-        {
-            //rigid.sharedMaterial.friction = 0f;
-        }
-
-        if (moveInput != 0 && rigid.velocity == Vector2.zero)
-        {
-
-        }
+        //RaycastHit2D hit = Physics2D.BoxCast(_wallCheckPoint.position, _wallCheckBoxSize, 0, Vector2.right * isPlayerRight, _wallCheckDistance);
+        //CheckWall();
+        //Dash 상태로 전환
+        CheckDashable();
     }
     public void FlipPlayer(float _moveDirection)
     {
@@ -337,6 +323,22 @@ public partial class PlayerController : MonoBehaviour
         {
             playerView.ChangeSprite(); // 상시 애니메이션 재생 상태라 없어도 무방
             playerModel.TagPlayerEvent(); // 속성 열거형 형식의 curNature를 바꿔줌 + 태그 이벤트 Invoke
+        }
+    }
+
+    public void CheckDashable()
+    {
+        //Dash 상태로 전환
+        if (moveInput != 0)
+        {
+            if (isDashUsed && Input.GetKeyDown(KeyCode.X))
+            {
+                Debug.Log("대시 쿨타임중입니다.");
+            }
+            else if (!isDashUsed && Input.GetKeyDown(KeyCode.X))
+            {
+                ChangeState(State.Dash);
+            }
         }
     }
 
@@ -388,18 +390,6 @@ public partial class PlayerController : MonoBehaviour
         playerModel.OnPlayerDamageTaken -= HandlePlayerDamaged;
         playerModel.OnPlayerDied -= HandlePlayerDied;
         playerModel.OnPlayerSpawn -= HandlePlayerSpawn;
-    }
-
-    IEnumerator CheckGroundRayRoutine()
-    {
-        WaitForSeconds delay = new WaitForSeconds(0.1f);
-        while (true)
-        {
-
-            //Debug.DrawRay(_groundCheckPoint.position, Vector2.down * _groundCheckDistance, Color.green);
-            //isGrounded = Physics2D.Raycast(_groundCheckPoint.position, Vector2.down, _groundCheckDistance,groundLayerMask); //_rayPoint.up * -1
-            yield return delay;
-        }
     }
 
     IEnumerator CheckWallDisplayRoutine()
@@ -461,6 +451,38 @@ public partial class PlayerController : MonoBehaviour
     //    if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
     //    {
     //        isGrounded = false;
+    //    }
+    //}
+
+    //public void MoveInAir()
+    //{
+    //    float moveInput = Input.GetAxisRaw("Horizontal");
+
+    //    Vector2 targetVelocity = rigid.velocity + new Vector2(moveInput * moveSpeed*Time.deltaTime, 0);
+    //    targetVelocity = Vector2.ClampMagnitude(targetVelocity, maxMoveSpeedInAir); // 속도제한
+    //    rigid.velocity = targetVelocity;
+
+    //    FlipPlayer(moveInput);
+
+    //    //추후 개선방안을 찾아야함
+    //    isWall = Physics2D.BoxCast(_wallCheckPoint.position, _wallCheckBoxSize, 0, Vector2.right * isPlayerRight, _wallCheckDistance, wallLayerMask);
+
+    //    if (isWall && _curState != State.WallJump)
+    //    {
+    //        if (moveInput == isPlayerRight && moveInput != 0)
+    //        ChangeState(State.WallGrab);
+    //    }
+    //}
+
+    //IEnumerator CheckGroundRayRoutine()
+    //{
+    //    WaitForSeconds delay = new WaitForSeconds(0.1f);
+    //    while (true)
+    //    {
+
+    //        //Debug.DrawRay(_groundCheckPoint.position, Vector2.down * _groundCheckDistance, Color.green);
+    //        //isGrounded = Physics2D.Raycast(_groundCheckPoint.position, Vector2.down, _groundCheckDistance,groundLayerMask); //_rayPoint.up * -1
+    //        yield return delay;
     //    }
     //}
 }

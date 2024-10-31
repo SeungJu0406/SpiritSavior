@@ -40,10 +40,18 @@ public class RunState : PlayerState
         {
             player.ChangeState(PlayerController.State.Jump);
         }
-        else if(Input.GetKeyDown(KeyCode.X))
-        {
-            player.ChangeState(PlayerController.State.Dash);
-        }
+        //Dash 상태로 전환
+        player.CheckDashable();
+
+        ////Dash 상태로 전환
+        //if (player.isDashUsed && Input.GetKeyDown(KeyCode.X))
+        //{
+        //    Debug.Log("대시 쿨타임중입니다.");
+        //}
+        //else if(!player.isDashUsed && Input.GetKeyDown(KeyCode.X))
+        //{
+        //    player.ChangeState(PlayerController.State.Dash);
+        //}
 
         ////Fall 상태로 전환 // 경사면은 어떻게?
         //if (player.rigid.velocity.y < 0)
@@ -75,7 +83,7 @@ public class RunState : PlayerState
     {
         player.moveInput = Input.GetAxisRaw("Horizontal"); 
 
-        if (player.isSlope && player.isGrounded && player.groundAngle < player.maxAngle)
+        if (player.isSlope && player.isGrounded && player.groundAngle < player.maxAngle) //slope면 ground라 나중에 조건 간단히 변경
         {
             player.rigid.velocity = player.perpAngle * player.moveSpeed * player.moveInput * -1.0f;
         }

@@ -26,6 +26,10 @@ public class WallSlidingState : PlayerState
             player.ChangeState(PlayerController.State.WallJump);
         }
 
+        if (!player.isWall)
+            player.ChangeState(PlayerController.State.Fall);
+
+
         if(player.isGrounded)
             player.ChangeState(PlayerController.State.Idle);
 

@@ -122,11 +122,15 @@ public class JumpState : PlayerState
             player.ChangeState(PlayerController.State.DoubleJump);
         }
 
+        
+        ////Dash 상태로 전환
+        //player.CheckDashable();
+
         //if(player.isGrounded)
         //{
         //    player.ChangeState(PlayerController.State.Idle);
         //}
-            
+
     }
 
     public override void FixedUpdate()
@@ -151,9 +155,9 @@ public class JumpState : PlayerState
 
                 if (alignment > 0.98f || alignment < -0.98f)
                 {
-                    Debug.Log(_velocityDirection);
-                    Debug.Log(player.perpAngle);
-                    Debug.Log(alignment);
+                    //Debug.Log(_velocityDirection);
+                    //Debug.Log(player.perpAngle);
+                    //Debug.Log(alignment);
                     player.ChangeState(PlayerController.State.Fall);
                 }
             }
