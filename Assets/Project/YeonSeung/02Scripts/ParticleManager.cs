@@ -22,7 +22,7 @@ public class ParticleManager : MonoBehaviour
 
     public Transform location;
 
-    PlayerModel pModel;
+
     
     private void Awake()
     {
@@ -83,10 +83,10 @@ public class ParticleManager : MonoBehaviour
     }
     void SubscribeEvents()
     {
-        Manager.Game.Player.playerModel.OnPlayerRan += PlayRunFX;
-        Manager.Game.Player.playerModel.OnPlayerJumped += PlayJumpFX;
-        Manager.Game.Player.playerModel.OnPlayerDoubleJumped += PlayDoubleJumpFX;
-        Manager.Game.Player.playerModel.OnPlayerDamageTaken += PlayHitFX;
+      //  Manager.Game.Player.playerModel.OnPlayerRan += PlayRunFX;
+      //  Manager.Game.Player.playerModel.OnPlayerJumped += PlayJumpFX;
+      //  Manager.Game.Player.playerModel.OnPlayerDoubleJumped += PlayDoubleJumpFX;
+      //  Manager.Game.Player.playerModel.OnPlayerDamageTaken += PlayHitFX;
     }
   //  private void PlayerModel_OnPlayerJumped()
   //  {
