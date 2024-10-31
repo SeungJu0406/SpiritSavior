@@ -10,6 +10,7 @@ public class GameOptionUI : BaseUI
     int _menuButtonInHash;
     int _menuButtonOutHash;
 
+    private bool _iInputKey = false;
     protected override void Awake()
     {
         base.Awake();
@@ -31,11 +32,6 @@ public class GameOptionUI : BaseUI
             ToggleGameOptionUI();
             
         }
-        // 키입력 차단 (테스트 필요)
-        if (Time.timeScale == 0)
-        {
-            return;
-        }
     }
     
     /// <summary>
@@ -46,10 +42,10 @@ public class GameOptionUI : BaseUI
         if (GetUI("GameOptionUI").activeSelf)
         {
             Time.timeScale = 1f;
-
+            
             GetUI("GameOptionUI").SetActive(false);
             GetUI<Animator>("MenuButton").Play("Out");
-
+            
             Manager.Game.Player.GetComponent<Animator>().enabled = true;
         }
         else
