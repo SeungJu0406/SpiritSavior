@@ -13,13 +13,14 @@ public class TitleUI : BaseUI
 
     void ShowOption()
     {
+        Debug.Log("1");
         GetUI("OptionUI").SetActive(true);
         GetUI("TitleUI").SetActive(false);
     }
 
     private void Init()
     {
-        GetUI("OptionUI").SetActive(false);
+        
     }
 
     void SubsCribeEvents()
