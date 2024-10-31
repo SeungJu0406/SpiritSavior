@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class GameOptionUI : BaseUI
 {
     List<GameObject> optionBoxs = new List<GameObject>(2);
-
+   
     int _menuButtonInHash;
     int _menuButtonOutHash;
 
