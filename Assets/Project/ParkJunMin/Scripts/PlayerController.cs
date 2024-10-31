@@ -192,6 +192,8 @@ public partial class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (Time.timeScale == 0) 
+            return;
         _states[(int)(_curState)].FixedUpdate();
         //여기서 바닥체크를 하니까 하나는 해결됨..
         CheckGroundRaycast();
