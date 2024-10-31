@@ -1,12 +1,10 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class ParticleManager : MonoBehaviour
+public class PlayerParticles : MonoBehaviour
 {
-    public static ParticleManager Instance;
+    public static PlayerParticles Instance;
 
 
     [Header("달리기 FX ")]
@@ -22,8 +20,8 @@ public class ParticleManager : MonoBehaviour
 
     public Transform location;
 
+    PlayerModel pModel;
 
-    
     private void Awake()
     {
 
@@ -71,7 +69,7 @@ public class ParticleManager : MonoBehaviour
 
     void Start()
     {
-           SubscribeEvents();
+        SubscribeEvents();
     }
 
     void Update()
@@ -83,15 +81,9 @@ public class ParticleManager : MonoBehaviour
     }
     void SubscribeEvents()
     {
-      //  Manager.Game.Player.playerModel.OnPlayerRan += PlayRunFX;
-      //  Manager.Game.Player.playerModel.OnPlayerJumped += PlayJumpFX;
-      //  Manager.Game.Player.playerModel.OnPlayerDoubleJumped += PlayDoubleJumpFX;
-      //  Manager.Game.Player.playerModel.OnPlayerDamageTaken += PlayHitFX;
+        Manager.Game.Player.playerModel.OnPlayerRan += PlayRunFX;
+        Manager.Game.Player.playerModel.OnPlayerJumped += PlayJumpFX;
+        Manager.Game.Player.playerModel.OnPlayerDoubleJumped += PlayDoubleJumpFX;
+        Manager.Game.Player.playerModel.OnPlayerDamageTaken += PlayHitFX;
     }
-  //  private void PlayerModel_OnPlayerJumped()
-  //  {
-  //      Debug.Log("EventJUMP되나");
-  //      PlayJumpFX();
-  //      throw new NotImplementedException();
-  //  }
 }
