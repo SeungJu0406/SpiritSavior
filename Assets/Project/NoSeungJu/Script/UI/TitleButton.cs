@@ -7,12 +7,15 @@ using UnityEngine.UI;
 
 public class TitleButton : BaseUI, IPointerEnterHandler, ISelectHandler, IDeselectHandler
 {
-    [SerializeField] GameObject HighlightObject;
+    TitleUI _titleUI;
+    GameObject _highlightObject;
 
     void Start()
     {
-        HighlightObject = GetUI("Highlight");
-        HighlightObject.SetActive(false);
+        _highlightObject = GetUI("Highlight");
+        _highlightObject.SetActive(false);
+        _titleUI = GetComponentInParent<TitleUI>();
+        _titleUI.AddHighlightList(_highlightObject);
     }
 
 
@@ -23,11 +26,11 @@ public class TitleButton : BaseUI, IPointerEnterHandler, ISelectHandler, IDesele
 
     public void OnSelect(BaseEventData eventData)
     {
-        HighlightObject.SetActive(true);
+        _highlightObject.SetActive(true);
     }
 
     public void OnDeselect(BaseEventData eventData)
     {
-        HighlightObject?.SetActive(false);
+        _highlightObject?.SetActive(false);
     }
 }

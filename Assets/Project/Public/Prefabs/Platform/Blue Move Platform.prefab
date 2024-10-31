@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2039037827190912899}
   - component: {fileID: 2039037827190912911}
   - component: {fileID: 6547513927881690593}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Blue Move Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146,6 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _platformNature: 1
+  _type: 0
 --- !u!114 &6547513927881690593
 MonoBehaviour:
   m_ObjectHideFlags: 0
