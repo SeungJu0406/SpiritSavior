@@ -8,6 +8,7 @@ public class PlayerUI : BaseUI
 {
     [SerializeField] GameObject _lifePrefab;
     List<GameObject> _lifesUI = new List<GameObject>();
+    List<GameObject> _faceList = new List<GameObject>();
 
 
     [SerializeField] bool _canTag;
@@ -31,19 +32,52 @@ public class PlayerUI : BaseUI
     protected void Start()
     {
         SubsCribeEvents();
-        InitHp();
-        InitSkillUI();
+        Init();
     }
 
     #region 캐릭터 초상화 UI
+
+    public void UpdateFace()
+    {
+        PlayerModel.Nature nature = Manager.Game.Player.playerModel.curNature;
+        if (nature == PlayerModel.Nature.Red)
+        {
+            ShowRedFace();
+        }
+        else if (nature == PlayerModel.Nature.Blue)
+        {
+            ShowBlueFace();
+        }
+    }
+    public void UpdateFace(PlayerModel.Nature nature)
+    {
+        nature = Manager.Game.Player.playerModel.curNature;
+        if (nature == PlayerModel.Nature.Red)
+        {
+            ShowRedFace();
+        }
+        else if (nature == PlayerModel.Nature.Blue)
+        {
+            ShowBlueFace();
+        }
+    }
+
     /// <summary>
     /// 레드 캐릭터 UI 활성화
     /// </summary>
-    public void ShowCharFace()
+    public void ShowRedFace()
     {
-        GetUI("CharFace").SetActive(true);
-        GetUI("BlueFace").SetActive(false);
-        GetUI("DeadFace").SetActive(false);
+        foreach(GameObject face in _faceList)
+        {
+            if(face.name == GetUI("RedFace").name)
+            {
+                face.SetActive(true);
+            }
+            else
+            {
+                face.SetActive(false);
+            }
+        }
     }
 
     /// <summary>
@@ -51,9 +85,17 @@ public class PlayerUI : BaseUI
     /// </summary>
     public void ShowBlueFace()
     {
-        GetUI("CharFace").SetActive(false);
-        GetUI("BlueFace").SetActive(true);
-        GetUI("DeadFace").SetActive(false);
+        foreach (GameObject face in _faceList)
+        {
+            if (face.name == GetUI("BlueFace").name)
+            {
+                face.SetActive(true);
+            }
+            else
+            {
+                face.SetActive(false);
+            }
+        }
     }
 
     /// <summary>
@@ -61,9 +103,17 @@ public class PlayerUI : BaseUI
     /// </summary>
     public void ShowDeadFace()
     {
-        GetUI("CharFace").SetActive(false);
-        GetUI("BlueFace").SetActive(false);
-        GetUI("DeadFace").SetActive(true);
+        foreach (GameObject face in _faceList)
+        {
+            if (face.name == GetUI("DeadFace").name)
+            {
+                face.SetActive(true);
+            }
+            else
+            {
+                face.SetActive(false);
+            }
+        }
     }
     #endregion
     public void SetHp()
@@ -178,7 +228,62 @@ public class PlayerUI : BaseUI
         GetUI("DashOff").gameObject.SetActive(!GetUI("DashOff").gameObject.activeSelf);
         GetUI("DashOn").gameObject.SetActive(!GetUI("DashOn").gameObject.activeSelf);
     }
-    #endregion
+    #endregion  
+
+    void AddLife(int hp)
+    {
+        int count = hp - _lifesUI.Count;
+        for (int i = 0; i < count; i++)
+        {
+            GameObject newLife = Instantiate(_lifePrefab);
+            newLife.transform.SetParent(GetUI("Life").transform);
+            _lifesUI.Add(newLife);
+        }
+    }
+
+    private void Init()
+    {
+        InitFace();
+        InitHp();
+        InitSkillUI();
+    }
+
+    void InitFace()
+    {
+        _faceList.Add(GetUI("RedFace"));
+        _faceList.Add(GetUI("BlueFace"));
+        _faceList.Add(GetUI("DeadFace"));
+    }
+    void InitHp()
+    {
+        SetHp();
+    }
+    
+    void InitSkillUI()
+    {
+        HideTagSkill();
+        HideWallJumpSkill();
+        HideDashSkill();
+        HideDoubleJumpSkill();
+    }
+
+
+    void SubsCribeEvents()
+    {
+        Manager.Game.Player.playerModel.OnPlayerDamageTaken += SetHp;
+        Manager.Game.Player.playerModel.OnPlayerHealth += SetHp;
+        Manager.Game.Player.playerModel.OnPlayerSpawn += SetHp;
+        Manager.Game.Player.playerModel.OnPlayerSpawn += UpdateFace;
+        Manager.Game.Player.playerModel.OnPlayerDied += ShowDeadFace;
+        Manager.Game.Player.playerModel.OnPlayerTagged += UpdateFace;
+
+
+        OnChangeCanTag += ToggleTagSkill;
+        OnChangeCanWallJump += ToggleWallJumpSkill;
+        OnChangeCanDoubleJump += ToggleDoubleJumpSkill;
+        OnChangeCanDash += ToggleDashSkill;
+    }
+
 
 
     /// <summary>
@@ -221,41 +326,4 @@ public class PlayerUI : BaseUI
         CanDash = !CanDash;
     }
 
-
-    void AddLife(int hp)
-    {
-        int count = hp - _lifesUI.Count;
-        for (int i = 0; i < count; i++)
-        {
-            GameObject newLife = Instantiate(_lifePrefab);
-            newLife.transform.SetParent(GetUI("Life").transform);
-            _lifesUI.Add(newLife);
-        }
-    }
-
-    void InitHp()
-    {
-        SetHp();
-    }
-    
-    void InitSkillUI()
-    {
-        HideTagSkill();
-        HideWallJumpSkill();
-        HideDashSkill();
-        HideDoubleJumpSkill();
-    }
-
-
-    void SubsCribeEvents()
-    {
-        Manager.Game.Player.playerModel.OnPlayerDamageTaken += SetHp;
-        Manager.Game.Player.playerModel.OnPlayerHealth += SetHp;
-        Manager.Game.Player.playerModel.OnPlayerSpawn += SetHp;
-
-        OnChangeCanTag += ToggleTagSkill;
-        OnChangeCanWallJump += ToggleWallJumpSkill;
-        OnChangeCanDoubleJump += ToggleDoubleJumpSkill;
-        OnChangeCanDash += ToggleDashSkill;
-    }
 }
