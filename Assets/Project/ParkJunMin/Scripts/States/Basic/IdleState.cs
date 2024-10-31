@@ -14,8 +14,6 @@ public class IdleState : PlayerState
     {
         player.rigid.velocity = Vector2.zero;
 
-        prevNature = player.playerModel.curNature; // 스폰상태때 넣어주는것이 나음
-
         player.isDoubleJumpUsed = false;
         //Debug.Log("Idle 상태 진입");
         player.playerView.PlayAnimation(animationIndex);

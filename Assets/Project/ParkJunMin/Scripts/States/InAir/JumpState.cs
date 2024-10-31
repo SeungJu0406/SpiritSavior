@@ -15,7 +15,7 @@ public class JumpState : PlayerState
     public override void Enter()
     {
         //Debug.Log("점프 상태 진입");
-        
+        //player.rigid.sharedMaterial.friction = 0f;
         player.playerView.PlayAnimation(animationIndex);
         player.playerModel.JumpPlayerEvent();
         _hasJumped = true;
@@ -157,7 +157,6 @@ public class JumpState : PlayerState
                     player.ChangeState(PlayerController.State.Fall);
                 }
             }
-
         }
 
         if (!player.isSlope && player.rigid.velocity.y < 0)
@@ -165,13 +164,15 @@ public class JumpState : PlayerState
             //Debug.Log(player.rigid.velocity.y);
             player.ChangeState(PlayerController.State.Fall);
         }
+
     }
 
     public override void Exit()
     {
-        Debug.Log("점프 상태 종료");
         _slopeDetectionDelayTimer = 0.2f;
         _velocityDirection = Vector2.zero;
+        player.jumpChargingTime = 0;
+        //player.rigid.sharedMaterial.friction = 0.6f;
     }
 
 }

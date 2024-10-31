@@ -7,16 +7,16 @@ public class SpawnState : PlayerState
 {
     public SpawnState(PlayerController player) : base(player)
     {
+        animationIndex = (int)PlayerController.State.Spawn;
     }
 
     public override void Enter()
     {
-        animationIndex = (int)PlayerController.State.Spawn;
-        player.playerView.PlayAnimation(animationIndex);
-        player.playerModel.SpawnPlayerEvent();
         ResetPlayer();
+        player.playerView.PlayAnimation(animationIndex);
         
-
+        player.playerModel.SpawnPlayerEvent();
+        
     }
 
     public override void Update()
@@ -33,9 +33,11 @@ public class SpawnState : PlayerState
 
     private void ResetPlayer()
     {
-        //player.hasJumped = false;
+        prevNature = player.playerModel.curNature;
+        player.playerModel.hp = player.playerModel.curMaxHP;
         player.isDead = false;
         player.playerModel.invincibility = false;
+
         if (Manager.Game.RespawnPoint != null )
         {
             player.transform.position = Manager.Game.RespawnPoint;
@@ -44,8 +46,8 @@ public class SpawnState : PlayerState
         {
             Debug.Log("리스폰 포인트 없음");
         }
-        //player.playerModel.curNature = PlayerModel.Nature.Red;
-        player.playerModel.hp = player.playerModel.curMaxHP;
+
+        
 
     }
 

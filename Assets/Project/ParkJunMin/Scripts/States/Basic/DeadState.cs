@@ -15,10 +15,10 @@ public class DeadState : PlayerState
 
     public override void Enter()
     {
-        //animationIndex = (int)PlayerController.State.Dead;
+        player.isDead = true;
+        player.playerModel.hp = 0;
         player.playerView.PlayAnimation(animationIndex);
-        
-        //player.playerModel.DiePlayer(); // 죽음시 이벤트 실행을 어디서할지는 추후 결정
+        player.playerModel.DiePlayerEvent(); // 죽음시 이벤트 실행을 어디서할지는 추후 결정
         //애니메이션 끝나고 자동 리스폰
     }
 
@@ -28,7 +28,6 @@ public class DeadState : PlayerState
         { 
             player.ChangeState(PlayerController.State.Spawn);
         }
-            
     }
 
     public override void Exit()
