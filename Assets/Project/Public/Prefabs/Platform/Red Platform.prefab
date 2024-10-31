@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1962648479955498819}
   - component: {fileID: 1962648479955498818}
   - component: {fileID: 1962648479955498817}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Red Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,3 +125,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _platformNature: 0
+  _type: 0

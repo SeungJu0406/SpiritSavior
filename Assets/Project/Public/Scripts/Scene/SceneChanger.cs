@@ -24,11 +24,6 @@ public class SceneChanger : MonoBehaviour
         else Destroy(gameObject);
     }
 
-    private void Start()
-    {
-        InitScene();
-    }
-
     /// <summary>
     /// 일회용 트랩이 사용됬는지 체크
     /// </summary>
@@ -55,7 +50,10 @@ public class SceneChanger : MonoBehaviour
         }
     }
 
-    void InitScene()
+    /// <summary>
+    /// 초기 게임 씬 로드
+    /// </summary>
+    public void InitGameScene()
     {
             AsyncOperation playerSceneOper = SceneManager.LoadSceneAsync(_playerScene);
             playerSceneOper.allowSceneActivation = true;

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2320424740227509252}
   - component: {fileID: 2320424740227509251}
   - component: {fileID: 2320424740227509250}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Red Move Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 4210551444043480274}
   - component: {fileID: 4210551444043480272}
   - component: {fileID: 6831871855681177914}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Red Move Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -254,3 +254,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _platformNature: 0
+  _type: 0
