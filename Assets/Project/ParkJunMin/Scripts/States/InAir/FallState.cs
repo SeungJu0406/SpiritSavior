@@ -48,6 +48,14 @@ public class FallState : PlayerState
     {
         //Debug.Log("Fall 상태 종료");
         _isFalling = false;
-       // player.rigid.gravityScale = 1;
+
+        // 벽에 끼임 현상을 방지하기 위해 벽타기 불가능한 벽에선 0으로 주고
+        // 그 상태를 벗어날때 다시 원상복구 해주고싶은데 
+        // 상태 enter때마다 다 넣어주는 방법 외에 더 좋은 방법이 없을까?
+        
+        player.rigid.sharedMaterial.friction = 0.6f;
+
+
+        // player.rigid.gravityScale = 1;
     }
 }

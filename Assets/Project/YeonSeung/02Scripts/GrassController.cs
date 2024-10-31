@@ -8,7 +8,7 @@ public class GrassController : MonoBehaviour
 
     // private ParticleSystem _grassParticlesInstance;
 
-    private void SpawnGrassParticles()
+    private void SpawnGrassParticles(Vector2 pos)
     {
         ObjectPool.SpawnObject(grassParticles, transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
     }
@@ -16,7 +16,8 @@ public class GrassController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            SpawnGrassParticles();
+            ObjectPool.SpawnObject(grassParticles, collision.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
+            // SpawnGrassParticles(collision.transform.position);
         }
     }
     void Start()
