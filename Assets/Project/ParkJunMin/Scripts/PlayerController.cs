@@ -147,6 +147,9 @@ public partial class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (Time.timeScale == 0)
+            return;
+
         _states[(int)_curState].Update();
         TagePlayer();
         CheckDashCoolTime();
