@@ -157,7 +157,6 @@ public class JumpState : PlayerState
                     player.ChangeState(PlayerController.State.Fall);
                 }
             }
-
         }
 
         if (!player.isSlope && player.rigid.velocity.y < 0)
@@ -165,6 +164,7 @@ public class JumpState : PlayerState
             //Debug.Log(player.rigid.velocity.y);
             player.ChangeState(PlayerController.State.Fall);
         }
+
     }
 
     public override void Exit()

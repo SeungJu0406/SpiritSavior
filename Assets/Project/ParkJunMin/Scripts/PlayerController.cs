@@ -44,6 +44,7 @@ public partial class PlayerController : MonoBehaviour
     //public bool hasJumped = false;          //
     public float jumpChargingTime = 0f;     // 스페이스바 누른시간 체크
     public bool isDoubleJumpUsed; // 더블점프 사용 유무를 나타내는 변수
+    private bool _isStuck; // 벽에 끼었는지 확인
     public bool isDead = false; // 죽었는지 확인
     
     [Header("Ground & Slope & Wall Checking")]
@@ -260,7 +261,7 @@ public partial class PlayerController : MonoBehaviour
         if(hit.collider == null)
             return;
 
-        if ((wallLayerMask & (1 << hit.collider.gameObject.layer)) != 0) //비트연산으로 레이어 일치 여부 확인 (제일 빠를것)
+        if ((wallLayerMask & (1 << hit.collider.gameObject.layer)) != 0) //비트연산으로 레이어 일치 여부 확인 (제일 빠를것) // 벽타기 가능한 벽일경우
         {
             if (_curState == State.WallJump)
                 return;
@@ -268,9 +269,46 @@ public partial class PlayerController : MonoBehaviour
             if(moveInput == isPlayerRight && moveInput != 0)
                 ChangeState(State.WallGrab);
         }
+        else // 벽타기 불가능한 벽이었을 경우
+        {
+            Debug.Log($"벽에 끼임 {rigid.velocity}");
+            // 벽에 끼었을 때
+            
+            if (moveInput != 0 && rigid.velocity.y == Vector2.zero.y)
+            {
+                if(moveInput == Mathf.Sign(-hit.normal.x))
+                {
+                    // 이래도 벽감지가 끝나면 끼어버림
+                    rigid.velocity = new Vector2(0, rigid.velocity.y);
+
+                }
+            }
+        }
+    }
+
+    private void CheckWall()
+    {
+        RaycastHit2D hit = Physics2D.BoxCast(_wallCheckPoint.position, _wallCheckBoxSize, 0, Vector2.right * isPlayerRight, _wallCheckDistance);
+
+        if (hit.collider == null)
+            return;
+
+        if ((wallLayerMask & (1 << hit.collider.gameObject.layer)) != 0) //비트연산으로 레이어 일치 여부 확인 (제일 빠를것)
+        {
+            if (_curState == State.WallJump)
+                return;
+
+            if (moveInput == isPlayerRight && moveInput != 0)
+                ChangeState(State.WallGrab);
+        }
         else
         {
             //rigid.sharedMaterial.friction = 0f;
+        }
+
+        if (moveInput != 0 && rigid.velocity == Vector2.zero)
+        {
+
         }
     }
     public void FlipPlayer(float _moveDirection)
