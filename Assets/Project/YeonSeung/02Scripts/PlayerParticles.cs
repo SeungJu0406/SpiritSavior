@@ -40,27 +40,22 @@ public class PlayerParticles : MonoBehaviour
     #region 함수리스트
     public void PlayRunFX()
     {
-        Debug.Log("1. RUNFX_PM_Manager");
         ObjectPool.SpawnObject(runFX, this.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
     }
     public void PlayJumpFX()
     {
-        Debug.Log("2. JumpFX_PM_Manager");
         ObjectPool.SpawnObject(jumpFX, transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
     }
     public void PlayDoubleJumpFX()
     {
-        Debug.Log("3. DoubleJump_PM_Manager");
         ObjectPool.SpawnObject(dJumpFX, this.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
     }
     public void PlayHitFX()
     {
-        Debug.Log("4. Hit_FX_PM_Manager");
         ObjectPool.SpawnObject(hitFX, transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
     }
     public void PlayGrassFX()
     {
-        Debug.Log("5. GrassFX_PM_Manager");
         ObjectPool.SpawnObject(GrassFX, transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
     }
 
