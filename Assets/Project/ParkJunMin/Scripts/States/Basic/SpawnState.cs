@@ -11,11 +11,10 @@ public class SpawnState : PlayerState
 
     public override void Enter()
     {
-        animationIndex = (int)PlayerController.State.Spawn;
-        player.playerView.PlayAnimation(animationIndex);
         ResetPlayer();
+        player.playerView.PlayAnimation(animationIndex);
+
         player.playerModel.SpawnPlayerEvent();
-      
 
     }
 
