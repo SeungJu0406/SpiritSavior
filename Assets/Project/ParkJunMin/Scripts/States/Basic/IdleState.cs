@@ -14,7 +14,7 @@ public class IdleState : PlayerState
     {
         player.rigid.velocity = Vector2.zero;
 
-        player.isDoubleJumpUsed = false;
+        //player.isDoubleJumpUsed = false;
         //Debug.Log("Idle 상태 진입");
         player.playerView.PlayAnimation(animationIndex);
     }

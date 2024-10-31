@@ -122,11 +122,15 @@ public class JumpState : PlayerState
             player.ChangeState(PlayerController.State.DoubleJump);
         }
 
+        
+        ////Dash 상태로 전환
+        //player.CheckDashable();
+
         //if(player.isGrounded)
         //{
         //    player.ChangeState(PlayerController.State.Idle);
         //}
-            
+
     }
 
     public override void FixedUpdate()

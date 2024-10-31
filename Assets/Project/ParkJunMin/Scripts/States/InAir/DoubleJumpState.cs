@@ -34,6 +34,19 @@ public class DoubleJumpState : PlayerState
             //Debug.Log(player.rigid.velocity.y);
             player.ChangeState(PlayerController.State.Fall);
         }
+
+        //Dash 상태로 전환
+        if (player.isDashUsed && Input.GetKeyDown(KeyCode.X))
+        {
+            Debug.Log("대시 쿨타임중입니다.");
+        }
+        else if (!player.isDashUsed && Input.GetKeyDown(KeyCode.X))
+        {
+            player.ChangeState(PlayerController.State.Dash);
+        }
+
+
+
     }
 
     public override void Exit()

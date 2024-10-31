@@ -22,12 +22,12 @@ public partial class PlayerController : MonoBehaviour
     [Header("Player Setting")]
     public float moveSpeed;        // 이동속도
     //public float maxMoveSpeed;     // 이동속도의 최대값
-    public float dashForce;
+    public float dashForce;         // 대시 힘
     public float lowJumpForce;     // 낮은점프 힘
     public float highJumpForce;    // 높은점프 힘
     public float maxJumpTime;     // 최대점프 시간
     public float slopeJumpBoost; // 경사면에서의 추가 점프 오프셋 값
-    public float jumpCirticalPoint;
+    public float jumpCirticalPoint; // 낮은점프, 높은점프를 가르는 시점
     public float doubleJumpForce; // 더블 점프시 얼마나 위로 올라갈지 결정
     public float knockbackForce; // 피격시 얼마나 뒤로 밀려날 지 결정
 
@@ -45,6 +45,9 @@ public partial class PlayerController : MonoBehaviour
     //public bool hasJumped = false;          //
     public float jumpChargingTime = 0f;     // 스페이스바 누른시간 체크
     public bool isDoubleJumpUsed; // 더블점프 사용 유무를 나타내는 변수
+    public bool isDashUsed; // 대시를 사용했는지 유무를 나타내는 변수
+    public float dashCoolTime; // 대시 사용 후 쿨타임
+    [HideInInspector] public float dashDeltaTime;
     private bool _isStuck; // 벽에 끼었는지 확인
     public bool isDead = false; // 죽었는지 확인
     
@@ -146,7 +149,7 @@ public partial class PlayerController : MonoBehaviour
     {
         _states[(int)_curState].Update();
         TagePlayer();
-
+        CheckDashCoolTime();
         //CheckGroundRaycast();
 
 
@@ -191,6 +194,23 @@ public partial class PlayerController : MonoBehaviour
         CheckGroundRaycast();
     }
 
+    public void CheckDashCoolTime()
+    {
+        if (!isDashUsed)
+            return;
+
+        // 대쉬를 쓰고 쿨타임만큼 지난경우
+        if(dashDeltaTime >= dashCoolTime)
+        {
+            isDashUsed = false;
+            //dashDeltaTime을 0으로 초기화해주는건 대시진입시 해줌
+        }
+        else
+        {
+            dashDeltaTime += Time.deltaTime;
+        }
+
+    }
 
     public void ChangeState(State nextState)
     {
@@ -260,33 +280,10 @@ public partial class PlayerController : MonoBehaviour
 
         FlipPlayer(moveInput);
 
-        RaycastHit2D hit = Physics2D.BoxCast(_wallCheckPoint.position, _wallCheckBoxSize, 0, Vector2.right * isPlayerRight, _wallCheckDistance);
-
-        if(hit.collider == null)
-            return;
-
-        if ((wallLayerMask & (1 << hit.collider.gameObject.layer)) != 0) //비트연산으로 레이어 일치 여부 확인 (제일 빠를것) // 벽타기 가능한 벽일경우
-        {
-            if (_curState == State.WallJump)
-                return;
-
-            if(moveInput == isPlayerRight && moveInput != 0)
-                ChangeState(State.WallGrab);
-        }
-        else // 벽타기 불가능한 벽이었을 경우
-        {
-            Debug.Log($"벽에 끼임 {rigid.velocity}");
-            // 벽에 끼었을 때
-            
-            if (moveInput != 0 && rigid.velocity.y == Vector2.zero.y)
-            {
-                if(moveInput == Mathf.Sign(-hit.normal.x))
-                {
-                    // 이래도 벽감지가 끝나면 끼어버림
-                    rigid.velocity = new Vector2(0, rigid.velocity.y);
-                }
-            }
-        }
+        //RaycastHit2D hit = Physics2D.BoxCast(_wallCheckPoint.position, _wallCheckBoxSize, 0, Vector2.right * isPlayerRight, _wallCheckDistance);
+        CheckWall();
+        //Dash 상태로 전환
+        CheckDashable();
     }
 
     private void CheckWall()
@@ -296,7 +293,7 @@ public partial class PlayerController : MonoBehaviour
         if (hit.collider == null)
             return;
 
-        if ((wallLayerMask & (1 << hit.collider.gameObject.layer)) != 0) //비트연산으로 레이어 일치 여부 확인 (제일 빠를것)
+        if ((wallLayerMask & (1 << hit.collider.gameObject.layer)) != 0) //비트연산으로 레이어 일치 여부 확인 (제일 빠를것) // 벽타기 가능한 벽일 경우
         {
             if (_curState == State.WallJump)
                 return;
@@ -304,14 +301,19 @@ public partial class PlayerController : MonoBehaviour
             if (moveInput == isPlayerRight && moveInput != 0)
                 ChangeState(State.WallGrab);
         }
-        else
+        else // 벽타기 불가능한 벽이었을 경우
         {
-            //rigid.sharedMaterial.friction = 0f;
-        }
+            Debug.Log($"벽에 끼임 {rigid.velocity}");
+            // 벽에 끼었을 때
 
-        if (moveInput != 0 && rigid.velocity == Vector2.zero)
-        {
-
+            if (moveInput != 0 && rigid.velocity.y == Vector2.zero.y)
+            {
+                if (moveInput == Mathf.Sign(-hit.normal.x))
+                {
+                    // 이래도 벽감지가 끝나면 끼어버림
+                    rigid.velocity = new Vector2(0, rigid.velocity.y);
+                }
+            }
         }
     }
     public void FlipPlayer(float _moveDirection)
@@ -337,6 +339,22 @@ public partial class PlayerController : MonoBehaviour
         {
             playerView.ChangeSprite(); // 상시 애니메이션 재생 상태라 없어도 무방
             playerModel.TagPlayerEvent(); // 속성 열거형 형식의 curNature를 바꿔줌 + 태그 이벤트 Invoke
+        }
+    }
+
+    public void CheckDashable()
+    {
+        //Dash 상태로 전환
+        if (moveInput != 0)
+        {
+            if (isDashUsed && Input.GetKeyDown(KeyCode.X))
+            {
+                Debug.Log("대시 쿨타임중입니다.");
+            }
+            else if (!isDashUsed && Input.GetKeyDown(KeyCode.X))
+            {
+                ChangeState(State.Dash);
+            }
         }
     }
 
