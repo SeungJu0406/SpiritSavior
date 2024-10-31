@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ButtonController : MonoBehaviour
@@ -11,6 +12,7 @@ public class ButtonController : MonoBehaviour
     {
         GameObject playerObject = GameObject.FindWithTag("Player");
         _player = playerObject.GetComponent<PlayerController>();
+        
     }
 
     public void Warp()

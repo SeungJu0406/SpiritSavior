@@ -4,6 +4,7 @@ using UnityEngine;
 public class PointController : MonoBehaviour
 {
     [SerializeField] GameObject buttonPrefab;
+    [SerializeField] string pointName;
     [SerializeField] GameObject buttonCanvas;
     [SerializeField] Transform buttonLayout;
     [SerializeField] ParticleSystem unActiveParticle;
@@ -19,14 +20,12 @@ public class PointController : MonoBehaviour
     {
         _pointActive = false;
 
-        psMain = ps.main;
-        ps = unActiveParticle;
+        unActiveParticle.gameObject.SetActive(true);
+        activeParticle.gameObject.SetActive(false);
 
         buttonCanvas.SetActive(false);
 
         _transform = GetComponent<Transform>();
-
-
     }
 
     #region point 立辟咯何
@@ -87,7 +86,8 @@ public class PointController : MonoBehaviour
 
     private void ActivePoint()
     {
-        ps = activeParticle;
+        unActiveParticle.gameObject.SetActive(false);
+        activeParticle.gameObject.SetActive(true);
 
         _buttonObject = Instantiate(buttonPrefab, buttonLayout) as GameObject; // button 积己
         _button = _buttonObject.GetComponent<ButtonController>();
