@@ -19,14 +19,17 @@ public class LightningController : MonoBehaviour
     [Header("¹ø°³ ·£´ý")]
     [SerializeField] bool isRandom;
 
-    PlayerController _player;
-
 
     [SerializeField] PlayerModel.Nature _lightingNature;
 
+
+    PlayerController _player;
+
+
     private int _defaultLayer;
     private int _ignorePlayerLayer;
-      
+
+    private bool _canAttack = false;
 
 
     private void Awake()
@@ -42,7 +45,7 @@ public class LightningController : MonoBehaviour
             return;
         }
         _player = Manager.Game.Player;
-      //  _player.playerModel.OnPlayerTagged += SetActiveCollider;
+        _player.playerModel.OnPlayerTagged += SetActiveCollider;
 
     }
 
@@ -62,8 +65,14 @@ public class LightningController : MonoBehaviour
     {
         if (nature == _lightingNature)
         {
+            
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
             _player.playerModel.TakeDamageEvent(lightningDamage);
-
         }
     }
 }
