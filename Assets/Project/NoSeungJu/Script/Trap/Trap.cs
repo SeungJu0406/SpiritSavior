@@ -14,7 +14,15 @@ public abstract class Trap : MonoBehaviour
     {
         if (_isDisposable)
         {
-            bool keeping = SceneChanger.Instance.CheckKeepingTrap(transform.position);
+            bool keeping = false;
+            if (SceneChanger.Instance != null)
+            {
+                keeping = SceneChanger.Instance.CheckKeepingTrap(transform.position);
+            }
+            else if (TestSceneChanger.Instance != null)
+            {
+                keeping = SceneChanger.Instance.CheckKeepingTrap(transform.position);
+            }
             if (!keeping)
             {
                 gameObject.SetActive(false);
