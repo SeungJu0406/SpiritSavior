@@ -75,6 +75,7 @@ MonoBehaviour:
   _isDisposable: 0
   _fallingPoint: {fileID: 600636102606960812}
   _fallingTrapObject: {fileID: 4099030452102227573, guid: cfaee5e89d3240b4ba513a8a20d22b40, type: 3}
+  _damage: 1
   _lifeTime: 2
   _restartTime: 5
 --- !u!1 &600636102606960813
@@ -89,7 +90,7 @@ GameObject:
   m_Layer: 0
   m_Name: TrapPoint
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
