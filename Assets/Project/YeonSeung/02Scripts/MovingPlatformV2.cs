@@ -20,6 +20,10 @@ public class MovingPlatformV2 : SwichInteractable
 
     private Coroutine _delayMove;
 
+    // 패트롤 기능 만들고 그걸 사용해야됨.
+
+
+
     public override void Interact()
     {
         if (_isMoving == false)
@@ -48,6 +52,7 @@ public class MovingPlatformV2 : SwichInteractable
     void Update()
     {
         // _isMoving이 활성화때만 움직이기
+        /*
         if (_isMoving == true)
         {
             if (_delayMove == null)
@@ -68,6 +73,14 @@ public class MovingPlatformV2 : SwichInteractable
             
             RetreatPlatform();
         }
+        */
+        // Patrol
+        // transform.position = Vector3.MoveTowards(transform.position, nextPosition, moveSpeed * Time.deltaTime);
+        // if (transform.position == nextPosition)
+        // {
+        //     nextPosition = (nextPosition == pointA.position) ? pointB.position : pointA.position;
+        // }
+        Patrol();
 
     }
     IEnumerator DelayMove()
@@ -80,12 +93,21 @@ public class MovingPlatformV2 : SwichInteractable
         _isMoving = true;
     }
 
+    public void Patrol()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, nextPosition, moveSpeed * Time.deltaTime);
+        if (transform.position == nextPosition)
+        {
+            nextPosition = (nextPosition == pointA.position) ? pointB.position : pointA.position;
+        }
+    }
+
     /// <summary>
     /// 플레이어 움직이는 메서드
     /// </summary>
     public void MovePlatform()
     {
-        Debug.Log("start moving");
+        // Debug.Log("start moving");
         transform.position = Vector3.MoveTowards(transform.position, nextPosition, moveSpeed * Time.deltaTime);
     }
     /// <summary>
