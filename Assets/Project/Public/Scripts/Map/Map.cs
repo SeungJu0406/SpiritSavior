@@ -1,18 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Map : MonoBehaviour
 {
-
+    // Map 부분
+    private PlayerController _playerController;
     public GameObject redFace;
     public GameObject blueFace;
     public GameObject mapImage;
 
-    private PlayerController _playerController;
+    // Map애니메이션 부분
+    public RawImage map;
+    public float transparencyTime = 1.0f;
+    private bool _isTransparency = false;
+
     void Start()
     {
-        mapImage.SetActive(false);
+        map.color = new Color(map.color.r, map.color.g, map.color.b, 0); // 투명도 0
         redFace.SetActive(false);
         blueFace.SetActive(false);
 
@@ -33,19 +39,44 @@ public class Map : MonoBehaviour
                 redFace.SetActive(false);
                 blueFace.SetActive(true);
             }
-            
+
         }
+    }
+
+    private IEnumerator TransparencyImage(float start, float end)
+    {
+        _isTransparency = true;
+        float time = 0;
+        Color color = map.color;
+
+        while (time < transparencyTime)
+        {
+            time += Time.deltaTime;
+            color.a = Mathf.Lerp(start, end, time / transparencyTime);
+            map.color = color;
+            yield return null;
+        }
+
+        _isTransparency = false;
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.M))
+        if (Input.GetKeyDown(KeyCode.M) && !_isTransparency)
         {
-            mapImage.SetActive(!mapImage.activeSelf);
-            if (!mapImage.activeSelf)
+            if (map.color.a > 0)
             {
+                StartCoroutine(TransparencyImage(1, 0));
                 redFace.SetActive(false);
                 blueFace.SetActive(false);
             }
+            else
+            {
+                StartCoroutine(TransparencyImage(0, 1));
+                FaceMap();
+            }
+        }
+        if (map.color.a > 0)
+        {
             FaceMap();
         }
     }
