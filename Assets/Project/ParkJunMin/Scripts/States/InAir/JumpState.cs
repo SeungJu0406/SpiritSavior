@@ -27,7 +27,7 @@ public class JumpState : PlayerState
     }
 
     public override void Update()
-    {   
+    {
         PlayAnimationInUpdate();
         if (Input.GetKey(KeyCode.C) && _hasJumped) // 스페이스바를 누르는 동안 점프력 증가
         {
@@ -122,19 +122,24 @@ public class JumpState : PlayerState
             player.ChangeState(PlayerController.State.DoubleJump);
         }
 
-        
         ////Dash 상태로 전환
         //player.CheckDashable();
 
-        //if(player.isGrounded)
+        // 점프에서 바로 idle로 전환됨
+        //if (player.isGrounded)
         //{
         //    player.ChangeState(PlayerController.State.Idle);
         //}
-
     }
 
     public override void FixedUpdate()
     {
+
+        //if (player.isGrounded && !player.isSlope)
+        //{
+        //    player.ChangeState(PlayerController.State.Idle);
+        //}
+
         // slope면 이미 바닥이라는 얘기
         // 바닥인데 y축 속도가 일정값 이상으로 계속 증가하고 있다 = 경사면에서 비스듬히 계속 올라가고있다
         if (player.isSlope) 
@@ -148,16 +153,20 @@ public class JumpState : PlayerState
             else
             {
                 _velocityDirection = player.rigid.velocity.normalized;
-                //Vector2 slopeDirection = player.groundHit.normal.normalized; //player.perpAngle;
 
+                if(player.rigid.velocity.y < 0)
+                    player.ChangeState(PlayerController.State.Fall);
+
+                // 
                 // 벡터의 방향이 같은지 확인
+                // 일정 경사 내에선 잘 작동하는거같은데 아직 확실치 않다 오류가 좀 많다 개선사항이 필요
                 float alignment = Vector2.Dot(_velocityDirection, player.perpAngle);
 
                 if (alignment > 0.98f || alignment < -0.98f)
                 {
-                    //Debug.Log(_velocityDirection);
-                    //Debug.Log(player.perpAngle);
-                    //Debug.Log(alignment);
+                    Debug.Log(_velocityDirection);
+                    Debug.Log(player.perpAngle);
+                    Debug.Log(alignment);
                     player.ChangeState(PlayerController.State.Fall);
                 }
             }
@@ -167,6 +176,10 @@ public class JumpState : PlayerState
         {
             //Debug.Log(player.rigid.velocity.y);
             player.ChangeState(PlayerController.State.Fall);
+        }
+        else
+        {
+            
         }
 
     }

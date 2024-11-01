@@ -6,8 +6,20 @@ using UnityEngine;
 public partial class PlayerController : MonoBehaviour
 {
     public enum State {Idle, Run, Dash, Jump, DoubleJump, Fall, WallGrab, WallSliding, WallJump, Damaged, WakeUp, Dead, Spawn, Size}
+    public enum Ability //모델에 넣고 싶었는데 컨트롤러가 접근하기 더 편할거같아서 일단 여기에
+    {
+        None = 0,
+        Tag = 1 << 0,
+        Dash = 1 << 1,
+        WallJump = 1 << 2,
+        DoubleJump = 1 << 3
+    }
     [SerializeField] State _curState;
-    private BaseState[] _states = new BaseState[(int)State.Size];
+    public State prevState;
+    //private BaseState[] _states = new BaseState[(int)State.Size];
+    private PlayerState[] _states = new PlayerState[(int)State.Size];
+
+    public Ability unlockedAbilities = Ability.None;
 
     public PlayerModel playerModel = new PlayerModel();
     public PlayerView playerView;
@@ -185,6 +197,13 @@ public partial class PlayerController : MonoBehaviour
         //    Debug.Log("죽음");
         //}
 
+        ////임시 능력 해금 트리거
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            UnlockAbility(Ability.DoubleJump);
+            Debug.Log("더블점프 해금");
+        }
+
         //임시 체력 확인용
         //hp = playerModel.hp;
 
@@ -219,9 +238,41 @@ public partial class PlayerController : MonoBehaviour
 
     public void ChangeState(State nextState)
     {
-        _states[(int)_curState].Exit();
-        _curState = nextState;
-        _states[(int)_curState].Enter();
+        // 어빌리티가 해금됐는지 확인하는 과정
+
+        ////방안1.
+        //if (_states[(int)nextState].ability != Ability.None)
+        //{
+        //    if (HasAbility(_states[(int)nextState].ability))
+        //    {
+        //        _states[(int)_curState].Exit();
+        //        _curState = nextState;
+        //        _states[(int)_curState].Enter();
+        //    }
+        //    else
+        //    {
+        //        Debug.Log("아직 해금하지 않은 능력");
+        //    }
+        //}
+        //else
+        //{
+        //    _states[(int)_curState].Exit();
+        //    _curState = nextState;
+        //    _states[(int)_curState].Enter();
+        //}
+
+        //방안2. 중복 코드를 줄임
+        if (_states[(int)nextState].ability == Ability.None || HasAbility(_states[(int)nextState].ability))
+        {
+            _states[(int)_curState].Exit();
+            _curState = nextState;
+            _states[(int)_curState].Enter();
+        }
+        else
+        {
+            Debug.Log("아직 해금하지 않은 능력");
+        }
+        
     }
 
     private void CheckGroundRaycast()
@@ -300,6 +351,20 @@ public partial class PlayerController : MonoBehaviour
         //Dash 상태로 전환
         CheckDashable();
     }
+
+
+    public void UnlockAbility(Ability ability)
+    {
+        unlockedAbilities |= ability;
+    }
+
+    public bool HasAbility(Ability ability)
+    {
+        return (unlockedAbilities & ability) == ability;
+    }
+
+
+
     public void FlipPlayer(float _moveDirection)
     {
         playerView.FlipRender(_moveDirection);

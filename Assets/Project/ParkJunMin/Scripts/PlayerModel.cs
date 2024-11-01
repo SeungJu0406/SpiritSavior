@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerModel
 {
     public enum Nature {Red, Blue}
-
+ 
     public event Action<Nature> OnPlayerTagged;
     public event Action OnPlayerDamageTaken;
     public event Action OnPlayerHealth;
