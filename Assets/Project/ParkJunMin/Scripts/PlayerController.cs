@@ -92,7 +92,16 @@ public partial class PlayerController : MonoBehaviour
     private Vector2 _wallCheckBoxSize;
     Coroutine _wallCheckRoutine;
     //Coroutine _groundCheckRoutine;
+
+    [Header("Input")]
     public float moveInput;
+    public KeyCode keyInput;
+
+    // 코요테 타임
+    public float coyoteTime = 0.2f;
+    public float coyoteTimeCounter;
+    //[HideInInspector]
+    //[HideInInspector]
 
     private void Awake()
     {
@@ -169,6 +178,7 @@ public partial class PlayerController : MonoBehaviour
         //벽체크의 경우 fixedUpdate에서 수행하면 wallGrab 애니메이션이 자주 재생이 안된다
         //벽 체크 주기의 문제같다. Update에서 하니 문제가 사라짐
         CheckWall();
+        ControlCoyoteTime();
         //CheckGroundRaycast();
 
 
@@ -307,6 +317,8 @@ public partial class PlayerController : MonoBehaviour
 
     private void CheckGroundRaycast()
     {
+        // 땅 체크와 땅이 평지인지 경사면인지 체크하는 메서드
+
         groundHit = Physics2D.Raycast(_groundCheckPoint.position, Vector2.down, _groundCheckDistance, groundLayerMask);
         //노멀벡터로 각도를 구함
         isGrounded = groundHit;
@@ -322,6 +334,18 @@ public partial class PlayerController : MonoBehaviour
             else
                 isSlope = false;
 
+
+            if(groundAngle > maxAngle)
+            {
+                Debug.Log(groundAngle);
+                moveInput = 0;
+            }
+            else
+            {
+                //Debug.Log(groundAngle);
+            }
+
+
             //법선벡터, 지면에서 수직
             Debug.DrawLine(groundHit.point, groundHit.point + groundHit.normal, Color.blue);
 
@@ -336,6 +360,10 @@ public partial class PlayerController : MonoBehaviour
         isWall = wallHit;
 
         if (wallHit.collider == null)
+            return;
+
+        // 트리거였을시 return
+        if (wallHit.collider.isTrigger)
             return;
 
         if ((wallLayerMask & (1 << wallHit.collider.gameObject.layer)) != 0) //비트연산으로 레이어 일치 여부 확인 (제일 빠를것) // 벽타기 가능한 벽일 경우
@@ -382,6 +410,17 @@ public partial class PlayerController : MonoBehaviour
         CheckDashable();
     }
 
+    private void ControlCoyoteTime()
+    {
+        if (isGrounded)
+        {
+            coyoteTimeCounter = coyoteTime;
+        }
+        else
+        {
+            coyoteTimeCounter -= Time.deltaTime;
+        }
+    }
 
     public void UnlockAbility(PlayerModel.Ability ability)
     {

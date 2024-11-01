@@ -39,8 +39,6 @@ public class FallState : PlayerState
             player.isDoubleJumpUsed = false;
             player.ChangeState(PlayerController.State.Idle);
         }
-            
-
     }
 
     public override void Exit()
