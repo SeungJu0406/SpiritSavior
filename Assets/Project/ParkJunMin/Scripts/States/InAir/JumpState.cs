@@ -33,8 +33,12 @@ public class JumpState : PlayerState
         //{
 
         // JumpVer1();
-
         JumpVer2();
+
+
+
+
+
         //}
 
         player.MoveInAir();
@@ -140,7 +144,7 @@ public class JumpState : PlayerState
 
 
                     // 지면에 수직인 법선벡터 방향으로 속도를 주는 방법 
-                    player.rigid.velocity = (player.groundHit.normal.normalized) * (player.highJumpForce + player.slopeJumpBoost);
+                    player.rigid.velocity = (player.groundHit.normal.normalized) * (player.jumpForce + player.slopeJumpBoost);
 
                     //경사면이 아닐 경우와 같은 방법으로 속도를 주는 방법
                     // player.rigid.velocity = new Vector2(player.rigid.velocity.x, player.highJumpForce);
@@ -157,7 +161,7 @@ public class JumpState : PlayerState
                 }
                 else
                 {
-                    player.rigid.velocity = new Vector2(player.rigid.velocity.x, player.highJumpForce);
+                    player.rigid.velocity = new Vector2(player.rigid.velocity.x, player.jumpForce);
                 }
                 //&& player.isGrounded)
 
@@ -209,10 +213,11 @@ public class JumpState : PlayerState
 
     private void JumpVer2()
     {
-        if (player.coyoteTimeCounter > 0f && Input.GetKey(KeyCode.C)) //player.coyoteTimeCounter > 0f && 
+        Debug.Log("b");
+        if (player.coyoteTimeCounter > 0f && player.jumpBufferCounter > 0f)//Input.GetKey(KeyCode.C)) 
+            // //player.coyoteTimeCounter > 0f && 
         {
-            Debug.Log("Flag 1");
-            player.rigid.velocity = new Vector2(player.rigid.velocity.x, player.highJumpForce);
+            player.rigid.velocity = new Vector2(player.rigid.velocity.x, player.jumpForce);
             player.coyoteTimeCounter = 0f;
         }
     }
