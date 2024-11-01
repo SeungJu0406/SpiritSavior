@@ -2,11 +2,10 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class SkillSwitchInteractable : SwichInteractable
-{
-    public enum Skill { Tag, WallJump, DoubleJump, Dash }
+{ 
 
     [SerializeField] SkillTooltipUI _tooltipUI;
-    [SerializeField] Skill _skill;
+    [SerializeField] PlayerModel.Ability _ability;
 
     public override void Interact()
     {
@@ -23,21 +22,8 @@ public class SkillSwitchInteractable : SwichInteractable
 
     void ActivePlayerSkill()
     {
-        switch (_skill)
-        {
-            case Skill.Tag:
-                // Tag 활성화
-                break;
-            case Skill.WallJump:
-                // WallJump 활성화
-                break;
-            case Skill.DoubleJump:
-                // DoubleJump 활성화
-                break;
-            case Skill.Dash:
-                // Dash 활성화
-                break;
-        }
+        Manager.Game.Player.UnlockAbility(_ability);
+        Manager.Game.Player.playerModel.UnlockAbilityEvent(_ability);
 
         Destroy(gameObject);
     }

@@ -187,7 +187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tooltipUI: {fileID: 2040261535573758384, guid: 9f1b46c77ba2a7243b0e50b7e71ff247, type: 3}
-  _skill: 2
+  _ability: 8
 --- !u!1001 &2408505530457159210
 PrefabInstance:
   m_ObjectHideFlags: 0

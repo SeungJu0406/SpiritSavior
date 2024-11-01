@@ -1,8 +1,5 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerUI : BaseUI
 {
@@ -12,17 +9,9 @@ public class PlayerUI : BaseUI
 
 
     [SerializeField] bool _canTag;
-    public bool CanTag { get { return _canTag; } set { _canTag = value; OnChangeCanTag.Invoke(); } }
-    public event Action OnChangeCanTag;
     [SerializeField] bool _canWallJump;
-    public bool CanWallJump { get { return _canWallJump; } set { _canWallJump = value; OnChangeCanWallJump.Invoke(); } }
-    public event Action OnChangeCanWallJump;
     [SerializeField] bool _canDoubleJump;
-    public bool CanDoubleJump { get { return _canDoubleJump; } set { _canDoubleJump = value; OnChangeCanDoubleJump.Invoke(); } }
-    public event Action OnChangeCanDoubleJump;
     [SerializeField] bool _canDash;
-    public bool CanDash { get { return _canDash; } set { _canDash = value; OnChangeCanDash.Invoke(); } }
-    public event Action OnChangeCanDash;
 
     protected override void Awake()
     {
@@ -67,9 +56,9 @@ public class PlayerUI : BaseUI
     /// </summary>
     public void ShowRedFace()
     {
-        foreach(GameObject face in _faceList)
+        foreach (GameObject face in _faceList)
         {
-            if(face.name == GetUI("RedFace").name)
+            if (face.name == GetUI("RedFace").name)
             {
                 face.SetActive(true);
             }
@@ -258,7 +247,7 @@ public class PlayerUI : BaseUI
     {
         SetHp();
     }
-    
+
     void InitSkillUI()
     {
         HideTagSkill();
@@ -276,54 +265,27 @@ public class PlayerUI : BaseUI
         Manager.Game.Player.playerModel.OnPlayerSpawn += UpdateFace;
         Manager.Game.Player.playerModel.OnPlayerDied += ShowDeadFace;
         Manager.Game.Player.playerModel.OnPlayerTagged += UpdateFace;
-
-
-        OnChangeCanTag += ToggleTagSkill;
-        OnChangeCanWallJump += ToggleWallJumpSkill;
-        OnChangeCanDoubleJump += ToggleDoubleJumpSkill;
-        OnChangeCanDash += ToggleDashSkill;
+        Manager.Game.Player.playerModel.OnAbilityUnlocked += UpdateSkillUI;
     }
 
-
-
-    /// <summary>
-    /// 테스트 용
-    /// </summary>
-    private void Update()
+    void UpdateSkillUI(PlayerModel.Ability ability)
     {
-        if (Input.GetKeyDown(KeyCode.Z))
+        switch (ability)
         {
-            ToggleTag();
-        }
-        else if (Input.GetKeyDown(KeyCode.X))
-        {
-            ToggleWallJump();
-        }
-        else if (Input.GetKeyDown(KeyCode.C))
-        {
-            ToggleDoubleJump();
-        }
-        else if (Input.GetKeyDown(KeyCode.V))
-        {
-            ToggleDash();
+            case PlayerModel.Ability.Tag:
+                ShowTagSkill();
+                break;
+            case PlayerModel.Ability.WallJump:
+                ShowWallJumpSkill();
+                break;
+            case PlayerModel.Ability.DoubleJump:
+                ShowDoubleJumpSkill();
+                break;
+            case PlayerModel.Ability.Dash:
+                ShowDashSkill();
+                break;
+            default:
+                break;
         }
     }
-
-    public void ToggleTag()
-    {
-        CanTag = !CanTag;
-    }
-    public void ToggleWallJump()
-    {
-        CanWallJump = !CanWallJump;
-    }
-    public void ToggleDoubleJump()
-    {
-        CanDoubleJump = !CanDoubleJump;
-    }
-    public void ToggleDash()
-    {
-        CanDash = !CanDash;
-    }
-
 }

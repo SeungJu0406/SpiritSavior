@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tooltipUI: {fileID: 5646506031363484268, guid: 04475329c1919154fb0318295db2c1a3, type: 3}
-  _skill: 3
+  _ability: 2
 --- !u!1 &8233364164369272207
 GameObject:
   m_ObjectHideFlags: 0
