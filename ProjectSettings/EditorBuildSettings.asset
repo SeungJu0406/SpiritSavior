@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Project/NoSeungJu/Scenes/TitleScene.unity
+    path: Assets/Project/Public/Scenes/TitleScene.unity
     guid: f8b2913edf2639144ad281091d49f3fd
   - enabled: 1
     path: Assets/Project/Public/Scenes/PlayerScene.unity
