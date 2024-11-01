@@ -4,25 +4,33 @@ using UnityEngine;
 public class PointController : MonoBehaviour
 {
     [Header("사용자지정")]
+    [SerializeField] string pointName;
+    [SerializeField] ButtonController buttonPrefab;
+    [SerializeField] SceneField _pointScene;
+
+    [Space(10f)]
     [SerializeField] GameObject buttonCanvas;
     [SerializeField] Transform buttonLayout;
-    [SerializeField] string pointName;
-    [SerializeField] GameObject buttonPrefab;
-
-    [Space (10f)]
     [SerializeField] ParticleSystem unActiveParticle;
     [SerializeField] ParticleSystem activeParticle;
     private bool _pointActive; // point 활성화 여부
     private bool _uiActive; // ui canvas 활성화 여부
-    private GameObject _buttonObject;
     private ButtonController _button;
+
     void Start()
-    {
+    {   
         _pointActive = false;
 
         unActiveParticle.gameObject.SetActive(true);
         activeParticle.gameObject.SetActive(false);
 
+        StartCoroutine(StartRoutine());
+    }
+
+    IEnumerator StartRoutine()
+    {
+        yield return null;
+        buttonCanvas = Manager.UI.WarpUI;
         buttonCanvas.SetActive(false);
     }
 
@@ -87,9 +95,9 @@ public class PointController : MonoBehaviour
         unActiveParticle.gameObject.SetActive(false);
         activeParticle.gameObject.SetActive(true);
 
-        _buttonObject = Instantiate(buttonPrefab, buttonLayout) as GameObject; // button 생성
-        _button = _buttonObject.GetComponent<ButtonController>();
+        _button = Instantiate(buttonPrefab, buttonCanvas.transform);
         _button._buttonText.text = pointName;
         _button.destinationPos = transform.position;
+        _button.PointScene = _pointScene;
     }
 }
