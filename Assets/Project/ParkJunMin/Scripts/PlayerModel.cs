@@ -6,7 +6,14 @@ using UnityEngine;
 public class PlayerModel
 {
     public enum Nature {Red, Blue}
-
+    public enum Ability
+    {
+        None = 0,
+        Tag = 1 << 0,
+        Dash = 1 << 1,
+        WallJump = 1 << 2,
+        DoubleJump = 1 << 3
+    }
     public event Action<Nature> OnPlayerTagged;
     public event Action OnPlayerDamageTaken;
     public event Action OnPlayerHealth;
@@ -18,6 +25,8 @@ public class PlayerModel
     public event Action OnPlayerDashed;
     public event Action OnPlayerDied;
     public event Action OnPlayerSpawn;
+
+    public event Action<Ability> OnAbilityUnlocked;
 
 
     public bool invincibility = false;
@@ -32,6 +41,12 @@ public class PlayerModel
         //curNature = Nature.Red;
         //curNature += 10;
     }
+
+    public void UnlockAbilityEvent(Ability _newAbility)
+    {
+        OnAbilityUnlocked?.Invoke(_newAbility);
+    }
+
     public void TagPlayerEvent()
     {
         //curNature = (Nature)(((int)curNature + 1) % (int)Nature.Size);
@@ -77,6 +92,7 @@ public class PlayerModel
     {
         OnPlayerRan?.Invoke();
     }
+    
 
     
 
