@@ -177,6 +177,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: SceneChanger
       objectReference: {fileID: 0}
+    - target: {fileID: 2468933295853445477, guid: e0b3449450041154ba6145c205ca846e, type: 3}
+      propertyPath: _firstStage._sceneName
+      value: 0Stage
+      objectReference: {fileID: 0}
+    - target: {fileID: 2468933295853445477, guid: e0b3449450041154ba6145c205ca846e, type: 3}
+      propertyPath: _firstStage._sceneAsset
+      value: 
+      objectReference: {fileID: 102900000, guid: 5fe9f1ade8a5e88448accba098b6f9c5, type: 3}
+    - target: {fileID: 2468933295853445477, guid: e0b3449450041154ba6145c205ca846e, type: 3}
+      propertyPath: _playerScene._sceneName
+      value: PlayerScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 2468933295853445477, guid: e0b3449450041154ba6145c205ca846e, type: 3}
+      propertyPath: _playerScene._sceneAsset
+      value: 
+      objectReference: {fileID: 102900000, guid: 8e9df1b98d2b8c54786ffe938063f224, type: 3}
     - target: {fileID: 2468933295853445498, guid: e0b3449450041154ba6145c205ca846e, type: 3}
       propertyPath: m_RootOrder
       value: 1
