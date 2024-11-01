@@ -10,7 +10,7 @@ public class WallGrabState : PlayerState
         animationIndex = (int)PlayerController.State.WallGrab;
         //wallJump로 가기 위해선 WallGrab이 필수적이라 여기에 닮
         //wallGrab -> wallSliding -> wallJump 순서로 가야하기때문에 wallGrab에 닮.
-        ability = PlayerController.Ability.WallJump;
+        ability = PlayerModel.Ability.WallJump;
     }
 
     public override void Enter()

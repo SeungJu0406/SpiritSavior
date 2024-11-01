@@ -6,20 +6,20 @@ using UnityEngine;
 public partial class PlayerController : MonoBehaviour
 {
     public enum State {Idle, Run, Dash, Jump, DoubleJump, Fall, WallGrab, WallSliding, WallJump, Damaged, WakeUp, Dead, Spawn, Size}
-    public enum Ability //모델에 넣고 싶었는데 컨트롤러가 접근하기 더 편할거같아서 일단 여기에
-    {
-        None = 0,
-        Tag = 1 << 0,
-        Dash = 1 << 1,
-        WallJump = 1 << 2,
-        DoubleJump = 1 << 3
-    }
+    //public enum Ability //모델에 넣고 싶었는데 컨트롤러가 접근하기 더 편할거같아서 일단 여기에
+    //{
+    //    None = 0,
+    //    Tag = 1 << 0,
+    //    Dash = 1 << 1,
+    //    WallJump = 1 << 2,
+    //    DoubleJump = 1 << 3
+    //}
     [SerializeField] State _curState;
-    public State prevState;
+    //public State prevState;
     //private BaseState[] _states = new BaseState[(int)State.Size];
     private PlayerState[] _states = new PlayerState[(int)State.Size];
 
-    public Ability unlockedAbilities = Ability.None;
+    public PlayerModel.Ability unlockedAbilities = PlayerModel.Ability.None;
 
     public PlayerModel playerModel = new PlayerModel();
     public PlayerView playerView;
@@ -30,7 +30,7 @@ public partial class PlayerController : MonoBehaviour
 
     
 
-    public SpriteRenderer renderer;
+    //public SpriteRenderer renderer;
     [Header("Player Setting")]
     public float moveSpeed;        // 이동속도
     //public float maxMoveSpeed;     // 이동속도의 최대값
@@ -165,6 +165,10 @@ public partial class PlayerController : MonoBehaviour
         _states[(int)_curState].Update();
         TagePlayer();
         CheckDashCoolTime();
+
+        //벽체크의 경우 fixedUpdate에서 수행하면 wallGrab 애니메이션이 자주 재생이 안된다
+        //벽 체크 주기의 문제같다. Update에서 하니 문제가 사라짐
+        CheckWall();
         //CheckGroundRaycast();
 
 
@@ -198,11 +202,28 @@ public partial class PlayerController : MonoBehaviour
         //}
 
         ////임시 능력 해금 트리거
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            UnlockAbility(Ability.DoubleJump);
-            Debug.Log("더블점프 해금");
+            UnlockAbility(PlayerModel.Ability.Tag);
+            //Debug.Log("태그 해금");
         }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            UnlockAbility(PlayerModel.Ability.Dash);
+            //Debug.Log("대시 해금");
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            UnlockAbility(PlayerModel.Ability.WallJump);
+            //Debug.Log("벽점프 해금");
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            UnlockAbility(PlayerModel.Ability.DoubleJump);
+           // Debug.Log("더블점프 해금");
+        }
+
+
 
         //임시 체력 확인용
         //hp = playerModel.hp;
@@ -216,7 +237,7 @@ public partial class PlayerController : MonoBehaviour
         _states[(int)(_curState)].FixedUpdate();
         //여기서 바닥체크를 하니까 하나는 해결됨..
         CheckGroundRaycast();
-        CheckWall();
+        //CheckWall();
     }
 
     public void CheckDashCoolTime()
@@ -261,8 +282,17 @@ public partial class PlayerController : MonoBehaviour
         //    _states[(int)_curState].Enter();
         //}
 
+        // 더블점프의 예외사항 처리
+        if(_curState == State.WallJump && nextState == State.DoubleJump)
+        {
+            _states[(int)_curState].Exit();
+            _curState = nextState;
+            _states[(int)_curState].Enter();
+        }
+
+
         //방안2. 중복 코드를 줄임
-        if (_states[(int)nextState].ability == Ability.None || HasAbility(_states[(int)nextState].ability))
+        if (_states[(int)nextState].ability == PlayerModel.Ability.None || HasAbility(_states[(int)nextState].ability))
         {
             _states[(int)_curState].Exit();
             _curState = nextState;
@@ -270,7 +300,7 @@ public partial class PlayerController : MonoBehaviour
         }
         else
         {
-            Debug.Log("아직 해금하지 않은 능력");
+            //Debug.Log("아직 해금하지 않은 능력");
         }
         
     }
@@ -319,7 +349,7 @@ public partial class PlayerController : MonoBehaviour
         }
         else // 벽타기 불가능한 벽이었을 경우
         {
-            Debug.Log($"벽에 끼임 {rigid.velocity}");
+            //Debug.Log($"벽에 끼임 {rigid.velocity}");
             // 벽에 끼었을 때
 
             if (moveInput != 0 && rigid.velocity.y == Vector2.zero.y)
@@ -353,17 +383,23 @@ public partial class PlayerController : MonoBehaviour
     }
 
 
-    public void UnlockAbility(Ability ability)
+    public void UnlockAbility(PlayerModel.Ability ability)
     {
+        if(HasAbility(ability))
+        {
+            Debug.Log("이미 해금된 능력입니다.");
+            return;
+        }
+
         unlockedAbilities |= ability;
+        playerModel.UnlockAbilityEvent(ability);
+        Debug.Log($"{ability} 해금");
     }
 
-    public bool HasAbility(Ability ability)
+    public bool HasAbility(PlayerModel.Ability ability)
     {
         return (unlockedAbilities & ability) == ability;
     }
-
-
 
     public void FlipPlayer(float _moveDirection)
     {
@@ -386,8 +422,15 @@ public partial class PlayerController : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Z))
         {
-            playerView.ChangeSprite(); // 상시 애니메이션 재생 상태라 없어도 무방
-            playerModel.TagPlayerEvent(); // 속성 열거형 형식의 curNature를 바꿔줌 + 태그 이벤트 Invoke
+            if(HasAbility(PlayerModel.Ability.Tag))
+            {
+                // playerView.ChangeSprite(); // 상시 애니메이션 재생 상태라 없어도 무방
+                playerModel.TagPlayerEvent(); // 속성 열거형 형식의 curNature를 바꿔줌 + 태그 이벤트 Invoke
+            }
+            else
+            {
+                Debug.Log("태그 능력 해금 안됨");
+            }
         }
     }
 
@@ -448,6 +491,7 @@ public partial class PlayerController : MonoBehaviour
         playerModel.OnPlayerDamageTaken += HandlePlayerDamaged;
         playerModel.OnPlayerDied += HandlePlayerDied;
         playerModel.OnPlayerSpawn += HandlePlayerSpawn;
+        //playerModel.OnAbilityUnlocked += 
     }
 
     private void UnsubscribeEvents()

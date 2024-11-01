@@ -164,9 +164,9 @@ public class JumpState : PlayerState
 
                 if (alignment > 0.98f || alignment < -0.98f)
                 {
-                    Debug.Log(_velocityDirection);
-                    Debug.Log(player.perpAngle);
-                    Debug.Log(alignment);
+                    //Debug.Log(_velocityDirection);
+                    //Debug.Log(player.perpAngle);
+                    //Debug.Log(alignment);
                     player.ChangeState(PlayerController.State.Fall);
                 }
             }

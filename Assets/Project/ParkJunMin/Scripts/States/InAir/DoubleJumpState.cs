@@ -8,7 +8,7 @@ public class DoubleJumpState : PlayerState
     public DoubleJumpState(PlayerController player) : base(player)
     {
         animationIndex = (int)PlayerController.State.DoubleJump;
-        ability = PlayerController.Ability.DoubleJump;
+        ability = PlayerModel.Ability.DoubleJump;
     }
 
     public override void Enter()
