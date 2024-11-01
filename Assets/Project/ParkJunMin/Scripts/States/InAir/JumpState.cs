@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class JumpState : PlayerState
@@ -19,6 +17,7 @@ public class JumpState : PlayerState
         player.playerView.PlayAnimation(animationIndex);
         player.playerModel.JumpPlayerEvent();
         _hasJumped = true;
+
         player.jumpChargingTime = 0f;
 
         //player.maxFlightTime = 0.2f;
@@ -29,10 +28,111 @@ public class JumpState : PlayerState
     public override void Update()
     {
         PlayAnimationInUpdate();
+
+        //if (player.coyoteTimeCounter > 0f)
+        //{
+
+        // JumpVer1();
+        JumpVer2();
+
+
+
+
+
+        //}
+
+        player.MoveInAir();
+
+        //if (player.maxFlightTime > 0)
+        //{
+        //    player.maxFlightTime -= Time.deltaTime; // 이런거 오르막길에 의미없음
+        //}
+        // 점프 상태에서 더블점프로 상태변환
+        if (!player.isDoubleJumpUsed && Input.GetKeyDown(KeyCode.C))
+        {
+            player.ChangeState(PlayerController.State.DoubleJump);
+        }
+
+        ////Dash 상태로 전환
+        //player.CheckDashable();
+
+        if(player.rigid.velocity.y < 0)
+        {
+            player.ChangeState(PlayerController.State.Fall);
+        }
+
+
+        // 점프에서 바로 idle로 전환됨
+        //if (player.isGrounded)
+        //{
+        //    player.ChangeState(PlayerController.State.Idle);
+        //}
+    }
+
+    public override void FixedUpdate()
+    {
+
+        //if (player.isGrounded && !player.isSlope)
+        //{
+        //    player.ChangeState(PlayerController.State.Idle);
+        //}
+
+        // slope면 이미 바닥이라는 얘기
+        // 바닥인데 y축 속도가 일정값 이상으로 계속 증가하고 있다 = 경사면에서 비스듬히 계속 올라가고있다
+
+        ///////////////////////////
+        ///
+        //if (player.isSlope)
+        //{
+        //    if (_slopeDetectionDelayTimer > 0)
+        //    {
+        //        // 점프 후 일정시간동안은 탐지하지 않음
+        //        // 점프가 불가능할 정도로 빠르게 탐지하는것을 방지
+        //        _slopeDetectionDelayTimer -= Time.fixedDeltaTime;
+        //    }
+        //    else
+        //    {
+        //        _velocityDirection = player.rigid.velocity.normalized;
+
+        //        if (player.rigid.velocity.y < 0)
+        //            player.ChangeState(PlayerController.State.Fall);
+
+        //        // 
+        //        // 벡터의 방향이 같은지 확인
+        //        // 일정 경사 내에선 잘 작동하는거같은데 아직 확실치 않다 오류가 좀 많다 개선사항이 필요
+        //        float alignment = Vector2.Dot(_velocityDirection, player.perpAngle);
+
+        //        if (alignment > 0.98f || alignment < -0.98f)
+        //        {
+        //            //Debug.Log(_velocityDirection);
+        //            //Debug.Log(player.perpAngle);
+        //            //Debug.Log(alignment);
+        //            player.ChangeState(PlayerController.State.Fall);
+        //        }
+        //    }
+        //}
+
+        //if (!player.isSlope && player.rigid.velocity.y < 0)
+        //{
+        //    player.ChangeState(PlayerController.State.Fall);
+        //}
+
+    }
+
+    public override void Exit()
+    {
+        _slopeDetectionDelayTimer = 0.2f;
+        _velocityDirection = Vector2.zero;
+        player.jumpChargingTime = 0;
+        //player.rigid.sharedMaterial.friction = 0.6f;
+    }
+
+    private void JumpVer1()
+    {
         if (Input.GetKey(KeyCode.C) && _hasJumped) // 스페이스바를 누르는 동안 점프력 증가
         {
             player.jumpChargingTime += Time.deltaTime;
-            if(player.jumpChargingTime >= player.jumpCirticalPoint)
+            if (player.jumpChargingTime >= player.jumpCirticalPoint)
             {
                 // 높은점프로 결정될만큼 스페이스바를 임계 시간 이상 누른경우
 
@@ -44,7 +144,7 @@ public class JumpState : PlayerState
 
 
                     // 지면에 수직인 법선벡터 방향으로 속도를 주는 방법 
-                    player.rigid.velocity = (player.groundHit.normal.normalized) * (player.highJumpForce + player.slopeJumpBoost);
+                    player.rigid.velocity = (player.groundHit.normal.normalized) * (player.jumpForce + player.slopeJumpBoost);
 
                     //경사면이 아닐 경우와 같은 방법으로 속도를 주는 방법
                     // player.rigid.velocity = new Vector2(player.rigid.velocity.x, player.highJumpForce);
@@ -61,10 +161,10 @@ public class JumpState : PlayerState
                 }
                 else
                 {
-                    player.rigid.velocity = new Vector2(player.rigid.velocity.x, player.highJumpForce);
+                    player.rigid.velocity = new Vector2(player.rigid.velocity.x, player.jumpForce);
                 }
-                        //&& player.isGrounded)
-                
+                //&& player.isGrounded)
+
                 _hasJumped = false;
 
                 //player.maxFlightTime = 0.2f;
@@ -109,87 +209,16 @@ public class JumpState : PlayerState
             _hasJumped = false;
             //player.jumpMaintainTime = 0.2f;
         }
-
-        player.MoveInAir();
-
-        //if (player.maxFlightTime > 0)
-        //{
-        //    player.maxFlightTime -= Time.deltaTime; // 이런거 오르막길에 의미없음
-        //}
-        // 점프 상태에서 더블점프로 상태변환
-        if (!player.isDoubleJumpUsed && Input.GetKeyDown(KeyCode.C))
-        {
-            player.ChangeState(PlayerController.State.DoubleJump);
-        }
-
-        ////Dash 상태로 전환
-        //player.CheckDashable();
-
-        // 점프에서 바로 idle로 전환됨
-        //if (player.isGrounded)
-        //{
-        //    player.ChangeState(PlayerController.State.Idle);
-        //}
     }
 
-    public override void FixedUpdate()
+    private void JumpVer2()
     {
-
-        //if (player.isGrounded && !player.isSlope)
-        //{
-        //    player.ChangeState(PlayerController.State.Idle);
-        //}
-
-        // slope면 이미 바닥이라는 얘기
-        // 바닥인데 y축 속도가 일정값 이상으로 계속 증가하고 있다 = 경사면에서 비스듬히 계속 올라가고있다
-        if (player.isSlope) 
+        Debug.Log("b");
+        if (player.coyoteTimeCounter > 0f && player.jumpBufferCounter > 0f)//Input.GetKey(KeyCode.C)) 
+            // //player.coyoteTimeCounter > 0f && 
         {
-            if(_slopeDetectionDelayTimer > 0)
-            {
-                // 점프 후 일정시간동안은 탐지하지 않음
-                // 점프가 불가능할 정도로 빠르게 탐지하는것을 방지
-                _slopeDetectionDelayTimer -= Time.fixedDeltaTime;
-            }
-            else
-            {
-                _velocityDirection = player.rigid.velocity.normalized;
-
-                if(player.rigid.velocity.y < 0)
-                    player.ChangeState(PlayerController.State.Fall);
-
-                // 
-                // 벡터의 방향이 같은지 확인
-                // 일정 경사 내에선 잘 작동하는거같은데 아직 확실치 않다 오류가 좀 많다 개선사항이 필요
-                float alignment = Vector2.Dot(_velocityDirection, player.perpAngle);
-
-                if (alignment > 0.98f || alignment < -0.98f)
-                {
-                    //Debug.Log(_velocityDirection);
-                    //Debug.Log(player.perpAngle);
-                    //Debug.Log(alignment);
-                    player.ChangeState(PlayerController.State.Fall);
-                }
-            }
+            player.rigid.velocity = new Vector2(player.rigid.velocity.x, player.jumpForce);
+            player.coyoteTimeCounter = 0f;
         }
-
-        if (!player.isSlope && player.rigid.velocity.y < 0)
-        {
-            //Debug.Log(player.rigid.velocity.y);
-            player.ChangeState(PlayerController.State.Fall);
-        }
-        else
-        {
-            
-        }
-
     }
-
-    public override void Exit()
-    {
-        _slopeDetectionDelayTimer = 0.2f;
-        _velocityDirection = Vector2.zero;
-        player.jumpChargingTime = 0;
-        //player.rigid.sharedMaterial.friction = 0.6f;
-    }
-
 }

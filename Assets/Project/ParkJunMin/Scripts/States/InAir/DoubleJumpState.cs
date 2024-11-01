@@ -45,9 +45,6 @@ public class DoubleJumpState : PlayerState
         {
             player.ChangeState(PlayerController.State.Dash);
         }
-
-
-
     }
 
     public override void Exit()

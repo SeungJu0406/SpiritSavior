@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 public class DamagedState : PlayerState
 {
     private float _knockbackForce;
     //private float _minKnockback = 0.5f;
     private Vector2 knockbackDirection;
+    private bool knockbackFlag;
     public DamagedState(PlayerController player) : base(player)
     {
         animationIndex = (int)PlayerController.State.Damaged;
@@ -15,9 +17,11 @@ public class DamagedState : PlayerState
 
     public override void Enter()
     {
-        player.rigid.sharedMaterial.friction = 0.6f;
-
-        KnockbackPlayer();
+        knockbackFlag = true;
+        if (player.rigid.sharedMaterial != null)
+        {
+            player.rigid.sharedMaterial.friction = 0.6f;
+        }
 
         //무적상태 
         player.playerModel.invincibility = true;
@@ -31,7 +35,7 @@ public class DamagedState : PlayerState
     public override void Update()
     {
         // 피격상태가 끝나는걸 확인
-        if(player.rigid.velocity.magnitude < 0.1f) // 넉백의 힘이 거의 사라졌을 때
+        if (!knockbackFlag && player.rigid.velocity.sqrMagnitude < 0.1f) // 넉백의 힘이 거의 사라졌을 때
         {
             if (player.playerModel.hp > 0)
             {
@@ -44,9 +48,19 @@ public class DamagedState : PlayerState
         }
     }
 
+    public override void FixedUpdate()
+    {
+        if(knockbackFlag)
+            KnockbackPlayer();
+    }
+
     public override void Exit()
     {
         knockbackDirection = Vector2.zero;
+        if (player.rigid.sharedMaterial != null)
+        {
+            player.rigid.sharedMaterial.friction = 0f;
+        }
     }
 
     private void KnockbackPlayer()
@@ -58,7 +72,10 @@ public class DamagedState : PlayerState
         player.rigid.velocity = Vector2.zero;
 
         //넉백
+
         player.rigid.AddForce(knockbackDirection * _knockbackForce, ForceMode2D.Impulse);
+
+        knockbackFlag = false;
     }
 
 }
