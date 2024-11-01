@@ -6,6 +6,7 @@ public class PlayerState : BaseState
 {
     public PlayerController player;
     protected PlayerModel.Nature prevNature;
+    public PlayerModel.Ability ability = PlayerModel.Ability.None;
     public int animationIndex;
     public PlayerState(PlayerController player)
     {

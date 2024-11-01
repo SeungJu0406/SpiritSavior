@@ -3,19 +3,19 @@ using UnityEngine;
 
 public class PointController : MonoBehaviour
 {
-    [SerializeField] GameObject buttonPrefab;
-    [SerializeField] string pointName;
+    [Header("사용자지정")]
     [SerializeField] GameObject buttonCanvas;
     [SerializeField] Transform buttonLayout;
+    [SerializeField] string pointName;
+    [SerializeField] GameObject buttonPrefab;
+
+    [Space (10f)]
     [SerializeField] ParticleSystem unActiveParticle;
     [SerializeField] ParticleSystem activeParticle;
-    [SerializeField] bool _pointActive; // point 활성화 여부
-    [SerializeField] bool _uiActive; // ui canvas 활성화 여부
+    private bool _pointActive; // point 활성화 여부
+    private bool _uiActive; // ui canvas 활성화 여부
     private GameObject _buttonObject;
-    public ParticleSystem ps;
-    public ParticleSystem.MainModule psMain;
-    public ButtonController _button;
-    private Transform _transform;
+    private ButtonController _button;
     void Start()
     {
         _pointActive = false;
@@ -24,8 +24,6 @@ public class PointController : MonoBehaviour
         activeParticle.gameObject.SetActive(false);
 
         buttonCanvas.SetActive(false);
-
-        _transform = GetComponent<Transform>();
     }
 
     #region point 접근여부
@@ -91,8 +89,7 @@ public class PointController : MonoBehaviour
 
         _buttonObject = Instantiate(buttonPrefab, buttonLayout) as GameObject; // button 생성
         _button = _buttonObject.GetComponent<ButtonController>();
-        _button.Destinasion = _transform;
-        _button.Destinasion = _transform;
-        _button.Destinasion.position = _transform.position; // point 위치 버튼 목적지에 대입
+        _button._buttonText.text = pointName;
+        _button.destinationPos = transform.position;
     }
 }

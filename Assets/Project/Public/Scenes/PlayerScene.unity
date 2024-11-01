@@ -135,11 +135,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2885980925322481645, guid: 54b83fed8e8e1f745888d97b22d65881, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.2
+      value: 918.03
       objectReference: {fileID: 0}
     - target: {fileID: 2885980925322481645, guid: 54b83fed8e8e1f745888d97b22d65881, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.3
+      value: -25.24
       objectReference: {fileID: 0}
     - target: {fileID: 2885980925322481645, guid: 54b83fed8e8e1f745888d97b22d65881, type: 3}
       propertyPath: m_LocalPosition.z
@@ -550,12 +550,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2809031215115734676, guid: 93fd9a172f4795541aee25b2be1d0e27, type: 3}
       propertyPath: _firstStage._sceneName
-      value: 1Stage
+      value: 5Stage
       objectReference: {fileID: 0}
     - target: {fileID: 2809031215115734676, guid: 93fd9a172f4795541aee25b2be1d0e27, type: 3}
       propertyPath: _firstStage._sceneAsset
       value: 
-      objectReference: {fileID: 102900000, guid: b654f0c3f227940498dc231b6acaec1d, type: 3}
+      objectReference: {fileID: 102900000, guid: df4a1e0cfadffa34db3e1d9fae79eecb, type: 3}
     - target: {fileID: 2809031215115734677, guid: 93fd9a172f4795541aee25b2be1d0e27, type: 3}
       propertyPath: m_Name
       value: TestSceneChanger
