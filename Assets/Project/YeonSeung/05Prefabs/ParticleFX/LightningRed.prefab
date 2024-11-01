@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1266297610116616396}
   - component: {fileID: 1266297610116616397}
   - component: {fileID: -2709453143424368427}
+  - component: {fileID: 4660864584970248075}
   m_Layer: 0
   m_Name: LightningRed
   m_TagString: Untagged
@@ -4898,6 +4899,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57b9c360677b265478008e5613058ead, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4660864584970248075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1266297610116616394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfa1df2ae53cc1044a48a8070c7b3d2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightning: {fileID: 1266297610116616394}
+  lightningDamage: 0
+  _hitBox: {fileID: 5953840007957322140}
+  _lightingNature: 0
 --- !u!1 &2161572443989264800
 GameObject:
   m_ObjectHideFlags: 0
@@ -14620,7 +14637,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &357482005653598059
 Transform:
   m_ObjectHideFlags: 0
@@ -14646,7 +14663,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

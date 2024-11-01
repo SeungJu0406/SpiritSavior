@@ -9718,6 +9718,7 @@ GameObject:
   - component: {fileID: 4322695981796623134}
   - component: {fileID: 4322695981796623135}
   - component: {fileID: -3904593102881128332}
+  - component: {fileID: 8444246692321167127}
   m_Layer: 0
   m_Name: LightningBlue
   m_TagString: Untagged
@@ -14604,6 +14605,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57b9c360677b265478008e5613058ead, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8444246692321167127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4322695981796623128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfa1df2ae53cc1044a48a8070c7b3d2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightning: {fileID: 4322695981796623128}
+  lightningDamage: 0
+  _hitBox: {fileID: 8705403177674754638}
+  _lightingNature: 1
 --- !u!1 &7977639229134808873
 GameObject:
   m_ObjectHideFlags: 0
@@ -14646,7 +14663,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
