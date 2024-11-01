@@ -8,6 +8,7 @@ public class DashState : PlayerState
     public DashState(PlayerController player) : base(player)
     {
         animationIndex = (int)PlayerController.State.Dash;
+        ability = PlayerModel.Ability.Dash;
     }
 
     public override void Enter()

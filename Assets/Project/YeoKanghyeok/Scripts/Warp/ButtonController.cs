@@ -1,22 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ButtonController : MonoBehaviour
 {
-    [SerializeField] public bool ActiveButton;
-    [SerializeField] public Transform Destinasion;
-    [SerializeField] PlayerController _player;
-    private void Awake()
+    [SerializeField] public Text _buttonText;
+    private Transform playerPos;
+    public Vector2 destinationPos;
+    private void Start()
     {
-        GameObject playerObject = GameObject.FindWithTag("Player");
-        _player = playerObject.GetComponent<PlayerController>();
-        
+        playerPos = Manager.Game.Player.transform;
     }
 
     public void Warp()
     {
-        _player.transform.position = Destinasion.position;
+        playerPos.transform.position = destinationPos;
     }
 }

@@ -17,7 +17,7 @@ public class RunState : PlayerState
         
         player.playerView.PlayAnimation(animationIndex);
         player.playerModel.RunPlayerEvent();
-        player.isGrounded = true;
+        player.isGrounded = true; // 이건 이제 없어도 되지 않을까?
     }
     public override void Update()
     {
