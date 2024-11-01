@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class TestInteractable : SwichInteractable
 {
+    [SerializeField] GameObject gameObject;
+    private GameObject interactiveObject;
     public override void Interact()
     {
-        Debug.Log("인터렉터블 상호작용");
+        interactiveObject = Instantiate(gameObject);
+        interactiveObject.SetActive(true);
     }
 }
