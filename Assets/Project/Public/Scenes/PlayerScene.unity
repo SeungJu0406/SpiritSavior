@@ -548,6 +548,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2809031215115734676, guid: 93fd9a172f4795541aee25b2be1d0e27, type: 3}
+      propertyPath: _firstStage._sceneName
+      value: 1Stage
+      objectReference: {fileID: 0}
+    - target: {fileID: 2809031215115734676, guid: 93fd9a172f4795541aee25b2be1d0e27, type: 3}
+      propertyPath: _firstStage._sceneAsset
+      value: 
+      objectReference: {fileID: 102900000, guid: b654f0c3f227940498dc231b6acaec1d, type: 3}
     - target: {fileID: 2809031215115734677, guid: 93fd9a172f4795541aee25b2be1d0e27, type: 3}
       propertyPath: m_Name
       value: TestSceneChanger
