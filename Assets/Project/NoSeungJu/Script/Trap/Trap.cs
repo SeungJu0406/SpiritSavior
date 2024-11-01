@@ -17,7 +17,7 @@ public abstract class Trap : MonoBehaviour
             bool keeping = SceneChanger.Instance.CheckKeepingTrap(transform.position);
             if (!keeping)
             {
-                Destroy(gameObject);
+                gameObject.SetActive(false);
             }
         }
     }
@@ -65,7 +65,6 @@ public abstract class Trap : MonoBehaviour
     {
         if (SceneChanger.Instance == null) return;
         SceneChanger.Instance.SetKeepingTrap(transform.position, false);
-        Destroy(gameObject);
     }
     protected virtual void OnCollisionEnter2D(Collision2D collision) { }
     protected virtual void OnTriggerEnter2D(Collider2D collision) { }
