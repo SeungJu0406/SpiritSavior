@@ -21,7 +21,7 @@ public abstract class Trap : MonoBehaviour
             }
             else if (TestSceneChanger.Instance != null)
             {
-                keeping = SceneChanger.Instance.CheckKeepingTrap(transform.position);
+                keeping = TestSceneChanger.Instance.CheckKeepingTrap(transform.position);
             }
             if (!keeping)
             {
