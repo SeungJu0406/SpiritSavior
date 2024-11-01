@@ -228,4 +228,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _buttonText: {fileID: 1074753470875037178}
-  destinasion: {fileID: 0}
+  PointScene:
+    _sceneAsset: {fileID: 0}
+    _sceneName: 
+  _loadTrigger: {fileID: 7220145990415169447, guid: 5f4e363a81d20974c82d8a2c987f6f19, type: 3}
+  destinationPos: {x: 0, y: 0}

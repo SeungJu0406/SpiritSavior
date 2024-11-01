@@ -31,10 +31,12 @@ public class RunState : PlayerState
         {
             player.ChangeState(PlayerController.State.Idle);
         }
-        else if(!player.isGrounded && player.rigid.velocity.y < -1.0f) // !player.isSlope && 어차피 Slope면 Ground임
+        else if (player.coyoteTimeCounter <= 0 && player.rigid.velocity.y < 0f) //!player.isGrounded &&
         {
             player.ChangeState(PlayerController.State.Fall);
         }
+
+
         // Jump 상태로 전환
         else if (Input.GetKeyDown(KeyCode.C))//&& player.isGrounded) // 조건 나중에 뺄 수도 있음
         {
@@ -81,7 +83,7 @@ public class RunState : PlayerState
 
     private void Run()
     {
-        player.moveInput = Input.GetAxisRaw("Horizontal"); 
+        player.moveInput = Input.GetAxisRaw("Horizontal");
 
         if (player.isSlope && player.isGrounded && player.groundAngle < player.maxAngle) //slope면 ground라 나중에 조건 간단히 변경
         {
@@ -91,10 +93,6 @@ public class RunState : PlayerState
         {
             player.rigid.velocity = new Vector2(player.moveInput * player.moveSpeed, player.rigid.velocity.y);
         }
-        //else
-        //{
-        //    player.ChangeState(PlayerController.State.Fall);
-        //}
 
         player.FlipPlayer(player.moveInput);
     }

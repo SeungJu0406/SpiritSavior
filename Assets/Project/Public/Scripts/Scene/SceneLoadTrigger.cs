@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -23,8 +24,14 @@ public class SceneLoadTrigger : MonoBehaviour
             UnloadScene();
         }
     }
-
     
+    public void AddSceneToLoad(SceneField sceneField)
+    {
+        SceneField[] sceneFields = new SceneField[1];
+        sceneFields[0] = sceneField;
+        _sceneToLoad = sceneFields;
+    }
+
     void LoadScene()
     {
         for (int i = 0; i < _sceneToLoad.Length; i++) 

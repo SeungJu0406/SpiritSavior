@@ -5,15 +5,8 @@ using UnityEngine;
 
 public partial class PlayerController : MonoBehaviour
 {
-    public enum State {Idle, Run, Dash, Jump, DoubleJump, Fall, WallGrab, WallSliding, WallJump, Damaged, WakeUp, Dead, Spawn, Size}
-    //public enum Ability //모델에 넣고 싶었는데 컨트롤러가 접근하기 더 편할거같아서 일단 여기에
-    //{
-    //    None = 0,
-    //    Tag = 1 << 0,
-    //    Dash = 1 << 1,
-    //    WallJump = 1 << 2,
-    //    DoubleJump = 1 << 3
-    //}
+    public enum State {Idle, Run, Dash, Jump, DoubleJump, Fall, Land, WallGrab, WallSliding, WallJump, Damaged, WakeUp, Dead, Spawn, Size}
+
     [SerializeField] State _curState;
     //public State prevState;
     //private BaseState[] _states = new BaseState[(int)State.Size];
@@ -35,11 +28,11 @@ public partial class PlayerController : MonoBehaviour
     public float moveSpeed;        // 이동속도
     //public float maxMoveSpeed;     // 이동속도의 최대값
     public float dashForce;         // 대시 힘
-    public float lowJumpForce;     // 낮은점프 힘
-    public float highJumpForce;    // 높은점프 힘
+    [HideInInspector] public float lowJumpForce;     // 낮은점프 힘 // 폐기
+    public float jumpForce;    // 높은점프 힘
     public float maxJumpTime;     // 최대점프 시간
-    public float slopeJumpBoost; // 경사면에서의 추가 점프 오프셋 값
-    public float jumpCirticalPoint; // 낮은점프, 높은점프를 가르는 시점
+    [HideInInspector] public float slopeJumpBoost; // 경사면에서의 추가 점프 오프셋 값 // 폐기
+    [HideInInspector] public float jumpCirticalPoint; // 낮은점프, 높은점프를 가르는 시점 // 폐기
     public float doubleJumpForce; // 더블 점프시 얼마나 위로 올라갈지 결정
     public float knockbackForce; // 피격시 얼마나 뒤로 밀려날 지 결정
 
@@ -51,16 +44,16 @@ public partial class PlayerController : MonoBehaviour
     public float speedAdjustmentOffsetInAir; // 공중에서의 속도 = 땅에서의 속도 * 해당 변수
 
     [Header("Checking")]
-    public Rigidbody2D rigid;
+    [HideInInspector] public Rigidbody2D rigid;
     public float hp;
     
     //public bool hasJumped = false;          //
-    public float jumpChargingTime = 0f;     // 스페이스바 누른시간 체크
+    [HideInInspector] public float jumpChargingTime = 0f;     // 스페이스바 누른시간 체크
     public bool isDoubleJumpUsed; // 더블점프 사용 유무를 나타내는 변수
     public bool isDashUsed; // 대시를 사용했는지 유무를 나타내는 변수
     public float dashCoolTime; // 대시 사용 후 쿨타임
     [HideInInspector] public float dashDeltaTime;
-    private bool _isStuck; // 벽에 끼었는지 확인
+    public bool isStuck; // 벽에 끼었는지 확인
     public bool isDead = false; // 죽었는지 확인
     
     [Header("Ground & Slope & Wall Checking")]
@@ -70,6 +63,7 @@ public partial class PlayerController : MonoBehaviour
     private float _wallCheckHeight = 2.25f; // 너무 길면 경사도 벽으로 인식함
 
     [SerializeField] private float _groundCheckDistance;
+    [SerializeField] private float _slopeCheckDistance;
     public float groundAngle;
     public Vector2 perpAngle;
     public bool isSlope;
@@ -81,6 +75,7 @@ public partial class PlayerController : MonoBehaviour
     public bool isGrounded;        // 캐릭터가 땅에 붙어있는지 체크
 
     public RaycastHit2D groundHit;
+    public RaycastHit2D slopeHit;
     public RaycastHit2D wallHit;
 
 
@@ -92,7 +87,19 @@ public partial class PlayerController : MonoBehaviour
     private Vector2 _wallCheckBoxSize;
     Coroutine _wallCheckRoutine;
     //Coroutine _groundCheckRoutine;
+
+    [Header("Input")]
     public float moveInput;
+
+    // 코요테 타임
+    public float coyoteTime = 0.2f;
+    [HideInInspector] public float coyoteTimeCounter;
+
+    //점프 버퍼
+    public float jumpBufferTime = 0.2f;
+    [HideInInspector] public float jumpBufferCounter;
+    //[HideInInspector]
+    //[HideInInspector]
 
     private void Awake()
     {
@@ -117,6 +124,7 @@ public partial class PlayerController : MonoBehaviour
         _states[(int)State.Jump] = new JumpState(this);
         _states[(int)State.DoubleJump] = new DoubleJumpState(this);
         _states[(int)State.Fall] = new FallState(this);
+        _states[(int)State.Land] = new LandState(this);
         _states[(int)State.WallGrab] = new WallGrabState(this);
         _states[(int)State.WallSliding] = new WallSlidingState(this);
         _states[(int)State.WallJump] = new WallJumpState(this);
@@ -169,6 +177,8 @@ public partial class PlayerController : MonoBehaviour
         //벽체크의 경우 fixedUpdate에서 수행하면 wallGrab 애니메이션이 자주 재생이 안된다
         //벽 체크 주기의 문제같다. Update에서 하니 문제가 사라짐
         CheckWall();
+        ControlCoyoteTime();
+        ControlJumpBuffer();
         //CheckGroundRaycast();
 
 
@@ -188,11 +198,11 @@ public partial class PlayerController : MonoBehaviour
         //    rigid.velocity = new Vector2(0,rigid.velocity.y);
         //}
 
-        ////임시 피격 트리거
-        //if (Input.GetKeyDown(KeyCode.O))
-        //{
-        //    playerModel.TakeDamage(1); // 임시
-        //}
+        //임시 피격 트리거
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            playerModel.TakeDamageEvent(1); // 임시
+        }
 
         ////임시 죽음 트리거
         //if (Input.GetKeyDown(KeyCode.P))
@@ -307,13 +317,19 @@ public partial class PlayerController : MonoBehaviour
 
     private void CheckGroundRaycast()
     {
+        // 땅 체크와 땅이 평지인지 경사면인지 체크하는 메서드
+
         groundHit = Physics2D.Raycast(_groundCheckPoint.position, Vector2.down, _groundCheckDistance, groundLayerMask);
+        slopeHit = Physics2D.Raycast(_groundCheckPoint.position, Vector2.down, _slopeCheckDistance, groundLayerMask);
         //노멀벡터로 각도를 구함
         isGrounded = groundHit;
         // Vector2.Perpendicular(Vector2 A) : A의 값에서 반시계 방향으로 90도 회전한 벡터값을 반환
 
         if(isGrounded)
         {
+            //if (rigid.sharedMaterial.friction != 0.6f)
+            //    rigid.sharedMaterial.friction = 0.6f;
+
             perpAngle = Vector2.Perpendicular(groundHit.normal).normalized; // 
             groundAngle = Vector2.Angle(groundHit.normal, Vector2.up);
 
@@ -321,6 +337,18 @@ public partial class PlayerController : MonoBehaviour
                 isSlope = true;
             else
                 isSlope = false;
+
+
+            if(groundAngle > maxAngle)
+            {
+                Debug.Log(groundAngle);
+                moveInput = 0;
+            }
+            else
+            {
+                //Debug.Log(groundAngle);
+            }
+
 
             //법선벡터, 지면에서 수직
             Debug.DrawLine(groundHit.point, groundHit.point + groundHit.normal, Color.blue);
@@ -338,39 +366,72 @@ public partial class PlayerController : MonoBehaviour
         if (wallHit.collider == null)
             return;
 
-        if ((wallLayerMask & (1 << wallHit.collider.gameObject.layer)) != 0) //비트연산으로 레이어 일치 여부 확인 (제일 빠를것) // 벽타기 가능한 벽일 경우
+        // 트리거였을시 return
+        if (wallHit.collider.isTrigger)
+            return;
+
+        if (HasAbility(PlayerModel.Ability.WallJump) && (wallLayerMask & (1 << wallHit.collider.gameObject.layer)) != 0) //비트연산으로 레이어 일치 여부 확인 (제일 빠를것) // 벽타기 가능한 벽일 경우
         {
             if (isGrounded || _curState == State.WallJump || _curState == State.WallGrab || _curState == State.WallSliding ) //너무 긴데
                 return;
 
-            //조건 임시방편.. 고쳐야함
             if (moveInput == isPlayerRight && moveInput != 0) //&& _curState != State.WallGrab && _curState != State.WallSliding)
                 ChangeState(State.WallGrab);
         }
         else // 벽타기 불가능한 벽이었을 경우
         {
-            //Debug.Log($"벽에 끼임 {rigid.velocity}");
-            // 벽에 끼었을 때
-
-            if (moveInput != 0 && rigid.velocity.y == Vector2.zero.y)
+            float wallAngle = Vector2.Angle(Vector2.up, wallHit.normal);
+            if (wallAngle > maxAngle)
             {
-                if (moveInput == Mathf.Sign(-wallHit.normal.x))
-                {
-                    // 이래도 벽감지가 끝나면 끼어버림
-                    rigid.velocity = new Vector2(0, -5.0f);  //rigid.velocity.y*2.0f);
-                    // 너무 무식한 방법인데 다른방법이 없을까
-                }
+                Vector2 slideDirection = Vector2.Perpendicular(wallHit.normal).normalized;
+                //Debug.Log("a");
+                //rigid.velocity = new Vector2(0, rigid.velocity.y);
+                rigid.velocity = new Vector2(slideDirection.x * rigid.velocity.x, rigid.velocity.y);
+
             }
+            //if(rigid.sharedMaterial.friction != 0)
+            //    rigid.sharedMaterial.friction = 0f;
+
+
+            //float slopeAngle = Vector2.Angle(Vector2.up, wallHit.normal); // 벽의 법선 벡터와 수직 벡터의 각도
+            //if (slopeAngle > 45f) // 예를 들어, 45도 이상의 경사면
+            //{
+            //    // 경사면일 경우 점프를 무시하거나 적절한 처리를 합니다.
+            //    if (rigid.velocity.y > 0) // 현재 플레이어가 위로 점프하고 있다면
+            //    {
+            //        rigid.velocity = new Vector2(rigid.velocity.x, 0); // y축 속도를 0으로 설정하여 점프를 멈추게 함
+            //    }
+            //}
+
+            ////Debug.Log($"벽에 끼임 {rigid.velocity}");
+            //// 벽에 끼었을 때
+
+            //if (moveInput != 0 && rigid.velocity.y == Vector2.zero.y)
+            //{
+            //    if (moveInput == Mathf.Sign(-wallHit.normal.x))
+            //    {
+            //        Debug.Log("aa");
+            //        // 이래도 벽감지가 끝나면 끼어버림
+            //        Vector2 pushBack = new Vector2(wallHit.normal.x * 0.1f, 0f);
+            //        rigid.position += pushBack;
+            //        moveInput = 0; // 플레이어 입력 무시
+            //        //rigid.velocity = new Vector2(0, -5.0f);  //rigid.velocity.y*2.0f);
+            //        // 너무 무식한 방법인데 다른방법이 없을까
+            //    }
+            //}
         }
     }
 
     public void MoveInAir()
-    {     
+    {
         // 벽 끼임 방지 현상을 위해
         // 마찰력을 0으로 두는곳과 원래대로 돌리는곳을 정확히 정할 필요가 있음
         //rigid.sharedMaterial.friction = 0f;
-
-        moveInput = Input.GetAxisRaw("Horizontal");
+        if (!isStuck)
+        {
+            moveInput = Input.GetAxisRaw("Horizontal");
+        }
+        
 
         rigid.velocity = new Vector2(moveInput * moveSpeedInAir, rigid.velocity.y);
 
@@ -382,6 +443,29 @@ public partial class PlayerController : MonoBehaviour
         CheckDashable();
     }
 
+    private void ControlCoyoteTime()
+    {
+        if (isGrounded)
+        {
+            coyoteTimeCounter = coyoteTime;
+        }
+        else
+        {
+            coyoteTimeCounter -= Time.deltaTime;
+        }
+    }
+
+    private void ControlJumpBuffer()
+    {
+        if(Input.GetKeyDown(KeyCode.C))
+        {
+            jumpBufferCounter = jumpBufferTime;
+        }
+        else
+        {
+            jumpBufferCounter -= Time.deltaTime;
+        }
+    }
 
     public void UnlockAbility(PlayerModel.Ability ability)
     {

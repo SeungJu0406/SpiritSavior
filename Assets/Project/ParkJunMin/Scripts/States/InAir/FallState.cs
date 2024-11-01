@@ -34,13 +34,11 @@ public class FallState : PlayerState
             player.ChangeState(PlayerController.State.DoubleJump);
         }
 
-        if (player.isGrounded)
+        if (player.isGrounded) //player.coyoteTimeCounter > 0) //
         {
             player.isDoubleJumpUsed = false;
-            player.ChangeState(PlayerController.State.Idle);
+            player.ChangeState(PlayerController.State.Land);
         }
-            
-
     }
 
     public override void Exit()
@@ -50,8 +48,11 @@ public class FallState : PlayerState
         // 벽에 끼임 현상을 방지하기 위해 벽타기 불가능한 벽에선 0으로 주고
         // 그 상태를 벗어날때 다시 원상복구 해주고싶은데 
         // 상태 enter때마다 다 넣어주는 방법 외에 더 좋은 방법이 없을까?
+        if(player.rigid.sharedMaterial != null)
+        {
+            //player.rigid.sharedMaterial.friction = 0.6f;
+        }
         
-        player.rigid.sharedMaterial.friction = 0.6f;
 
 
         // player.rigid.gravityScale = 1;

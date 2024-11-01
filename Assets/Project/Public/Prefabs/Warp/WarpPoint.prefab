@@ -53422,10 +53422,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82375d70927447947a675e72036576ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pointName: point1
+  buttonPrefab: {fileID: 6705479704975942577, guid: c0b10d50096dc5748b66d20ad3310ed3, type: 3}
+  _pointScene:
+    _sceneAsset: {fileID: 0}
+    _sceneName: 
   buttonCanvas: {fileID: 0}
   buttonLayout: {fileID: 0}
-  pointName: point1
-  buttonPrefab: {fileID: 8538509829252165246, guid: c0b10d50096dc5748b66d20ad3310ed3, type: 3}
   unActiveParticle: {fileID: 4637108308136772470}
   activeParticle: {fileID: 2590846876914184069}
 --- !u!58 &8744870913888346943
