@@ -283,7 +283,7 @@ GameObject:
   - component: {fileID: 5727006006911412932}
   - component: {fileID: 5743195363148918790}
   - component: {fileID: 5721909952037243037}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Breakable_Rocks_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -364,6 +364,7 @@ MonoBehaviour:
   _rockLifeTime: 2
   _canRespawn: 1
   _respawnTime: 5
+  _breakDelayTime: 0.2
 --- !u!1 &5723181074231361174
 GameObject:
   m_ObjectHideFlags: 0
@@ -375,7 +376,7 @@ GameObject:
   - component: {fileID: 5720799618620199418}
   - component: {fileID: 5596821542636534318}
   - component: {fileID: 5597694210500463030}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stone Puff Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5257,7 +5258,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5721071533990748912}
   - component: {fileID: 5591677295368821852}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Rocks Cracks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5342,7 +5343,7 @@ GameObject:
   - component: {fileID: 5727100579389542512}
   - component: {fileID: 5593280831778424676}
   - component: {fileID: 5131253366915604061}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Rocks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5538,7 +5539,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5727077941399421042}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Rock Pieces
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5582,7 +5583,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5721094971451836422}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5755,7 +5756,7 @@ GameObject:
   - component: {fileID: 5727449923934383336}
   - component: {fileID: 5596721554246522470}
   - component: {fileID: 5595962054525246412}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Splinters Particles (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11318,7 +11319,7 @@ GameObject:
   - component: {fileID: 5727075991610900484}
   - component: {fileID: 5596571412111112734}
   - component: {fileID: 5595992737750512286}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stone Puff Particles (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16337,7 +16338,7 @@ GameObject:
   - component: {fileID: 5727041146829606112}
   - component: {fileID: 5596584975536636448}
   - component: {fileID: 5597735753891590902}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Splinters Particles (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
