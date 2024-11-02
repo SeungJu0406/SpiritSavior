@@ -213,7 +213,7 @@ public class JumpState : PlayerState
 
     private void JumpVer2()
     {
-        Debug.Log("b");
+        //Debug.Log("b");
         if (player.coyoteTimeCounter > 0f && player.jumpBufferCounter > 0f)//Input.GetKey(KeyCode.C)) 
             // //player.coyoteTimeCounter > 0f && 
         {

@@ -6,7 +6,7 @@ using UnityEngine;
 public partial class PlayerController : MonoBehaviour
 {
     public enum State {Idle, Run, Dash, Jump, DoubleJump, Fall, Land, WallGrab, WallSliding, WallJump, Damaged, WakeUp, Dead, Spawn, Size}
-
+    public PlayerData playerData;
     [SerializeField] State _curState;
     //public State prevState;
     //private BaseState[] _states = new BaseState[(int)State.Size];
@@ -30,9 +30,13 @@ public partial class PlayerController : MonoBehaviour
     public float dashForce;         // 대시 힘
     [HideInInspector] public float lowJumpForce;     // 낮은점프 힘 // 폐기
     public float jumpForce;    // 높은점프 힘
-    public float maxJumpTime;     // 최대점프 시간
+    //public float maxJumpTime;     // 최대점프 시간
+
+    //폐기
     [HideInInspector] public float slopeJumpBoost; // 경사면에서의 추가 점프 오프셋 값 // 폐기
     [HideInInspector] public float jumpCirticalPoint; // 낮은점프, 높은점프를 가르는 시점 // 폐기
+
+
     public float doubleJumpForce; // 더블 점프시 얼마나 위로 올라갈지 결정
     public float knockbackForce; // 피격시 얼마나 뒤로 밀려날 지 결정
 
@@ -81,7 +85,7 @@ public partial class PlayerController : MonoBehaviour
 
     public bool isWall;                  // 캐릭터가 벽에 붙어있는지 체크
     public bool isWallJumpUsed;         // 벽에서 벽점프를 사용 했는지 체크
-    public float wallSlidingSpeed = 0.5f; // 중력계수 조정으로 할지 결정해야함
+    //public float wallSlidingSpeed = 0.5f; // 중력계수 조정으로 할지 결정해야함
     public float wallJumpPower;
 
     private Vector2 _wallCheckBoxSize;
@@ -101,6 +105,18 @@ public partial class PlayerController : MonoBehaviour
     //[HideInInspector]
     //[HideInInspector]
 
+    //임시
+    public void PrintPlayerData()
+    {
+        Debug.Log("이동 속도" + playerData.moveSpeed);
+        Debug.Log("대시 속도" + playerData.dashForce);
+        Debug.Log("점프 속도" + playerData.jumpForce);
+        Debug.Log("더블 점프 속도" + playerData.doubleJumpForce);
+        Debug.Log("넉백 힘" + knockbackForce);
+        Debug.Log("공중에서 속도 = 땅에서의 속도 * 해당 변수 " + playerData.speedAdjustmentOffsetInAir);
+        Debug.Log("이동 가능한 최대 각도" + playerData.maxAngle);
+        Debug.Log("벽 점프 힘" + playerData.wallJumpPower);
+    }
     private void Awake()
     {
         if(playerModel != null)
@@ -320,7 +336,7 @@ public partial class PlayerController : MonoBehaviour
         // 땅 체크와 땅이 평지인지 경사면인지 체크하는 메서드
 
         groundHit = Physics2D.Raycast(_groundCheckPoint.position, Vector2.down, _groundCheckDistance, groundLayerMask);
-        slopeHit = Physics2D.Raycast(_groundCheckPoint.position, Vector2.down, _slopeCheckDistance, groundLayerMask);
+        //slopeHit = Physics2D.Raycast(_groundCheckPoint.position, Vector2.down, _slopeCheckDistance, groundLayerMask);
         //노멀벡터로 각도를 구함
         isGrounded = groundHit;
         // Vector2.Perpendicular(Vector2 A) : A의 값에서 반시계 방향으로 90도 회전한 벡터값을 반환
