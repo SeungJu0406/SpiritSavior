@@ -44,4 +44,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Project/Public/Scenes/Sample/SceneChangeSample.unity
     guid: f7c0956b22e93cc489e96f89fd474090
+  - enabled: 1
+    path: Assets/Project/PSH/PlayerScenePSH.unity
+    guid: 06f79db62b3ceb447bed8c1236d5d38d
+  - enabled: 1
+    path: Assets/Project/KimGyeongya/PlayerSceneKKY.unity
+    guid: 87ae9c4377f1f744587657cb06daabae
   m_configObjects: {}
