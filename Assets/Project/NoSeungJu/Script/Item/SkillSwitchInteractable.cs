@@ -18,7 +18,7 @@ public class SkillSwitchInteractable : SwichInteractable
 
         Instantiate(_tooltipUI);
         Manager.Game.Player.UnlockAbility(_ability);
-        Manager.Game.Player.playerModel.UnlockAbilityEvent(_ability);
+        //Manager.Game.Player.playerModel.UnlockAbilityEvent(_ability);
         Destroy(gameObject);
     }
 }
