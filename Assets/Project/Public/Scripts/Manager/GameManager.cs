@@ -7,6 +7,7 @@ public partial class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    public int MaxStage = 4;
     public PlayerController Player;
     public Vector2 RespawnPoint;
 
@@ -58,6 +59,7 @@ public partial class GameManager : MonoBehaviour
         else
         {
             IsClearStageDIc.Add(key, value);
+            OnChangeIsClearStage(key, value);
         }
     }
 }

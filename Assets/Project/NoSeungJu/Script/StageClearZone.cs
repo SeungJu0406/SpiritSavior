@@ -7,12 +7,6 @@ public class StageClearZone : Trap
 {
     [SerializeField] int _stage;
 
-    protected override void Start()
-    {
-        base.Start();
-        Manager.Game.SetIsClearStageDIc(_stage, false);
-    }
-
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == Manager.Game.Player.tag)

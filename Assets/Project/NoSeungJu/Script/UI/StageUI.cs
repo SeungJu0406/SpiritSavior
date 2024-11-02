@@ -6,13 +6,15 @@ using UnityEngine;
 
 public class StageUI : BaseUI
 {
+    int _curStage;
+
     StringBuilder sb = new StringBuilder();
     private void Start()
     {
         SubscribesEvents();
         Init();
-    }
-
+     
+     }
 
     private void UpdateStage(int stage,bool isClear)
     {
@@ -33,6 +35,20 @@ public class StageUI : BaseUI
             unClearIcon.SetActive(true);
             clearIcon.SetActive(false);
         }
+
+        UpdateClearParticle(stage);
+    }
+
+    void UpdateClearParticle(int stage)
+    {
+
+        if (stage > _curStage)
+        {
+            _curStage = stage;
+            Color color = GetUI<ParticleSystem>("StageParticle").startColor;
+            color.a = (0.8f / Manager.Game.MaxStage) * _curStage;
+            GetUI<ParticleSystem>("StageParticle").startColor = color;
+        }
     }
 
     private void Init()
@@ -48,6 +64,8 @@ public class StageUI : BaseUI
 
         GetUI("4StageUnClear").SetActive(true);
         GetUI("4StageClear").SetActive(false);
+
+        GetUI("StageParticle").SetActive(true);
     }
 
     private void SubscribesEvents()
