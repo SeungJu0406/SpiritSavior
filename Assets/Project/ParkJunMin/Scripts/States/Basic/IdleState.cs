@@ -29,7 +29,7 @@ public class IdleState : PlayerState
         //    prevNature = player.playerModel.curNature;
         //}
         player.moveInput = Mathf.Abs(Input.GetAxisRaw("Horizontal"));
-        if (player.moveInput > 0)
+        if (player.moveInput > 0 && player.isGrounded)
         {
             player.ChangeState(PlayerController.State.Run);
         }
@@ -37,6 +37,11 @@ public class IdleState : PlayerState
         if (Input.GetKeyDown(KeyCode.C))
         {
             player.ChangeState(PlayerController.State.Jump);
+        }
+        
+        if(player.rigid.velocity.y < -0.1f)
+        {
+            player.ChangeState(PlayerController.State.Fall);
         }
 
         //일단 주석 잘 돌아감
