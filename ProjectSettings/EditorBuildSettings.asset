@@ -50,4 +50,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Project/KimGyeongya/PlayerSceneKKY.unity
     guid: 87ae9c4377f1f744587657cb06daabae
+  - enabled: 1
+    path: Assets/Project/NoSeungJu/Scenes/PlayerSceneNSJ.unity
+    guid: b5a6c39850512084e9f9e96345796939
   m_configObjects: {}
