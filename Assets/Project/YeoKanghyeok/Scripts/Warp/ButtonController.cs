@@ -1,10 +1,11 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ButtonController : MonoBehaviour
 {
-    [SerializeField] public Text _buttonText;
+    [SerializeField] public TextMeshProUGUI _buttonText;
     [SerializeField] public SceneField PointScene;
     [SerializeField] SceneLoadTrigger _loadTrigger;
 
@@ -20,13 +21,14 @@ public class ButtonController : MonoBehaviour
         StartCoroutine(WarpRoutine());       
     }
 
+    WaitForSeconds SceneTriggerDeleteDelay = new WaitForSeconds(0.1f);
     IEnumerator WarpRoutine()
     {
         SceneLoadTrigger instance = Instantiate(_loadTrigger, destinationPos, Quaternion.identity);
         instance.AddSceneToLoad(PointScene);
         yield return null;
         playerPos.transform.position = destinationPos;
-        yield return null;
+        yield return SceneTriggerDeleteDelay;
         Destroy(instance.gameObject);
     }
 }

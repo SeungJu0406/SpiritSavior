@@ -53422,8 +53422,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82375d70927447947a675e72036576ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isDisposable: 1
   pointName: point1
-  buttonPrefab: {fileID: 6705479704975942577, guid: c0b10d50096dc5748b66d20ad3310ed3, type: 3}
+  buttonPrefab: {fileID: 7469814845571494346, guid: c0b10d50096dc5748b66d20ad3310ed3, type: 3}
   _pointScene:
     _sceneAsset: {fileID: 0}
     _sceneName: 

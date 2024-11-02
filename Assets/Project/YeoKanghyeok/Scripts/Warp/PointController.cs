@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class PointController : MonoBehaviour
+public class PointController : Trap
 {
     [Header("사용자지정")]
     [SerializeField] string pointName;
@@ -17,14 +17,39 @@ public class PointController : MonoBehaviour
     private bool _uiActive; // ui canvas 활성화 여부
     private ButtonController _button;
 
-    void Start()
-    {   
-        _pointActive = false;
+    protected override void Start()
+    {
+        if (_isDisposable)
+        {
+            bool isUnActive = false;
+            if (SceneChanger.Instance != null)
+            {
+                isUnActive = SceneChanger.Instance.CheckKeepingTrap(transform.position);
+            }
+            else if (TestSceneChanger.Instance != null)
+            {
+                isUnActive = TestSceneChanger.Instance.CheckKeepingTrap(transform.position);
+            }
+            if (isUnActive == true)
+            {
+                _pointActive = false;
+                unActiveParticle.gameObject.SetActive(true);
+                activeParticle.gameObject.SetActive(false);
+            }
+            else
+            {
+                _pointActive = true;
+                unActiveParticle.gameObject.SetActive(false);
+                activeParticle.gameObject.SetActive(true);
+            }
+        }
 
-        unActiveParticle.gameObject.SetActive(true);
-        activeParticle.gameObject.SetActive(false);
+
+
 
         StartCoroutine(StartRoutine());
+
+
     }
 
     IEnumerator StartRoutine()
@@ -35,7 +60,7 @@ public class PointController : MonoBehaviour
     }
 
     #region point 접근여부
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected override void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
@@ -68,9 +93,10 @@ public class PointController : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
+                Debug.LogWarning(_pointActive);
                 if (!_pointActive)
                 {
-                    ActivePoint();
+                    Active();
                     _pointActive = true;
                 }
 
@@ -89,6 +115,10 @@ public class PointController : MonoBehaviour
             yield return null;
         }
     }
+    protected override void ProcessActive()
+    {
+        ActivePoint();
+    }
 
     private void ActivePoint()
     {
@@ -100,4 +130,6 @@ public class PointController : MonoBehaviour
         _button.destinationPos = transform.position;
         _button.PointScene = _pointScene;
     }
+
+
 }
