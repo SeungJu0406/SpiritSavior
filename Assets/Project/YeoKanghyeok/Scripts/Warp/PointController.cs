@@ -6,7 +6,7 @@ public class PointController : Trap
     [Header("사용자지정")]
     [SerializeField] string pointName;
     [SerializeField] ButtonController buttonPrefab;
-    [SerializeField] SceneField _pointScene;
+    [SerializeField] SceneField[] _sceneToLoad;
 
     [Space(10f)]
     [SerializeField] GameObject buttonCanvas;
@@ -43,9 +43,6 @@ public class PointController : Trap
                 activeParticle.gameObject.SetActive(true);
             }
         }
-
-
-
 
         StartCoroutine(StartRoutine());
 
@@ -128,7 +125,7 @@ public class PointController : Trap
         _button = Instantiate(buttonPrefab, buttonCanvas.transform);
         _button._buttonText.text = pointName;
         _button.destinationPos = transform.position;
-        _button.PointScene = _pointScene;
+        _button.SceneToLoad = _sceneToLoad;
     }
 
 

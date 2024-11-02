@@ -9,7 +9,7 @@ public class TestSceneChanger : MonoBehaviour
     public static TestSceneChanger Instance;
 
     [Header("플레이어 전용 씬")]
-    [SerializeField] SceneField _playerScene;
+    public SceneField _playerScene;
     [Header("최초 스테이지")]
     [SerializeField] SceneField _firstStage;
 
