@@ -13,6 +13,7 @@ public class LandState : PlayerState
     public override void Enter()
     {
         player.playerView.PlayAnimation(animationIndex);
+        player.isDoubleJumpUsed = false;
     }
 
     public override void Update()

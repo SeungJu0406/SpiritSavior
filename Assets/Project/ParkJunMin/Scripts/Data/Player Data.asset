@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6905cdf068f2e54499b6933bed8712e, type: 3}
   m_Name: Player Data
   m_EditorClassIdentifier: 
-  moveSpeed: 0
-  dashForce: 0
-  jumpForce: 0
-  doubleJumpForce: 0
-  knockbackForce: 0
-  speedAdjustmentOffsetInAir: 0
-  maxAngle: 0
-  wallJumpPower: 0
+  moveSpeed: 8
+  dashForce: 15
+  jumpForce: 15
+  doubleJumpForce: 15
+  knockbackForce: 10
+  speedAdjustmentOffsetInAir: 0.8
+  maxAngle: 45
+  wallJumpPower: 10

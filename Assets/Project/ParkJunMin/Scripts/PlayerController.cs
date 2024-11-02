@@ -47,7 +47,17 @@ public partial class PlayerController : MonoBehaviour
     
     [Space(30)]
     [Header("Ground & Slope & Wall Checking")]
-    [SerializeField] Transform _groundCheckPoint;
+    [SerializeField] Transform _bottomPivot;
+
+    [SerializeField] Transform _groundCheckPoint1;
+    [SerializeField] Transform _groundCheckPoint2;
+
+    //[SerializeField] Vector2 _originalCheckPoint1;
+    //[SerializeField] Vector2 _originalCheckPoint2;
+    //private Vector2 _changedPoint1;
+    //private Vector2 _changedPoint2;
+
+
     public Transform _wallCheckPoint;
     private float _wallCheckDistance = 0.01f;
     [SerializeField] private float _wallCheckHeight; //2.25f; // 너무 길면 경사도 벽으로 인식함
@@ -57,7 +67,9 @@ public partial class PlayerController : MonoBehaviour
     public bool isGrounded;        // 캐릭터가 땅에 붙어있는지 체크
     [HideInInspector] public Vector2 perpAngle;
     [HideInInspector] public bool isSlope;
-    [HideInInspector] public RaycastHit2D groundHit;
+    [HideInInspector] public RaycastHit2D groundHit1;
+    [HideInInspector] public RaycastHit2D groundHit2;
+    [HideInInspector] public RaycastHit2D chosenHit;
     [HideInInspector] public RaycastHit2D wallHit;
     public bool isWall;                  // 캐릭터가 벽에 붙어있는지 체크
     public bool isWallJumpUsed;         // 벽에서 벽점프를 사용 했는지 체크
@@ -123,14 +135,17 @@ public partial class PlayerController : MonoBehaviour
         //maxMoveSpeedInAir = maxMoveSpeed * speedAdjustmentOffsetInAir;
 
 
-        if (_groundCheckPoint == null)
-            _groundCheckPoint = transform.Find("BottomPivot");
+        if (_bottomPivot == null)
+            _bottomPivot = transform.Find("BottomPivot");
+
+        if (_groundCheckPoint1 == null)
+            _groundCheckPoint1 = transform.Find("GroundCheckPoint1");
+
+        if (_groundCheckPoint2 == null)
+            _groundCheckPoint2 = transform.Find("GroundCheckPoint2");
 
         if (_wallCheckPoint == null)
             _wallCheckPoint = transform.Find("WallCheckPoint");
-
-        //if (_groundCheckRoutine == null)
-        //    _groundCheckRoutine = StartCoroutine(CheckGroundRayRoutine());
 
         if (_wallCheckDisplayRoutine == null) // 작성중
             _wallCheckDisplayRoutine = StartCoroutine(CheckWallDisplayRoutine());
@@ -167,7 +182,7 @@ public partial class PlayerController : MonoBehaviour
         ControlCoyoteTime();
         ControlJumpBuffer();
         //CheckGroundRaycast();
-
+        
         //// 미끄러짐 방지1
         //if (player.moveInput == 0)
         //{
@@ -304,10 +319,33 @@ public partial class PlayerController : MonoBehaviour
     {
         // 땅 체크와 땅이 평지인지 경사면인지 체크하는 메서드
 
-        groundHit = Physics2D.Raycast(_groundCheckPoint.position, Vector2.down, _groundCheckDistance, groundLayerMask);
+        groundHit1 = Physics2D.Raycast(_groundCheckPoint1.position, Vector2.down, _groundCheckDistance, groundLayerMask);
+        groundHit2 = Physics2D.Raycast(_groundCheckPoint2.position, Vector2.down, _groundCheckDistance, groundLayerMask);
+        
+        Debug.DrawLine(_groundCheckPoint1.position, (Vector2)_groundCheckPoint1.position + Vector2.down * _groundCheckDistance, Color.cyan);
+        Debug.DrawLine(_groundCheckPoint2.position, (Vector2)_groundCheckPoint2.position + Vector2.down * _groundCheckDistance, Color.yellow);
         //slopeHit = Physics2D.Raycast(_groundCheckPoint.position, Vector2.down, _slopeCheckDistance, groundLayerMask);
         //노멀벡터로 각도를 구함
-        isGrounded = groundHit;
+
+        if (groundHit1 || groundHit2)
+        {
+            isGrounded = true;
+            if(groundHit1 && groundHit2)
+            {
+                //둘 중 더 distance가 더 짧은 ray를 선택
+                chosenHit = groundHit1.distance <= groundHit2.distance ? groundHit1 : groundHit2;
+            }
+            else
+            {
+                chosenHit = groundHit1 ? groundHit1 : groundHit2;
+            }
+
+        }
+        else
+        {
+            isGrounded = false;
+        }
+
         // Vector2.Perpendicular(Vector2 A) : A의 값에서 반시계 방향으로 90도 회전한 벡터값을 반환
 
         if(isGrounded)
@@ -315,8 +353,8 @@ public partial class PlayerController : MonoBehaviour
             //if (rigid.sharedMaterial.friction != 0.6f)
             //    rigid.sharedMaterial.friction = 0.6f;
 
-            perpAngle = Vector2.Perpendicular(groundHit.normal).normalized; // 
-            groundAngle = Vector2.Angle(groundHit.normal, Vector2.up);
+            perpAngle = Vector2.Perpendicular(chosenHit.normal).normalized; // 
+            groundAngle = Vector2.Angle(chosenHit.normal, Vector2.up);
 
             if(groundAngle != 0)
                 isSlope = true;
@@ -326,7 +364,6 @@ public partial class PlayerController : MonoBehaviour
 
             if(groundAngle > maxAngle)
             {
-                Debug.Log(groundAngle);
                 moveInput = 0;
             }
             else
@@ -336,10 +373,10 @@ public partial class PlayerController : MonoBehaviour
 
 
             //법선벡터, 지면에서 수직
-            Debug.DrawLine(groundHit.point, groundHit.point + groundHit.normal, Color.blue);
+            Debug.DrawLine(chosenHit.point, chosenHit.point + chosenHit.normal, Color.blue);
 
             // 법선벡터의 수직인 벡터, 경사면
-            Debug.DrawLine(groundHit.point, groundHit.point + perpAngle, Color.red);
+            Debug.DrawLine(chosenHit.point, chosenHit.point + perpAngle, Color.red);
 
         }
     }
@@ -476,14 +513,18 @@ public partial class PlayerController : MonoBehaviour
     public void FlipPlayer(float _moveDirection)
     {
         playerView.FlipRender(_moveDirection);
-        AdjustWallCheckPoint();
         AdjustColliderOffset();
+        AdjustCheckPoint();
     }
 
-    private void AdjustWallCheckPoint()
+    private void AdjustCheckPoint()
     {
+        _groundCheckPoint1.localPosition = new Vector2(Mathf.Abs(_groundCheckPoint1.localPosition.x) * -isPlayerRight, _groundCheckPoint1.localPosition.y);
+        _groundCheckPoint2.localPosition = new Vector2(Mathf.Abs(_groundCheckPoint2.localPosition.x) * isPlayerRight, _groundCheckPoint2.localPosition.y);
+
         _wallCheckPoint.localPosition = new Vector2(Mathf.Abs(_wallCheckPoint.localPosition.x) * isPlayerRight, _wallCheckPoint.localPosition.y);
     }
+
 
     private void AdjustColliderOffset()
     {
