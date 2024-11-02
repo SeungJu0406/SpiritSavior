@@ -62,8 +62,15 @@ public abstract class Trap : MonoBehaviour
     /// </summary>
     public void ActiveFromGame()
     {
-        if (SceneChanger.Instance == null) return;
-        SceneChanger.Instance.SetKeepingTrap(transform.position, true);
+        if (SceneChanger.Instance != null)
+        {
+            SceneChanger.Instance.SetKeepingTrap(transform.position, true);
+        }
+        else if(TestSceneChanger.Instance != null)
+        {
+            TestSceneChanger.Instance.SetKeepingTrap(transform.position, true);
+        }
+        
     }
 
     /// <summary>
@@ -71,8 +78,14 @@ public abstract class Trap : MonoBehaviour
     /// </summary>
     public void UnActiveFromGame()
     {
-        if (SceneChanger.Instance == null) return;
-        SceneChanger.Instance.SetKeepingTrap(transform.position, false);
+        if (SceneChanger.Instance != null)
+        {
+            SceneChanger.Instance.SetKeepingTrap(transform.position, false);
+        }
+        else if (TestSceneChanger.Instance != null)
+        {
+            TestSceneChanger.Instance.SetKeepingTrap(transform.position, false);
+        }
     }
     protected virtual void OnCollisionEnter2D(Collision2D collision) { }
     protected virtual void OnTriggerEnter2D(Collider2D collision) { }
