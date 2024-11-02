@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ButtonController : MonoBehaviour
 {
     [SerializeField] public TextMeshProUGUI _buttonText;
-    [SerializeField] public SceneField PointScene;
+    [SerializeField] public SceneField[] SceneToLoad;
     [SerializeField] SceneLoadTrigger _loadTrigger;
 
     private Transform playerPos;
@@ -20,15 +20,14 @@ public class ButtonController : MonoBehaviour
     {
         StartCoroutine(WarpRoutine());       
     }
-
-    WaitForSeconds SceneTriggerDeleteDelay = new WaitForSeconds(0.1f);
+   
     IEnumerator WarpRoutine()
     {
         SceneLoadTrigger instance = Instantiate(_loadTrigger, destinationPos, Quaternion.identity);
-        instance.AddSceneToLoad(PointScene);
+        instance.AddSceneToLoad(SceneToLoad);
         yield return null;
-        playerPos.transform.position = destinationPos;
-        yield return SceneTriggerDeleteDelay;
-        Destroy(instance.gameObject);
+        playerPos.transform.position = destinationPos;  
+        instance.Delete();
+
     }
 }

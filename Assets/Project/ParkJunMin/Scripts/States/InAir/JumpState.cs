@@ -18,7 +18,7 @@ public class JumpState : PlayerState
         player.playerModel.JumpPlayerEvent();
         _hasJumped = true;
 
-        player.jumpChargingTime = 0f;
+        //player.jumpChargingTime = 0f;
 
         //player.maxFlightTime = 0.2f;
 
@@ -123,10 +123,11 @@ public class JumpState : PlayerState
     {
         _slopeDetectionDelayTimer = 0.2f;
         _velocityDirection = Vector2.zero;
-        player.jumpChargingTime = 0;
+        //player.jumpChargingTime = 0;
         //player.rigid.sharedMaterial.friction = 0.6f;
     }
 
+    /* 기존 점프
     private void JumpVer1()
     {
         if (Input.GetKey(KeyCode.C) && _hasJumped) // 스페이스바를 누르는 동안 점프력 증가
@@ -210,10 +211,11 @@ public class JumpState : PlayerState
             //player.jumpMaintainTime = 0.2f;
         }
     }
+    */
 
     private void JumpVer2()
     {
-        Debug.Log("b");
+        //Debug.Log("b");
         if (player.coyoteTimeCounter > 0f && player.jumpBufferCounter > 0f)//Input.GetKey(KeyCode.C)) 
             // //player.coyoteTimeCounter > 0f && 
         {

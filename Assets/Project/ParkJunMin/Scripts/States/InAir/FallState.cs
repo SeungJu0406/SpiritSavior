@@ -33,12 +33,32 @@ public class FallState : PlayerState
         {
             player.ChangeState(PlayerController.State.DoubleJump);
         }
+        
+        //if(player.isSlope && player.rigid.velocity.y > 0.01f) // 여기 이상함 아래랑 엮어서 좀 고쳐야함
+        //{
+        //    player.ChangeState(PlayerController.State.Land);
+        //}
 
-        if (player.isGrounded) //player.coyoteTimeCounter > 0) //
+        if(player.isGrounded)
         {
-            player.isDoubleJumpUsed = false;
-            player.ChangeState(PlayerController.State.Land);
+            if (player.isSlope)
+            {
+                if (player.groundAngle < player.maxAngle)
+                {
+                    player.ChangeState(PlayerController.State.Land);
+                }
+            }
+            else
+            {
+                player.ChangeState(PlayerController.State.Land);
+            }
         }
+
+
+        //if (player.isGrounded)// && player.rigid.velocity.y < -0.01f) //player.coyoteTimeCounter > 0) //
+        //{
+        //    player.ChangeState(PlayerController.State.Land);
+        //}
     }
 
     public override void Exit()
