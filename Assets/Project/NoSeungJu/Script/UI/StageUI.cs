@@ -16,7 +16,7 @@ public class StageUI : BaseUI
      
      }
 
-    private void UpdateStage(int stage,bool isClear)
+    private void UpdateStage(int stage)
     {
         sb.Clear();
         sb.Append($"{stage}StageUnClear");
@@ -25,6 +25,7 @@ public class StageUI : BaseUI
         sb.Append($"{stage}StageClear");
         GameObject clearIcon = GetUI(sb.ToString());
 
+        bool isClear = Manager.Game.GetIsClearStageDIc(stage);
         if (isClear)
         {
             unClearIcon.SetActive(false);

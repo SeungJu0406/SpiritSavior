@@ -12,7 +12,7 @@ public partial class GameManager : MonoBehaviour
     public Vector2 RespawnPoint;
 
     public Dictionary<int, bool> IsClearStageDIc = new Dictionary<int, bool>();
-    public event UnityAction<int,bool> OnChangeIsClearStage;
+    public event UnityAction<int> OnChangeIsClearStage;
     private void Awake()
     {
         if (Instance == null) Instance = this;
@@ -44,22 +44,22 @@ public partial class GameManager : MonoBehaviour
     }
 
     
-    public bool GetIsClearStageDIcI(int key)
+    public bool GetIsClearStageDIc(int key)
     {
         return IsClearStageDIc[key];
     }
 
     public void SetIsClearStageDIc(int key, bool value)
     {
-        if (IsClearStageDIc.ContainsKey(key)) 
+        if (IsClearStageDIc.ContainsKey(key))
         {
             IsClearStageDIc[key] = value;
-            OnChangeIsClearStage(key, value);
+            OnChangeIsClearStage(key);
         }
         else
         {
             IsClearStageDIc.Add(key, value);
-            OnChangeIsClearStage(key, value);
+            OnChangeIsClearStage(key);
         }
     }
 }
