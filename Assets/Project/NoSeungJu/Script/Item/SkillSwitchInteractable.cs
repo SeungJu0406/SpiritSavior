@@ -9,22 +9,16 @@ public class SkillSwitchInteractable : SwichInteractable
 
     public override void Interact()
     {
-        ShowTooltipUi();
-    }
-
-    void ShowTooltipUi()
-    {
-        transform.SetParent(null);
-
-        SkillTooltipUI tooltipUI = Instantiate(_tooltipUI);
-        tooltipUI.GetUI<Button>("CancelButton").onClick.AddListener(ActivePlayerSkill);
+        ActivePlayerSkill();
     }
 
     void ActivePlayerSkill()
     {
+        transform.SetParent(null);
+
+        Instantiate(_tooltipUI);
         Manager.Game.Player.UnlockAbility(_ability);
         Manager.Game.Player.playerModel.UnlockAbilityEvent(_ability);
-
         Destroy(gameObject);
     }
 }
