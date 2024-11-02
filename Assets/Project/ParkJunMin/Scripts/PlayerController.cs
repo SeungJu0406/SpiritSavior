@@ -6,117 +6,88 @@ using UnityEngine;
 public partial class PlayerController : MonoBehaviour
 {
     public enum State {Idle, Run, Dash, Jump, DoubleJump, Fall, Land, WallGrab, WallSliding, WallJump, Damaged, WakeUp, Dead, Spawn, Size}
-    public PlayerData playerData;
+    //public PlayerData playerData;
     [SerializeField] State _curState;
-    //public State prevState;
-    //private BaseState[] _states = new BaseState[(int)State.Size];
     private PlayerState[] _states = new PlayerState[(int)State.Size];
 
-    public PlayerModel.Ability unlockedAbilities = PlayerModel.Ability.None;
+    [HideInInspector] public PlayerModel.Ability unlockedAbilities = PlayerModel.Ability.None;
 
-    public PlayerModel playerModel = new PlayerModel();
-    public PlayerView playerView;
+    [HideInInspector] public PlayerModel playerModel = new PlayerModel();
+    [HideInInspector] public PlayerView playerView;
 
     private Collider2D _playerCollider;
     private int groundLayerMask;
     private int wallLayerMask; 
 
-    
-
     //public SpriteRenderer renderer;
     [Header("Player Setting")]
     public float moveSpeed;        // 이동속도
-    //public float maxMoveSpeed;     // 이동속도의 최대값
     public float dashForce;         // 대시 힘
-    [HideInInspector] public float lowJumpForce;     // 낮은점프 힘 // 폐기
+    public float dashCoolTime; // 대시 사용 후 쿨타임
     public float jumpForce;    // 높은점프 힘
-    //public float maxJumpTime;     // 최대점프 시간
-
-    //폐기
-    [HideInInspector] public float slopeJumpBoost; // 경사면에서의 추가 점프 오프셋 값 // 폐기
-    [HideInInspector] public float jumpCirticalPoint; // 낮은점프, 높은점프를 가르는 시점 // 폐기
-
-
     public float doubleJumpForce; // 더블 점프시 얼마나 위로 올라갈지 결정
     public float knockbackForce; // 피격시 얼마나 뒤로 밀려날 지 결정
-
-    //기본 이동속도에 따라 변화되는 변수 변경x
-    [HideInInspector] public float moveSpeedInAir;    // 공중에서 플레이어의 속도
-    [HideInInspector] public float maxMoveSpeedInAir; // 공중에서 플레이어의 속도의 최대값
-
-    [Header("SpeedInAir = SpeedInGround * x")]
+    public float wallJumpPower; // 벽점프 힘
+    public float maxAngle; // 이동 가능한 최대 각도
     public float speedAdjustmentOffsetInAir; // 공중에서의 속도 = 땅에서의 속도 * 해당 변수
-
-    [Header("Checking")]
-    [HideInInspector] public Rigidbody2D rigid;
-    public float hp;
     
-    //public bool hasJumped = false;          //
-    [HideInInspector] public float jumpChargingTime = 0f;     // 스페이스바 누른시간 체크
+    // "SpeedInAir = SpeedInGround * x")
+    [HideInInspector] public float moveSpeedInAir;    // 공중에서 플레이어의 속도
+    //기본 이동속도에 따라 변화되는 변수 변경x
+
+    [Space(30)]
+    [Header("Checking")]
     public bool isDoubleJumpUsed; // 더블점프 사용 유무를 나타내는 변수
     public bool isDashUsed; // 대시를 사용했는지 유무를 나타내는 변수
-    public float dashCoolTime; // 대시 사용 후 쿨타임
-    [HideInInspector] public float dashDeltaTime;
-    public bool isStuck; // 벽에 끼었는지 확인
-    public bool isDead = false; // 죽었는지 확인
     
+    public bool isDead = false; // 죽었는지 확인
+    [HideInInspector] public Rigidbody2D rigid;
+    [HideInInspector] public float hp;
+    [HideInInspector] public float dashDeltaTime;
+    
+    [Space(30)]
     [Header("Ground & Slope & Wall Checking")]
     [SerializeField] Transform _groundCheckPoint;
     public Transform _wallCheckPoint;
     private float _wallCheckDistance = 0.01f;
-    private float _wallCheckHeight = 2.25f; // 너무 길면 경사도 벽으로 인식함
-
+    [SerializeField] private float _wallCheckHeight; //2.25f; // 너무 길면 경사도 벽으로 인식함
     [SerializeField] private float _groundCheckDistance;
-    [SerializeField] private float _slopeCheckDistance;
     public float groundAngle;
-    public Vector2 perpAngle;
-    public bool isSlope;
-    public float maxAngle; // 이동 가능한 최대 각도
-
-    //[HideInInspector] public float maxFlightTime; // 점프 후 바로 fall 상태로 들어가지 않기 위한 변수
-
     public int isPlayerRight = 1;
     public bool isGrounded;        // 캐릭터가 땅에 붙어있는지 체크
-
-    public RaycastHit2D groundHit;
-    public RaycastHit2D slopeHit;
-    public RaycastHit2D wallHit;
-
-
+    [HideInInspector] public Vector2 perpAngle;
+    [HideInInspector] public bool isSlope;
+    [HideInInspector] public RaycastHit2D groundHit;
+    [HideInInspector] public RaycastHit2D wallHit;
     public bool isWall;                  // 캐릭터가 벽에 붙어있는지 체크
     public bool isWallJumpUsed;         // 벽에서 벽점프를 사용 했는지 체크
-    //public float wallSlidingSpeed = 0.5f; // 중력계수 조정으로 할지 결정해야함
-    public float wallJumpPower;
-
     private Vector2 _wallCheckBoxSize;
-    Coroutine _wallCheckRoutine;
-    //Coroutine _groundCheckRoutine;
+    Coroutine _wallCheckDisplayRoutine;
 
     [Header("Input")]
-    public float moveInput;
-
+    [HideInInspector] public float moveInput;
     // 코요테 타임
-    public float coyoteTime = 0.2f;
+    [HideInInspector] public float coyoteTime = 0.2f;
     [HideInInspector] public float coyoteTimeCounter;
-
     //점프 버퍼
-    public float jumpBufferTime = 0.2f;
+    [HideInInspector] public float jumpBufferTime = 0.2f;
     [HideInInspector] public float jumpBufferCounter;
-    //[HideInInspector]
-    //[HideInInspector]
 
-    //임시
-    public void PrintPlayerData()
-    {
-        Debug.Log("이동 속도" + playerData.moveSpeed);
-        Debug.Log("대시 속도" + playerData.dashForce);
-        Debug.Log("점프 속도" + playerData.jumpForce);
-        Debug.Log("더블 점프 속도" + playerData.doubleJumpForce);
-        Debug.Log("넉백 힘" + knockbackForce);
-        Debug.Log("공중에서 속도 = 땅에서의 속도 * 해당 변수 " + playerData.speedAdjustmentOffsetInAir);
-        Debug.Log("이동 가능한 최대 각도" + playerData.maxAngle);
-        Debug.Log("벽 점프 힘" + playerData.wallJumpPower);
-    }
+    /*
+    //폐기
+    [HideInInspector] public float lowJumpForce;     // 낮은점프 힘
+    [HideInInspector] public float maxMoveSpeed;     // 이동속도의 최대값
+    [HideInInspector] public float maxJumpTime;     // 최대점프 시간
+    [HideInInspector] public float slopeJumpBoost; // 경사면에서의 추가 점프 오프셋 값 // 폐기
+    [HideInInspector] public float jumpCirticalPoint; // 낮은점프, 높은점프를 가르는 시점 // 폐기
+    [HideInInspector] public float maxMoveSpeedInAir; // 공중에서 플레이어의 속도의 최대값
+    [HideInInspector] public float jumpChargingTime = 0f;     // 스페이스바 누른시간 체크
+    [HideInInspector] public float maxFlightTime; // 점프 후 바로 fall 상태로 들어가지 않기 위한 변수
+    [HideInInspector] public RaycastHit2D slopeHit;
+    Coroutine _groundCheckRoutine;
+    [SerializeField] private float _slopeCheckDistance;
+    public bool isStuck; // 벽에 끼었는지 확인
+    */
     private void Awake()
     {
         if(playerModel != null)
@@ -161,8 +132,8 @@ public partial class PlayerController : MonoBehaviour
         //if (_groundCheckRoutine == null)
         //    _groundCheckRoutine = StartCoroutine(CheckGroundRayRoutine());
 
-        if (_wallCheckRoutine == null) // 작성중
-            _wallCheckRoutine = StartCoroutine(CheckWallDisplayRoutine());
+        if (_wallCheckDisplayRoutine == null) // 작성중
+            _wallCheckDisplayRoutine = StartCoroutine(CheckWallDisplayRoutine());
 
         _wallCheckBoxSize = new Vector2(_wallCheckDistance, _wallCheckHeight);
 
@@ -196,8 +167,6 @@ public partial class PlayerController : MonoBehaviour
         ControlCoyoteTime();
         ControlJumpBuffer();
         //CheckGroundRaycast();
-
-
 
         //// 미끄러짐 방지1
         //if (player.moveInput == 0)
@@ -443,10 +412,13 @@ public partial class PlayerController : MonoBehaviour
         // 벽 끼임 방지 현상을 위해
         // 마찰력을 0으로 두는곳과 원래대로 돌리는곳을 정확히 정할 필요가 있음
         //rigid.sharedMaterial.friction = 0f;
-        if (!isStuck)
-        {
-            moveInput = Input.GetAxisRaw("Horizontal");
-        }
+
+        moveInput = Input.GetAxisRaw("Horizontal");
+
+        //if (!isStuck)
+        //{
+            
+        //}
         
 
         rigid.velocity = new Vector2(moveInput * moveSpeedInAir, rigid.velocity.y);
@@ -549,8 +521,6 @@ public partial class PlayerController : MonoBehaviour
             }
         }
     }
-
-
     private void HandlePlayerDied()
     {
         //ChangeState(State.Dead);
@@ -582,8 +552,8 @@ public partial class PlayerController : MonoBehaviour
         //if (_groundCheckRoutine != null)
         //    StopCoroutine(_groundCheckRoutine);
 
-        if(_wallCheckRoutine != null)
-            StopCoroutine(_wallCheckRoutine);
+        if(_wallCheckDisplayRoutine != null)
+            StopCoroutine(_wallCheckDisplayRoutine);
     }
 
     private void SubscribeEvents()
