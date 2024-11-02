@@ -501,7 +501,7 @@ public partial class PlayerController : MonoBehaviour
         }
 
         unlockedAbilities |= ability;
-        //playerModel.UnlockAbilityEvent(ability);
+        playerModel.UnlockAbilityEvent(ability);
         Debug.Log($"{ability} ÇØ±Ý");
     }
 
