@@ -173,38 +173,70 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7220145990415169446, guid: 5f4e363a81d20974c82d8a2c987f6f19, type: 3}
+      propertyPath: m_Size.x
+      value: 11.002415
+      objectReference: {fileID: 0}
+    - target: {fileID: 7220145990415169446, guid: 5f4e363a81d20974c82d8a2c987f6f19, type: 3}
+      propertyPath: m_Size.y
+      value: 10.178253
+      objectReference: {fileID: 0}
+    - target: {fileID: 7220145990415169446, guid: 5f4e363a81d20974c82d8a2c987f6f19, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.87177086
+      objectReference: {fileID: 0}
+    - target: {fileID: 7220145990415169446, guid: 5f4e363a81d20974c82d8a2c987f6f19, type: 3}
+      propertyPath: m_Offset.y
+      value: 2.8250237
+      objectReference: {fileID: 0}
     - target: {fileID: 7220145990415169447, guid: 5f4e363a81d20974c82d8a2c987f6f19, type: 3}
       propertyPath: _sceneToLoad.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7220145990415169447, guid: 5f4e363a81d20974c82d8a2c987f6f19, type: 3}
       propertyPath: _sceneToUnload.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7220145990415169447, guid: 5f4e363a81d20974c82d8a2c987f6f19, type: 3}
+      propertyPath: _DontUnLoadScene._sceneName
+      value: SceneChangeSample
+      objectReference: {fileID: 0}
+    - target: {fileID: 7220145990415169447, guid: 5f4e363a81d20974c82d8a2c987f6f19, type: 3}
+      propertyPath: _DontUnLoadScene._sceneAsset
+      value: 
+      objectReference: {fileID: 102900000, guid: f7c0956b22e93cc489e96f89fd474090, type: 3}
+    - target: {fileID: 7220145990415169447, guid: 5f4e363a81d20974c82d8a2c987f6f19, type: 3}
       propertyPath: _sceneToLoad.Array.data[0]._sceneName
-      value: TestStage2
+      value: TestStage3
       objectReference: {fileID: 0}
     - target: {fileID: 7220145990415169447, guid: 5f4e363a81d20974c82d8a2c987f6f19, type: 3}
       propertyPath: _sceneToLoad.Array.data[1]._sceneName
       value: TestStage4
       objectReference: {fileID: 0}
     - target: {fileID: 7220145990415169447, guid: 5f4e363a81d20974c82d8a2c987f6f19, type: 3}
+      propertyPath: _sceneToLoad.Array.data[2]._sceneName
+      value: TestStage2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7220145990415169447, guid: 5f4e363a81d20974c82d8a2c987f6f19, type: 3}
       propertyPath: _sceneToLoad.Array.data[0]._sceneAsset
       value: 
-      objectReference: {fileID: 102900000, guid: 6f13f53810375eb4d98c6bb1b642fc32, type: 3}
+      objectReference: {fileID: 102900000, guid: 0e20529e665b9d040baf53fafed898a3, type: 3}
     - target: {fileID: 7220145990415169447, guid: 5f4e363a81d20974c82d8a2c987f6f19, type: 3}
       propertyPath: _sceneToLoad.Array.data[1]._sceneAsset
       value: 
       objectReference: {fileID: 102900000, guid: b1864daf98878d3438276770f5048e5f, type: 3}
     - target: {fileID: 7220145990415169447, guid: 5f4e363a81d20974c82d8a2c987f6f19, type: 3}
+      propertyPath: _sceneToLoad.Array.data[2]._sceneAsset
+      value: 
+      objectReference: {fileID: 102900000, guid: 6f13f53810375eb4d98c6bb1b642fc32, type: 3}
+    - target: {fileID: 7220145990415169447, guid: 5f4e363a81d20974c82d8a2c987f6f19, type: 3}
       propertyPath: _sceneToUnload.Array.data[0]._sceneName
-      value: TestStage1
+      value: TestStage2
       objectReference: {fileID: 0}
     - target: {fileID: 7220145990415169447, guid: 5f4e363a81d20974c82d8a2c987f6f19, type: 3}
       propertyPath: _sceneToUnload.Array.data[0]._sceneAsset
       value: 
-      objectReference: {fileID: 102900000, guid: afc85be5583c9a84483fd14310fc4395, type: 3}
+      objectReference: {fileID: 102900000, guid: 6f13f53810375eb4d98c6bb1b642fc32, type: 3}
     - target: {fileID: 7220145990415169448, guid: 5f4e363a81d20974c82d8a2c987f6f19, type: 3}
       propertyPath: m_Name
       value: SceneTrigger (2)
@@ -232,6 +264,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8744870913888346915, guid: c843c960512b61f42b248990bf1705f8, type: 3}
       propertyPath: _pointScene._sceneAsset
+      value: 
+      objectReference: {fileID: 102900000, guid: 0e20529e665b9d040baf53fafed898a3, type: 3}
+    - target: {fileID: 8744870913888346915, guid: c843c960512b61f42b248990bf1705f8, type: 3}
+      propertyPath: _sceneToLoad.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8744870913888346915, guid: c843c960512b61f42b248990bf1705f8, type: 3}
+      propertyPath: _sceneToLoad.Array.data[0]._sceneName
+      value: TestStage3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8744870913888346915, guid: c843c960512b61f42b248990bf1705f8, type: 3}
+      propertyPath: _sceneToLoad.Array.data[1]._sceneName
+      value: TestStage3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8744870913888346915, guid: c843c960512b61f42b248990bf1705f8, type: 3}
+      propertyPath: _sceneToLoad.Array.data[0]._sceneAsset
+      value: 
+      objectReference: {fileID: 102900000, guid: 0e20529e665b9d040baf53fafed898a3, type: 3}
+    - target: {fileID: 8744870913888346915, guid: c843c960512b61f42b248990bf1705f8, type: 3}
+      propertyPath: _sceneToLoad.Array.data[1]._sceneAsset
       value: 
       objectReference: {fileID: 102900000, guid: 0e20529e665b9d040baf53fafed898a3, type: 3}
     - target: {fileID: 8744870913888346940, guid: c843c960512b61f42b248990bf1705f8, type: 3}
