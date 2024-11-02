@@ -28,6 +28,5 @@ public class ButtonController : MonoBehaviour
         yield return null;
         playerPos.transform.position = destinationPos;  
         instance.Delete();
-
     }
 }
