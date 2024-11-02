@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class NaturePlatform : MonoBehaviour
 {
@@ -95,18 +96,20 @@ public class NaturePlatform : MonoBehaviour
 
     void InitObjectList()
     {
-        NaturePlatformStruct parentPlatform = new NaturePlatformStruct();
-        parentPlatform.Platform = gameObject;
-        parentPlatform.Layer = gameObject.layer;
-        objectList.Add(parentPlatform);
+        objectList.Add(CreateNaturePlatformStruct(gameObject, gameObject.layer));
         Transform[] childObjects = GetComponentsInChildren<Transform>();
         foreach (Transform obj in childObjects)
         {
-            NaturePlatformStruct childPlatform = new NaturePlatformStruct();
-            childPlatform.Platform = obj.gameObject;
-            childPlatform.Layer = obj.gameObject.layer;
-            objectList.Add(childPlatform);
+            objectList.Add( CreateNaturePlatformStruct(obj.gameObject, obj.gameObject.layer));
         }
+    }
+
+    NaturePlatformStruct CreateNaturePlatformStruct(GameObject platform, int layer)
+    {
+        NaturePlatformStruct newPlatform = new NaturePlatformStruct();
+        newPlatform.Platform = platform;
+        newPlatform.Layer = layer;
+        return newPlatform;
     }
 
     void SetDefaultLayer(NaturePlatformStruct naturePlatform)
