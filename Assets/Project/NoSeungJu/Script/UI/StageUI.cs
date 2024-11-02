@@ -7,8 +7,6 @@ using UnityEngine;
 public class StageUI : BaseUI
 {
     int _curStage;
-
-    StringBuilder sb = new StringBuilder();
     private void Start()
     {
         SubscribesEvents();
@@ -18,13 +16,8 @@ public class StageUI : BaseUI
 
     private void UpdateStage(int stage)
     {
-        sb.Clear();
-        sb.Append($"{stage}StageUnClear");
-        GameObject unClearIcon = GetUI(sb.ToString());
-        sb.Clear();
-        sb.Append($"{stage}StageClear");
-        GameObject clearIcon = GetUI(sb.ToString());
-
+        GameObject unClearIcon = GetUI($"{stage}StageUnClear");
+        GameObject clearIcon = GetUI($"{stage}StageClear");
         bool isClear = Manager.Game.GetIsClearStageDIc(stage);
         if (isClear)
         {
