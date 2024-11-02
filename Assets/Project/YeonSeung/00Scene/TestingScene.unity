@@ -251,7 +251,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: -5177388603050735206, guid: cc35afd292fc349128b36a291fb3a165, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -270,8 +270,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 123765593}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.25, y: 9.47, z: 0}
-  m_LocalScale: {x: 3, y: 1, z: 1}
+  m_LocalPosition: {x: 10.8, y: 6.7, z: 0}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -292,9 +292,9 @@ PolygonCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
+    border: {x: 0.25, y: 0.25, z: 0.25, w: 0.25}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.984375, y: 0.984375}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -893,6 +893,7 @@ GameObject:
   - component: {fileID: 534477044}
   - component: {fileID: 534477043}
   - component: {fileID: 534477042}
+  - component: {fileID: 534477045}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -959,13 +960,48 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 534477041}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: -15.81, y: -0.25, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &534477045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 534477041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68a0c5dbb01b08a4699232624efe8360, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectSettings:
+  - title: TestingObject
+    theGameObject: {fileID: 123765593}
+    size: {x: 5, y: 5}
+    offset: {x: 0, y: 0}
+    multiplySizeByTransformScale: 1
+    DrawColor: {r: 1, g: 1, b: 1, a: 1}
+    showBorders: 1
+  - title: Red Platform
+    theGameObject: {fileID: 3769458146049299860}
+    size: {x: 4, y: 1}
+    offset: {x: 0, y: 0}
+    multiplySizeByTransformScale: 1
+    DrawColor: {r: 1, g: 1, b: 1, a: 1}
+    showBorders: 1
+  - title: Blue Platform
+    theGameObject: {fileID: 5394183266005073917}
+    size: {x: 4, y: 1}
+    offset: {x: 0, y: 0}
+    multiplySizeByTransformScale: 1
+    DrawColor: {r: 1, g: 1, b: 1, a: 1}
+    showBorders: 1
+  updateRateInSeconds: 0.1
 --- !u!1 &538407697
 GameObject:
   m_ObjectHideFlags: 0
@@ -1565,9 +1601,8 @@ MonoBehaviour:
   hitSpot: {fileID: 1114000273}
   hittingPeriod: 3
   lightningDamage: 0
-  isRandom: 0
-  _hitBox: {fileID: 0}
   _lightingNature: 1
+  isRandom: 0
 --- !u!1 &974457288
 GameObject:
   m_ObjectHideFlags: 0
@@ -3281,12 +3316,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerUI: {fileID: 0}
   _curState: 0
+  unlockedAbilities: 0
   playerView: {fileID: 0}
-  renderer: {fileID: 0}
   moveSpeed: 8
   dashForce: 0
   lowJumpForce: 10
-  highJumpForce: 15
+  jumpForce: 0
   maxJumpTime: 0.2
   slopeJumpBoost: 5
   jumpCirticalPoint: 0.2
@@ -3299,20 +3334,30 @@ MonoBehaviour:
   hp: 0
   jumpChargingTime: 0
   isDoubleJumpUsed: 0
+  isDashUsed: 0
+  dashCoolTime: 0
+  dashDeltaTime: 0
+  isStuck: 0
   isDead: 0
   _groundCheckPoint: {fileID: 0}
   _wallCheckPoint: {fileID: 0}
   _groundCheckDistance: 0.3
+  _slopeCheckDistance: 0
   groundAngle: 0
   perpAngle: {x: 0, y: 0}
   isSlope: 0
   maxAngle: 60
   isPlayerRight: 1
   isGrounded: 0
+  isWall: 0
   isWallJumpUsed: 0
   wallSlidingSpeed: 0.5
   wallJumpPower: 10
   moveInput: 0
+  coyoteTime: 0.2
+  coyoteTimeCounter: 0
+  jumpBufferTime: 0.2
+  jumpBufferCounter: 0
 --- !u!4 &1096882936298469840
 Transform:
   m_ObjectHideFlags: 0
