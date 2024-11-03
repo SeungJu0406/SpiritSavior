@@ -14,6 +14,8 @@ public class RespawnPoint : MonoBehaviour
     List<SceneField> _respawnScenes = new List<SceneField>(1);
     private void Awake()
     {
+        if (_isRespawnPoint)
+            gameObject.tag = "Respawn";
         _respawnScenes.Add(_respawnScene);
     }
 

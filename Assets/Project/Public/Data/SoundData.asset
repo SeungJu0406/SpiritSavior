@@ -12,11 +12,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a4396934e179cd4f99683c7f141dc27, type: 3}
   m_Name: SoundData
   m_EditorClassIdentifier: 
-  JumpSound: {fileID: 0}
-  TagSound: {fileID: 0}
-  DashSound: {fileID: 0}
-  WallGrapSound: {fileID: 0}
-  ItemGettingSound: {fileID: 0}
-  HighlightSound: {fileID: 0}
-  ClickSound: {fileID: 0}
-  GameStartSount: {fileID: 0}
+  _bgm:
+    TitleBGM: {fileID: 0}
+    GameBGM: {fileID: 0}
+  _player:
+    RunningSound: {fileID: 0}
+    JumpSound: {fileID: 0}
+    LandingSound: {fileID: 0}
+    DoubleJumpSound: {fileID: 0}
+    WallClimbSound: {fileID: 0}
+    DashSound: {fileID: 0}
+    HitSound: {fileID: 0}
+    DeathSound: {fileID: 0}
+    SpawnSound: {fileID: 0}
+    ClipSound: {fileID: 0}
+  _mapObject:
+    MovingPlatformSound: {fileID: 0}
+    WarpBeforeOpenSound: {fileID: 0}
+    WarpOpeningSound: {fileID: 0}
+    WarpAfterOpenSound: {fileID: 0}
+    WarpInteractionSound: {fileID: 0}
+    WarpButtonClickSound: {fileID: 0}
+    AbilityItemPickUpSound: {fileID: 0}
+    SwitchInteractionSound: {fileID: 0}
+    ClearTreeInteractionSound: {fileID: 0}
+    ClearSound: {fileID: 0}
+    ObjectDropSound: {fileID: 0}
+    TrapActivationSound: {fileID: 0}
+    EnvironmentalSound: {fileID: 0}
+  _uI:
+    NotificationSound: {fileID: 0}
+    InteractionSound: {fileID: 0}
+    ButtonClickSound: {fileID: 0}
+    MenuToggleSound: {fileID: 0}
+    SliderSound: {fileID: 0}
+    SuccessSound: {fileID: 0}
