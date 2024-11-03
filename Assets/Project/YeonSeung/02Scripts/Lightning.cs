@@ -41,7 +41,7 @@ public class Lightning : MonoBehaviour
 
     void Awake()
     {
-        Debug.Log("Lightning AWAKE");
+        // Debug.Log("Lightning AWAKE");
         // Layer 추가
         _defaultLayer = gameObject.layer;
         _ignorePlayerLayer = LayerMask.NameToLayer("Ignore Player");
@@ -122,7 +122,7 @@ public class Lightning : MonoBehaviour
         if (collision.gameObject.tag == "Player" && _canAttack)
         {
 
-            Debug.Log("번개Exit");
+           // Debug.Log("번개Exit");
            // _hitBox.enabled = false;
 
         }
