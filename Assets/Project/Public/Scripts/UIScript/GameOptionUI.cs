@@ -66,6 +66,8 @@ public class GameOptionUI : BaseUI
     /// </summary>
     private void ToggleKeyOption()
     {
+        Manager.Sound.PlaySFX(Manager.Sound.Data.ClickSound);
+
         GameObject keyOption = GetUI("KeyOption");
         for (int i = 0; i < optionBoxs.Count; i++)
         {

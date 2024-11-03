@@ -89,8 +89,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36fb14c953209644587b23678c30687e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MaxStage: 4
   Player: {fileID: 0}
   RespawnPoint: {x: 0, y: 0}
+  IsClear: 0
 --- !u!1 &8693097239786891635
 GameObject:
   m_ObjectHideFlags: 0
@@ -239,6 +241,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1550994652934448577, guid: ccc20eb30e5cf164e8bc071c0237cd9e, type: 3}
+      propertyPath: Data
+      value: 
+      objectReference: {fileID: 11400000, guid: f66e6a3249eb2cc44ab8cb9cb2509759, type: 2}
     - target: {fileID: 1550994652934448578, guid: ccc20eb30e5cf164e8bc071c0237cd9e, type: 3}
       propertyPath: m_Name
       value: SoundManager
