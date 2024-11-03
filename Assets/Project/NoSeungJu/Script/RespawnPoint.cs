@@ -6,8 +6,16 @@ public class RespawnPoint : MonoBehaviour
 {
     [Header("리스폰 포인트 On/Off")]
     [SerializeField] bool _isRespawnPoint;
-    [SerializeField] SceneField[] _respawnScenes;
+    [SerializeField] SceneField _respawnScene;
+    [Space(20)]
     [SerializeField] SceneLoadTrigger _loadTrigger;
+
+
+    List<SceneField> _respawnScenes = new List<SceneField>(1);
+    private void Awake()
+    {
+        _respawnScenes.Add(_respawnScene);
+    }
 
     private void Start()
     {
@@ -26,7 +34,7 @@ public class RespawnPoint : MonoBehaviour
     IEnumerator RespawnRoutine()
     {
         SceneLoadTrigger instance = Instantiate(_loadTrigger, Manager.Game.RespawnPoint, Quaternion.identity);
-        instance.AddSceneToLoad(_respawnScenes);
+        instance.AddSceneToLoad(_respawnScenes.ToArray());
         yield return null;
         instance.Delete();
     }
