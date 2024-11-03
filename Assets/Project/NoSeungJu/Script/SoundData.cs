@@ -8,7 +8,7 @@ public partial class SoundData : ScriptableObject
 {
     #region BGM
     [System.Serializable]
-    public struct BGM
+    public partial struct BGM
     {
         public AudioClip TitleBGM;
         public AudioClip GameBGM;
@@ -20,7 +20,7 @@ public partial class SoundData : ScriptableObject
     #endregion
     #region Player
     [System.Serializable]
-    public struct Player
+    public partial struct Player
     {
         public AudioClip RunningSound;
         public AudioClip JumpSound;
@@ -48,7 +48,7 @@ public partial class SoundData : ScriptableObject
     #endregion
     #region MapObject
     [System.Serializable]
-    public struct MapObject
+    public partial struct MapObject
     {
         public AudioClip MovingPlatformSound;
         public AudioClip WarpBeforeOpenSound;
@@ -82,7 +82,7 @@ public partial class SoundData : ScriptableObject
     #endregion
     #region UI
     [System.Serializable]
-    public struct UI
+    public partial struct UI
     {
         public AudioClip NotificationSound;
         public AudioClip InteractionSound;

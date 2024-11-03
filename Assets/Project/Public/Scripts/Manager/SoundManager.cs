@@ -24,6 +24,7 @@ public class SoundManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
         else Destroy(gameObject);
+        Debug.Log(Data.TestBGM);
     }
 
     /// <summary>
