@@ -41,7 +41,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2272592525161888488}
   serializedVersion: 8
-  lengthInSec: 1.12
+  lengthInSec: 1.1
   simulationSpeed: 1.2
   stopAction: 0
   cullingMode: 0
@@ -4865,7 +4865,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4003969789127203442}
   serializedVersion: 8
-  lengthInSec: 1
+  lengthInSec: 0.8
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -9719,6 +9719,7 @@ GameObject:
   - component: {fileID: 4322695981796623135}
   - component: {fileID: -3904593102881128332}
   - component: {fileID: 8444246692321167127}
+  - component: {fileID: 8987439670606884964}
   m_Layer: 0
   m_Name: LightningBlue
   m_TagString: Untagged
@@ -9740,7 +9741,6 @@ Transform:
   m_Children:
   - {fileID: 4003969789127203445}
   - {fileID: 2272592525161888491}
-  - {fileID: 3357855859836320953}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -14619,47 +14619,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lightning: {fileID: 4322695981796623128}
   lightningDamage: 0
-  _hitBox: {fileID: 8705403177674754638}
+  _hitBox: {fileID: 8987439670606884964}
   _lightingNature: 1
---- !u!1 &7977639229134808873
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3357855859836320953}
-  - component: {fileID: 8705403177674754638}
-  m_Layer: 0
-  m_Name: HitBox
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3357855859836320953
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7977639229134808873}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4322695981796623133}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &8705403177674754638
+--- !u!61 &8987439670606884964
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7977639229134808873}
+  m_GameObject: {fileID: 4322695981796623128}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}

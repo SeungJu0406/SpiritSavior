@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Lightning : MonoBehaviour
@@ -31,11 +29,11 @@ public class Lightning : MonoBehaviour
 
     private bool _canAttack = true;
 
-  //  private Coroutine _PeriodicStrike;
-  //
-  //  WaitForSeconds _respawnDelay;
-  //  WaitForSeconds _poolDelay;
-  //  float _poolDelayTime = 0.5f;
+    //  private Coroutine _PeriodicStrike;
+    //
+    //  WaitForSeconds _respawnDelay;
+    //  WaitForSeconds _poolDelay;
+    //  float _poolDelayTime = 0.5f;
 
 
 
@@ -47,9 +45,9 @@ public class Lightning : MonoBehaviour
         // Layer 추가
         _defaultLayer = gameObject.layer;
         _ignorePlayerLayer = LayerMask.NameToLayer("Ignore Player");
-     //   _respawnDelay = new WaitForSeconds(hittingPeriod);
-     //   _poolDelay = new WaitForSeconds(_poolDelayTime);
-     //   _hitBox = GetComponent<Collider2D>();
+        //   _respawnDelay = new WaitForSeconds(hittingPeriod);
+        //   _poolDelay = new WaitForSeconds(_poolDelayTime);
+        //   _hitBox = GetComponent<Collider2D>();
     }
     void Start()
     {
@@ -60,7 +58,8 @@ public class Lightning : MonoBehaviour
         _player = Manager.Game.Player;
         _player.playerModel.OnPlayerTagged += SetActiveCollider;
         SetActiveCollider(_player.playerModel.curNature);
-    //    _hitBox.enabled = false;
+        _hitBox.enabled = true;
+        // _hitBox.enabled = false;
     }
     private void OnEnable()
     {
@@ -68,6 +67,7 @@ public class Lightning : MonoBehaviour
         _player = Manager.Game.Player;
         _player.playerModel.OnPlayerTagged += SetActiveCollider;
         SetActiveCollider(_player.playerModel.curNature);
+        _hitBox.enabled = true;
     }
 
     private void Update()
@@ -90,30 +90,41 @@ public class Lightning : MonoBehaviour
     }
 
 
-   // private void OnTriggerEnter2D(Collider2D collision)
-   // {
-   //     if (collision.gameObject.tag == "Player")
-   //     {
-   //         if (_canAttack)
-   //         {
-   //             Debug.Log("번개소환번개");
-   //             // Lightning();
-   //             _player.playerModel.TakeDamageEvent(lightningDamage);
-   //         }
-   //     }
-   // }
-   //
+    // private void OnTriggerEnter2D(Collider2D collision)
+    // {
+    //     if (collision.gameObject.tag == "Player")
+    //     {
+    //         if (_canAttack)
+    //         {
+    //             Debug.Log("번개소환번개");
+    //             // Lightning();
+    //             _player.playerModel.TakeDamageEvent(lightningDamage);
+    //         }
+    //     }
+    // }
+    //
 
+    // _player.playerModel.curNature == _lightingNature
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player" && _canAttack)
         {
-            if (_canAttack)
-            {
-                Debug.Log("번개소환번개");
-                // Lightning();
-                _player.playerModel.TakeDamageEvent(lightningDamage);
-            }
+
+            Debug.Log("번개Enter");
+            // _hitBox.enabled = true;
+            // Lightning();
+            _player.playerModel.TakeDamageEvent(lightningDamage);
+
+        }
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player" && _canAttack)
+        {
+
+            Debug.Log("번개Exit");
+           // _hitBox.enabled = false;
+
         }
     }
 
