@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class RespawnPoint : MonoBehaviour
 {
+    [Header("리스폰 포인트 On/Off")]
+    [SerializeField] bool _isRespawnPoint;
     [SerializeField] SceneField[] _respawnScenes;
     [SerializeField] SceneLoadTrigger _loadTrigger;
 
     private void Start()
     {
-        Manager.Game.SetRespawnPoint(transform.position);
-        Manager.Game.Player.playerModel.OnPlayerSpawn += Respawn;
+        if (_isRespawnPoint)
+        {
+            Manager.Game.SetRespawnPoint(transform.position);
+            Manager.Game.Player.playerModel.OnPlayerSpawn += Respawn;
+        }
     }
 
     public void Respawn()

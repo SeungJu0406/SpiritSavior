@@ -18,13 +18,7 @@ public partial class GameManager : MonoBehaviour
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
 
-        SetPlayer(GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>());
-        GameObject respawnPoint = GameObject.FindGameObjectWithTag("Respawn");
-        if (respawnPoint != null)
-        {
-            SetRespawnPoint(respawnPoint.transform.position);
-        }
-        
+        SetPlayer(GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>());     
     }
 
     /// <summary>
