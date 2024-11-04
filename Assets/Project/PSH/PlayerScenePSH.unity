@@ -382,11 +382,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9157503080114635299, guid: 2784e3e099f601a4491f874e22c2c447, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 168.99994
+      value: -132.87
       objectReference: {fileID: 0}
     - target: {fileID: 9157503080114635299, guid: 2784e3e099f601a4491f874e22c2c447, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 293.7
+      value: 287.59
       objectReference: {fileID: 0}
     - target: {fileID: 9157503080114635299, guid: 2784e3e099f601a4491f874e22c2c447, type: 3}
       propertyPath: m_LocalPosition.z
@@ -421,6 +421,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9157503080114635324, guid: 2784e3e099f601a4491f874e22c2c447, type: 3}
+      propertyPath: _isRespawnPoint
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9157503080114635324, guid: 2784e3e099f601a4491f874e22c2c447, type: 3}
       propertyPath: _respawnScene._sceneName
       value: 4Stage
       objectReference: {fileID: 0}
@@ -431,6 +435,10 @@ PrefabInstance:
     - target: {fileID: 9157503080114635325, guid: 2784e3e099f601a4491f874e22c2c447, type: 3}
       propertyPath: m_Name
       value: 4StagePoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 9157503080114635325, guid: 2784e3e099f601a4491f874e22c2c447, type: 3}
+      propertyPath: m_TagString
+      value: Respawn
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2784e3e099f601a4491f874e22c2c447, type: 3}
@@ -1101,7 +1109,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9157503080114635324, guid: 2784e3e099f601a4491f874e22c2c447, type: 3}
       propertyPath: _respawnScene._sceneName
-      value: 2Stage
+      value: soohyun
       objectReference: {fileID: 0}
     - target: {fileID: 9157503080114635324, guid: 2784e3e099f601a4491f874e22c2c447, type: 3}
       propertyPath: _respawnScene._sceneAsset
@@ -1113,7 +1121,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9157503080114635325, guid: 2784e3e099f601a4491f874e22c2c447, type: 3}
       propertyPath: m_TagString
-      value: Respawn
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2784e3e099f601a4491f874e22c2c447, type: 3}
