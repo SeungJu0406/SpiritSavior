@@ -513,7 +513,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 210251936}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.57, y: 11.49, z: 0}
+  m_LocalPosition: {x: -11.03, y: 11.71, z: 0}
   m_LocalScale: {x: 4.2446527, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -744,6 +744,7 @@ MonoBehaviour:
   _curState: 0
   unlockedAbilities: 0
   playerView: {fileID: 0}
+  _groundLayerMask: 0
   moveSpeed: 8
   dashForce: 0
   dashCoolTime: 0
@@ -760,7 +761,7 @@ MonoBehaviour:
   rigid: {fileID: 0}
   hp: 0
   dashDeltaTime: 0
-  _bottomPivot: {fileID: 0}
+  bottomPivot: {fileID: 0}
   _groundCheckPoint1: {fileID: 0}
   _groundCheckPoint2: {fileID: 0}
   _wallCheckPoint: {fileID: 0}
@@ -1795,6 +1796,7 @@ MonoBehaviour:
   _curState: 0
   unlockedAbilities: 0
   playerView: {fileID: 0}
+  _groundLayerMask: 0
   moveSpeed: 3
   dashForce: 0
   dashCoolTime: 0
@@ -1811,7 +1813,7 @@ MonoBehaviour:
   rigid: {fileID: 0}
   hp: 0
   dashDeltaTime: 0
-  _bottomPivot: {fileID: 0}
+  bottomPivot: {fileID: 0}
   _groundCheckPoint1: {fileID: 0}
   _groundCheckPoint2: {fileID: 0}
   _wallCheckPoint: {fileID: 0}
@@ -2930,7 +2932,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2044426830535345418}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -21.99, y: 0.68, z: 0}
+  m_LocalPosition: {x: -14.63, y: 7.16, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3098,9 +3100,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!60 &2713846713764013767
 PolygonCollider2D:
@@ -3208,6 +3207,7 @@ MonoBehaviour:
   _curState: 0
   unlockedAbilities: 0
   playerView: {fileID: 0}
+  _groundLayerMask: 0
   moveSpeed: 8
   dashForce: 15
   dashCoolTime: 3
@@ -3224,7 +3224,7 @@ MonoBehaviour:
   rigid: {fileID: 0}
   hp: 0
   dashDeltaTime: 0
-  _bottomPivot: {fileID: 0}
+  bottomPivot: {fileID: 0}
   _groundCheckPoint1: {fileID: 0}
   _groundCheckPoint2: {fileID: 0}
   _wallCheckPoint: {fileID: 0}

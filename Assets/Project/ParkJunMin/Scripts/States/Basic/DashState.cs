@@ -48,6 +48,7 @@ public class DashState : PlayerState
 
     public override void Update()
     {
+        PlayAnimationInUpdate();
         //if (player.isWall)
         //{
         //    Debug.Log("대시 중 벽 감지");
