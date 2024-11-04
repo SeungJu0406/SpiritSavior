@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2272592525161888491}
   - component: {fileID: 2272592525161888490}
   - component: {fileID: 2272592525161888489}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Electricity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4835,7 +4835,7 @@ GameObject:
   - component: {fileID: 4003969789127203445}
   - component: {fileID: 4003969789127203444}
   - component: {fileID: 4003969789127203443}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LightSImpact
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9720,7 +9720,7 @@ GameObject:
   - component: {fileID: -3904593102881128332}
   - component: {fileID: 8444246692321167127}
   - component: {fileID: 8987439670606884964}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LightningBlue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
