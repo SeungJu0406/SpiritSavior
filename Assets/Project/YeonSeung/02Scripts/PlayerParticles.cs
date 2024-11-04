@@ -15,6 +15,9 @@ public class PlayerParticles : MonoBehaviour
     [SerializeField] GameObject dJumpFX;
     [Header("ÇÇ°Ý FX ")]
     [SerializeField] GameObject hitFX;
+    [Header("È¸º¹ FX ")]
+    [SerializeField] GameObject healFX;
+
     [Header("ÀÜµð ¹â´Â FX ")]
     [SerializeField] GameObject GrassFX;
 
@@ -54,6 +57,10 @@ public class PlayerParticles : MonoBehaviour
     {
         ObjectPool.SpawnObject(hitFX, transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
     }
+    public void PlayHealFX()
+    {
+        ObjectPool.SpawnObject(healFX, transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
+    }
     public void PlayGrassFX()
     {
         ObjectPool.SpawnObject(GrassFX, transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
@@ -80,5 +87,6 @@ public class PlayerParticles : MonoBehaviour
         Manager.Game.Player.playerModel.OnPlayerJumped += PlayJumpFX;
         Manager.Game.Player.playerModel.OnPlayerDoubleJumped += PlayDoubleJumpFX;
         Manager.Game.Player.playerModel.OnPlayerDamageTaken += PlayHitFX;
+        Manager.Game.Player.playerModel.OnPlayerHealth += PlayHealFX;
     }
 }
