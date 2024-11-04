@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class MovingPlatformV2 : SwichInteractable
 {
+    [Header("순찰모드(자동이동)\n비활성시: 올라타야움직임")]
+    [SerializeField] bool _isPatrol;
+    
     [Header("시작점")]
     public Transform pointA;
     [Header("도착점")]
@@ -12,7 +15,6 @@ public class MovingPlatformV2 : SwichInteractable
     [SerializeField] float moveSpeed;
     [Header("기다리는 시간")]
     [SerializeField] float delay;
-
     private Vector3 nextPosition;
 
     private bool _isMoving;
@@ -20,7 +22,7 @@ public class MovingPlatformV2 : SwichInteractable
 
     private Coroutine _delayMove;
 
-    // 패트롤 기능 만들고 그걸 사용해야됨.
+    [SerializeField] GameObject _platformFX;
 
 
 
@@ -46,41 +48,50 @@ public class MovingPlatformV2 : SwichInteractable
     void Start()
     {
         nextPosition = pointB.position;
+       // _platformFX = GetComponent<GameObject>();
     }
 
 
     void Update()
     {
-        // _isMoving이 활성화때만 움직이기
-        /*
-        if (_isMoving == true)
+        // 패트롤 비활성시 
+        if (_isPatrol == false)
         {
-            if (_delayMove == null)
+            if (_isMoving == true)
             {
+                // _isMoving이 활성화때만 움직이기
+                if (_delayMove == null)
+                {
                 
                 
-                MovePlatform();
+                    MovePlatform();
+                }
+                else if (_delayMove != null)
+                {
+                    Debug.Log("코루틴끝");
+                    StopCoroutine(_delayMove);
+                    _delayMove = null;
+                }
             }
-            else if (_delayMove != null)
+            else if (_isMoving == false)
             {
-                Debug.Log("코루틴끝");
-                StopCoroutine(_delayMove);
-                _delayMove = null;
-            }
-        }
-        else if (_isMoving == false)
-        {
             
-            RetreatPlatform();
+                RetreatPlatform();
+            }
         }
-        */
+        
         // Patrol
         // transform.position = Vector3.MoveTowards(transform.position, nextPosition, moveSpeed * Time.deltaTime);
         // if (transform.position == nextPosition)
         // {
         //     nextPosition = (nextPosition == pointA.position) ? pointB.position : pointA.position;
         // }
-        Patrol();
+
+        // 패트롤 활성시
+        if(_isPatrol)
+        {
+            Patrol();
+        }
 
     }
     IEnumerator DelayMove()
@@ -123,6 +134,8 @@ public class MovingPlatformV2 : SwichInteractable
     {
         if (collision.gameObject.tag == "Player")
         {
+
+            _platformFX.SetActive(false);
             _delayMove = StartCoroutine(DelayMove());
             // _isMoving = true;
             collision.transform.SetParent(transform);
@@ -132,6 +145,7 @@ public class MovingPlatformV2 : SwichInteractable
     {
         if (collision.gameObject.tag == "Player")
         {
+            _platformFX.SetActive(true);
             collision.gameObject.transform.parent = null;
             // 떨어지면 isMoving비활성화
             _isMoving = false;
