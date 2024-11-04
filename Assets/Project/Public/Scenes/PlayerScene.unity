@@ -944,6 +944,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5002474722431601510, guid: 0834a8c5adc41974180b770e6ef0ccf3, type: 3}
+      propertyPath: jumpForce
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002474722431601510, guid: 0834a8c5adc41974180b770e6ef0ccf3, type: 3}
+      propertyPath: moveSpeed
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002474722431601510, guid: 0834a8c5adc41974180b770e6ef0ccf3, type: 3}
+      propertyPath: doubleJumpForce
+      value: 18
+      objectReference: {fileID: 0}
     - target: {fileID: 5368200722397085772, guid: 0834a8c5adc41974180b770e6ef0ccf3, type: 3}
       propertyPath: m_Name
       value: Player_Neo

@@ -60,6 +60,11 @@ public class TitleUI : BaseUI
 
     void StartNewGame()
     {
+        if(Manager.Game != null)
+        {
+            GameManager.Instance = null;
+        }
+
         SceneChanger.Instance.InitGameScene();
     }
 
