@@ -19,7 +19,7 @@ public partial class PlayerController : MonoBehaviour
     private Collider2D _playerCollider;
     private int _groundLayerMask;
     private int _wallLayerMask;
-    [SerializeField] private int _ignorePlayerLayerMask;
+    private int _ignorePlayerLayerMask;
 
     //public SpriteRenderer renderer;
     [Header("Player Setting")]
@@ -85,7 +85,7 @@ public partial class PlayerController : MonoBehaviour
     [HideInInspector] public float coyoteTimeCounter;
     //점프 버퍼
     [HideInInspector] public float jumpBufferTime = 0.2f;
-    [HideInInspector] public float jumpBufferCounter;
+    [SerializeField] public float jumpBufferCounter;
 
     /*
     //폐기
