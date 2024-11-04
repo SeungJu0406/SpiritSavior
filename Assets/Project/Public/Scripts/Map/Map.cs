@@ -18,8 +18,6 @@ public class Map : MonoBehaviour
     public float transparencyTime = 1.0f;
     private bool _isTransparency = false;
 
-    // 자식 이동
-    [SerializeField] private GameObject _player;
     private void Awake()
     {
         if (mainCamera == null)
@@ -31,14 +29,12 @@ public class Map : MonoBehaviour
     }
     void Start()
     {
+        _playerController = Manager.Game.Player.GetComponent<PlayerController>();
         _mapImage.color = new Color(_mapImage.color.r, _mapImage.color.g, _mapImage.color.b, 0); // 투명도 0
         _faceRed.SetActive(false);
         _faceBlue.SetActive(false);
-
-        _playerController = FindObjectOfType<PlayerController>();
         ChildSettings();
 
-        
     }
     private void ChildSettings()
     {
@@ -48,9 +44,9 @@ public class Map : MonoBehaviour
         Transform cameraTransform = _mapCam.transform;
 
         // Player 자식으로 설정
-        faceRedTransform.SetParent(_player.transform);
-        faceBlueTransform.SetParent(_player.transform);
-        cameraTransform.SetParent(_player.transform);
+        faceRedTransform.SetParent(Manager.Game.Player.transform);
+        faceBlueTransform.SetParent(Manager.Game.Player.transform);
+        cameraTransform.SetParent(Manager.Game.Player.transform);
 
         // Player 위치로 설정
         faceRedTransform.localPosition = new Vector3(0.23f, 4.28f, 0);
