@@ -48,5 +48,6 @@ MonoBehaviour:
   jumpFX: {fileID: 6597771109109094848, guid: c629ab3aac1ebaa4f8c36345322ec7fe, type: 3}
   dJumpFX: {fileID: 4513346181163405318, guid: 8df6059478dbd3e478aa17a386c5a8f2, type: 3}
   hitFX: {fileID: 2136547074602107628, guid: 768b3fae1547efe44884f44b55dbb719, type: 3}
+  healFX: {fileID: 1591516255688425007, guid: 12fd776822d0a32418181ea5014e178a, type: 3}
   GrassFX: {fileID: 288565498536937811, guid: 4bf6e74fac28bce42ad206316564f1aa, type: 3}
   location: {fileID: 0}
