@@ -9,15 +9,9 @@ public class SceneLoadTrigger : MonoBehaviour
     [SerializeField] private SceneField[] _sceneToLoad;
 
     SceneField _DontUnLoadScene;
-    GameObject _player;
 
     bool _canUnload = true;
    
-    private void Awake()
-    {
-        _player = GameObject.FindGameObjectWithTag("Player");
-    }
-
     private void Start()
     {
         if (SceneChanger.Instance != null) 
@@ -32,7 +26,7 @@ public class SceneLoadTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == _player.tag)
+        if (collision.gameObject.tag == Manager.Game.Player.gameObject.tag)
         {
             LoadScene();
             UnloadScene();

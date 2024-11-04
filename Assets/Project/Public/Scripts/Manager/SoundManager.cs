@@ -11,6 +11,7 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance;
 
+    [SerializeField] public SoundData Data;
     [SerializeField] private AudioSource _bgm;
     [SerializeField] private AudioSource _sfx;
 
@@ -31,6 +32,7 @@ public class SoundManager : MonoBehaviour
     /// <param name="clip"></param>
     public void PlayBGM(AudioClip clip)
     {
+        if (clip == null) return;
         _bgm.clip = clip;
         _bgm.Play();
     }
@@ -81,6 +83,7 @@ public class SoundManager : MonoBehaviour
     /// <param name="clip"></param>
     public void PlaySFX(AudioClip clip) 
     {
+        if (clip == null) return;
         _sfx.PlayOneShot(clip);
     }
 

@@ -11,6 +11,9 @@ public partial class GameManager : MonoBehaviour
     public PlayerController Player;
     public Vector2 RespawnPoint;
 
+
+    public bool IsClear;
+    public event UnityAction OnClear;
     public Dictionary<int, bool> IsClearStageDIc = new Dictionary<int, bool>();
     public event UnityAction<int> OnChangeIsClearStage;
     private void Awake()
@@ -18,13 +21,7 @@ public partial class GameManager : MonoBehaviour
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
 
-        SetPlayer(GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>());
-        GameObject respawnPoint = GameObject.FindGameObjectWithTag("Respawn");
-        if (respawnPoint != null)
-        {
-            SetRespawnPoint(respawnPoint.transform.position);
-        }
-        
+        SetPlayer(GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>());     
     }
 
     /// <summary>
@@ -60,6 +57,19 @@ public partial class GameManager : MonoBehaviour
         {
             IsClearStageDIc.Add(key, value);
             OnChangeIsClearStage(key);
+        }
+
+        UpdateIsClear();
+    }
+
+
+
+    private void UpdateIsClear()
+    {
+        if(IsClearStageDIc.Count >= MaxStage)
+        {
+            IsClear = true;
+            OnClear?.Invoke();
         }
     }
 }

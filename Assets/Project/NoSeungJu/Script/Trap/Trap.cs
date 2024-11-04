@@ -25,7 +25,7 @@ public abstract class Trap : MonoBehaviour
             }
             if (!keeping)
             {
-                gameObject.SetActive(false);
+                Destroy(gameObject);
             }
         }
     }

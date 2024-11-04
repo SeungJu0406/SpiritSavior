@@ -51,7 +51,7 @@ public class DashState : PlayerState
         if(player.playerView.IsAnimationFinished())
         {
             Debug.Log("대시 애니메이션 종료");
-            player.rigid.gravityScale = 1;
+            //player.rigid.gravityScale = 1;
             player.ChangeState(PlayerController.State.Fall);
         }
 
@@ -59,6 +59,7 @@ public class DashState : PlayerState
 
     public override void Exit()
     {
+        player.rigid.gravityScale = 1;
     }
 
 
