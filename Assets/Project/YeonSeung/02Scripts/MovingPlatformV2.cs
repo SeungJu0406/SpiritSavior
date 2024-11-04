@@ -146,7 +146,7 @@ public class MovingPlatformV2 : SwichInteractable
         if (collision.gameObject.tag == "Player")
         {
             _platformFX.SetActive(true);
-            collision.gameObject.transform.parent = null;
+            collision.transform.SetParent(Manager.Game.RespawnPoint);
             // 떨어지면 isMoving비활성화
             _isMoving = false;
             Debug.Log($"isMoving {_isMoving}");
