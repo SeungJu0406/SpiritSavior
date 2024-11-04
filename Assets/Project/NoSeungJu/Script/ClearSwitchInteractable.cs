@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.ParticleSystem;
 
 public class ClearSwitchInteractable : SwichInteractable
 {
@@ -21,6 +20,8 @@ public class ClearSwitchInteractable : SwichInteractable
         _clearUI.SetActive(false);
         _particle.gameObject.SetActive(false);
         _boxCollider.enabled = false;
+
+        UpdateClearSwitch();
     }
 
     public override void Interact()
@@ -44,7 +45,10 @@ public class ClearSwitchInteractable : SwichInteractable
 
     void UpdateClearSwitch()
     {
-        _particle.gameObject.SetActive(true);
-        _boxCollider.enabled = true;
+        if (Manager.Game.IsClearStageDIc.Count >= Manager.Game.MaxStage)
+        {
+            _particle.gameObject.SetActive(true);
+            _boxCollider.enabled = true;
+        }
     }
 }
