@@ -1002,9 +1002,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!61 &28988335
 BoxCollider2D:
@@ -1445,9 +1442,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!61 &33744178
 BoxCollider2D:
@@ -2342,7 +2336,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2688880460085771425, guid: 951994e785a387b4fa5a28ec54b50230, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2688880460085771425, guid: 951994e785a387b4fa5a28ec54b50230, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3014,9 +3008,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &62876116
 PrefabInstance:
@@ -4013,9 +4004,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!61 &88029453
 BoxCollider2D:
@@ -4759,9 +4747,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &107728184
 PrefabInstance:
@@ -4850,9 +4835,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &111743633
 PrefabInstance:
@@ -6041,9 +6023,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!61 &129241538
 BoxCollider2D:
@@ -6712,9 +6691,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &147553448
 PrefabInstance:
@@ -7032,9 +7008,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!70 &154785525
 CapsuleCollider2D:
@@ -7173,9 +7146,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1 &166776037
 GameObject:
@@ -7478,7 +7448,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2688880460085771425, guid: 951994e785a387b4fa5a28ec54b50230, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2688880460085771425, guid: 951994e785a387b4fa5a28ec54b50230, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7923,9 +7893,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &183631486
 PrefabInstance:
@@ -8011,9 +7978,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!61 &183631490
 BoxCollider2D:
@@ -9475,9 +9439,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!61 &211294501
 BoxCollider2D:
@@ -9843,9 +9804,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1 &229963116
 GameObject:
@@ -10214,9 +10172,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &240817129
 PrefabInstance:
@@ -10309,9 +10264,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &241590433
 PrefabInstance:
@@ -10580,9 +10532,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &253251734
 PrefabInstance:
@@ -11444,9 +11393,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!61 &278773621
 BoxCollider2D:
@@ -11685,7 +11631,7 @@ Transform:
   - {fileID: 711247007}
   - {fileID: 44090979}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &284770422
 PrefabInstance:
@@ -12327,9 +12273,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &303600461
 PrefabInstance:
@@ -12773,9 +12716,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &310121376
 PrefabInstance:
@@ -13202,9 +13142,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1 &313376588
 GameObject:
@@ -13556,9 +13493,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1 &320798034
 GameObject:
@@ -13868,9 +13802,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1 &337668817
 GameObject:
@@ -14631,9 +14562,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!61 &348586172
 BoxCollider2D:
@@ -15547,9 +15475,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &382755276
 PrefabInstance:
@@ -15757,9 +15682,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &384140370
 PrefabInstance:
@@ -16045,9 +15967,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &391744955
 PrefabInstance:
@@ -16401,9 +16320,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!61 &393334310
 BoxCollider2D:
@@ -16737,9 +16653,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &406140628
 PrefabInstance:
@@ -17345,9 +17258,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &415628150
 PrefabInstance:
@@ -18339,9 +18249,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &447881911
 PrefabInstance:
@@ -18815,9 +18722,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &460394802
 PrefabInstance:
@@ -19421,9 +19325,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &465201601
 PrefabInstance:
@@ -20482,9 +20383,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &477596796
 PrefabInstance:
@@ -21160,9 +21058,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &486461481
 PrefabInstance:
@@ -23148,9 +23043,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &517224100
 PrefabInstance:
@@ -23305,9 +23197,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1 &521397093
 GameObject:
@@ -23593,9 +23482,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1 &532559645
 GameObject:
@@ -23743,9 +23629,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!61 &533925766
 BoxCollider2D:
@@ -24740,9 +24623,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &564423119
 PrefabInstance:
@@ -25439,9 +25319,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1 &570200683 stripped
 GameObject:
@@ -25486,9 +25363,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &571266915
 PrefabInstance:
@@ -25834,9 +25708,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &575256035
 PrefabInstance:
@@ -26441,6 +26312,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: WarpPoint
       objectReference: {fileID: 0}
+    - target: {fileID: 8744870913888346915, guid: c843c960512b61f42b248990bf1705f8, type: 3}
+      propertyPath: pointName
+      value: 4 Stage
+      objectReference: {fileID: 0}
+    - target: {fileID: 8744870913888346915, guid: c843c960512b61f42b248990bf1705f8, type: 3}
+      propertyPath: _sceneToLoad.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8744870913888346915, guid: c843c960512b61f42b248990bf1705f8, type: 3}
+      propertyPath: _sceneToLoad.Array.data[0]._sceneName
+      value: 4Stage
+      objectReference: {fileID: 0}
+    - target: {fileID: 8744870913888346915, guid: c843c960512b61f42b248990bf1705f8, type: 3}
+      propertyPath: _sceneToLoad.Array.data[0]._sceneAsset
+      value: 
+      objectReference: {fileID: 102900000, guid: 90a7897daca92db44acef037cc25ab64, type: 3}
     - target: {fileID: 8744870913888346940, guid: c843c960512b61f42b248990bf1705f8, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -26451,7 +26338,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8744870913888346940, guid: c843c960512b61f42b248990bf1705f8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 108.2
+      value: 106.7
       objectReference: {fileID: 0}
     - target: {fileID: 8744870913888346940, guid: c843c960512b61f42b248990bf1705f8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -26925,9 +26812,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &594080909
 PrefabInstance:
@@ -27020,9 +26904,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!61 &594080913
 BoxCollider2D:
@@ -27255,9 +27136,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!61 &601870366
 BoxCollider2D:
@@ -27442,9 +27320,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1 &613220347
 GameObject:
@@ -27631,9 +27506,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &620192711
 PrefabInstance:
@@ -27821,9 +27693,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!61 &622480370
 BoxCollider2D:
@@ -28255,9 +28124,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!61 &636605121
 BoxCollider2D:
@@ -29253,9 +29119,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1 &666120628
 GameObject:
@@ -29925,9 +29788,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &672998575
 PrefabInstance:
@@ -30013,9 +29873,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &676474234
 PrefabInstance:
@@ -30491,9 +30348,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!61 &687092645
 BoxCollider2D:
@@ -31149,9 +31003,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1 &702608701
 GameObject:
@@ -31338,9 +31189,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &705884278
 PrefabInstance:
@@ -31438,9 +31286,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &706560931
 PrefabInstance:
@@ -32433,9 +32278,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &732769386
 PrefabInstance:
@@ -33518,9 +33360,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &759920347
 PrefabInstance:
@@ -34039,9 +33878,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!61 &761836572
 BoxCollider2D:
@@ -34211,9 +34047,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &773491574
 PrefabInstance:
@@ -34315,9 +34148,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!61 &773491578
 BoxCollider2D:
@@ -34685,9 +34515,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!61 &779262394
 BoxCollider2D:
@@ -34803,9 +34630,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &783124897
 PrefabInstance:
@@ -34891,9 +34715,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1 &784478397
 GameObject:
@@ -36286,9 +36107,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &823050327
 PrefabInstance:
@@ -36374,9 +36192,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!61 &823050331
 BoxCollider2D:
@@ -36495,9 +36310,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &825755359
 PrefabInstance:
@@ -37272,9 +37084,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &836674361
 PrefabInstance:
@@ -38310,6 +38119,67 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4946826951826424, guid: 27542d9a5a5cdf64aa0f189e2481e393, type: 3}
   m_PrefabInstance: {fileID: 848008931}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &856240213
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2624853979794868475, guid: a25f2cbf5f616f94bb53cabfc407a5f1, type: 3}
+      propertyPath: m_RootOrder
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 2624853979794868475, guid: a25f2cbf5f616f94bb53cabfc407a5f1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1035.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2624853979794868475, guid: a25f2cbf5f616f94bb53cabfc407a5f1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -54
+      objectReference: {fileID: 0}
+    - target: {fileID: 2624853979794868475, guid: a25f2cbf5f616f94bb53cabfc407a5f1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.14699078
+      objectReference: {fileID: 0}
+    - target: {fileID: 2624853979794868475, guid: a25f2cbf5f616f94bb53cabfc407a5f1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2624853979794868475, guid: a25f2cbf5f616f94bb53cabfc407a5f1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2624853979794868475, guid: a25f2cbf5f616f94bb53cabfc407a5f1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2624853979794868475, guid: a25f2cbf5f616f94bb53cabfc407a5f1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2624853979794868475, guid: a25f2cbf5f616f94bb53cabfc407a5f1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2624853979794868475, guid: a25f2cbf5f616f94bb53cabfc407a5f1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2624853979794868475, guid: a25f2cbf5f616f94bb53cabfc407a5f1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2624853979794868476, guid: a25f2cbf5f616f94bb53cabfc407a5f1, type: 3}
+      propertyPath: _stage
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2624853979794868477, guid: a25f2cbf5f616f94bb53cabfc407a5f1, type: 3}
+      propertyPath: m_Name
+      value: StageClearZone (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a25f2cbf5f616f94bb53cabfc407a5f1, type: 3}
 --- !u!1001 &859360385
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39517,9 +39387,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &877711520
 PrefabInstance:
@@ -39753,9 +39620,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1 &885021907
 GameObject:
@@ -41067,9 +40931,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1 &929803281
 GameObject:
@@ -41327,9 +41188,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!61 &935659375
 BoxCollider2D:
@@ -42154,9 +42012,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &960293380
 PrefabInstance:
@@ -42674,9 +42529,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1 &970377687
 GameObject:
@@ -44014,9 +43866,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!61 &981370812
 BoxCollider2D:
@@ -44488,9 +44337,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!61 &988969454
 BoxCollider2D:
@@ -44606,9 +44452,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &989474670
 PrefabInstance:
@@ -44706,9 +44549,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &991592030
 PrefabInstance:
@@ -45589,9 +45429,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &1009248067
 PrefabInstance:
@@ -45681,9 +45518,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!61 &1009248071
 BoxCollider2D:
@@ -45873,9 +45707,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &1027733259
 PrefabInstance:
@@ -46317,9 +46148,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1 &1040960993
 GameObject:
@@ -47031,9 +46859,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &1071703581
 PrefabInstance:
@@ -48207,9 +48032,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &1102044759
 PrefabInstance:
@@ -48728,9 +48550,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &1112773223
 PrefabInstance:
@@ -48820,9 +48639,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &1113895614
 PrefabInstance:
@@ -48837,7 +48653,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2688880460085771425, guid: 951994e785a387b4fa5a28ec54b50230, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2688880460085771425, guid: 951994e785a387b4fa5a28ec54b50230, type: 3}
       propertyPath: m_LocalPosition.x
@@ -49320,9 +49136,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &1122390031
 PrefabInstance:
@@ -50396,9 +50209,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1 &1147571461
 GameObject:
@@ -50675,9 +50485,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &1151985033
 PrefabInstance:
@@ -51345,9 +51152,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &1166515823
 PrefabInstance:
@@ -51861,9 +51665,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &1178756893
 PrefabInstance:
@@ -51949,9 +51750,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &1181092377
 PrefabInstance:
@@ -52041,9 +51839,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &1182625478
 PrefabInstance:
@@ -52315,9 +52110,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!61 &1183115116
 BoxCollider2D:
@@ -52445,9 +52237,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &1190594111
 PrefabInstance:
@@ -53101,9 +52890,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!61 &1209997730
 BoxCollider2D:
@@ -53409,9 +53195,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &1215145537
 PrefabInstance:
@@ -53509,9 +53292,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1 &1220853303
 GameObject:
@@ -53655,9 +53435,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!61 &1222778944
 BoxCollider2D:
@@ -54249,9 +54026,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1 &1227116986
 GameObject:
@@ -54435,9 +54209,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1 &1230548710
 GameObject:
@@ -55242,9 +55013,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &1246183777
 PrefabInstance:
@@ -55337,9 +55105,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &1256765291
 PrefabInstance:
@@ -56832,9 +56597,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1 &1297418424
 GameObject:
@@ -58192,9 +57954,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1 &1318192363
 GameObject:
@@ -58772,9 +58531,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &1328963379
 PrefabInstance:
@@ -58946,9 +58702,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &1336820041
 PrefabInstance:
@@ -59506,9 +59259,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &1350358179
 PrefabInstance:
@@ -59594,9 +59344,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &1353638209
 PrefabInstance:
@@ -59965,9 +59712,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &1359896066
 PrefabInstance:
@@ -60800,9 +60544,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &1379182243
 PrefabInstance:
@@ -61264,9 +61005,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!61 &1389154557
 BoxCollider2D:
@@ -61365,7 +61103,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2688880460085771425, guid: 951994e785a387b4fa5a28ec54b50230, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2688880460085771425, guid: 951994e785a387b4fa5a28ec54b50230, type: 3}
       propertyPath: m_LocalPosition.x
@@ -61589,9 +61327,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!61 &1406612207
 BoxCollider2D:
@@ -62393,9 +62128,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &1434021032
 PrefabInstance:
@@ -62643,9 +62375,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1 &1437367277
 GameObject:
@@ -63905,9 +63634,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &1478674542
 PrefabInstance:
@@ -64005,9 +63731,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &1481411246
 PrefabInstance:
@@ -66438,9 +66161,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!61 &1563707404
 BoxCollider2D:
@@ -66559,9 +66279,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &1567600219
 PrefabInstance:
@@ -67381,9 +67098,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!61 &1576801396
 BoxCollider2D:
@@ -67729,9 +67443,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1 &1584757062
 GameObject:
@@ -68111,7 +67822,7 @@ Transform:
   - {fileID: 601612081}
   - {fileID: 32085732}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1589537717
 GameObject:
@@ -68845,9 +68556,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &1623767759
 PrefabInstance:
@@ -69019,9 +68727,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &1627239757
 PrefabInstance:
@@ -69119,9 +68824,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1 &1627888927
 GameObject:
@@ -70473,9 +70175,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!61 &1659073920
 BoxCollider2D:
@@ -70755,9 +70454,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &1669744622
 PrefabInstance:
@@ -70843,9 +70539,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1 &1671304260
 GameObject:
@@ -71411,9 +71104,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &1691773044
 PrefabInstance:
@@ -71511,9 +71201,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &1692516353
 PrefabInstance:
@@ -72763,9 +72450,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1 &1717700526
 GameObject:
@@ -73182,9 +72866,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!61 &1723669149
 BoxCollider2D:
@@ -73299,9 +72980,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &1724607680
 PrefabInstance:
@@ -73391,9 +73069,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &1725006513
 PrefabInstance:
@@ -74498,9 +74173,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &1746440499
 PrefabInstance:
@@ -74764,9 +74436,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!61 &1751884683
 BoxCollider2D:
@@ -75030,9 +74699,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &1762205865
 PrefabInstance:
@@ -75254,9 +74920,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1 &1769307532
 GameObject:
@@ -75594,9 +75257,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1 &1780957974
 GameObject:
@@ -76004,9 +75664,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &1790605721
 PrefabInstance:
@@ -77024,9 +76681,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &1800017404
 PrefabInstance:
@@ -77115,9 +76769,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!61 &1800017408
 BoxCollider2D:
@@ -77455,9 +77106,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &1819628560
 PrefabInstance:
@@ -78029,9 +77677,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &1831845287
 PrefabInstance:
@@ -78368,9 +78013,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &1850860278
 PrefabInstance:
@@ -78468,9 +78110,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &1851564599
 PrefabInstance:
@@ -80365,9 +80004,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &1882083177
 PrefabInstance:
@@ -80941,9 +80577,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &1886506300
 PrefabInstance:
@@ -81631,9 +81264,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &1898378966
 PrefabInstance:
@@ -83036,9 +82666,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!60 &1923104696
 PolygonCollider2D:
@@ -83493,9 +83120,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!61 &1935789398
 BoxCollider2D:
@@ -84310,9 +83934,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &1964156015
 PrefabInstance:
@@ -84865,9 +84486,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1 &1974705822
 GameObject:
@@ -85476,9 +85094,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &1985997682
 PrefabInstance:
@@ -85810,9 +85425,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &1995049906
 PrefabInstance:
@@ -87876,9 +87488,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!61 &2039541104
 BoxCollider2D:
@@ -88412,9 +88021,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &2053524549
 PrefabInstance:
@@ -88974,9 +88580,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &2072370636
 PrefabInstance:
@@ -89210,9 +88813,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &2084170018
 PrefabInstance:
@@ -89388,9 +88988,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1 &2088383191
 GameObject:
@@ -89630,9 +89227,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1 &2090658990
 GameObject:
@@ -90796,9 +90390,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!61 &2118462384
 BoxCollider2D:
@@ -90926,9 +90517,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1001 &2120791418
 PrefabInstance:
@@ -91018,9 +90606,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a5ccb8f3173c348862272d0d1e3999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPower: 0
-  yPower: 0
-  _player: {fileID: 0}
   attackPower: 1
 --- !u!1 &2124112145
 GameObject:
