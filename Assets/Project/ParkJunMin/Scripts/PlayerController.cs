@@ -486,7 +486,7 @@ public partial class PlayerController : MonoBehaviour
             }
             else
             {
-                Debug.Log("이제 closetHit 없음");
+                //Debug.Log("이제 closetHit 없음");
             }
              
 

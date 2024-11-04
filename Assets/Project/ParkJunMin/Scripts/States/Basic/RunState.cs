@@ -36,6 +36,11 @@ public class RunState : PlayerState
             player.ChangeState(PlayerController.State.Fall);
         }
 
+        if(player.groundAngle > player.maxAngle)
+        {
+            player.ChangeState(PlayerController.State.Fall);
+        }
+
 
         // Jump 상태로 전환
         else if (Input.GetKeyDown(KeyCode.C))//&& player.isGrounded) // 조건 나중에 뺄 수도 있음
