@@ -59,6 +59,15 @@ public class DashState : PlayerState
         //    }
         //}
 
+        // 대시중 wallCheckRay에 groundLayer가 감지됐을 경우
+
+        //if((player._groundLayerMask & (1 << player.wallHit.collider.gameObject.layer)) != 0)
+        //{
+
+        //}
+
+
+
         if (player.playerView.IsAnimationFinished())
         {
             Debug.Log("대시 애니메이션 종료");
