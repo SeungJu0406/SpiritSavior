@@ -1,3 +1,4 @@
+using Cinemachine.Utility;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +10,8 @@ public partial class GameManager : MonoBehaviour
 
     public int MaxStage = 4;
     public PlayerController Player;
-    public Vector2 RespawnPoint;
+    public Transform RespawnPoint;
+    public Vector2 RespawnPos;
 
 
     public bool IsClear;
@@ -21,7 +23,8 @@ public partial class GameManager : MonoBehaviour
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
 
-        SetPlayer(GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>());     
+        SetPlayer(GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>());
+        SetRespawnPoint(GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().transform);
     }
 
     /// <summary>
@@ -35,9 +38,10 @@ public partial class GameManager : MonoBehaviour
     /// <summary>
     /// 게임매니저에 최근 리스폰 지점 저장
     /// </summary>
-    public void SetRespawnPoint(Vector2 respawnPos)
+    public void SetRespawnPoint(Transform respawnPoint)
     {
-        RespawnPoint = respawnPos;
+        RespawnPoint = respawnPoint;  
+        RespawnPos = respawnPoint.position;
     }
 
     

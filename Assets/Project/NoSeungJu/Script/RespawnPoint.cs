@@ -14,16 +14,14 @@ public class RespawnPoint : MonoBehaviour
     List<SceneField> _respawnScenes = new List<SceneField>(1);
     private void Awake()
     {
-        if (_isRespawnPoint)
-            gameObject.tag = "Respawn";
         _respawnScenes.Add(_respawnScene);
     }
 
     private void Start()
     {
-        if (_isRespawnPoint)
+        if (gameObject.tag == "Respawn")
         {
-            Manager.Game.SetRespawnPoint(transform.position);
+            Manager.Game.SetRespawnPoint(transform);
             Manager.Game.Player.playerModel.OnPlayerSpawn += Respawn;
         }
     }
@@ -35,7 +33,7 @@ public class RespawnPoint : MonoBehaviour
 
     IEnumerator RespawnRoutine()
     {
-        SceneLoadTrigger instance = Instantiate(_loadTrigger, Manager.Game.RespawnPoint, Quaternion.identity);
+        SceneLoadTrigger instance = Instantiate(_loadTrigger, Manager.Game.RespawnPos, Quaternion.identity);
         instance.AddSceneToLoad(_respawnScenes.ToArray());
         yield return null;
         instance.Delete();
