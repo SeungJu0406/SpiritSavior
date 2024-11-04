@@ -12,7 +12,7 @@ public class IdleState : PlayerState
 
     public override void Enter()
     {
-        player.rigid.velocity = Vector2.zero;
+        //player.rigid.velocity = Vector2.zero;
 
 
         //player.isDoubleJumpUsed = false;
@@ -39,7 +39,7 @@ public class IdleState : PlayerState
             player.ChangeState(PlayerController.State.Jump);
         }
 
-        if (player.rigid.velocity.y < -0.1f)
+        if (player.rigid.velocity.y != 0 && !player.isGrounded) //(player.rigid.velocity.y < -0.1f)
         {
             player.ChangeState(PlayerController.State.Fall);
         }
@@ -49,6 +49,11 @@ public class IdleState : PlayerState
         //{
         //    player.ChangeState(PlayerController.State.Fall);
         //}
+
+        if (player.rigid.velocity.y != 0 && !player.isGrounded)
+        {
+            player.ChangeState(PlayerController.State.Fall);
+        }
 
         //안미끄러지는건 아니고 훨씬 덜 미끄러짐..y까지 0으로 해도 같음
         //주석 처리해도 더 많이 미끄러질 뿐 같다

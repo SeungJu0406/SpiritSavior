@@ -48,12 +48,27 @@ public class DashState : PlayerState
 
     public override void Update()
     {
-        if(player.playerView.IsAnimationFinished())
+        //if (player.isWall)
+        //{
+        //    Debug.Log("대시 중 벽 감지");
+        //    if (!player.isGrounded)
+        //    {
+        //        Vector2 curPosition = player.transform.position;
+        //        curPosition += (Vector2.up * 0.5f);
+        //        player.transform.position = new Vector2(curPosition.x, curPosition.y); //, player.transform.position.z);
+        //    }
+        //}
+
+        if (player.playerView.IsAnimationFinished())
         {
             Debug.Log("대시 애니메이션 종료");
-            //player.rigid.gravityScale = 1;
             player.ChangeState(PlayerController.State.Fall);
         }
+
+    }
+
+    public override void FixedUpdate()
+    {
 
     }
 

@@ -47,6 +47,13 @@ public class FallState : PlayerState
                 {
                     player.ChangeState(PlayerController.State.Land);
                 }
+                else
+                {
+                    if(player.rigid.velocity.y >= 0) // 다 미끄러졌으면
+                    {
+                        player.ChangeState(PlayerController.State.Land);
+                    }
+                }
             }
             else
             {
