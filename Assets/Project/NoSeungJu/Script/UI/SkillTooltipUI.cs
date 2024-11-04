@@ -11,6 +11,13 @@ public class SkillTooltipUI : BaseUI
         SubscribsEvents();
         Init();
     }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape)) 
+        {
+            HideUI();
+        }
+    }
 
     void ShowUI()
     {
@@ -20,12 +27,13 @@ public class SkillTooltipUI : BaseUI
     void HideUI()
     {
         Time.timeScale = 1f;
+        Manager.UI.IsPopUp = false;
         Destroy(gameObject);
     }
 
-
     void Init()
     {
+        Manager.UI.IsPopUp = true;
         ShowUI();
     }
 

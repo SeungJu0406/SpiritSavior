@@ -27,6 +27,8 @@ public class GameOptionUI : BaseUI
 
     private void Update()
     {
+        if (Manager.UI.IsPopUp) return;
+
         if (Input.GetKeyDown(KeyCode.Escape)) 
         {
             ToggleGameOptionUI();
