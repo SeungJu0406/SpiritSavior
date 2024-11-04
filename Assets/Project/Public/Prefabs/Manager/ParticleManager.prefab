@@ -48,4 +48,11 @@ MonoBehaviour:
   jumpFX: {fileID: 6597771109109094848, guid: c629ab3aac1ebaa4f8c36345322ec7fe, type: 3}
   dJumpFX: {fileID: 6975080102365490848, guid: de8a92e8afa21d7498c0ef82e0ac457c, type: 3}
   hitFX: {fileID: 2136547074602107628, guid: 768b3fae1547efe44884f44b55dbb719, type: 3}
+  healFX: {fileID: 1591516255688425007, guid: 12fd776822d0a32418181ea5014e178a, type: 3}
+  dashFX: {fileID: 7824106877745622087, guid: ce7eb9676449ebc429cec1f35b409a39, type: 3}
+  unlockTagFX: {fileID: 4035903591278710484, guid: ba79e35041218d54282daa9648aee201, type: 3}
+  unlockWallJumpFX: {fileID: 3384366999043453948, guid: 405ac24ff16c68f4482577b76bffa8b4, type: 3}
+  unlockDoubleJumpFX: {fileID: 8680598818964007281, guid: bc646ac382b2f7348beb251127d13cea, type: 3}
+  unlockDashFX: {fileID: 3384366999043453948, guid: 46f645561f0bb5644a7b282152b2000c, type: 3}
+  spawnFX: {fileID: 8176850701479282271, guid: 0873e2406f84d76479b42e8e6e88e5ba, type: 3}
   GrassFX: {fileID: 288565498536937811, guid: 4bf6e74fac28bce42ad206316564f1aa, type: 3}

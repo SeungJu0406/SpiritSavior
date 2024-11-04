@@ -81,11 +81,13 @@ public class Lightning : MonoBehaviour
         {
             SetDefaultLayer();
             _canAttack = true;
+            Debug.Log($"ignore layer: {_layer}");
         }
         else if (nature != _lightingNature)
         {
             SetIgnorePlayerLayer();
             _canAttack = false;
+            Debug.Log($"default layer: {_layer}");
         }
     }
     void InitLayer()
