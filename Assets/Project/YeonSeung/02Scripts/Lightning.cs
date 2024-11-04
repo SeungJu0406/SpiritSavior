@@ -16,14 +16,14 @@ public class Lightning : MonoBehaviour
 
 
     [SerializeField] PlayerModel.Nature _lightingNature;
-
+    
 
 
     // OnTriggerEnter2D 사용
 
     PlayerController _player;
 
-
+    private int _layer;
     private int _defaultLayer;
     private int _ignorePlayerLayer;
 
@@ -42,12 +42,10 @@ public class Lightning : MonoBehaviour
     void Awake()
     {
         // Debug.Log("Lightning AWAKE");
-        // Layer 추가
+        InitLayer();
         _defaultLayer = gameObject.layer;
         _ignorePlayerLayer = LayerMask.NameToLayer("Ignore Player");
-        //   _respawnDelay = new WaitForSeconds(hittingPeriod);
-        //   _poolDelay = new WaitForSeconds(_poolDelayTime);
-        //   _hitBox = GetComponent<Collider2D>();
+        
     }
     void Start()
     {
@@ -81,12 +79,29 @@ public class Lightning : MonoBehaviour
     {
         if (nature == _lightingNature)
         {
+            SetDefaultLayer();
             _canAttack = true;
+            Debug.Log($"ignore layer: {_layer}");
         }
         else if (nature != _lightingNature)
         {
+            SetIgnorePlayerLayer();
             _canAttack = false;
+            Debug.Log($"default layer: {_layer}");
         }
+    }
+    void InitLayer()
+    {
+        _defaultLayer = gameObject.layer;
+        _ignorePlayerLayer = LayerMask.NameToLayer("Ignore Player");
+    }
+    void SetDefaultLayer()
+    {
+        _layer = _defaultLayer;
+    }
+    void SetIgnorePlayerLayer()
+    {
+        _layer = _ignorePlayerLayer;
     }
 
 

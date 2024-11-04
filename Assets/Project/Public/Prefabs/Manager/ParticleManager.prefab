@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2447756171031024388
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2447756171031024386}
+  - component: {fileID: 2447756171031024387}
+  m_Layer: 0
+  m_Name: ParticleManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2447756171031024386
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2447756171031024388}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -10.855237, y: -3.7997732, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2447756171031024387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2447756171031024388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 406187eaf7475384e9f27113a4966225, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  runFX: {fileID: 688694432486717029, guid: 1194d968b6722524aa6c727c146112e7, type: 3}
+  jumpFX: {fileID: 6597771109109094848, guid: c629ab3aac1ebaa4f8c36345322ec7fe, type: 3}
+  dJumpFX: {fileID: 6975080102365490848, guid: de8a92e8afa21d7498c0ef82e0ac457c, type: 3}
+  hitFX: {fileID: 2136547074602107628, guid: 768b3fae1547efe44884f44b55dbb719, type: 3}
+  healFX: {fileID: 1591516255688425007, guid: 12fd776822d0a32418181ea5014e178a, type: 3}
+  dashFX: {fileID: 7824106877745622087, guid: ce7eb9676449ebc429cec1f35b409a39, type: 3}
+  unlockTagFX: {fileID: 4035903591278710484, guid: ba79e35041218d54282daa9648aee201, type: 3}
+  unlockWallJumpFX: {fileID: 3384366999043453948, guid: 405ac24ff16c68f4482577b76bffa8b4, type: 3}
+  unlockDoubleJumpFX: {fileID: 8680598818964007281, guid: bc646ac382b2f7348beb251127d13cea, type: 3}
+  unlockDashFX: {fileID: 3384366999043453948, guid: 46f645561f0bb5644a7b282152b2000c, type: 3}
+  spawnFX: {fileID: 8176850701479282271, guid: 0873e2406f84d76479b42e8e6e88e5ba, type: 3}
+  GrassFX: {fileID: 288565498536937811, guid: 4bf6e74fac28bce42ad206316564f1aa, type: 3}
