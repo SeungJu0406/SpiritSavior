@@ -39,6 +39,9 @@ public class ClearSwitchInteractable : SwichInteractable
 
     void ShowClearUI()
     {
+
+        Manager.Sound.PlaySFX(Manager.Sound.Data.ClearTreeInteractionSound);
+
         _clearUI.SetActive(true);
         Time.timeScale = 0;
     }
