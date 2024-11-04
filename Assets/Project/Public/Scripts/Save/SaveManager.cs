@@ -6,7 +6,6 @@ using UnityEngine;
 public class SaveManager : MonoBehaviour
 {
     private string saveFilePath; // 저장할 파일 경로
-    public PlayerController playerController;
     private void Start()
     {
         // 저장 파일 경로
@@ -14,15 +13,41 @@ public class SaveManager : MonoBehaviour
         // 자동 저장 시작
         InvokeRepeating("SaveGame", 180f, 180f);
     }
+    // 스테이지 확인
+    private int GetCurrentStage()
+    {
+        int currentStage = 0;
+
+        for (int stage = 1; stage <= GameManager.Instance.MaxStage; stage++)
+        {
+            if (GameManager.Instance.GetIsClearStageDIc(stage))
+            {
+                currentStage = stage;
+            }
+        }
+
+        return currentStage;
+    }
+    // 어빌리티 비트
+    private int GetUnlockedAbilities()
+    {
+        int unlockedAbilities = 0;
+
+        
+
+        return unlockedAbilities;
+    }
     // 게임 저장
     public void SaveGame()
     {
-        if (playerController != null)
+        if (Manager.Game.Player != null)
         {
             GameData gameData = new GameData
             {
-                playerHp = playerController.hp,                       // 현재 hp저장 (플레이어 컨트롤러에서 생명 관련 추가구현 필요시 알려줘야함)
-                playerPosition = playerController.transform.position, // 현재 플레이어의 위치를 저장
+                playerHp = Manager.Game.Player.playerModel.hp,                       // 현재 hp저장 (플레이어 컨트롤러에서 생명 관련 추가구현 필요시 알려줘야함)
+                playerPosition = Manager.Game.Player.transform.position, // 현재 플레이어의 위치를 저장
+                currentStage = GetCurrentStage(),
+                /*unlockedAbilities = Manager.Game.Player.playerModel.*/
                 // items = items, // 아이템 목록 (추후 구현)
                 // traps = traps // 함정 상태 (추후 구현)
                 // 여기에 저장할부분 추가해주시면 됩니다.
@@ -33,11 +58,6 @@ public class SaveManager : MonoBehaviour
             File.WriteAllText(saveFilePath, json);
             Debug.Log("저장 완료");
         }
-        else
-        {
-            Debug.Log("플레이어 컨트롤러가 없습니다");
-        }
-        
     }
 
     // 게임 불러오기
