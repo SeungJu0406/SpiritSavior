@@ -31,7 +31,7 @@ public class RunState : PlayerState
         {
             player.ChangeState(PlayerController.State.Idle);
         }
-        else if (player.coyoteTimeCounter <= 0 && player.rigid.velocity.y < 0f) //!player.isGrounded &&
+        else if (player.coyoteTimeCounter <= 0 && player.rigid.velocity.y != 0f) //!player.isGrounded &&
         {
             player.ChangeState(PlayerController.State.Fall);
         }
