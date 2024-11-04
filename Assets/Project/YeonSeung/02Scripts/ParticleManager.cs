@@ -54,6 +54,12 @@ public class ParticleManager : MonoBehaviour
 
     [Header("ÀÜµð ¹â´Â FX ")]
     [SerializeField] GameObject GrassFX;
+    [Header("ÀÜµð ¹â´Â FX ")]
+    [SerializeField] GameObject trapomlineFX;
+    TrampolineController _trampoline;
+
+
+
 
     // public Transform location;
 
@@ -128,10 +134,15 @@ public class ParticleManager : MonoBehaviour
     // ´Ù¸¥ ÆÄÆ¼Å¬µé
     public void PlayGrassFX()
     {
+        // ParticleManager.Instance.PlayGrassFX();
         ObjectPool.SpawnObject(GrassFX, _pBottom.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
     }
 
-
+    public void PlayTrampolineFX()
+    {
+        // ParticleManager.Instance.PlayTrampolineFX();
+        ObjectPool.SpawnObject(trapomlineFX, _pBottom.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
+    }
 
     #endregion
 
@@ -142,22 +153,28 @@ public class ParticleManager : MonoBehaviour
         _player = Manager.Game.Player;
         // _pBottom.y = _player.transform.position.y;
         _pBottom = _player.bottomPivot;
-
+        // _trampoline = GetComponent<TrampolineController>();
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("SpaceBar EventTest");
+           // Debug.Log("SpaceBar EventTest");
         }
     }
+    private void OnParticleSystemStopped()
+    {
+        ObjectPool.ReturnObjectPool(gameObject);
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
             _collisionPos = collision.transform.position;
         }
+        
     }
 
 

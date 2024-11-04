@@ -56,3 +56,4 @@ MonoBehaviour:
   unlockDashFX: {fileID: 3384366999043453948, guid: 46f645561f0bb5644a7b282152b2000c, type: 3}
   spawnFX: {fileID: 8176850701479282271, guid: 0873e2406f84d76479b42e8e6e88e5ba, type: 3}
   GrassFX: {fileID: 288565498536937811, guid: 4bf6e74fac28bce42ad206316564f1aa, type: 3}
+  trapomlineFX: {fileID: 4513346181163405318, guid: 67720f770ad5002408ab68ea0ec1da40, type: 3}
