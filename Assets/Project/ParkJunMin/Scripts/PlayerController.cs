@@ -17,7 +17,7 @@ public partial class PlayerController : MonoBehaviour
     [HideInInspector] public PlayerView playerView;
 
     private Collider2D _playerCollider;
-    private int _groundLayerMask;
+    public int _groundLayerMask;
     private int _wallLayerMask;
     private int _ignorePlayerLayerMask;
 
@@ -49,7 +49,7 @@ public partial class PlayerController : MonoBehaviour
     
     [Space(30)]
     [Header("Ground & Slope & Wall Checking")]
-    [SerializeField] Transform _bottomPivot;
+    public Transform bottomPivot;
 
     [SerializeField] Transform _groundCheckPoint1;
     [SerializeField] Transform _groundCheckPoint2;
@@ -137,8 +137,8 @@ public partial class PlayerController : MonoBehaviour
         //maxMoveSpeedInAir = maxMoveSpeed * speedAdjustmentOffsetInAir;
 
 
-        if (_bottomPivot == null)
-            _bottomPivot = transform.Find("BottomPivot");
+        if (bottomPivot == null)
+            bottomPivot = transform.Find("BottomPivot");
 
         if (_groundCheckPoint1 == null)
             _groundCheckPoint1 = transform.Find("GroundCheckPoint1");
@@ -202,10 +202,10 @@ public partial class PlayerController : MonoBehaviour
         //}
 
         //임시 피격 트리거
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            playerModel.TakeDamageEvent(1); // 임시
-        }
+        //if (Input.GetKeyDown(KeyCode.O))
+        //{
+        //    playerModel.TakeDamageEvent(1); // 임시
+        //}
 
         ////임시 죽음 트리거
         //if (Input.GetKeyDown(KeyCode.P))
