@@ -15,6 +15,7 @@ public class TitleUI : BaseUI
     {
         Init();
         SubsCribeEvents();
+        Time.timeScale = 1.0f;
     }
 
 
