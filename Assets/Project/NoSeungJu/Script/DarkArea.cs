@@ -6,7 +6,7 @@ using UnityEngine.Timeline;
 
 public class DarkArea : Trap
 {
-    [Header("영역에서 나가면 다시 어두워 지는가?")]
+    [Header("토글 형식?")]
     [SerializeField] bool _isToggle;
 
     [Space]
