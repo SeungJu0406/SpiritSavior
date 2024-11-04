@@ -23,7 +23,6 @@ public class Lightning : MonoBehaviour
 
     PlayerController _player;
 
-    private int _layer;
     private int _defaultLayer;
     private int _ignorePlayerLayer;
 
@@ -72,7 +71,7 @@ public class Lightning : MonoBehaviour
     {
 
     }
-
+    // 구독취소 / 이벤트 해지하는거 리턴풀할떄 해야됨 (-=SetActiveCollider);
 
 
     private void SetActiveCollider(PlayerModel.Nature nature)
@@ -81,14 +80,20 @@ public class Lightning : MonoBehaviour
         {
             SetDefaultLayer();
             _canAttack = true;
-            Debug.Log($"ignore layer: {_layer}");
+            
         }
         else if (nature != _lightingNature)
         {
             SetIgnorePlayerLayer();
             _canAttack = false;
-            Debug.Log($"default layer: {_layer}");
+           
         }
+    }
+    private void OnParticleSystemStopped()
+    {
+        // Debug.Log("구독취소 테스트, 파티클 끝날때");
+        _player.playerModel.OnPlayerTagged -= SetActiveCollider;
+        ObjectPool.ReturnObjectPool(gameObject);
     }
     void InitLayer()
     {
@@ -97,11 +102,11 @@ public class Lightning : MonoBehaviour
     }
     void SetDefaultLayer()
     {
-        _layer = _defaultLayer;
+        gameObject.layer = _defaultLayer;
     }
     void SetIgnorePlayerLayer()
     {
-        _layer = _ignorePlayerLayer;
+        gameObject.layer = _ignorePlayerLayer;
     }
 
 
@@ -125,7 +130,7 @@ public class Lightning : MonoBehaviour
         if (collision.gameObject.tag == "Player" && _canAttack)
         {
 
-            Debug.Log("번개Enter");
+            // Debug.Log("번개Enter");
             // _hitBox.enabled = true;
             // Lightning();
             _player.playerModel.TakeDamageEvent(lightningDamage);
