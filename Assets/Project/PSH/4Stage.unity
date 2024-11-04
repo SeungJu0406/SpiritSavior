@@ -64635,6 +64635,10 @@ PrefabInstance:
       value: Trunk_5
       objectReference: {fileID: 0}
     - target: {fileID: 1282570016628730, guid: 0f45cf86eeab8774a9c61c5e097834b2, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1282570016628730, guid: 0f45cf86eeab8774a9c61c5e097834b2, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}

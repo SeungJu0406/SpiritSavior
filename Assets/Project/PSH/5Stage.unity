@@ -8010,6 +8010,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Trunk_5
       objectReference: {fileID: 0}
+    - target: {fileID: 1282570016628730, guid: 0f45cf86eeab8774a9c61c5e097834b2, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4239161791173414, guid: 0f45cf86eeab8774a9c61c5e097834b2, type: 3}
       propertyPath: m_RootOrder
       value: 0
