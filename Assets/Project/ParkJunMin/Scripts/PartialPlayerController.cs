@@ -5,21 +5,21 @@ using UnityEngine;
 
 public partial class PlayerController : MonoBehaviour
 {
-    [SerializeField] PlayerUI _playerUI;
-    //[SerializeField] float _invincibility = 1;
+    //[SerializeField] PlayerUI _playerUI;
+    ////[SerializeField] float _invincibility = 1;
 
-    bool _canTakeDamage = true;
-    bool _isDead;
+    //bool _canTakeDamage = true;
+    //bool _isDead;
 
-    WaitForSeconds _dieDelay = new WaitForSeconds(0.767f);
+    //WaitForSeconds _dieDelay = new WaitForSeconds(0.767f);
 
-    //private void OnEnable()
-    //{
-    //    if (_isDead)
-    //    {
-    //        InitRespawnPlayer();
-    //    }
-    //}
+    ////private void OnEnable()
+    ////{
+    ////    if (_isDead)
+    ////    {
+    ////        InitRespawnPlayer();
+    ////    }
+    ////}
 
     /// <summary>
     /// 플레이어의 데미지 피격
@@ -43,15 +43,15 @@ public partial class PlayerController : MonoBehaviour
     /// 플레이어가 힐을 받음
     /// </summary>
     /// <param name="healAmount"></param>
-    public void TakeHeal(int healAmount)
-    {
-        playerModel.hp += healAmount;
-        //_playerUI.SetHp(playerModel.hp);
-        if (playerModel.hp > playerModel.curMaxHP)
-        {
-            playerModel.hp = playerModel.curMaxHP;
-        }
-    }
+    //public void TakeHeal(int healAmount)
+    //{
+    //    playerModel.hp += healAmount;
+    //    //_playerUI.SetHp(playerModel.hp);
+    //    if (playerModel.hp > playerModel.curMaxHP)
+    //    {
+    //        playerModel.hp = playerModel.curMaxHP;
+    //    }
+    //}
 
     /// <summary>
     /// 캐릭터 죽음 메서드

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 
 public partial class PlayerController : MonoBehaviour
 {
@@ -16,8 +17,9 @@ public partial class PlayerController : MonoBehaviour
     [HideInInspector] public PlayerView playerView;
 
     private Collider2D _playerCollider;
-    private int groundLayerMask;
-    private int wallLayerMask; 
+    private int _groundLayerMask;
+    private int _wallLayerMask;
+    [SerializeField] private int _ignorePlayerLayerMask;
 
     //public SpriteRenderer renderer;
     [Header("Player Setting")]
@@ -163,8 +165,9 @@ public partial class PlayerController : MonoBehaviour
         _curState = State.Spawn;
         _states[(int)_curState].Enter();
         SubscribeEvents();
-        wallLayerMask = LayerMask.GetMask("Wall");
-        groundLayerMask = LayerMask.GetMask("Ground");
+        _wallLayerMask = LayerMask.GetMask("Wall");
+        _groundLayerMask = LayerMask.GetMask("Ground");
+        _ignorePlayerLayerMask = LayerMask.GetMask("Ignore Player");
     }
 
     void Update()
@@ -319,13 +322,14 @@ public partial class PlayerController : MonoBehaviour
     {
         // 땅 체크와 땅이 평지인지 경사면인지 체크하는 메서드
 
-        groundHit1 = Physics2D.Raycast(_groundCheckPoint1.position, Vector2.down, _groundCheckDistance, groundLayerMask);
-        groundHit2 = Physics2D.Raycast(_groundCheckPoint2.position, Vector2.down, _groundCheckDistance, groundLayerMask);
+        groundHit1 = Physics2D.Raycast(_groundCheckPoint1.position, Vector2.down, _groundCheckDistance, _groundLayerMask);
+        groundHit2 = Physics2D.Raycast(_groundCheckPoint2.position, Vector2.down, _groundCheckDistance, _groundLayerMask);
         
         Debug.DrawLine(_groundCheckPoint1.position, (Vector2)_groundCheckPoint1.position + Vector2.down * _groundCheckDistance, Color.cyan);
         Debug.DrawLine(_groundCheckPoint2.position, (Vector2)_groundCheckPoint2.position + Vector2.down * _groundCheckDistance, Color.yellow);
         //slopeHit = Physics2D.Raycast(_groundCheckPoint.position, Vector2.down, _slopeCheckDistance, groundLayerMask);
         //노멀벡터로 각도를 구함
+
 
         if (groundHit1 || groundHit2)
         {
@@ -392,7 +396,12 @@ public partial class PlayerController : MonoBehaviour
         if (wallHit.collider.isTrigger)
             return;
 
-        if (HasAbility(PlayerModel.Ability.WallJump) && (wallLayerMask & (1 << wallHit.collider.gameObject.layer)) != 0) //비트연산으로 레이어 일치 여부 확인 (제일 빠를것) // 벽타기 가능한 벽일 경우
+        if ((_ignorePlayerLayerMask & (1 << wallHit.collider.gameObject.layer)) != 0)
+        {
+            return;
+        }
+
+        if (HasAbility(PlayerModel.Ability.WallJump) && (_wallLayerMask & (1 << wallHit.collider.gameObject.layer)) != 0)// 벽타기 가능한 벽일 경우
         {
             if (isGrounded || _curState == State.WallJump || _curState == State.WallGrab || _curState == State.WallSliding ) //너무 긴데
                 return;
@@ -406,8 +415,6 @@ public partial class PlayerController : MonoBehaviour
             if (wallAngle > maxAngle)
             {
                 Vector2 slideDirection = Vector2.Perpendicular(wallHit.normal).normalized;
-                //Debug.Log("a");
-                //rigid.velocity = new Vector2(0, rigid.velocity.y);
                 rigid.velocity = new Vector2(slideDirection.x * rigid.velocity.x, rigid.velocity.y);
 
             }
