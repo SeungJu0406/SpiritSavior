@@ -1,13 +1,21 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ParticleManager : MonoBehaviour
 {
     public static ParticleManager Instance;
 
+    PlayerController _player;
+
+    // float x;
+    // float y;
+    // float z;
+
+    Transform _pBottom;
+
+
+    // Transform _collisionPos;
+
+    Vector3 _collisionPos;
 
     [Header("달리기 FX ")]
     [SerializeField] GameObject runFX;
@@ -17,13 +25,15 @@ public class ParticleManager : MonoBehaviour
     [SerializeField] GameObject dJumpFX;
     [Header("피격 FX ")]
     [SerializeField] GameObject hitFX;
+    [Header("체력회복 FX ")]
+    [SerializeField] GameObject healFX;
     [Header("잔디 밟는 FX ")]
     [SerializeField] GameObject GrassFX;
 
-    public Transform location;
+    // public Transform location;
 
 
-    
+
     private void Awake()
     {
 
@@ -35,7 +45,8 @@ public class ParticleManager : MonoBehaviour
         else Destroy(gameObject);
 
 
-        this.location = transform;
+
+        //this.location = transform;
     }
 
 
@@ -43,27 +54,32 @@ public class ParticleManager : MonoBehaviour
     public void PlayRunFX()
     {
         Debug.Log("1. RUNFX_PM_Manager");
-        ObjectPool.SpawnObject(runFX, this.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
+        ObjectPool.SpawnObject(runFX, _pBottom.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
     }
     public void PlayJumpFX()
     {
         Debug.Log("2. JumpFX_PM_Manager");
-        ObjectPool.SpawnObject(jumpFX, transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
+        ObjectPool.SpawnObject(jumpFX, _pBottom.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
     }
     public void PlayDoubleJumpFX()
     {
         Debug.Log("3. DoubleJump_PM_Manager");
-        ObjectPool.SpawnObject(dJumpFX, this.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
+        ObjectPool.SpawnObject(dJumpFX, _pBottom.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
     }
     public void PlayHitFX()
     {
         Debug.Log("4. Hit_FX_PM_Manager");
-        ObjectPool.SpawnObject(hitFX, transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
+        ObjectPool.SpawnObject(hitFX, _pBottom.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
+    }
+    public void PlayHealFX()
+    {
+        Debug.Log("4. Hit_FX_PM_Manager");
+        ObjectPool.SpawnObject(healFX, _pBottom.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
     }
     public void PlayGrassFX()
     {
         Debug.Log("5. GrassFX_PM_Manager");
-        ObjectPool.SpawnObject(GrassFX, transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
+        ObjectPool.SpawnObject(GrassFX, _pBottom.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
     }
 
     #endregion
@@ -71,7 +87,11 @@ public class ParticleManager : MonoBehaviour
 
     void Start()
     {
-           SubscribeEvents();
+        SubscribeEvents();
+        _player = Manager.Game.Player;
+        // _pBottom.y = _player.transform.position.y;
+        _pBottom = _player.bottomPivot;
+
     }
 
     void Update()
@@ -81,17 +101,28 @@ public class ParticleManager : MonoBehaviour
             Debug.Log("SpaceBar EventTest");
         }
     }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            _collisionPos = collision.transform.position;
+        }
+    }
+
+
+
     void SubscribeEvents()
     {
-      //  Manager.Game.Player.playerModel.OnPlayerRan += PlayRunFX;
-      //  Manager.Game.Player.playerModel.OnPlayerJumped += PlayJumpFX;
-      //  Manager.Game.Player.playerModel.OnPlayerDoubleJumped += PlayDoubleJumpFX;
-      //  Manager.Game.Player.playerModel.OnPlayerDamageTaken += PlayHitFX;
+        Manager.Game.Player.playerModel.OnPlayerRan += PlayRunFX;
+        Manager.Game.Player.playerModel.OnPlayerJumped += PlayJumpFX;
+        Manager.Game.Player.playerModel.OnPlayerDoubleJumped += PlayDoubleJumpFX;
+        Manager.Game.Player.playerModel.OnPlayerDamageTaken += PlayHitFX;
+        Manager.Game.Player.playerModel.OnPlayerHealth += PlayHealFX;
     }
-  //  private void PlayerModel_OnPlayerJumped()
-  //  {
-  //      Debug.Log("EventJUMP되나");
-  //      PlayJumpFX();
-  //      throw new NotImplementedException();
-  //  }
+    //  private void PlayerModel_OnPlayerJumped()
+    //  {
+    //      Debug.Log("EventJUMP되나");
+    //      PlayJumpFX();
+    //      throw new NotImplementedException();
+    //  }
 }
