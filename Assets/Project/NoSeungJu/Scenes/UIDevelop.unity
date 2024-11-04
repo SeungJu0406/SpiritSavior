@@ -897,6 +897,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1841288194076894288, guid: d7d3c8b0fe7ba8d408c864b6e020ef23, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2152529981950174865, guid: d7d3c8b0fe7ba8d408c864b6e020ef23, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -906,24 +910,36 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2878529203880559142, guid: d7d3c8b0fe7ba8d408c864b6e020ef23, type: 3}
+      propertyPath: m_PlayableAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 7cd8880a63d4ef9419e60e0abd125de8, type: 2}
+    - target: {fileID: 2878529203880559142, guid: d7d3c8b0fe7ba8d408c864b6e020ef23, type: 3}
       propertyPath: m_SceneBindings.Array.size
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2878529203880559142, guid: d7d3c8b0fe7ba8d408c864b6e020ef23, type: 3}
       propertyPath: m_SceneBindings.Array.data[3].key
       value: 
-      objectReference: {fileID: -330812250588023664, guid: 7cd8880a63d4ef9419e60e0abd125de8, type: 2}
+      objectReference: {fileID: 0}
+    - target: {fileID: 2878529203880559142, guid: d7d3c8b0fe7ba8d408c864b6e020ef23, type: 3}
+      propertyPath: m_SceneBindings.Array.data[4].key
+      value: 
+      objectReference: {fileID: 6859845592437010038, guid: 7cd8880a63d4ef9419e60e0abd125de8, type: 2}
     - target: {fileID: 2878529203880559142, guid: d7d3c8b0fe7ba8d408c864b6e020ef23, type: 3}
       propertyPath: m_SceneBindings.Array.data[3].value
       value: 
       objectReference: {fileID: 1869943059}
+    - target: {fileID: 2878529203880559142, guid: d7d3c8b0fe7ba8d408c864b6e020ef23, type: 3}
+      propertyPath: m_SceneBindings.Array.data[4].value
+      value: 
+      objectReference: {fileID: 1703208444}
     - target: {fileID: 4074191868783778033, guid: d7d3c8b0fe7ba8d408c864b6e020ef23, type: 3}
       propertyPath: m_fontColor.a
-      value: 0
+      value: 0.78431374
       objectReference: {fileID: 0}
     - target: {fileID: 4074191868783778033, guid: d7d3c8b0fe7ba8d408c864b6e020ef23, type: 3}
       propertyPath: m_fontColor32.rgba
-      value: 9671571
+      value: 3365114771
       objectReference: {fileID: 0}
     - target: {fileID: 4618555157464850303, guid: d7d3c8b0fe7ba8d408c864b6e020ef23, type: 3}
       propertyPath: m_IsActive
@@ -934,12 +950,24 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4618555158193186409, guid: d7d3c8b0fe7ba8d408c864b6e020ef23, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.21960784
+      objectReference: {fileID: 0}
+    - target: {fileID: 4618555158193186409, guid: d7d3c8b0fe7ba8d408c864b6e020ef23, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.21960784
+      objectReference: {fileID: 0}
+    - target: {fileID: 4618555158193186409, guid: d7d3c8b0fe7ba8d408c864b6e020ef23, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.21960784
+      objectReference: {fileID: 0}
+    - target: {fileID: 4618555158193186409, guid: d7d3c8b0fe7ba8d408c864b6e020ef23, type: 3}
       propertyPath: m_fontColor32.rgba
-      value: 16777215
+      value: 436207615
       objectReference: {fileID: 0}
     - target: {fileID: 4618555159040843664, guid: d7d3c8b0fe7ba8d408c864b6e020ef23, type: 3}
       propertyPath: m_Color.a
-      value: 0
+      value: 0.5882353
       objectReference: {fileID: 0}
     - target: {fileID: 4618555159040843666, guid: d7d3c8b0fe7ba8d408c864b6e020ef23, type: 3}
       propertyPath: m_IsActive
@@ -947,7 +975,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5034307865060403357, guid: d7d3c8b0fe7ba8d408c864b6e020ef23, type: 3}
       propertyPath: m_Color.a
-      value: 0
+      value: 0.78431374
       objectReference: {fileID: 0}
     - target: {fileID: 8452448700293512064, guid: d7d3c8b0fe7ba8d408c864b6e020ef23, type: 3}
       propertyPath: m_Color.a
@@ -1003,6 +1031,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d7d3c8b0fe7ba8d408c864b6e020ef23, type: 3}
+--- !u!95 &1703208444 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6685958917616122955, guid: d7d3c8b0fe7ba8d408c864b6e020ef23, type: 3}
+  m_PrefabInstance: {fileID: 1703208443}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1717721661
 PrefabInstance:
   m_ObjectHideFlags: 0
