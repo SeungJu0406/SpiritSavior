@@ -16,11 +16,14 @@ public class StageUI : BaseUI
 
     private void UpdateStage(int stage)
     {
+
         GameObject unClearIcon = GetUI($"{stage}StageUnClear");
         GameObject clearIcon = GetUI($"{stage}StageClear");
         bool isClear = Manager.Game.GetIsClearStageDIc(stage);
         if (isClear)
         {
+            Manager.Sound.PlaySFX(Manager.Sound.Data.NotificationSound);
+
             unClearIcon.SetActive(false);
             clearIcon.SetActive(true);
         }
@@ -35,6 +38,7 @@ public class StageUI : BaseUI
 
     void UpdateClearParticle(int stage)
     {
+
 
         if (stage > _curStage)
         {

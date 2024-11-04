@@ -28,7 +28,8 @@ public class ClearUI : BaseUI
 
     void BackTitleScene()
     {
-        Time.timeScale = 1.0f;
+        Manager.Sound.PlaySFX(Manager.Sound.Data.ButtonClickSound);
+
         SceneManager.LoadSceneAsync("TitleScene");
     }
 
