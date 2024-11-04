@@ -3,6 +3,7 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
+using static SoundData;
 
 public partial class PlayerController : MonoBehaviour
 {
@@ -73,6 +74,7 @@ public partial class PlayerController : MonoBehaviour
     [HideInInspector] public RaycastHit2D groundHit2;
     [HideInInspector] public RaycastHit2D chosenHit;
     [HideInInspector] public RaycastHit2D wallHit;
+    [HideInInspector] public RaycastHit2D[] boxHits;
     public bool isWall;                  // 캐릭터가 벽에 붙어있는지 체크
     public bool isWallJumpUsed;         // 벽에서 벽점프를 사용 했는지 체크
     private Vector2 _wallCheckBoxSize;
@@ -389,6 +391,7 @@ public partial class PlayerController : MonoBehaviour
         wallHit = Physics2D.BoxCast(_wallCheckPoint.position, _wallCheckBoxSize, 0, Vector2.right * isPlayerRight, _wallCheckDistance);
         isWall = wallHit;
 
+
         if (wallHit.collider == null)
             return;
 
@@ -451,27 +454,50 @@ public partial class PlayerController : MonoBehaviour
         }
     }
 
+    public void AdjustDash()
+    {
+        boxHits = Physics2D.BoxCastAll(_wallCheckPoint.position, _wallCheckBoxSize, 0, Vector2.right * isPlayerRight, _wallCheckDistance);
+        if (boxHits.Length > 0)
+        {
+            bool allHits = false;
+            float closetDistance = float.MaxValue;
+            RaycastHit2D closetHit = new RaycastHit2D();
+            foreach (RaycastHit2D hit in boxHits)
+            {
+                if (hit.distance < closetDistance)
+                {
+                    closetDistance = hit.distance;
+                    closetHit = hit;
+                }
+            }
+
+            if(closetHit.collider != null)
+            {
+                if(!isGrounded)
+                {
+                    Vector2 curPosition = transform.position;
+                    Vector2 hitPositon = closetHit.point;
+
+                    if(curPosition.y != hitPositon.y)
+                    {
+                        transform.position = new Vector2(curPosition.x, Mathf.Lerp(curPosition.y, hitPositon.y,0.5f));
+                    }
+                }
+            }
+            else
+            {
+                Debug.Log("이제 closetHit 없음");
+            }
+             
+
+        }
+    }
+
     public void MoveInAir()
     {
-        // 벽 끼임 방지 현상을 위해
-        // 마찰력을 0으로 두는곳과 원래대로 돌리는곳을 정확히 정할 필요가 있음
-        //rigid.sharedMaterial.friction = 0f;
-
         moveInput = Input.GetAxisRaw("Horizontal");
-
-        //if (!isStuck)
-        //{
-            
-        //}
-        
-
         rigid.velocity = new Vector2(moveInput * moveSpeedInAir, rigid.velocity.y);
-
         FlipPlayer(moveInput);
-
-        //RaycastHit2D hit = Physics2D.BoxCast(_wallCheckPoint.position, _wallCheckBoxSize, 0, Vector2.right * isPlayerRight, _wallCheckDistance);
-        //CheckWall();
-        //Dash 상태로 전환
         CheckDashable();
     }
 
@@ -528,7 +554,6 @@ public partial class PlayerController : MonoBehaviour
     {
         _groundCheckPoint1.localPosition = new Vector2(Mathf.Abs(_groundCheckPoint1.localPosition.x) * -isPlayerRight, _groundCheckPoint1.localPosition.y);
         _groundCheckPoint2.localPosition = new Vector2(Mathf.Abs(_groundCheckPoint2.localPosition.x) * isPlayerRight, _groundCheckPoint2.localPosition.y);
-
         _wallCheckPoint.localPosition = new Vector2(Mathf.Abs(_wallCheckPoint.localPosition.x) * isPlayerRight, _wallCheckPoint.localPosition.y);
     }
 
@@ -623,13 +648,6 @@ public partial class PlayerController : MonoBehaviour
     {
         WaitForSeconds delay = new WaitForSeconds(0.1f);
 
-        //while (true)
-        //{
-        //    Debug.DrawRay(_wallCheckPoint.position, Vector2.right * isPlayerRight * _wallCheckDistance, Color.red);
-        //    isWall = Physics2D.Raycast(_wallCheckPoint.position, Vector2.right * isPlayerRight, _wallCheckDistance, wallLayerMask);
-        //    yield return delay;
-        //}
-
         //BoxCast를 통해 벽을 체크한 범위를 보여줌
         while (true)
         {
@@ -646,8 +664,6 @@ public partial class PlayerController : MonoBehaviour
             Debug.DrawLine(topRight, bottomRight, Color.red);
             Debug.DrawLine(bottomRight, bottomLeft, Color.red);
             Debug.DrawLine(bottomLeft, topLeft, Color.red);
-
-            //isWall = Physics2D.BoxCast(_wallCheckPoint.position, _wallCheckBoxSize, 0, Vector2.right * isPlayerRight, _wallCheckDistance, wallLayerMask);
             yield return delay;
         }
 
