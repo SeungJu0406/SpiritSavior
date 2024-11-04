@@ -36861,19 +36861,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7220145990415169446, guid: 5f4e363a81d20974c82d8a2c987f6f19, type: 3}
       propertyPath: m_Size.x
-      value: 460.36224
+      value: 375.04004
       objectReference: {fileID: 0}
     - target: {fileID: 7220145990415169446, guid: 5f4e363a81d20974c82d8a2c987f6f19, type: 3}
       propertyPath: m_Size.y
-      value: 269.7469
+      value: 238.85437
       objectReference: {fileID: 0}
     - target: {fileID: 7220145990415169446, guid: 5f4e363a81d20974c82d8a2c987f6f19, type: 3}
       propertyPath: m_Offset.x
-      value: -89.49875
+      value: -46.837646
       objectReference: {fileID: 0}
     - target: {fileID: 7220145990415169446, guid: 5f4e363a81d20974c82d8a2c987f6f19, type: 3}
       propertyPath: m_Offset.y
-      value: -14.402893
+      value: 1.0433655
       objectReference: {fileID: 0}
     - target: {fileID: 7220145990415169447, guid: 5f4e363a81d20974c82d8a2c987f6f19, type: 3}
       propertyPath: _sceneToLoad.Array.size

@@ -1241,6 +1241,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2878529203880559142, guid: d7d3c8b0fe7ba8d408c864b6e020ef23, type: 3}
+      propertyPath: m_PlayableAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 7cd8880a63d4ef9419e60e0abd125de8, type: 2}
+    - target: {fileID: 2878529203880559142, guid: d7d3c8b0fe7ba8d408c864b6e020ef23, type: 3}
+      propertyPath: m_SceneBindings.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2878529203880559142, guid: d7d3c8b0fe7ba8d408c864b6e020ef23, type: 3}
+      propertyPath: m_SceneBindings.Array.data[4].key
+      value: 
+      objectReference: {fileID: 6859845592437010038, guid: 7cd8880a63d4ef9419e60e0abd125de8, type: 2}
+    - target: {fileID: 2878529203880559142, guid: d7d3c8b0fe7ba8d408c864b6e020ef23, type: 3}
+      propertyPath: m_SceneBindings.Array.data[4].value
+      value: 
+      objectReference: {fileID: 1595859978}
     - target: {fileID: 4074191868783778033, guid: d7d3c8b0fe7ba8d408c864b6e020ef23, type: 3}
       propertyPath: m_fontColor32.rgba
       value: 4287861651
@@ -10984,6 +11000,11 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 13.187155, y: 1.1073684}
   m_EdgeRadius: 0
+--- !u!95 &1595859978 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6685958917616122955, guid: d7d3c8b0fe7ba8d408c864b6e020ef23, type: 3}
+  m_PrefabInstance: {fileID: 79441147}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1607914002
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -142,6 +142,8 @@ PlayableDirector:
     value: {fileID: 1648520322193762202}
   - key: {fileID: 3308659858442354494, guid: 7cd8880a63d4ef9419e60e0abd125de8, type: 2}
     value: {fileID: 1648520322193762202}
+  - key: {fileID: 6859845592437010038, guid: 7cd8880a63d4ef9419e60e0abd125de8, type: 2}
+    value: {fileID: 1648520322193762202}
   m_ExposedReferences:
     m_References:
     - 43eaac31102ff0f479319f0e5c775528: {fileID: 1643564461586318468}
@@ -318,7 +320,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &734530099678757954
 RectTransform:
   m_ObjectHideFlags: 0
@@ -456,7 +458,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 9671571
+    rgba: 4287861651
   m_fontColor: {r: 0.5764706, g: 0.5764706, b: 0.5764706, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
