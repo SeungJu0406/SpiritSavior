@@ -26,6 +26,8 @@ public class SkillTooltipUI : BaseUI
 
     void HideUI()
     {
+        Manager.Sound.PlaySFX(Manager.Sound.Data.InteractionSound);
+
         Time.timeScale = 1f;
         Manager.UI.IsPopUp = false;
         Destroy(gameObject);
