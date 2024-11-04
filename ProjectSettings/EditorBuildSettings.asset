@@ -6,11 +6,14 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Project/NoSeungJu/Scenes/TitleScene.unity
+    path: Assets/Project/Public/Scenes/TitleScene.unity
     guid: f8b2913edf2639144ad281091d49f3fd
   - enabled: 1
     path: Assets/Project/Public/Scenes/PlayerScene.unity
     guid: 8e9df1b98d2b8c54786ffe938063f224
+  - enabled: 1
+    path: Assets/Project/PSH/0Stage.unity
+    guid: 5fe9f1ade8a5e88448accba098b6f9c5
   - enabled: 1
     path: Assets/Project/KimGyeongya/1Stage.unity
     guid: b654f0c3f227940498dc231b6acaec1d
@@ -23,6 +26,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Project/PSH/4Stage.unity
     guid: 90a7897daca92db44acef037cc25ab64
+  - enabled: 1
+    path: Assets/Project/PSH/5Stage.unity
+    guid: 96604ea12a6524f40bc68c04cd4e4aaf
   - enabled: 1
     path: Assets/Project/Public/Scenes/Sample/TestStage/TestStage1.unity
     guid: afc85be5583c9a84483fd14310fc4395
@@ -38,4 +44,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Project/Public/Scenes/Sample/SceneChangeSample.unity
     guid: f7c0956b22e93cc489e96f89fd474090
+  - enabled: 1
+    path: Assets/Project/PSH/PlayerScenePSH.unity
+    guid: 06f79db62b3ceb447bed8c1236d5d38d
+  - enabled: 1
+    path: Assets/Project/KimGyeongya/PlayerSceneKKY.unity
+    guid: 87ae9c4377f1f744587657cb06daabae
+  - enabled: 1
+    path: Assets/Project/NoSeungJu/Scenes/PlayerSceneNSJ.unity
+    guid: b5a6c39850512084e9f9e96345796939
   m_configObjects: {}
