@@ -9,19 +9,27 @@ public class SceneLoadTrigger : MonoBehaviour
     [SerializeField] private SceneField[] _sceneToLoad;
 
     SceneField _DontUnLoadScene;
-
+     [SerializeField]BoxCollider2D _boxCollider2D;
     bool _canUnload = true;
-   
+
+    private void Awake()
+    {
+        _boxCollider2D = GetComponent<BoxCollider2D>();
+    }
+
     private void Start()
     {
         if (SceneChanger.Instance != null) 
         {
             _DontUnLoadScene= SceneChanger.Instance._playerScene;
+            SceneChanger.Instance.OnChangeCurSceneTrigger += CheckCurSceneTrigger;
         }
         else if(TestSceneChanger.Instance != null)
         {
             _DontUnLoadScene = TestSceneChanger.Instance._playerScene;
+            TestSceneChanger.Instance.OnChangeCurSceneTrigger += CheckCurSceneTrigger;
         }
+      StartCoroutine(StartRoutine());
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -30,9 +38,9 @@ public class SceneLoadTrigger : MonoBehaviour
         {
             LoadScene();
             UnloadScene();
+            SetCurSceneTrigger();
         }
     }
-
 
     public void AddSceneToLoad(SceneField[] sceneToLoad)
     {
@@ -106,5 +114,41 @@ public class SceneLoadTrigger : MonoBehaviour
         }
     }
 
+    IEnumerator StartRoutine()
+    {
+        yield return null;
+        CheckCurSceneTrigger();
+    }
+
+    void CheckCurSceneTrigger()
+    {
+        if (_boxCollider2D == null) return;
+        if (SceneChanger.Instance != null)
+        {
+            if (SceneChanger.Instance.CurSceneTrigger == this)
+                _boxCollider2D.enabled = false;
+            else
+                _boxCollider2D.enabled = true;
+        }
+        else if (TestSceneChanger.Instance != null)
+        {
+            if (TestSceneChanger.Instance.CurSceneTrigger == this)
+                _boxCollider2D.enabled = false;
+            else
+                _boxCollider2D.enabled = true;
+
+        }
+    }
+    void SetCurSceneTrigger()
+    {
+        if (SceneChanger.Instance != null)
+        {
+            SceneChanger.Instance.SetCurSceneTrigger(this);
+        }
+        else if (TestSceneChanger.Instance != null)
+        {
+            TestSceneChanger.Instance.SetCurSceneTrigger(this);
+        }
+    }
 
 }

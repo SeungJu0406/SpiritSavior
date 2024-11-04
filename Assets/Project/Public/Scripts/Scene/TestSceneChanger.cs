@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class TestSceneChanger : MonoBehaviour
@@ -12,6 +13,9 @@ public class TestSceneChanger : MonoBehaviour
     public SceneField _playerScene;
     [Header("최초 스테이지")]
     [SerializeField] SceneField _firstStage;
+
+    [SerializeField] public SceneLoadTrigger CurSceneTrigger;
+    public event UnityAction OnChangeCurSceneTrigger;
 
     private void Awake()
     {
@@ -65,5 +69,11 @@ public class TestSceneChanger : MonoBehaviour
         AsyncOperation firstSceneOper = SceneManager.LoadSceneAsync(_firstStage, LoadSceneMode.Additive);
         firstSceneOper.allowSceneActivation = true;
         //StartCoroutine(LoadSceneRoutine());
+    }
+
+    public void SetCurSceneTrigger(SceneLoadTrigger sceneTrigger)
+    {
+        CurSceneTrigger = sceneTrigger;
+        OnChangeCurSceneTrigger?.Invoke();
     }
 }

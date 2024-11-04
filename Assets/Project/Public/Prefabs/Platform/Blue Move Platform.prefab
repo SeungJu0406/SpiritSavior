@@ -159,7 +159,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cf4a2fb255de824eab7c1d1e18f712b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isPatrol: 0
   pointA: {fileID: 0}
   pointB: {fileID: 0}
   moveSpeed: 5
   delay: 0
+  _platformFX: {fileID: 2434392685542819886, guid: 56f298800f839a84684ad988205b0c1b, type: 3}
