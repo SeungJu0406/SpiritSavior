@@ -50,7 +50,8 @@ public class DashState : PlayerState
     {
         PlayAnimationInUpdate();
 
-        //미구현
+
+        //미완성
         //player.AdjustDash();
 
         //if (player.isWall)
