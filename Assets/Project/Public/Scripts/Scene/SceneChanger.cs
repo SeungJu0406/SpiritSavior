@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class SceneChanger : MonoBehaviour
@@ -12,7 +13,8 @@ public class SceneChanger : MonoBehaviour
     [Header("최초 스테이지")]
     [SerializeField] SceneField _firstStage;
 
-    
+    [HideInInspector] public SceneLoadTrigger CurSceneTrigger;
+    public event UnityAction OnChangeCurSceneTrigger;
 
     private void Awake()
     {
@@ -62,6 +64,11 @@ public class SceneChanger : MonoBehaviour
         //StartCoroutine(LoadSceneRoutine());
     }
 
+    public void SetCurSceneTrigger(SceneLoadTrigger sceneTrigger)
+    {
+        CurSceneTrigger = sceneTrigger;
+        OnChangeCurSceneTrigger?.Invoke();
+    }
     //IEnumerator LoadSceneRoutine()
     //{ 
 
