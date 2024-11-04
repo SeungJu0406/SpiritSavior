@@ -34,12 +34,12 @@ public class IdleState : PlayerState
             player.ChangeState(PlayerController.State.Run);
         }
 
-        if (Input.GetKeyDown(KeyCode.C))
+        if (player.jumpBufferCounter > 0f)
         {
             player.ChangeState(PlayerController.State.Jump);
         }
-        
-        if(player.rigid.velocity.y < -0.1f)
+
+        if (player.rigid.velocity.y < -0.1f)
         {
             player.ChangeState(PlayerController.State.Fall);
         }

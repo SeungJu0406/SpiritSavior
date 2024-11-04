@@ -18,6 +18,12 @@ public class LandState : PlayerState
 
     public override void Update()
     {
+        if (player.jumpBufferCounter > 0f)
+        {
+            player.ChangeState(PlayerController.State.Jump);
+            return;
+        }
+
         if (Input.anyKey)
         {
             player.ChangeState(PlayerController.State.Idle);
