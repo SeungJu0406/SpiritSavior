@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1233548109177111808}
   - component: {fileID: 1233548109177111810}
   - component: {fileID: 1233548109177111809}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: MapImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -191,7 +191,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 842c97ce998850246928c0cdf59da332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _faceRed: {fileID: 2034353885118770681}
+  _faceBlue: {fileID: 4799990413198852260}
+  _mapCam: {fileID: 8397066667245872857}
+  mainCamera: {fileID: 6279925403313855614}
+  miniMapLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  _mapImage: {fileID: 1233548109177111809}
   transparencyTime: 0.4
+  _player: {fileID: 5438525081934560786}
 --- !u!1 &1233548109861398021
 GameObject:
   m_ObjectHideFlags: 0
@@ -235,8 +244,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8611565166575129365}
   - component: {fileID: 6807949367289139378}
-  m_Layer: 5
-  m_Name: RedFace
+  m_Layer: 3
+  m_Name: FaceRed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -319,8 +328,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7206253100222748145}
   - component: {fileID: 973559373729864867}
-  m_Layer: 5
-  m_Name: BlueFace
+  m_Layer: 3
+  m_Name: FaceBlue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -404,7 +413,7 @@ GameObject:
   - component: {fileID: 7770817942033001186}
   - component: {fileID: 2294835913649150038}
   - component: {fileID: 772222438863657849}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: MapCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -542,5 +551,15 @@ PrefabInstance:
 --- !u!4 &5438525081934560777 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6120798119892349125, guid: 54b83fed8e8e1f745888d97b22d65881, type: 3}
+  m_PrefabInstance: {fileID: 2272335163462323916}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5438525081934560786 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6120798119892349150, guid: 54b83fed8e8e1f745888d97b22d65881, type: 3}
+  m_PrefabInstance: {fileID: 2272335163462323916}
+  m_PrefabAsset: {fileID: 0}
+--- !u!20 &6279925403313855614 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 5237178578901422770, guid: 54b83fed8e8e1f745888d97b22d65881, type: 3}
   m_PrefabInstance: {fileID: 2272335163462323916}
   m_PrefabAsset: {fileID: 0}
