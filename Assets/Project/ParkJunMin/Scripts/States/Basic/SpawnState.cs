@@ -38,9 +38,9 @@ public class SpawnState : PlayerState
         player.isDead = false;
         player.playerModel.invincibility = false;
 
-        if (Manager.Game.RespawnPoint != null )
+        if (Manager.Game.RespawnPos != null )
         {
-            player.transform.position = Manager.Game.RespawnPoint;
+            player.transform.position = Manager.Game.RespawnPos;
         }
         else
         {

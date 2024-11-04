@@ -92,7 +92,7 @@ public partial class PlayerController : MonoBehaviour
     //void InitRespawnPlayer()
     //{
     //    _isDead = false;
-    //    transform.position = Manager.Game.RespawnPoint;
+    //    transform.position = Manager.Game.RespawnPos;
     //    playerModel.curNature = PlayerModel.Nature.Red;
     //    ChangeState(State.Idle);
     //    playerModel.hp = playerModel.curMaxHP;
