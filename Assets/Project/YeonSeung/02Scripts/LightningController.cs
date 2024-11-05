@@ -104,10 +104,11 @@ public class LightningController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            Lightning();
-        }
+        // 테스트용
+        // if (Input.GetKeyDown(KeyCode.Q))
+        // {
+        //     Lightning();
+        // }
 
         if (_PeriodicStrike == null)
         {
@@ -157,6 +158,7 @@ public class LightningController : MonoBehaviour
     private void Lightning()
     {
         ObjectPool.SpawnObject(_lightning, hitSpot.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
+        Manager.Sound.PlaySFX(Manager.Sound.Data.ThunderSound);
     }
 
  //   private void OnTriggerEnter2D(Collider2D collision)
