@@ -4,7 +4,6 @@ using UnityEngine;
 public partial class PlayerController : MonoBehaviour
 {
     public enum State { Idle, Run, Dash, Jump, DoubleJump, Fall, Land, WallGrab, WallSliding, WallJump, Damaged, WakeUp, Dead, Spawn, Size }
-    //public PlayerData playerData;
     [SerializeField] State _curState;
     private PlayerState[] _states = new PlayerState[(int)State.Size];
 
@@ -17,26 +16,25 @@ public partial class PlayerController : MonoBehaviour
     private int _wallLayerMask;
     private int _ignorePlayerLayerMask;
 
-    //public SpriteRenderer renderer;
     [Header("Player Setting")]
-    public float moveSpeed;        // ÀÌµ¿¼Óµµ
-    public float dashForce;         // ´ë½Ã Èû
-    public float dashCoolTime; // ´ë½Ã »ç¿ë ÈÄ ÄğÅ¸ÀÓ
-    public float jumpForce;    // ³ôÀºÁ¡ÇÁ Èû
-    public float doubleJumpForce; // ´õºí Á¡ÇÁ½Ã ¾ó¸¶³ª À§·Î ¿Ã¶ó°¥Áö °áÁ¤
-    public float knockbackForce; // ÇÇ°İ½Ã ¾ó¸¶³ª µÚ·Î ¹Ğ·Á³¯ Áö °áÁ¤
-    public float wallJumpPower; // º®Á¡ÇÁ Èû
-    public float maxAngle; // ÀÌµ¿ °¡´ÉÇÑ ÃÖ´ë °¢µµ
-    public float speedAdjustmentOffsetInAir; // °øÁß¿¡¼­ÀÇ ¼Óµµ = ¶¥¿¡¼­ÀÇ ¼Óµµ * ÇØ´ç º¯¼ö
+    public float moveSpeed;        // ì´ë™ì†ë„
+    public float dashForce;         // ëŒ€ì‹œ í˜
+    public float dashCoolTime; // ëŒ€ì‹œ ì‚¬ìš© í›„ ì¿¨íƒ€ì„
+    public float jumpForce;    // ë†’ì€ì í”„ í˜
+    public float doubleJumpForce; // ë”ë¸” ì í”„ì‹œ ì–¼ë§ˆë‚˜ ìœ„ë¡œ ì˜¬ë¼ê°ˆì§€ ê²°ì •
+    public float knockbackForce; // í”¼ê²©ì‹œ ì–¼ë§ˆë‚˜ ë’¤ë¡œ ë°€ë ¤ë‚  ì§€ ê²°ì •
+    public float wallJumpPower; // ë²½ì í”„ í˜
+    public float maxAngle; // ì´ë™ ê°€ëŠ¥í•œ ìµœëŒ€ ê°ë„
+    public float speedAdjustmentOffsetInAir; // ê³µì¤‘ì—ì„œì˜ ì†ë„ = ë•…ì—ì„œì˜ ì†ë„ * í•´ë‹¹ ë³€ìˆ˜
 
     // "SpeedInAir = SpeedInGround * x")
-    [HideInInspector] public float moveSpeedInAir;    // °øÁß¿¡¼­ ÇÃ·¹ÀÌ¾îÀÇ ¼Óµµ
-    //±âº» ÀÌµ¿¼Óµµ¿¡ µû¶ó º¯È­µÇ´Â º¯¼ö º¯°æx
+    [HideInInspector] public float moveSpeedInAir;    // ê³µì¤‘ì—ì„œ í”Œë ˆì´ì–´ì˜ ì†ë„
 
     [Space(30)]
     [Header("Checking")]
-    public bool isDoubleJumpUsed; // ´õºíÁ¡ÇÁ »ç¿ë À¯¹«¸¦ ³ªÅ¸³»´Â º¯¼ö
-    public bool isDashUsed; // ´ë½Ã¸¦ »ç¿ëÇß´ÂÁö À¯¹«¸¦ ³ªÅ¸³»´Â º¯¼ö
+    public bool isDoubleJumpUsed; // ë”ë¸”ì í”„ ì‚¬ìš© ìœ ë¬´ë¥¼ ë‚˜íƒ€ë‚´ëŠ” ë³€ìˆ˜
+    public bool isDashUsed; // ëŒ€ì‹œë¥¼ ì‚¬ìš©í–ˆëŠ”ì§€ ìœ ë¬´ë¥¼ ë‚˜íƒ€ë‚´ëŠ” ë³€ìˆ˜
+
     [HideInInspector] public Rigidbody2D rigid;
     [HideInInspector] public float dashDeltaTime;
 
@@ -49,12 +47,12 @@ public partial class PlayerController : MonoBehaviour
 
     public Transform _wallCheckPoint;
     private float _wallCheckDistance = 0.01f;
-    [SerializeField] private float _wallCheckHeight; // ³Ê¹« ±æ¸é °æ»çµµ º®À¸·Î ÀÎ½ÄÇÔ
+    [SerializeField] private float _wallCheckHeight; // ë„ˆë¬´ ê¸¸ë©´ ê²½ì‚¬ë„ ë²½ìœ¼ë¡œ ì¸ì‹í•¨
     [SerializeField] private float _groundCheckDistance;
     public float groundAngle;
     public int isPlayerRight = 1;
-    public bool isGrounded;        // Ä³¸¯ÅÍ°¡ ¶¥¿¡ ºÙ¾îÀÖ´ÂÁö Ã¼Å©
-    private bool _isStandable; // µÎ ·¹ÀÌ ¸ğµÎ ¶¥¿¡ ºÙ¾îÀÖ´ÂÁö Ã¼Å©
+    public bool isGrounded;        // ìºë¦­í„°ê°€ ë•…ì— ë¶™ì–´ìˆëŠ”ì§€ ì²´í¬
+    private bool _isStandable; // ë‘ ë ˆì´ ëª¨ë‘ ë•…ì— ë¶™ì–´ìˆëŠ”ì§€ ì²´í¬ // í˜„ì¬ ë¯¸ì‚¬ìš©
     [HideInInspector] public Vector2 perpAngle;
     [HideInInspector] public bool isSlope;
     [HideInInspector] public RaycastHit2D groundHit1;
@@ -62,49 +60,46 @@ public partial class PlayerController : MonoBehaviour
     [HideInInspector] public RaycastHit2D chosenHit;
     [HideInInspector] public RaycastHit2D wallHit;
     [HideInInspector] public RaycastHit2D[] boxHits;
-    public bool isWall;                  // Ä³¸¯ÅÍ°¡ º®¿¡ ºÙ¾îÀÖ´ÂÁö Ã¼Å©
-    public bool isWallJumpUsed;         // º®¿¡¼­ º®Á¡ÇÁ¸¦ »ç¿ë Çß´ÂÁö Ã¼Å©
+    public bool isWall;                  // ìºë¦­í„°ê°€ ë²½ì— ë¶™ì–´ìˆëŠ”ì§€ ì²´í¬
+    //public bool isWallJumpUsed;         // ë²½ì—ì„œ ë²½ì í”„ë¥¼ ì‚¬ìš© í–ˆëŠ”ì§€ ì²´í¬
     private Vector2 _wallCheckBoxSize;
     Coroutine _wallCheckDisplayRoutine;
 
     [Header("Input")]
     [HideInInspector] public float moveInput;
-    // ÄÚ¿äÅ× Å¸ÀÓ
+    // ì½”ìš”í…Œ íƒ€ì„
     [HideInInspector] public float coyoteTime = 0.2f;
     [HideInInspector] public float coyoteTimeCounter;
-    //Á¡ÇÁ ¹öÆÛ
+    //ì í”„ ë²„í¼
     [HideInInspector] public float jumpBufferTime = 0.2f;
     [SerializeField] public float jumpBufferCounter;
 
     /*
-    //Æó±â
-    [HideInInspector] public float lowJumpForce;     // ³·ÀºÁ¡ÇÁ Èû
-    [HideInInspector] public float maxMoveSpeed;     // ÀÌµ¿¼ÓµµÀÇ ÃÖ´ë°ª
-    [HideInInspector] public float maxJumpTime;     // ÃÖ´ëÁ¡ÇÁ ½Ã°£
-    [HideInInspector] public float slopeJumpBoost; // °æ»ç¸é¿¡¼­ÀÇ Ãß°¡ Á¡ÇÁ ¿ÀÇÁ¼Â °ª // Æó±â
-    [HideInInspector] public float jumpCirticalPoint; // ³·ÀºÁ¡ÇÁ, ³ôÀºÁ¡ÇÁ¸¦ °¡¸£´Â ½ÃÁ¡ // Æó±â
-    [HideInInspector] public float maxMoveSpeedInAir; // °øÁß¿¡¼­ ÇÃ·¹ÀÌ¾îÀÇ ¼ÓµµÀÇ ÃÖ´ë°ª
-    [HideInInspector] public float jumpChargingTime = 0f;     // ½ºÆäÀÌ½º¹Ù ´©¸¥½Ã°£ Ã¼Å©
-    [HideInInspector] public float maxFlightTime; // Á¡ÇÁ ÈÄ ¹Ù·Î fall »óÅÂ·Î µé¾î°¡Áö ¾Ê±â À§ÇÑ º¯¼ö
+    //íê¸°
+    [HideInInspector] public float lowJumpForce;     // ë‚®ì€ì í”„ í˜
+    [HideInInspector] public float maxMoveSpeed;     // ì´ë™ì†ë„ì˜ ìµœëŒ€ê°’
+    [HideInInspector] public float maxJumpTime;     // ìµœëŒ€ì í”„ ì‹œê°„
+    [HideInInspector] public float slopeJumpBoost; // ê²½ì‚¬ë©´ì—ì„œì˜ ì¶”ê°€ ì í”„ ì˜¤í”„ì…‹ ê°’ // íê¸°
+    [HideInInspector] public float jumpCirticalPoint; // ë‚®ì€ì í”„, ë†’ì€ì í”„ë¥¼ ê°€ë¥´ëŠ” ì‹œì  // íê¸°
+    [HideInInspector] public float maxMoveSpeedInAir; // ê³µì¤‘ì—ì„œ í”Œë ˆì´ì–´ì˜ ì†ë„ì˜ ìµœëŒ€ê°’
+    [HideInInspector] public float jumpChargingTime = 0f;     // ìŠ¤í˜ì´ìŠ¤ë°” ëˆ„ë¥¸ì‹œê°„ ì²´í¬
+    [HideInInspector] public float maxFlightTime; // ì í”„ í›„ ë°”ë¡œ fall ìƒíƒœë¡œ ë“¤ì–´ê°€ì§€ ì•Šê¸° ìœ„í•œ ë³€ìˆ˜
     [HideInInspector] public RaycastHit2D slopeHit;
     Coroutine _groundCheckRoutine;
     [SerializeField] private float _slopeCheckDistance;
-    public bool isStuck; // º®¿¡ ³¢¾ú´ÂÁö È®ÀÎ
+    public bool isStuck; // ë²½ì— ë¼ì—ˆëŠ”ì§€ í™•ì¸
     */
     private void Awake()
     {
         if (playerModel != null)
-        {
             playerModel.curNature = PlayerModel.Nature.Red;
-        }
         else
-        {
-            Debug.LogError("¸ğµ¨ »ı¼º ¿À·ù");
-        }
+            Debug.LogError("ëª¨ë¸ ìƒì„± ì˜¤ë¥˜");
 
         rigid = GetComponent<Rigidbody2D>();
         if (rigid == null)
-            Debug.LogError("rigidBody¾øÀ½");
+            Debug.LogError("rigidBodyì—†ìŒ");
+
         _playerCollider = GetComponent<CapsuleCollider2D>();
         _states[(int)State.Idle] = new IdleState(this);
         _states[(int)State.Run] = new RunState(this);
@@ -134,7 +129,7 @@ public partial class PlayerController : MonoBehaviour
         if (_wallCheckPoint == null)
             _wallCheckPoint = transform.Find("WallCheckPoint");
 
-        if (_wallCheckDisplayRoutine == null) // ÀÛ¼ºÁß
+        if (_wallCheckDisplayRoutine == null)
             _wallCheckDisplayRoutine = StartCoroutine(CheckWallDisplayRoutine());
 
         _wallCheckBoxSize = new Vector2(_wallCheckDistance, _wallCheckHeight);
@@ -163,9 +158,10 @@ public partial class PlayerController : MonoBehaviour
         CheckWall();
         ControlCoyoteTime();
         ControlJumpBuffer();
+        
+        /* ë¯¸ë„ëŸ¼ ë°©ì§€ ì‹œí–‰ì°©ì˜¤ ë° ì„ì‹œí”¼ê²©íŠ¸ë¦¬ê±°
 
-        /* ¹Ì²ô·³ ¹æÁö ½ÃÇàÂø¿À ¹× ÀÓ½ÃÇÇ°İÆ®¸®°Å
-        //// ¹Ì²ô·¯Áü ¹æÁö1
+        //// ë¯¸ë„ëŸ¬ì§ ë°©ì§€1
         //if (player.moveInput == 0)
         //{
         //    player.rigid.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePosition;
@@ -174,45 +170,45 @@ public partial class PlayerController : MonoBehaviour
         //{
         //    player.rigid.constraints = RigidbodyConstraints2D.FreezeRotation;
         //}
-        // ¹Ì²ô·³ ¹æÁö2
+        // ë¯¸ë„ëŸ¼ ë°©ì§€2
         //if(moveInput == 0)
         //{
         //    rigid.velocity = new Vector2(0,rigid.velocity.y);
         //}
 
-        //ÀÓ½Ã ÇÇ°İ Æ®¸®°Å
+        //ì„ì‹œ í”¼ê²© íŠ¸ë¦¬ê±°
         //if (Input.GetKeyDown(KeyCode.O))
         //{
-        //    playerModel.TakeDamageEvent(1); // ÀÓ½Ã
+        //    playerModel.TakeDamageEvent(1); // ì„ì‹œ
         //}
 
-        ////ÀÓ½Ã Á×À½ Æ®¸®°Å
+        ////ì„ì‹œ ì£½ìŒ íŠ¸ë¦¬ê±°
         //if (Input.GetKeyDown(KeyCode.P))
         //{
         //    playerModel.DiePlayer();
-        //    Debug.Log("Á×À½");
+        //    Debug.Log("ì£½ìŒ");
         //}
 
-        ////ÀÓ½Ã ´É·Â ÇØ±İ Æ®¸®°Å
+        ////ì„ì‹œ ëŠ¥ë ¥ í•´ê¸ˆ íŠ¸ë¦¬ê±°
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             UnlockAbility(PlayerModel.Ability.Tag);
-            //Debug.Log("ÅÂ±× ÇØ±İ");
+            //Debug.Log("íƒœê·¸ í•´ê¸ˆ");
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             UnlockAbility(PlayerModel.Ability.Dash);
-            //Debug.Log("´ë½Ã ÇØ±İ");
+            //Debug.Log("ëŒ€ì‹œ í•´ê¸ˆ");
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             UnlockAbility(PlayerModel.Ability.WallJump);
-            //Debug.Log("º®Á¡ÇÁ ÇØ±İ");
+            //Debug.Log("ë²½ì í”„ í•´ê¸ˆ");
         }
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             UnlockAbility(PlayerModel.Ability.DoubleJump);
-            // Debug.Log("´õºíÁ¡ÇÁ ÇØ±İ");
+            // Debug.Log("ë”ë¸”ì í”„ í•´ê¸ˆ");
         }
         */
     }
@@ -230,11 +226,11 @@ public partial class PlayerController : MonoBehaviour
         if (!isDashUsed)
             return;
 
-        // ´ë½¬¸¦ ¾²°í ÄğÅ¸ÀÓ¸¸Å­ Áö³­°æ¿ì
+        // ëŒ€ì‰¬ë¥¼ ì“°ê³  ì¿¨íƒ€ì„ë§Œí¼ ì§€ë‚œê²½ìš°
         if (dashDeltaTime >= dashCoolTime)
         {
             isDashUsed = false;
-            //dashDeltaTimeÀ» 0À¸·Î ÃÊ±âÈ­ÇØÁÖ´Â°Ç ´ë½ÃÁøÀÔ½Ã
+            //dashDeltaTimeì„ 0ìœ¼ë¡œ ì´ˆê¸°í™”í•´ì£¼ëŠ”ê±´ ëŒ€ì‹œì§„ì…ì‹œ
         }
         else
         {
@@ -244,8 +240,8 @@ public partial class PlayerController : MonoBehaviour
 
     public void ChangeState(State nextState)
     {
-        // ¾îºô¸®Æ¼°¡ ÇØ±İµÆ´ÂÁö È®ÀÎÇÏ´Â °úÁ¤
-        // ´õºíÁ¡ÇÁÀÇ ¿¹¿Ü»çÇ× Ã³¸®
+        // ì–´ë¹Œë¦¬í‹°ê°€ í•´ê¸ˆëëŠ”ì§€ í™•ì¸í•˜ëŠ” ê³¼ì •
+        // ë”ë¸”ì í”„ì˜ ì˜ˆì™¸ì‚¬í•­ ì²˜ë¦¬
         if (_curState == State.WallJump && nextState == State.DoubleJump)
         {
             _states[(int)_curState].Exit();
@@ -254,7 +250,7 @@ public partial class PlayerController : MonoBehaviour
         }
 
 
-        //¹æ¾È2. Áßº¹ ÄÚµå¸¦ ÁÙÀÓ
+        //ë°©ì•ˆ2. ì¤‘ë³µ ì½”ë“œë¥¼ ì¤„ì„
         if (_states[(int)nextState].ability == PlayerModel.Ability.None || HasAbility(_states[(int)nextState].ability))
         {
             _states[(int)_curState].Exit();
@@ -262,7 +258,7 @@ public partial class PlayerController : MonoBehaviour
             _states[(int)_curState].Enter();
         }
 
-        /* ¹æ¾È1
+        /* ë°©ì•ˆ1
         //if (_states[(int)nextState].ability != Ability.None)
         //{
         //    if (HasAbility(_states[(int)nextState].ability))
@@ -273,7 +269,7 @@ public partial class PlayerController : MonoBehaviour
         //    }
         //    else
         //    {
-        //        Debug.Log("¾ÆÁ÷ ÇØ±İÇÏÁö ¾ÊÀº ´É·Â");
+        //        Debug.Log("ì•„ì§ í•´ê¸ˆí•˜ì§€ ì•Šì€ ëŠ¥ë ¥");
         //    }
         //}
         //else
@@ -287,7 +283,7 @@ public partial class PlayerController : MonoBehaviour
 
     private void CheckGroundRaycast()
     {
-        // ¶¥ Ã¼Å©¿Í ¶¥ÀÌ ÆòÁöÀÎÁö °æ»ç¸éÀÎÁö Ã¼Å©ÇÏ´Â ¸Ş¼­µå
+        // ë•… ì²´í¬ì™€ ë•…ì´ í‰ì§€ì¸ì§€ ê²½ì‚¬ë©´ì¸ì§€ ì²´í¬í•˜ëŠ” ë©”ì„œë“œ
         groundHit1 = Physics2D.Raycast(_groundCheckPoint1.position, Vector2.down, _groundCheckDistance, _groundLayerMask);
         groundHit2 = Physics2D.Raycast(_groundCheckPoint2.position, Vector2.down, _groundCheckDistance, _groundLayerMask);
         Debug.DrawLine(_groundCheckPoint1.position, (Vector2)_groundCheckPoint1.position + Vector2.down * _groundCheckDistance, Color.cyan);
@@ -295,7 +291,7 @@ public partial class PlayerController : MonoBehaviour
 
         if(groundHit1 && groundHit2)
         {
-            _isStandable = true; // ÇöÀç ¹Ì»ç¿ë
+            _isStandable = true; // í˜„ì¬ ë¯¸ì‚¬ìš©
         }
 
         if (groundHit1 || groundHit2)
@@ -303,7 +299,7 @@ public partial class PlayerController : MonoBehaviour
             isGrounded = true;
             if (groundHit1 && groundHit2)
             {
-                //µÑ Áß ´õ distance°¡ ´õ ÂªÀº ray¸¦ ¼±ÅÃ
+                //ë‘˜ ì¤‘ ë” distanceê°€ ë” ì§§ì€ rayë¥¼ ì„ íƒ
                 chosenHit = groundHit1.distance <= groundHit2.distance ? groundHit1 : groundHit2;
             }
             else
@@ -315,8 +311,8 @@ public partial class PlayerController : MonoBehaviour
         {
             isGrounded = false;
         }
+        // Vector2.Perpendicular(Vector2 A) : Aì˜ ê°’ì—ì„œ ë°˜ì‹œê³„ ë°©í–¥ìœ¼ë¡œ 90ë„ íšŒì „í•œ ë²¡í„°ê°’ì„ ë°˜í™˜
 
-        // Vector2.Perpendicular(Vector2 A) : AÀÇ °ª¿¡¼­ ¹İ½Ã°è ¹æÇâÀ¸·Î 90µµ È¸ÀüÇÑ º¤ÅÍ°ªÀ» ¹İÈ¯
         if (isGrounded)
         {
             perpAngle = Vector2.Perpendicular(chosenHit.normal).normalized; // 
@@ -332,10 +328,10 @@ public partial class PlayerController : MonoBehaviour
                 moveInput = 0;
             }
 
-            //¹ı¼±º¤ÅÍ, Áö¸é¿¡¼­ ¼öÁ÷
+            //ë²•ì„ ë²¡í„°, ì§€ë©´ì—ì„œ ìˆ˜ì§
             Debug.DrawLine(chosenHit.point, chosenHit.point + chosenHit.normal, Color.blue);
 
-            // ¹ı¼±º¤ÅÍÀÇ ¼öÁ÷ÀÎ º¤ÅÍ, °æ»ç¸é
+            // ë²•ì„ ë²¡í„°ì˜ ìˆ˜ì§ì¸ ë²¡í„°, ê²½ì‚¬ë©´
             Debug.DrawLine(chosenHit.point, chosenHit.point + perpAngle, Color.red);
         }
     }
@@ -353,7 +349,7 @@ public partial class PlayerController : MonoBehaviour
         if ((_ignorePlayerLayerMask & (1 << wallHit.collider.gameObject.layer)) != 0)
             return;
 
-        if (HasAbility(PlayerModel.Ability.WallJump) && (_wallLayerMask & (1 << wallHit.collider.gameObject.layer)) != 0)// º®Å¸±â °¡´ÉÇÑ º®ÀÏ °æ¿ì
+        if (HasAbility(PlayerModel.Ability.WallJump) && (_wallLayerMask & (1 << wallHit.collider.gameObject.layer)) != 0)// ë²½íƒ€ê¸° ê°€ëŠ¥í•œ ë²½ì¼ ê²½ìš°
         {
             if (isGrounded || _curState == State.WallJump || _curState == State.WallGrab || _curState == State.WallSliding)
                 return;
@@ -361,13 +357,12 @@ public partial class PlayerController : MonoBehaviour
             if (moveInput == isPlayerRight && moveInput != 0)
                 ChangeState(State.WallGrab);
         }
-        else // º®Å¸±â ºÒ°¡´ÉÇÑ º®ÀÌ¾úÀ» °æ¿ì
+        else // ë²½íƒ€ê¸° ë¶ˆê°€ëŠ¥í•œ ë²½ì´ì—ˆì„ ê²½ìš°
         {
             float wallAngle = Vector2.Angle(Vector2.up, wallHit.normal);
             {
                 Vector2 slideDirection = Vector2.Perpendicular(wallHit.normal).normalized;
                 rigid.velocity = new Vector2(slideDirection.x * rigid.velocity.x, rigid.velocity.y);
-
             }
         }
     }
@@ -375,6 +370,7 @@ public partial class PlayerController : MonoBehaviour
     private Vector2 GetCenterOfCollider()
     {
         return (Vector2)_playerCollider.bounds.center;
+
     }
 
     public void MoveInAir()
@@ -405,13 +401,13 @@ public partial class PlayerController : MonoBehaviour
     {
         if (HasAbility(ability))
         {
-            Debug.Log("ÀÌ¹Ì ÇØ±İµÈ ´É·ÂÀÔ´Ï´Ù.");
+            Debug.Log("ì´ë¯¸ í•´ê¸ˆëœ ëŠ¥ë ¥ì…ë‹ˆë‹¤.");
             return;
         }
 
         unlockedAbilities |= ability;
         playerModel.UnlockAbilityEvent(ability);
-        Debug.Log($"{ability} ÇØ±İ");
+        Debug.Log($"{ability} í•´ê¸ˆ");
     }
 
     public bool HasAbility(PlayerModel.Ability ability)
@@ -432,8 +428,6 @@ public partial class PlayerController : MonoBehaviour
         _groundCheckPoint2.localPosition = new Vector2(Mathf.Abs(_groundCheckPoint2.localPosition.x) * isPlayerRight, _groundCheckPoint2.localPosition.y);
         _wallCheckPoint.localPosition = new Vector2(Mathf.Abs(_wallCheckPoint.localPosition.x) * isPlayerRight, _wallCheckPoint.localPosition.y);
     }
-
-
     private void AdjustColliderOffset()
     {
         _playerCollider.offset = new Vector2(Mathf.Abs(_playerCollider.offset.x) * isPlayerRight, _playerCollider.offset.y);
@@ -445,24 +439,24 @@ public partial class PlayerController : MonoBehaviour
         {
             if (HasAbility(PlayerModel.Ability.Tag))
             {
-                // playerView.ChangeSprite(); // »ó½Ã ¾Ö´Ï¸ŞÀÌ¼Ç Àç»ı »óÅÂ¶ó ¾ø¾îµµ ¹«¹æ
-                playerModel.TagPlayerEvent(); // ¼Ó¼º ¿­°ÅÇü Çü½ÄÀÇ curNature¸¦ ¹Ù²ãÁÜ + ÅÂ±× ÀÌº¥Æ® Invoke
+                // playerView.ChangeSprite(); // ìƒì‹œ ì• ë‹ˆë©”ì´ì…˜ ì¬ìƒ ìƒíƒœë¼ ì—†ì–´ë„ ë¬´ë°©
+                playerModel.TagPlayerEvent(); // ì†ì„± ì—´ê±°í˜• í˜•ì‹ì˜ curNatureë¥¼ ë°”ê¿”ì¤Œ + íƒœê·¸ ì´ë²¤íŠ¸ Invoke
             }
             else
             {
-                Debug.Log("ÅÂ±× ´É·Â ÇØ±İ ¾ÈµÊ");
+                Debug.Log("íƒœê·¸ ëŠ¥ë ¥ í•´ê¸ˆ ì•ˆë¨");
             }
         }
     }
 
     public void CheckDashable()
     {
-        //Dash »óÅÂ·Î ÀüÈ¯
+        //Dash ìƒíƒœë¡œ ì „í™˜
         if (moveInput != 0)
         {
             if (isDashUsed && Input.GetKeyDown(KeyCode.X))
             {
-                Debug.Log("´ë½Ã ÄğÅ¸ÀÓÁßÀÔ´Ï´Ù.");
+                Debug.Log("ëŒ€ì‹œ ì¿¨íƒ€ì„ì¤‘ì…ë‹ˆë‹¤.");
             }
             else if (!isDashUsed && Input.GetKeyDown(KeyCode.X))
             {
@@ -481,17 +475,18 @@ public partial class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// ÇÃ·¹ÀÌ¾î ÃÊ±âÈ­ ¹× ½ºÆù ÀÛ¾÷
+    /// í”Œë ˆì´ì–´ ì´ˆê¸°í™” ë° ìŠ¤í° ì‘ì—…
     /// </summary>
     public void HandlePlayerSpawn()
     {
         //ChangeState(State.Spawn);
-        // _playerUI.SetHp(playerModel.hp); // ÀÏ´Ü ÁÖ¼®Ã³¸®, ¼ø¼­»óÀÇ ¹®Á¦·Î ÇÃ·¹ÀÌ¾î¿¡¼­ ÇØ¾ßÇÒ¼öµµ ÀÖÀ½
+        // _playerUI.SetHp(playerModel.hp); // ì¼ë‹¨ ì£¼ì„ì²˜ë¦¬, ìˆœì„œìƒì˜ ë¬¸ì œë¡œ í”Œë ˆì´ì–´ì—ì„œ í•´ì•¼í• ìˆ˜ë„ ìˆìŒ
     }
 
     private void OnDestroy()
     {
         UnsubscribeEvents();
+
         if (_wallCheckDisplayRoutine != null)
             StopCoroutine(_wallCheckDisplayRoutine);
     }
@@ -514,7 +509,7 @@ public partial class PlayerController : MonoBehaviour
     {
         WaitForSeconds delay = new WaitForSeconds(0.1f);
 
-        //BoxCast¸¦ ÅëÇØ º®À» Ã¼Å©ÇÑ ¹üÀ§¸¦ º¸¿©ÁÜ
+        //BoxCastë¥¼ í†µí•´ ë²½ì„ ì²´í¬í•œ ë²”ìœ„ë¥¼ ë³´ì—¬ì¤Œ
         while (true)
         {
             Vector2 origin = _wallCheckPoint.position;
@@ -534,14 +529,12 @@ public partial class PlayerController : MonoBehaviour
         }
 
     }
-
-    /* ¹Ì¿Ï¼º
-    public void AdjustDash()
+    public void AdjustDash() // ë¯¸ì™„ì„±
     {
-        float boundaryOffset = 1.0f; // yÃà °£°İ
-        float colliderHeight = 2.6f; // Äİ¶óÀÌ´õÀÇ ³ôÀÌ
-        float colliderOffsetY = 0.73f; // Äİ¶óÀÌ´õÀÇ y ¿ÀÇÁ¼Â
-        float colliderOffsetX = 0.06f; // Äİ¶óÀÌ´õÀÇ x ¿ÀÇÁ¼Â
+        float boundaryOffset = 1.0f; // yì¶• ê°„ê²©
+        float colliderHeight = 2.6f; // ì½œë¼ì´ë”ì˜ ë†’ì´
+        float colliderOffsetY = 0.73f; // ì½œë¼ì´ë”ì˜ y ì˜¤í”„ì…‹
+        float colliderOffsetX = 0.06f; // ì½œë¼ì´ë”ì˜ x ì˜¤í”„ì…‹
 
         boxHits = Physics2D.BoxCastAll(_wallCheckPoint.position, new Vector2(_wallCheckDistance, _wallCheckHeight + 0.35f), 0, Vector2.right * isPlayerRight, _wallCheckDistance);
         if (boxHits.Length > 0)
@@ -562,33 +555,100 @@ public partial class PlayerController : MonoBehaviour
                 if (!isGrounded)
                 {
                     Vector2 hitPosition = closestHit.point;
-                    Vector2 adjustedPosition = transform.position; // ±âÁ¸ ÇÃ·¹ÀÌ¾î À§Ä¡
+                    Vector2 adjustedPosition = transform.position; // ê¸°ì¡´ í”Œë ˆì´ì–´ ìœ„ì¹˜
 
-                    //// ÇöÀç Äİ¶óÀÌ´õ Áß¾ÓÀÇ y À§Ä¡
+                    //// í˜„ì¬ ì½œë¼ì´ë” ì¤‘ì•™ì˜ y ìœ„ì¹˜
                     //float currentColliderY = adjustedPosition.y - colliderOffsetY;
 
-                    //// ÇÃ·¹ÀÌ¾î°¡ Á¶±İ ³»·ÁÁÖ°Å³ª ¿Ã·ÁÁÖ¸é ¸Å²ô·´°Ô ´ë½¬ ÇÒ ¼ö ÀÖÀ»¶§
+                    //// í”Œë ˆì´ì–´ê°€ ì¡°ê¸ˆ ë‚´ë ¤ì£¼ê±°ë‚˜ ì˜¬ë ¤ì£¼ë©´ ë§¤ë„ëŸ½ê²Œ ëŒ€ì‰¬ í•  ìˆ˜ ìˆì„ë•Œ
                     //if (Mathf.Abs(currentColliderY - hitPosition.y) < boundaryOffset)
                     //{
-                    //    if (currentColliderY > hitPosition.y) // ÃµÀå¿¡ ºÙ¿©¾ß ÇÏ´Â °æ¿ì
+                    //    if (currentColliderY > hitPosition.y) // ì²œì¥ì— ë¶™ì—¬ì•¼ í•˜ëŠ” ê²½ìš°
                     //    {
-                    //        Debug.Log("ÃµÀå¿¡ ºÙ¾î¾ßÇÔ");
-                    //        //// ÃµÀå¿¡ ¸Â°Ô y À§Ä¡ º¸Á¤
+                    //        Debug.Log("ì²œì¥ì— ë¶™ì–´ì•¼í•¨");
+                    //        //// ì²œì¥ì— ë§ê²Œ y ìœ„ì¹˜ ë³´ì •
                     //        //adjustedPosition.y = hitPosition.y + (colliderHeight - colliderOffsetY);
                     //    }
-                    //    else if (currentColliderY < hitPosition.y) // ¹Ù´Ú¿¡ ºÙ¿©¾ß ÇÏ´Â °æ¿ì
+                    //    else if (currentColliderY < hitPosition.y) // ë°”ë‹¥ì— ë¶™ì—¬ì•¼ í•˜ëŠ” ê²½ìš°
                     //    {
-                    //        Debug.Log("¹Ù´Ú¿¡ ºÙ¾î¾ßÇÔ");
-                    //        // ¹Ù´Ú¿¡ ¸Â°Ô y À§Ä¡ º¸Á¤
+                    //        Debug.Log("ë°”ë‹¥ì— ë¶™ì–´ì•¼í•¨");
+                    //        // ë°”ë‹¥ì— ë§ê²Œ y ìœ„ì¹˜ ë³´ì •
                     //        adjustedPosition.y = hitPosition.y - colliderOffsetY;
                     //    }
                     //}
 
-                    // xÃà ¿ÀÇÁ¼Â °í·ÁÇØ º¸Á¤
+                    // xì¶• ì˜¤í”„ì…‹ ê³ ë ¤í•´ ë³´ì •
                     adjustedPosition.x = hitPosition.x - colliderOffsetX;
-                    // ¼ø°£ÀÌµ¿
+                    // ìˆœê°„ì´ë™
                     transform.position = adjustedPosition;
-                    //±âÁ¸ ¼Óµµ À¯Áö
+                    //ê¸°ì¡´ ì†ë„ ìœ ì§€
+                    Vector2 newVelocity = rigid.velocity;
+                    newVelocity.y = 0;
+                    rigid.velocity = newVelocity;
+                    return;
+                }
+            }
+        }
+    }
+    private Vector2 GetCenterOfCollider()
+    {
+        return (Vector2)_playerCollider.bounds.center;
+    }
+
+    /* ë¯¸ì™„ì„±
+    public void AdjustDash()
+    {
+        float boundaryOffset = 1.0f; // yì¶• ê°„ê²©
+        float colliderHeight = 2.6f; // ì½œë¼ì´ë”ì˜ ë†’ì´
+        float colliderOffsetY = 0.73f; // ì½œë¼ì´ë”ì˜ y ì˜¤í”„ì…‹
+        float colliderOffsetX = 0.06f; // ì½œë¼ì´ë”ì˜ x ì˜¤í”„ì…‹
+
+        boxHits = Physics2D.BoxCastAll(_wallCheckPoint.position, new Vector2(_wallCheckDistance, _wallCheckHeight + 0.35f), 0, Vector2.right * isPlayerRight, _wallCheckDistance);
+        if (boxHits.Length > 0)
+        {
+            float closestDistance = float.MaxValue;
+            RaycastHit2D closestHit = new RaycastHit2D();
+            foreach (RaycastHit2D hit in boxHits)
+            {
+                if (hit.distance < closestDistance)
+                {
+                    closestDistance = hit.distance;
+                    closestHit = hit;
+                }
+            }
+
+            if (closestHit.collider != null)
+            {
+                if (!isGrounded)
+                {
+                    Vector2 hitPosition = closestHit.point;
+                    Vector2 adjustedPosition = transform.position; // ê¸°ì¡´ í”Œë ˆì´ì–´ ìœ„ì¹˜
+
+                    //// í˜„ì¬ ì½œë¼ì´ë” ì¤‘ì•™ì˜ y ìœ„ì¹˜
+                    //float currentColliderY = adjustedPosition.y - colliderOffsetY;
+
+                    //// í”Œë ˆì´ì–´ê°€ ì¡°ê¸ˆ ë‚´ë ¤ì£¼ê±°ë‚˜ ì˜¬ë ¤ì£¼ë©´ ë§¤ë„ëŸ½ê²Œ ëŒ€ì‰¬ í•  ìˆ˜ ìˆì„ë•Œ
+                    //if (Mathf.Abs(currentColliderY - hitPosition.y) < boundaryOffset)
+                    //{
+                    //    if (currentColliderY > hitPosition.y) // ì²œì¥ì— ë¶™ì—¬ì•¼ í•˜ëŠ” ê²½ìš°
+                    //    {
+                    //        Debug.Log("ì²œì¥ì— ë¶™ì–´ì•¼í•¨");
+                    //        //// ì²œì¥ì— ë§ê²Œ y ìœ„ì¹˜ ë³´ì •
+                    //        //adjustedPosition.y = hitPosition.y + (colliderHeight - colliderOffsetY);
+                    //    }
+                    //    else if (currentColliderY < hitPosition.y) // ë°”ë‹¥ì— ë¶™ì—¬ì•¼ í•˜ëŠ” ê²½ìš°
+                    //    {
+                    //        Debug.Log("ë°”ë‹¥ì— ë¶™ì–´ì•¼í•¨");
+                    //        // ë°”ë‹¥ì— ë§ê²Œ y ìœ„ì¹˜ ë³´ì •
+                    //        adjustedPosition.y = hitPosition.y - colliderOffsetY;
+                    //    }
+                    //}
+
+                    // xì¶• ì˜¤í”„ì…‹ ê³ ë ¤í•´ ë³´ì •
+                    adjustedPosition.x = hitPosition.x - colliderOffsetX;
+                    // ìˆœê°„ì´ë™
+                    transform.position = adjustedPosition;
+                    //ê¸°ì¡´ ì†ë„ ìœ ì§€
                     Vector2 newVelocity = rigid.velocity;
                     newVelocity.y = 0;
                     rigid.velocity = newVelocity;
@@ -609,7 +669,7 @@ public partial class PlayerController : MonoBehaviour
     //    isWallJumpUsed = false;
     //}
 
-    // ·¹ÀÌ¾î ¶¥ Ã¼Å©
+    // ë ˆì´ì–´ ë•… ì²´í¬
     //private void OnCollisionEnter2D(Collision2D collision)
     //{
     //    if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
@@ -631,12 +691,12 @@ public partial class PlayerController : MonoBehaviour
     //    float moveInput = Input.GetAxisRaw("Horizontal");
 
     //    Vector2 targetVelocity = rigid.velocity + new Vector2(moveInput * moveSpeed*Time.deltaTime, 0);
-    //    targetVelocity = Vector2.ClampMagnitude(targetVelocity, maxMoveSpeedInAir); // ¼ÓµµÁ¦ÇÑ
+    //    targetVelocity = Vector2.ClampMagnitude(targetVelocity, maxMoveSpeedInAir); // ì†ë„ì œí•œ
     //    rigid.velocity = targetVelocity;
 
     //    FlipPlayer(moveInput);
 
-    //    //ÃßÈÄ °³¼±¹æ¾ÈÀ» Ã£¾Æ¾ßÇÔ
+    //    //ì¶”í›„ ê°œì„ ë°©ì•ˆì„ ì°¾ì•„ì•¼í•¨
     //    isWall = Physics2D.BoxCast(_wallCheckPoint.position, _wallCheckBoxSize, 0, Vector2.right * isPlayerRight, _wallCheckDistance, wallLayerMask);
 
     //    if (isWall && _curState != State.WallJump)

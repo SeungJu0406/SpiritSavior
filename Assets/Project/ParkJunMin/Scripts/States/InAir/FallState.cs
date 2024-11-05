@@ -20,24 +20,23 @@ public class FallState : PlayerState
         PlayAnimationInUpdate();
         player.MoveInAir();
 
-        // ¶³¾îÁö´Â »óÅÂ¿¡¼­ ´õºíÁ¡ÇÁ·Î »óÅÂº¯È¯ (´õºíÁ¡ÇÁ¸¦ ¾È½èÀ» °æ¿ì)
+        // ë–¨ì–´ì§€ëŠ” ìƒíƒœì—ì„œ ë”ë¸”ì í”„ë¡œ ìƒíƒœë³€í™˜ (ë”ë¸”ì í”„ë¥¼ ì•ˆì¼ì„ ê²½ìš°)
         if (!player.isDoubleJumpUsed && Input.GetKeyDown(KeyCode.C))
         {
             player.ChangeState(PlayerController.State.DoubleJump);
         }
-
         if(player.isGrounded)
         {
             if (player.isSlope)
             {
-                if (player.groundAngle < player.maxAngle) // ÇÃ·¹ÀÌ¾î°¡ ¿À¸¦ ¼ö ÀÖ´Â °æ»ç¸é ÀÏ °æ¿ì
+                if (player.groundAngle < player.maxAngle) // í”Œë ˆì´ì–´ê°€ ì˜¤ë¥¼ ìˆ˜ ìˆëŠ” ê²½ì‚¬ë©´ ì¼ ê²½ìš°
                 {
                     player.ChangeState(PlayerController.State.Land);
                 }
                 else
                 {
-                    // ¿À¸¦ ¼ö ¾ø´Â °æ»ç¸éÀÏ °æ¿ì ¹Ì²ô·¯Áü
-                    if(player.rigid.velocity.y >= 0) // ´Ù ¹Ì²ô·¯Á³À¸¸é
+                    // ì˜¤ë¥¼ ìˆ˜ ì—†ëŠ” ê²½ì‚¬ë©´ì¼ ê²½ìš° ë¯¸ë„ëŸ¬ì§
+                    if(player.rigid.velocity.y >= 0) // ë‹¤ ë¯¸ë„ëŸ¬ì¡Œìœ¼ë©´
                     {
                         player.ChangeState(PlayerController.State.Land);
                     }
@@ -45,15 +44,13 @@ public class FallState : PlayerState
             }
             else
             {
-                // ÆòÁöÀÏ °æ¿ì
+                // í‰ì§€ì¼ ê²½ìš°
                 player.ChangeState(PlayerController.State.Land);
             }
         }
-
     }
-
+    
     public override void Exit()
     {
-
     }
 }

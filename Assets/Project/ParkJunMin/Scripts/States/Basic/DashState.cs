@@ -17,14 +17,13 @@ public class DashState : PlayerState
         player.dashDeltaTime = 0;
         player.playerView.PlayAnimation(animationIndex);
         player.playerModel.DashPlayerEvent();
-
         dashDirection = new Vector2(player.moveInput, 0);
 
         player.rigid.gravityScale = 0;
         dashDirection = new Vector2(player.moveInput, 0);
         player.rigid.velocity = dashDirection * player.dashForce;
 
-        if (player.isSlope) // ÀÏ´Ü °æ»ç¸é¿¡¼­ ´Ù¸£°Ô Ã³¸®ÇÏ°Ô ¹Ù²Ü°æ¿ì¸¦ ´ëºñÇØ¼­ ³ª´²³õÀ½
+        if (player.isSlope) // ì¼ë‹¨ ê²½ì‚¬ë©´ì—ì„œ ë‹¤ë¥´ê²Œ ì²˜ë¦¬í•˜ê²Œ ë°”ê¿€ê²½ìš°ë¥¼ ëŒ€ë¹„í•´ì„œ ë‚˜ëˆ ë†“ìŒ
         {
             dashDirection = new Vector2(player.moveInput, 0);
             player.rigid.velocity = dashDirection * (player.dashForce);
@@ -39,10 +38,10 @@ public class DashState : PlayerState
     public override void Update()
     {
         PlayAnimationInUpdate();
-
+        
         if (player.playerView.IsAnimationFinished())
         {
-            //Debug.Log("´ë½Ã ¾Ö´Ï¸ŞÀÌ¼Ç Á¾·á");
+            //Debug.Log("ëŒ€ì‹œ ì• ë‹ˆë©”ì´ì…˜ ì¢…ë£Œ");
             player.ChangeState(PlayerController.State.Fall);
         }
         //player.AdjustDash();

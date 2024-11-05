@@ -31,12 +31,12 @@ public class IdleState : PlayerState
         {
             player.ChangeState(PlayerController.State.Fall);
         }
+
         if (player.rigid.velocity.y != 0 && !player.isGrounded)
         {
             player.ChangeState(PlayerController.State.Fall);
         }
-
-        //ÈÎ¾À ´ú ¹Ì²ô·¯Áü
+        //í›¨ì”¬ ëœ ë¯¸ë„ëŸ¬ì§
         if (player.moveInput == 0)
         {
             player.rigid.velocity = new Vector2(0, player.rigid.velocity.y);

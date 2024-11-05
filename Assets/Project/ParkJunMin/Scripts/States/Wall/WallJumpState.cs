@@ -30,8 +30,8 @@ public class WallJumpState : PlayerState
             player.ChangeState(PlayerController.State.DoubleJump);
         }
 
-        if(player.rigid.velocity.y < -5.0f)
-        {
+        if(player.rigid.velocity.y < -5.0f) // wallJump라는걸 알아보기 쉽게 하기 위함, 0으로 설정시 너무 빠른 fall로 전환
+        { 
             player.ChangeState(PlayerController.State.Fall);
         }
 
