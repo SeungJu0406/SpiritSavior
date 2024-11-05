@@ -61,4 +61,10 @@ public class BaseUI : MonoBehaviour
         componentDic.TryAdd(key, component);
         return component as T;
     }
+
+    protected void ClearDic()
+    {
+        gameObjectDic.Clear();
+        componentDic.Clear();
+    }
 }

@@ -26411,7 +26411,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8744870913888346915, guid: c843c960512b61f42b248990bf1705f8, type: 3}
       propertyPath: pointName
-      value: 4 Stage
+      value: 4-1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8744870913888346915, guid: c843c960512b61f42b248990bf1705f8, type: 3}
+      propertyPath: _pointStage
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8744870913888346915, guid: c843c960512b61f42b248990bf1705f8, type: 3}
       propertyPath: _sceneToLoad.Array.size
@@ -59119,11 +59123,15 @@ PrefabInstance:
     - target: {fileID: 2707026264680242175, guid: 3fc012e90742487438717b43eb52fc2e, type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+      objectReference: {fileID: 11400000, guid: 165d810b44f469247accb556463798d8, type: 2}
     - target: {fileID: 2707026264680242175, guid: 3fc012e90742487438717b43eb52fc2e, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+      objectReference: {fileID: 8345368200003475013, guid: 165d810b44f469247accb556463798d8, type: 2}
+    - target: {fileID: 2707026264680242175, guid: 3fc012e90742487438717b43eb52fc2e, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6824138003874267787, guid: 3fc012e90742487438717b43eb52fc2e, type: 3}
       propertyPath: _interactiveObject
       value: 

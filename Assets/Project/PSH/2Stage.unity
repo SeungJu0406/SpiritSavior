@@ -11276,7 +11276,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8744870913888346915, guid: c843c960512b61f42b248990bf1705f8, type: 3}
       propertyPath: pointName
-      value: 2-2 Stage
+      value: 2-2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8744870913888346915, guid: c843c960512b61f42b248990bf1705f8, type: 3}
+      propertyPath: _pointStage
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8744870913888346915, guid: c843c960512b61f42b248990bf1705f8, type: 3}
       propertyPath: _sceneToLoad.Array.size
@@ -34830,7 +34834,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8744870913888346915, guid: c843c960512b61f42b248990bf1705f8, type: 3}
       propertyPath: pointName
-      value: 2-1 Stage
+      value: 2-1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8744870913888346915, guid: c843c960512b61f42b248990bf1705f8, type: 3}
+      propertyPath: _pointStage
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8744870913888346915, guid: c843c960512b61f42b248990bf1705f8, type: 3}
       propertyPath: _sceneToLoad.Array.size
