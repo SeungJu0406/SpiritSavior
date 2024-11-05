@@ -88,21 +88,15 @@ public class PointController : Trap
     {
         while (true)
         {
-            if (_pointActive)
-            {
-                Manager.Sound.PlaySFX(Manager.Sound.Data.WarpAfterOpenSound); // 2.3 열린 다음 소리
-            }
-            else
-            {
-                Manager.Sound.PlaySFX(Manager.Sound.Data.WarpBeforeOpenSound); // 2.1 열리기 전 소리
-            }
+            if (_warpAroundSoundRoutine == null)
+                _warpAroundSoundRoutine = StartCoroutine(WarpAroundSoundRoutine());
 
             if (Input.GetKeyDown(KeyCode.F))
             {
                 Manager.Sound.PlaySFX(Manager.Sound.Data.WarpOpeningSound); // 2.2 열리는 소리
                 if (!_pointActive)
                 {
-                    
+
                     Active();
                     _pointActive = true;
                 }
@@ -122,6 +116,22 @@ public class PointController : Trap
             }
             yield return null;
         }
+    }
+
+    Coroutine _warpAroundSoundRoutine;
+    WaitForSeconds _warpAroundDelay = new WaitForSeconds(1.5f);
+    IEnumerator WarpAroundSoundRoutine()
+    {
+        if (_pointActive)
+        {
+            Manager.Sound.PlaySFX(Manager.Sound.Data.WarpAfterOpenSound); // 2.3 열린 다음 소리
+        }
+        else
+        {
+            Manager.Sound.PlaySFX(Manager.Sound.Data.WarpBeforeOpenSound); // 2.1 열리기 전 소리
+        }
+        yield return _warpAroundDelay;
+        _warpAroundSoundRoutine = null;
     }
     protected override void ProcessActive()
     {
