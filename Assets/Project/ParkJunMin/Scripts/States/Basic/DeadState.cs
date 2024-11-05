@@ -10,7 +10,6 @@ public class DeadState : PlayerState
     }
     public override void Enter()
     {
-        player.isDead = true;
         player.playerModel.hp = 0;
         player.playerView.PlayAnimation(animationIndex);
         player.playerModel.DiePlayerEvent();
