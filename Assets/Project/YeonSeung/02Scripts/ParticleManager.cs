@@ -154,13 +154,13 @@ public class ParticleManager : MonoBehaviour
     // 다른 파티클들
     public void PlayGrassFX()
     {
-        ParticleManager.Instance.PlayGrassFX();
+        //ParticleManager.Instance.PlayGrassFX();
         ObjectPool.SpawnObject(GrassFX, _pBottom.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
     }
 
     public void PlayTrampolineFX()
     {
-        ParticleManager.Instance.PlayTrampolineFX();
+        //ParticleManager.Instance.PlayTrampolineFX();
         ObjectPool.SpawnObject(trapomlineFX, _pBottom.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
     }
 
