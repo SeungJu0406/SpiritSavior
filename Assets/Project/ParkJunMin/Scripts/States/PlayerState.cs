@@ -25,6 +25,5 @@ public class PlayerState : BaseState
             player.playerView.PlayAnimation(animationIndex, normalizedTime);
             prevNature = player.playerModel.curNature;
         }
-        //애니메이션 진행 상황에 맞춰 다음 진행 될 애니메이션이 진행되면 좋을거같음
     }
 }

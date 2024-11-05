@@ -13,7 +13,6 @@ public class DoubleJumpState : PlayerState
 
     public override void Enter()
     {
-        
         player.playerView.PlayAnimation(animationIndex);
         player.playerModel.DoubleJumpPlayerEvent();
 
@@ -22,7 +21,6 @@ public class DoubleJumpState : PlayerState
         player.rigid.velocity = curVelocity;
         player.rigid.AddForce(new Vector2(player.rigid.velocity.x,player.doubleJumpForce),ForceMode2D.Impulse);
         player.isDoubleJumpUsed = true;
-        
     }
 
     public override void Update()
@@ -32,7 +30,6 @@ public class DoubleJumpState : PlayerState
 
         if (player.rigid.velocity.y < 0)
         {
-            //Debug.Log(player.rigid.velocity.y);
             player.ChangeState(PlayerController.State.Fall);
         }
 

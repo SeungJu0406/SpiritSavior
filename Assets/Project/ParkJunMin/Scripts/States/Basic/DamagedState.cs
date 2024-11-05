@@ -6,7 +6,6 @@ using UnityEngine.PlayerLoop;
 public class DamagedState : PlayerState
 {
     private float _knockbackForce;
-    //private float _minKnockback = 0.5f;
     private Vector2 knockbackDirection;
     private bool knockbackFlag;
     public DamagedState(PlayerController player) : base(player)
@@ -23,13 +22,9 @@ public class DamagedState : PlayerState
             player.rigid.sharedMaterial.friction = 0.6f;
         }
 
-        //무적상태 
         player.playerModel.invincibility = true;
         
         player.playerView.PlayAnimation(animationIndex);
-
-        //모델에서 이미 업데이트 된 hp를 받아옴
-        player.hp = player.playerModel.hp;
     }
 
     public override void Update()
@@ -72,9 +67,7 @@ public class DamagedState : PlayerState
         player.rigid.velocity = Vector2.zero;
 
         //넉백
-
         player.rigid.AddForce(knockbackDirection * _knockbackForce, ForceMode2D.Impulse);
-
         knockbackFlag = false;
     }
 

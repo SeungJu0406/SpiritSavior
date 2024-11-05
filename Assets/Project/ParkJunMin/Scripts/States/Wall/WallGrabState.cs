@@ -15,9 +15,9 @@ public class WallGrabState : PlayerState
 
     public override void Enter()
     {
-        //Debug.Log("WALLGRAB");
         player.isWallJumpUsed = false;
         player.playerView.PlayAnimation(animationIndex);
+        player.playerModel.GrabWallEvent();
         //위치를 고정시켜줘야함 -> 중력을 받지 않게
         player.rigid.velocity = Vector2.zero;
         player.rigid.gravityScale = 0;
@@ -35,7 +35,6 @@ public class WallGrabState : PlayerState
 
     public override void Exit()
     {
-        //player.rigid.gravityScale = 1;
     }
 
 }
