@@ -106,7 +106,6 @@ public class MovingPlatformV2 : SwichInteractable
 
     public void Patrol()
     {
-        Manager.Sound.PlaySFX(Manager.Sound.Data.MovingPlatformSound);
         transform.position = Vector3.MoveTowards(transform.position, nextPosition, moveSpeed * Time.deltaTime);
         if (transform.position == nextPosition)
         {
@@ -119,7 +118,6 @@ public class MovingPlatformV2 : SwichInteractable
     /// </summary>
     public void MovePlatform()
     {
-        Manager.Sound.PlaySFX(Manager.Sound.Data.MovingPlatformSound);
         // Debug.Log("start moving");
         transform.position = Vector3.MoveTowards(transform.position, nextPosition, moveSpeed * Time.deltaTime);
     }
@@ -128,7 +126,6 @@ public class MovingPlatformV2 : SwichInteractable
     /// </summary>
     public void RetreatPlatform()
     {
-        Manager.Sound.PlaySFX(Manager.Sound.Data.MovingPlatformSound);
         // A(시작점)로 복귀
         transform.position = Vector3.MoveTowards(transform.position, pointA.position, moveSpeed * Time.deltaTime);
     }
