@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class JumpState : PlayerState
 {
-    private bool _hasJumped;
-    private Vector2 _velocityDirection;
-    private float _slopeDetectionDelayTimer = 0.2f;
+    //private bool _hasJumped;
+    //private Vector2 _velocityDirection;
+    //private float _slopeDetectionDelayTimer = 0.2f;
     public JumpState(PlayerController player) : base(player)
     {
         animationIndex = (int)PlayerController.State.Jump;
@@ -16,7 +16,7 @@ public class JumpState : PlayerState
         //player.rigid.sharedMaterial.friction = 0f;
         player.playerView.PlayAnimation(animationIndex);
         player.playerModel.JumpPlayerEvent();
-        _hasJumped = true;
+        //_hasJumped = true;
 
         //player.jumpChargingTime = 0f;
 
@@ -28,25 +28,9 @@ public class JumpState : PlayerState
     public override void Update()
     {
         PlayAnimationInUpdate();
-
-        //if (player.coyoteTimeCounter > 0f)
-        //{
-
-        // JumpVer1();
         JumpVer2();
-
-
-
-
-
-        //}
-
         player.MoveInAir();
 
-        //if (player.maxFlightTime > 0)
-        //{
-        //    player.maxFlightTime -= Time.deltaTime; // 이런거 오르막길에 의미없음
-        //}
         // 점프 상태에서 더블점프로 상태변환
         if (!player.isDoubleJumpUsed && Input.GetKeyDown(KeyCode.C))
         {
@@ -54,19 +38,11 @@ public class JumpState : PlayerState
         }
 
         ////Dash 상태로 전환
-        //player.CheckDashable();
 
         if(player.rigid.velocity.y < 0)
         {
             player.ChangeState(PlayerController.State.Fall);
         }
-
-
-        // 점프에서 바로 idle로 전환됨
-        //if (player.isGrounded)
-        //{
-        //    player.ChangeState(PlayerController.State.Idle);
-        //}
     }
 
     public override void FixedUpdate()
@@ -121,10 +97,6 @@ public class JumpState : PlayerState
 
     public override void Exit()
     {
-        _slopeDetectionDelayTimer = 0.2f;
-        _velocityDirection = Vector2.zero;
-        //player.jumpChargingTime = 0;
-        //player.rigid.sharedMaterial.friction = 0.6f;
     }
 
     /* 기존 점프
@@ -215,9 +187,7 @@ public class JumpState : PlayerState
 
     private void JumpVer2()
     {
-        //Debug.Log("b");
-        if (player.coyoteTimeCounter > 0f && player.jumpBufferCounter > 0f)//Input.GetKey(KeyCode.C)) 
-            // //player.coyoteTimeCounter > 0f && 
+        if (player.coyoteTimeCounter > 0f && player.jumpBufferCounter > 0f)
         {
             player.rigid.velocity = new Vector2(player.rigid.velocity.x, player.jumpForce);
             player.coyoteTimeCounter = 0f;

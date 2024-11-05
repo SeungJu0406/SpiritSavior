@@ -15,7 +15,7 @@ public class DeadState : PlayerState
 
     public override void Enter()
     {
-        player.isDead = true;
+        //player.isDead = true;
         player.playerModel.hp = 0;
         player.playerView.PlayAnimation(animationIndex);
         player.playerModel.DiePlayerEvent(); // 죽음시 이벤트 실행을 어디서할지는 추후 결정
