@@ -9,7 +9,7 @@ public class SceneLoadTrigger : MonoBehaviour
     [SerializeField] private SceneField[] _sceneToLoad;
 
     SceneField _DontUnLoadScene;
-     [SerializeField]BoxCollider2D _boxCollider2D;
+    BoxCollider2D _boxCollider2D;
     bool _canUnload = true;
 
     private void Awake()
