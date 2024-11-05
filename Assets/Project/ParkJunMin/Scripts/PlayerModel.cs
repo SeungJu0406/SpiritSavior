@@ -14,6 +14,7 @@ public class PlayerModel
         WallJump = 1 << 2,
         DoubleJump = 1 << 3
     }
+
     public event Action<Nature> OnPlayerTagged;
     public event Action OnPlayerDamageTaken;
     public event Action OnPlayerHealth;
@@ -109,10 +110,6 @@ public class PlayerModel
     {
         OnPlayerWakedUp?.Invoke();
     }
-
-
-
-
 
     public void HealPlayerEvent()
     {
