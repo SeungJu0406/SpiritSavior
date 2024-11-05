@@ -71,6 +71,7 @@ public class PointController : Trap
     {
         if (collision.gameObject.tag == "Player")
         {
+            Manager.Sound.PlaySFX(Manager.Sound.Data.WarpBeforeOpenSound); // 2.1 열리기 전 소리
             if (_inputRoutine != null)
             {
                 StopCoroutine(_inputRoutine);
@@ -88,23 +89,29 @@ public class PointController : Trap
     {
         while (true)
         {
+            if (_pointActive)
+            {
+                Manager.Sound.PlaySFX(Manager.Sound.Data.WarpAfterOpenSound); // 2.3 열린 다음 소리
+            }
+
             if (Input.GetKeyDown(KeyCode.F))
             {
-                Debug.LogWarning(_pointActive);
                 if (!_pointActive)
                 {
+                    Manager.Sound.PlaySFX(Manager.Sound.Data.WarpOpeningSound); // 2.2 열리는 소리
                     Active();
                     _pointActive = true;
                 }
 
-
                 if (!_uiActive)
                 {
+                    Manager.Sound.PlaySFX(Manager.Sound.Data.InteractionSound); // 2.4 F 상호작용 시 소리
                     buttonCanvas.SetActive(true);
                     _uiActive = true;
                 }
                 else if (_uiActive)
                 {
+                    Manager.Sound.PlaySFX(Manager.Sound.Data.InteractionSound); // 2.4 F 상호작용 시 소리
                     buttonCanvas.SetActive(false);
                     _uiActive = false;
                 }
