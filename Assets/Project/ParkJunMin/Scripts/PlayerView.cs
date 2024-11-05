@@ -51,8 +51,6 @@ public class PlayerView : MonoBehaviour
         Animator.StringToHash("Resurrection_Blue")
     };
 
-    // Animator.StringToHash("Fall_(string)")
-
     private void Awake()
     {
         _player = GetComponent<PlayerController>();
@@ -63,16 +61,10 @@ public class PlayerView : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    public void ChangeSprite()
-    {
-        //renderer.sprite = sprites[(_curSpriteIndex++)%sprites.Length];
-    }
+
 
     public void FlipRender(float _moveDirection)
     {
-        // 이전에 움직였던 방향과 다를때만 수행
-        //if( _moveDirection !=0 && _moveDirection != _player.lastMoveDirection)
-        //{
         if (_moveDirection < 0)
         {
             renderer.flipX = true;
@@ -84,19 +76,6 @@ public class PlayerView : MonoBehaviour
             renderer.flipX = false;
             _player.isPlayerRight = 1;
         }
-
-        // 추후 해결 방법을 위함
-        //if( _moveDirection == 0)
-        //{
-        //    _player.isPlayerRight = 0;
-        //}
-
-        
-        //_player._wallCheckPoint.localPosition = new Vector2(Mathf.Abs(_player._wallCheckPoint.localPosition.x) * _player.isPlayerRight, _player._wallCheckPoint.localPosition.y);
-
-        //_player.lastMoveDirection = _moveDirection;
-
-
     }
 
     public void PlayAnimation(int animationIndex)
@@ -147,20 +126,8 @@ public class PlayerView : MonoBehaviour
         else
             return false;
     }
-
-
-    //public void PlayAnimation(int animationIndex)
-    //{
-    //    animationIndex %= _animationHash.Length;
-    //    if (animationIndex >= 0 && animationIndex < _animationHash.Length) // 없어도 됨
-    //    {
-    //        _animator.Play(_animationHash[animationIndex], 0, 0);
-    //    }
-    //    else
-    //    {
-    //        Debug.LogError("애니메이션 인덱스 에러");
-    //    }
-    //}
-
-
+    public void ChangeSprite()
+    {
+        //renderer.sprite = sprites[(_curSpriteIndex++)%sprites.Length];
+    }
 }

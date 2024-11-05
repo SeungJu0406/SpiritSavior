@@ -13,7 +13,7 @@ public class WakeupState : PlayerState
     public override void Enter()
     {
         player.playerView.PlayAnimation(animationIndex);
-        
+        player.playerModel.WakeUpEvent();
     }
 
     public override void Update()

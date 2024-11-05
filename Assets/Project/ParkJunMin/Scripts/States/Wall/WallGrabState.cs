@@ -8,16 +8,18 @@ public class WallGrabState : PlayerState
     public WallGrabState(PlayerController player) : base(player)
     {
         animationIndex = (int)PlayerController.State.WallGrab;
-        //wallJump·Î °¡±â À§ÇØ¼± WallGrabÀÌ ÇÊ¼öÀûÀÌ¶ó ¿©±â¿¡ ´à
-        //wallGrab -> wallSliding -> wallJump ¼ø¼­·Î °¡¾ßÇÏ±â¶§¹®¿¡ wallGrab¿¡ ´à.
+        //wallJumpë¡œ ê°€ê¸° ìœ„í•´ì„  WallGrabì´ í•„ìˆ˜ì ì´ë¼ ì—¬ê¸°ì— ë‹®
+        //wallGrab -> wallSliding -> wallJump ìˆœì„œë¡œ ê°€ì•¼í•˜ê¸°ë•Œë¬¸ì— wallGrabì— ë‹®.
         ability = PlayerModel.Ability.WallJump;
     }
 
     public override void Enter()
     {
+        player.isWallJumpUsed = false;
         player.playerView.PlayAnimation(animationIndex);
+        player.playerModel.GrabWallEvent();
+        //ìœ„ì¹˜ë¥¼ ê³ ì •ì‹œì¼œì¤˜ì•¼í•¨ -> ì¤‘ë ¥ì„ ë°›ì§€ ì•Šê²Œ
         player.rigid.velocity = Vector2.zero;
-        //À§Ä¡¸¦ °íÁ¤½ÃÄÑÁà¾ßÇÔ -> Áß·ÂÀ» ¹ŞÁö ¾Ê°Ô
         player.rigid.gravityScale = 0;
     }
 

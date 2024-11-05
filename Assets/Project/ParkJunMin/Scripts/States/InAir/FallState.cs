@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class FallState : PlayerState
 {
-    //private bool _isFalling;
     public FallState(PlayerController player) : base(player)
     {
         animationIndex = (int)PlayerController.State.Fall;
@@ -21,25 +20,23 @@ public class FallState : PlayerState
         PlayAnimationInUpdate();
         player.MoveInAir();
 
-        // ¶³¾îÁö´Â »óÅÂ¿¡¼­ ´õºíÁ¡ÇÁ·Î »óÅÂº¯È¯ (´õºíÁ¡ÇÁ¸¦ ¾È½èÀ» °æ¿ì)
+        // ë–¨ì–´ì§€ëŠ” ìƒíƒœì—ì„œ ë”ë¸”ì í”„ë¡œ ìƒíƒœë³€í™˜ (ë”ë¸”ì í”„ë¥¼ ì•ˆì¼ì„ ê²½ìš°)
         if (!player.isDoubleJumpUsed && Input.GetKeyDown(KeyCode.C))
         {
             player.ChangeState(PlayerController.State.DoubleJump);
         }
-        
         if(player.isGrounded)
         {
             if (player.isSlope)
             {
-                // °æ»çÀÎµ¥ ÇÃ·¹ÀÌ¾î°¡ ¿À¸¦ ¼ö ÀÖ´Â °æ»çÀÏ °æ¿ì
-                if (player.groundAngle < player.maxAngle)
+                if (player.groundAngle < player.maxAngle) // í”Œë ˆì´ì–´ê°€ ì˜¤ë¥¼ ìˆ˜ ìˆëŠ” ê²½ì‚¬ë©´ ì¼ ê²½ìš°
                 {
                     player.ChangeState(PlayerController.State.Land);
                 }
                 else
                 {
-                    // ¿À¸¦ ¼ö ¾ø´Â °æ»ç¿¡¼­ ´Ù ¹Ì²ô·¯Á³À» °æ¿ì
-                    if(player.rigid.velocity.y >= 0) 
+                    // ì˜¤ë¥¼ ìˆ˜ ì—†ëŠ” ê²½ì‚¬ë©´ì¼ ê²½ìš° ë¯¸ë„ëŸ¬ì§
+                    if(player.rigid.velocity.y >= 0) // ë‹¤ ë¯¸ë„ëŸ¬ì¡Œìœ¼ë©´
                     {
                         player.ChangeState(PlayerController.State.Land);
                     }
@@ -47,16 +44,12 @@ public class FallState : PlayerState
             }
             else
             {
-                // °æ»ç°¡ ¾Æ´Ñ ¹Ù´ÚÀÌ¸é Land
+                // í‰ì§€ì¼ ê²½ìš°
                 player.ChangeState(PlayerController.State.Land);
             }
         }
-        //if (player.isGrounded)// && player.rigid.velocity.y < -0.01f) //player.coyoteTimeCounter > 0) //
-        //{
-        //    player.ChangeState(PlayerController.State.Land);
-        //}
     }
-
+    
     public override void Exit()
     {
     }

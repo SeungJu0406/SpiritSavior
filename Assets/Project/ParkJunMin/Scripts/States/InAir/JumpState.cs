@@ -12,17 +12,9 @@ public class JumpState : PlayerState
 
     public override void Enter()
     {
-        //Debug.Log("Á¡ÇÁ »óÅÂ ÁøÀÔ");
-        //player.rigid.sharedMaterial.friction = 0f;
         player.playerView.PlayAnimation(animationIndex);
         player.playerModel.JumpPlayerEvent();
-        //_hasJumped = true;
-
-        //player.jumpChargingTime = 0f;
-
-        //player.maxFlightTime = 0.2f;
-
-        //player.rigid.velocity = new Vector2(player.rigid.velocity.x, player.lowJumpForce); // 1´ÜÁ¡ÇÁ
+        _hasJumped = true;
     }
 
     public override void Update()
@@ -31,14 +23,11 @@ public class JumpState : PlayerState
         JumpVer2();
         player.MoveInAir();
 
-        // Á¡ÇÁ »óÅÂ¿¡¼­ ´õºíÁ¡ÇÁ·Î »óÅÂº¯È¯
+        // ì í”„ ìƒíƒœì—ì„œ ë”ë¸”ì í”„ë¡œ ìƒíƒœë³€í™˜
         if (!player.isDoubleJumpUsed && Input.GetKeyDown(KeyCode.C))
         {
             player.ChangeState(PlayerController.State.DoubleJump);
         }
-
-        ////Dash »óÅÂ·Î ÀüÈ¯
-
         if(player.rigid.velocity.y < 0)
         {
             player.ChangeState(PlayerController.State.Fall);
@@ -47,14 +36,14 @@ public class JumpState : PlayerState
 
     public override void FixedUpdate()
     {
-
+        /* ê²½ì‚¬ë©´ ì‹œí–‰ì°©ì˜¤
         //if (player.isGrounded && !player.isSlope)
         //{
         //    player.ChangeState(PlayerController.State.Idle);
         //}
 
-        // slope¸é ÀÌ¹Ì ¹Ù´ÚÀÌ¶ó´Â ¾ê±â
-        // ¹Ù´ÚÀÎµ¥ yÃà ¼Óµµ°¡ ÀÏÁ¤°ª ÀÌ»óÀ¸·Î °è¼Ó Áõ°¡ÇÏ°í ÀÖ´Ù = °æ»ç¸é¿¡¼­ ºñ½ºµëÈ÷ °è¼Ó ¿Ã¶ó°¡°íÀÖ´Ù
+        // slopeë©´ ì´ë¯¸ ë°”ë‹¥ì´ë¼ëŠ” ì–˜ê¸°
+        // ë°”ë‹¥ì¸ë° yì¶• ì†ë„ê°€ ì¼ì •ê°’ ì´ìƒìœ¼ë¡œ ê³„ì† ì¦ê°€í•˜ê³  ìˆë‹¤ = ê²½ì‚¬ë©´ì—ì„œ ë¹„ìŠ¤ë“¬íˆ ê³„ì† ì˜¬ë¼ê°€ê³ ìˆë‹¤
 
         ///////////////////////////
         ///
@@ -62,8 +51,8 @@ public class JumpState : PlayerState
         //{
         //    if (_slopeDetectionDelayTimer > 0)
         //    {
-        //        // Á¡ÇÁ ÈÄ ÀÏÁ¤½Ã°£µ¿¾ÈÀº Å½ÁöÇÏÁö ¾ÊÀ½
-        //        // Á¡ÇÁ°¡ ºÒ°¡´ÉÇÒ Á¤µµ·Î ºü¸£°Ô Å½ÁöÇÏ´Â°ÍÀ» ¹æÁö
+        //        // ì í”„ í›„ ì¼ì •ì‹œê°„ë™ì•ˆì€ íƒì§€í•˜ì§€ ì•ŠìŒ
+        //        // ì í”„ê°€ ë¶ˆê°€ëŠ¥í•  ì •ë„ë¡œ ë¹ ë¥´ê²Œ íƒì§€í•˜ëŠ”ê²ƒì„ ë°©ì§€
         //        _slopeDetectionDelayTimer -= Time.fixedDeltaTime;
         //    }
         //    else
@@ -74,8 +63,8 @@ public class JumpState : PlayerState
         //            player.ChangeState(PlayerController.State.Fall);
 
         //        // 
-        //        // º¤ÅÍÀÇ ¹æÇâÀÌ °°ÀºÁö È®ÀÎ
-        //        // ÀÏÁ¤ °æ»ç ³»¿¡¼± Àß ÀÛµ¿ÇÏ´Â°Å°°Àºµ¥ ¾ÆÁ÷ È®½ÇÄ¡ ¾Ê´Ù ¿À·ù°¡ Á» ¸¹´Ù °³¼±»çÇ×ÀÌ ÇÊ¿ä
+        //        // ë²¡í„°ì˜ ë°©í–¥ì´ ê°™ì€ì§€ í™•ì¸
+        //        // ì¼ì • ê²½ì‚¬ ë‚´ì—ì„  ì˜ ì‘ë™í•˜ëŠ”ê±°ê°™ì€ë° ì•„ì§ í™•ì‹¤ì¹˜ ì•Šë‹¤ ì˜¤ë¥˜ê°€ ì¢€ ë§ë‹¤ ê°œì„ ì‚¬í•­ì´ í•„ìš”
         //        float alignment = Vector2.Dot(_velocityDirection, player.perpAngle);
 
         //        if (alignment > 0.98f || alignment < -0.98f)
@@ -92,34 +81,47 @@ public class JumpState : PlayerState
         //{
         //    player.ChangeState(PlayerController.State.Fall);
         //}
-
+        */
     }
 
     public override void Exit()
     {
+        _slopeDetectionDelayTimer = 0.2f;
+        _velocityDirection = Vector2.zero;
+    }
+    private void JumpVer2()
+    {
+        //Debug.Log("b");
+        if (player.coyoteTimeCounter > 0f && player.jumpBufferCounter > 0f)//Input.GetKey(KeyCode.C)) 
+                                                                           // //player.coyoteTimeCounter > 0f && 
+        {
+            player.rigid.velocity = new Vector2(player.rigid.velocity.x, player.jumpForce);
+            player.coyoteTimeCounter = 0f;
+        }
+
     }
 
-    /* ±âÁ¸ Á¡ÇÁ
+    /* ê¸°ì¡´ ì í”„
     private void JumpVer1()
     {
-        if (Input.GetKey(KeyCode.C) && _hasJumped) // ½ºÆäÀÌ½º¹Ù¸¦ ´©¸£´Â µ¿¾È Á¡ÇÁ·Â Áõ°¡
+        if (Input.GetKey(KeyCode.C) && _hasJumped) // ìŠ¤í˜ì´ìŠ¤ë°”ë¥¼ ëˆ„ë¥´ëŠ” ë™ì•ˆ ì í”„ë ¥ ì¦ê°€
         {
             player.jumpChargingTime += Time.deltaTime;
             if (player.jumpChargingTime >= player.jumpCirticalPoint)
             {
-                // ³ôÀºÁ¡ÇÁ·Î °áÁ¤µÉ¸¸Å­ ½ºÆäÀÌ½º¹Ù¸¦ ÀÓ°è ½Ã°£ ÀÌ»ó ´©¸¥°æ¿ì
+                // ë†’ì€ì í”„ë¡œ ê²°ì •ë ë§Œí¼ ìŠ¤í˜ì´ìŠ¤ë°”ë¥¼ ì„ê³„ ì‹œê°„ ì´ìƒ ëˆ„ë¥¸ê²½ìš°
 
                 if (player.isSlope) //&& player.isGrounded)
                 {
-                    // ¹ı¼±º¤ÅÍÀÇ ¼öÁ÷ÀÎ º¤ÅÍ¸¦ °öÇØµµ ÀÇ¹Ì ¾øÀ½
+                    // ë²•ì„ ë²¡í„°ì˜ ìˆ˜ì§ì¸ ë²¡í„°ë¥¼ ê³±í•´ë„ ì˜ë¯¸ ì—†ìŒ
                     //player.rigid.velocity = player.perpAngle * new Vector2(player.rigid.velocity.x, player.highJumpForce);
 
 
 
-                    // Áö¸é¿¡ ¼öÁ÷ÀÎ ¹ı¼±º¤ÅÍ ¹æÇâÀ¸·Î ¼Óµµ¸¦ ÁÖ´Â ¹æ¹ı 
+                    // ì§€ë©´ì— ìˆ˜ì§ì¸ ë²•ì„ ë²¡í„° ë°©í–¥ìœ¼ë¡œ ì†ë„ë¥¼ ì£¼ëŠ” ë°©ë²• 
                     player.rigid.velocity = (player.groundHit.normal.normalized) * (player.jumpForce + player.slopeJumpBoost);
 
-                    //°æ»ç¸éÀÌ ¾Æ´Ò °æ¿ì¿Í °°Àº ¹æ¹ıÀ¸·Î ¼Óµµ¸¦ ÁÖ´Â ¹æ¹ı
+                    //ê²½ì‚¬ë©´ì´ ì•„ë‹ ê²½ìš°ì™€ ê°™ì€ ë°©ë²•ìœ¼ë¡œ ì†ë„ë¥¼ ì£¼ëŠ” ë°©ë²•
                     // player.rigid.velocity = new Vector2(player.rigid.velocity.x, player.highJumpForce);
 
 
@@ -127,7 +129,7 @@ public class JumpState : PlayerState
                     //_jumpDirection.y = Mathf.Max(_jumpDirection.y, 0.5f);
                     //player.rigid.velocity = _jumpDirection * player.highJumpForce;
 
-                    // ´Ü¼øÈ÷ up ¹æÇâ¿¡ Ãß°¡ ¿ÀÇÁ¼Â°ªÀ» ÁÖ´Â ¹æ¹ı
+                    // ë‹¨ìˆœíˆ up ë°©í–¥ì— ì¶”ê°€ ì˜¤í”„ì…‹ê°’ì„ ì£¼ëŠ” ë°©ë²•
                     //_jumpDirection = Vector2.up.normalized;
                     //player.rigid.velocity = _jumpDirection * (player.highJumpForce + 10.0f);
 
@@ -147,17 +149,17 @@ public class JumpState : PlayerState
 
         if (Input.GetKeyUp(KeyCode.C) && _hasJumped)
         {
-            // ³·ÀºÁ¡ÇÁ ½ÇÇà
+            // ë‚®ì€ì í”„ ì‹¤í–‰
             if (player.isSlope) //&& player.isGrounded)
             {
                 //player.rigid.velocity = player.perpAngle * new Vector2(player.rigid.velocity.x, player.lowJumpForce);
 
 
 
-                // Áö¸é¿¡ ¼öÁ÷ÀÎ ¹ı¼±º¤ÅÍ ¹æÇâÀ¸·Î ¼Óµµ¸¦ ÁÖ´Â ¹æ¹ı 
+                // ì§€ë©´ì— ìˆ˜ì§ì¸ ë²•ì„ ë²¡í„° ë°©í–¥ìœ¼ë¡œ ì†ë„ë¥¼ ì£¼ëŠ” ë°©ë²• 
                 player.rigid.velocity = (player.groundHit.normal.normalized) * (player.lowJumpForce + player.slopeJumpBoost);
 
-                //°æ»ç¸éÀÌ ¾Æ´Ò °æ¿ì¿Í °°Àº ¹æ¹ıÀ¸·Î ¼Óµµ¸¦ ÁÖ´Â ¹æ¹ı
+                //ê²½ì‚¬ë©´ì´ ì•„ë‹ ê²½ìš°ì™€ ê°™ì€ ë°©ë²•ìœ¼ë¡œ ì†ë„ë¥¼ ì£¼ëŠ” ë°©ë²•
                 //player.rigid.velocity = new Vector2(player.rigid.velocity.x, player.lowJumpForce);
 
 
@@ -169,7 +171,7 @@ public class JumpState : PlayerState
                 //_jumpDirection.y = Mathf.Max(_jumpDirection.y, 0.5f);
                 //player.rigid.velocity = _jumpDirection * player.lowJumpForce;
 
-                // ´Ü¼øÈ÷ up ¹æÇâ¿¡ Ãß°¡ ¿ÀÇÁ¼Â°ªÀ» ÁÖ´Â ¹æ¹ı
+                // ë‹¨ìˆœíˆ up ë°©í–¥ì— ì¶”ê°€ ì˜¤í”„ì…‹ê°’ì„ ì£¼ëŠ” ë°©ë²•
                 //_jumpDirection = Vector2.up.normalized;
                 //player.rigid.velocity = _jumpDirection * (player.lowJumpForce + 10.0f);
             }
@@ -184,13 +186,4 @@ public class JumpState : PlayerState
         }
     }
     */
-
-    private void JumpVer2()
-    {
-        if (player.coyoteTimeCounter > 0f && player.jumpBufferCounter > 0f)
-        {
-            player.rigid.velocity = new Vector2(player.rigid.velocity.x, player.jumpForce);
-            player.coyoteTimeCounter = 0f;
-        }
-    }
 }
