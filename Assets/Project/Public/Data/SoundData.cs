@@ -63,6 +63,7 @@ public partial class SoundData : ScriptableObject
         public AudioClip ObjectDropSound;
         public AudioClip TrapActivationSound;
         public AudioClip EnvironmentalSound;
+        public AudioClip MushroomTrampoline;
     }
     [Header("오브젝트 관련")]
     [SerializeField] MapObject _mapObject;
@@ -79,6 +80,7 @@ public partial class SoundData : ScriptableObject
     public AudioClip ObjectDropSound { get { return _mapObject.ObjectDropSound; } }
     public AudioClip TrapActivationSound { get { return _mapObject.TrapActivationSound; } }
     public AudioClip EnvironmentalSound { get { return _mapObject.EnvironmentalSound; } }
+    public AudioClip MushroomTrampoline { get { return _mapObject.MushroomTrampoline; } }
     #endregion
     #region UI
     [System.Serializable]

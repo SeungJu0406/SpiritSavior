@@ -15,7 +15,6 @@ MonoBehaviour:
   _bgm:
     TitleBGM: {fileID: 0}
     GameBGM: {fileID: 0}
-    TestBGM: {fileID: 0}
   _player:
     RunningSound: {fileID: 0}
     JumpSound: {fileID: 0}
@@ -27,6 +26,11 @@ MonoBehaviour:
     DeathSound: {fileID: 0}
     SpawnSound: {fileID: 0}
     TagSound: {fileID: 0}
+    HealSound: {fileID: 0}
+    UnlockTagSound: {fileID: 0}
+    UnlockWallJumpSound: {fileID: 0}
+    UnlockDoubleJumpSound: {fileID: 0}
+    UnlockDashSound: {fileID: 0}
   _mapObject:
     MovingPlatformSound: {fileID: 0}
     WarpBeforeOpenSound: {fileID: 0}
@@ -41,7 +45,13 @@ MonoBehaviour:
     ObjectDropSound: {fileID: 0}
     TrapActivationSound: {fileID: 0}
     EnvironmentalSound: {fileID: 0}
+    MushroomTrampoline: {fileID: 8300000, guid: 8a6df2862312bb24caeb87784afc4865, type: 3}
+    ThunderSound: {fileID: 0}
+    LeafSound: {fileID: 0}
+    PlatformOnSound: {fileID: 0}
+    PlatformOffSound: {fileID: 0}
   _uI:
+    MapOpenSound: {fileID: 0}
     NotificationSound: {fileID: 0}
     InteractionSound: {fileID: 0}
     ButtonClickSound: {fileID: 0}
