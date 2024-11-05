@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class JumpState : PlayerState
 {
-    //private bool _hasJumped;
     //private Vector2 _velocityDirection;
     //private float _slopeDetectionDelayTimer = 0.2f;
     public JumpState(PlayerController player) : base(player)
@@ -14,7 +13,6 @@ public class JumpState : PlayerState
     {
         player.playerView.PlayAnimation(animationIndex);
         player.playerModel.JumpPlayerEvent();
-        _hasJumped = true;
     }
 
     public override void Update()
@@ -86,8 +84,6 @@ public class JumpState : PlayerState
 
     public override void Exit()
     {
-        _slopeDetectionDelayTimer = 0.2f;
-        _velocityDirection = Vector2.zero;
     }
     private void JumpVer2()
     {

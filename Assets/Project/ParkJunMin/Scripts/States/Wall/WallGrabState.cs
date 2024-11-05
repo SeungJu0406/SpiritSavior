@@ -15,7 +15,6 @@ public class WallGrabState : PlayerState
 
     public override void Enter()
     {
-        player.isWallJumpUsed = false;
         player.playerView.PlayAnimation(animationIndex);
         player.playerModel.GrabWallEvent();
         //위치를 고정시켜줘야함 -> 중력을 받지 않게

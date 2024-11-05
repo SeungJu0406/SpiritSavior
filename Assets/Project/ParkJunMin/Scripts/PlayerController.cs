@@ -26,7 +26,6 @@ public partial class PlayerController : MonoBehaviour
     public float wallJumpPower; // 벽점프 힘
     public float maxAngle; // 이동 가능한 최대 각도
     public float speedAdjustmentOffsetInAir; // 공중에서의 속도 = 땅에서의 속도 * 해당 변수
-
     // "SpeedInAir = SpeedInGround * x")
     [HideInInspector] public float moveSpeedInAir;    // 공중에서 플레이어의 속도
 
@@ -61,7 +60,6 @@ public partial class PlayerController : MonoBehaviour
     [HideInInspector] public RaycastHit2D wallHit;
     [HideInInspector] public RaycastHit2D[] boxHits;
     public bool isWall;                  // 캐릭터가 벽에 붙어있는지 체크
-    //public bool isWallJumpUsed;         // 벽에서 벽점프를 사용 했는지 체크
     private Vector2 _wallCheckBoxSize;
     Coroutine _wallCheckDisplayRoutine;
 
@@ -158,7 +156,7 @@ public partial class PlayerController : MonoBehaviour
         CheckWall();
         ControlCoyoteTime();
         ControlJumpBuffer();
-        
+
         /* 미끄럼 방지 시행착오 및 임시피격트리거
 
         //// 미끄러짐 방지1
@@ -248,7 +246,6 @@ public partial class PlayerController : MonoBehaviour
             _curState = nextState;
             _states[(int)_curState].Enter();
         }
-
 
         //방안2. 중복 코드를 줄임
         if (_states[(int)nextState].ability == PlayerModel.Ability.None || HasAbility(_states[(int)nextState].ability))
@@ -366,13 +363,6 @@ public partial class PlayerController : MonoBehaviour
             }
         }
     }
-
-    private Vector2 GetCenterOfCollider()
-    {
-        return (Vector2)_playerCollider.bounds.center;
-
-    }
-
     public void MoveInAir()
     {
         moveInput = Input.GetAxisRaw("Horizontal");
