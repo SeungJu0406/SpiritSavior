@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1305543287275895852}
   - component: {fileID: 1305543287275895853}
   - component: {fileID: 1305543287275895848}
-  - component: {fileID: 6725543336375484337}
+  - component: {fileID: 7156539961109852291}
   m_Layer: 5
   m_Name: WarpUI
   m_TagString: Warp
@@ -115,7 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28f56bb2210c2b04b8c452029d2fc281, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6725543336375484337
+--- !u!114 &7156539961109852291
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -133,9 +133,9 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: 10
-  m_ChildForceExpandWidth: 0
-  m_ChildForceExpandHeight: 0
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0

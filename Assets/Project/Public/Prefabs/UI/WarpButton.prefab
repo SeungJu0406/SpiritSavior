@@ -37,7 +37,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 58.805, y: -18.205}
-  m_SizeDelta: {x: 97.61, y: 26.41}
+  m_SizeDelta: {x: 0, y: 26.41}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7469814843728569291
 CanvasRenderer:
@@ -340,8 +340,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _buttonText: {fileID: 7469814843728569290}
-  PointScene:
-    _sceneAsset: {fileID: 0}
-    _sceneName: 
+  SceneToLoad: []
   _loadTrigger: {fileID: 7220145990415169447, guid: 5f4e363a81d20974c82d8a2c987f6f19, type: 3}
   destinationPos: {x: 0, y: 0}
