@@ -288,11 +288,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1389921785819388568, guid: 18bc36571f149f8479cdd557b0d4a467, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.86
+      value: -4.93
       objectReference: {fileID: 0}
     - target: {fileID: 1389921785819388568, guid: 18bc36571f149f8479cdd557b0d4a467, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.99
+      value: -0.94
+      objectReference: {fileID: 0}
+    - target: {fileID: 1389921785819388573, guid: 18bc36571f149f8479cdd557b0d4a467, type: 3}
+      propertyPath: m_Simulated
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8169878878776432367, guid: 18bc36571f149f8479cdd557b0d4a467, type: 3}
       propertyPath: m_RootOrder
@@ -535,6 +539,10 @@ PrefabInstance:
     - target: {fileID: 2170049949302617277, guid: 8281d1155b7d428499e0a2b456fe0197, type: 3}
       propertyPath: m_Name
       value: UpTrampoline_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2217866491441544323, guid: 8281d1155b7d428499e0a2b456fe0197, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8281d1155b7d428499e0a2b456fe0197, type: 3}
