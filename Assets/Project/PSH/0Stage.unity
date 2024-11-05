@@ -6537,6 +6537,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: 4259659069782910, guid: 3096338810fb5de4f88156fb73c149a2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -13.49
+      objectReference: {fileID: 0}
     - target: {fileID: 4801424814460774, guid: 3096338810fb5de4f88156fb73c149a2, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -6899,7 +6903,8 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 61643117448167960, guid: 9015478cf9cda0846ad6c9700dce0306, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9015478cf9cda0846ad6c9700dce0306, type: 3}
 --- !u!4 &841325068 stripped
 Transform:
@@ -15481,7 +15486,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 60202448766696314, guid: 8a7e992498274b94f8a78ba5ef4cab05, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8a7e992498274b94f8a78ba5ef4cab05, type: 3}
 --- !u!4 &2031857528 stripped
 Transform:

@@ -114,7 +114,7 @@ public class LightningController : MonoBehaviour
         {
             _PeriodicStrike = StartCoroutine(RespawnRoutine());
            // Debug.Log("코루틴끝");
-            //   Lightning();
+              Lightning();
         }
         // else if (_PeriodicStrike != null)
         // {
