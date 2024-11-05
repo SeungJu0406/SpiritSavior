@@ -5,8 +5,6 @@ using UnityEngine.PlayerLoop;
 
 public class DamagedState : PlayerState
 {
-    private float _knockbackForce;
-
     private Vector2 knockbackDirection;
     private bool knockbackFlag;
     public DamagedState(PlayerController player) : base(player)
@@ -59,7 +57,7 @@ public class DamagedState : PlayerState
         player.rigid.velocity = Vector2.zero;
 
         //넉백
-        player.rigid.AddForce(knockbackDirection * _knockbackForce, ForceMode2D.Impulse);
+        player.rigid.AddForce(knockbackDirection * player.knockbackForce, ForceMode2D.Impulse);
 
         knockbackFlag = false;
     }
