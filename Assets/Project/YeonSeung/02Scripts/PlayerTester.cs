@@ -107,7 +107,7 @@ public class PlayerTester : MonoBehaviour
         
         if (ParticleManager.Instance == null)
         {
-            Debug.Log("PM is null"); 
+          //  Debug.Log("PM is null"); 
         }
         else 
         {
