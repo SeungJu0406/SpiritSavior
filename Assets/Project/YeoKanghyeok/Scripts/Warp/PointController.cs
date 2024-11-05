@@ -71,7 +71,6 @@ public class PointController : Trap
     {
         if (collision.gameObject.tag == "Player")
         {
-            Manager.Sound.PlaySFX(Manager.Sound.Data.WarpBeforeOpenSound); // 2.1 凯府扁 傈 家府
             if (_inputRoutine != null)
             {
                 StopCoroutine(_inputRoutine);
@@ -93,12 +92,17 @@ public class PointController : Trap
             {
                 Manager.Sound.PlaySFX(Manager.Sound.Data.WarpAfterOpenSound); // 2.3 凯赴 促澜 家府
             }
+            else
+            {
+                Manager.Sound.PlaySFX(Manager.Sound.Data.WarpBeforeOpenSound); // 2.1 凯府扁 傈 家府
+            }
 
             if (Input.GetKeyDown(KeyCode.F))
             {
+                Manager.Sound.PlaySFX(Manager.Sound.Data.WarpOpeningSound); // 2.2 凯府绰 家府
                 if (!_pointActive)
                 {
-                    Manager.Sound.PlaySFX(Manager.Sound.Data.WarpOpeningSound); // 2.2 凯府绰 家府
+                    
                     Active();
                     _pointActive = true;
                 }

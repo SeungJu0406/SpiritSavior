@@ -58,34 +58,42 @@ public class ParticleManager : MonoBehaviour
     [SerializeField] GameObject trapomlineFX;
     TrampolineController _trampoline;
 
+    // LandingSound, WallclimbingSound
 
-
-
-    // public Transform location;
-
-
+    /* WalkingSounds & Effect Loop w/Coroutine
+    private Coroutine loopWalk;
+    IEnumerator LoopWalk()
+    {
+        while (true)
+        {
+            Debug.Log("Loop WALKING SOUND");
+            ObjectPool.SpawnObject(runFX, _pBottom.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
+            // Manager.Sound.PlaySFX(Manager.Sound.Data.RunningSound);
+            yield return new WaitForSeconds(.4f);
+        }
+    }
+    */
 
     private void Awake()
     {
-
         if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
         else Destroy(gameObject);
-
-
-
-        //this.location = transform;
     }
 
 
     #region 함수리스트
     public void PlayRunFX()
     {
-        Manager.Sound.PlaySFX(Manager.Sound.Data.RunningSound);
         ObjectPool.SpawnObject(runFX, _pBottom.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
+        Manager.Sound.PlaySFX(Manager.Sound.Data.RunningSound);
+
+        // loopWalk = StartCoroutine(LoopWalk());
+        // StopCoroutine(loopWalk);
+
     }
     public void PlayJumpFX()
     {
@@ -142,16 +150,17 @@ public class ParticleManager : MonoBehaviour
 
 
 
+
     // 다른 파티클들
     public void PlayGrassFX()
     {
-        // ParticleManager.Instance.PlayGrassFX();
+        ParticleManager.Instance.PlayGrassFX();
         ObjectPool.SpawnObject(GrassFX, _pBottom.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
     }
 
     public void PlayTrampolineFX()
     {
-        // ParticleManager.Instance.PlayTrampolineFX();
+        ParticleManager.Instance.PlayTrampolineFX();
         ObjectPool.SpawnObject(trapomlineFX, _pBottom.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
     }
 
@@ -171,7 +180,7 @@ public class ParticleManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-           // Debug.Log("SpaceBar EventTest");
+            // Debug.Log("SpaceBar EventTest");
         }
     }
     private void OnParticleSystemStopped()
@@ -185,7 +194,7 @@ public class ParticleManager : MonoBehaviour
         {
             _collisionPos = collision.transform.position;
         }
-        
+
     }
 
 
@@ -200,6 +209,9 @@ public class ParticleManager : MonoBehaviour
         Manager.Game.Player.playerModel.OnPlayerDashed += PlayDashFX;
         Manager.Game.Player.playerModel.OnAbilityUnlocked += UpdateSkillFX;
         Manager.Game.Player.playerModel.OnPlayerSpawn += PlaySpawnFX;
+       
+        // Climbing
+        // landing
     }
 
     void UpdateSkillFX(PlayerModel.Ability ability)

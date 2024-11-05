@@ -68,7 +68,7 @@ public class MovingPlatformV2 : SwichInteractable
                 }
                 else if (_delayMove != null)
                 {
-                    Debug.Log("코루틴끝");
+                    //Debug.Log("코루틴끝");
                     StopCoroutine(_delayMove);
                     _delayMove = null;
                 }
@@ -96,16 +96,17 @@ public class MovingPlatformV2 : SwichInteractable
     }
     IEnumerator DelayMove()
     {
-        Debug.Log("Coroutine STARTS!");
+       // Debug.Log("Coroutine STARTS!");
         yield return new WaitForSeconds(delay);
        
-        Debug.Log($"{delay}초 지남");
+       // Debug.Log($"{delay}초 지남");
         // 여기서 활성화 해서 MovePlatform();
         _isMoving = true;
     }
 
     public void Patrol()
     {
+        Manager.Sound.PlaySFX(Manager.Sound.Data.MovingPlatformSound);
         transform.position = Vector3.MoveTowards(transform.position, nextPosition, moveSpeed * Time.deltaTime);
         if (transform.position == nextPosition)
         {
@@ -118,6 +119,7 @@ public class MovingPlatformV2 : SwichInteractable
     /// </summary>
     public void MovePlatform()
     {
+        Manager.Sound.PlaySFX(Manager.Sound.Data.MovingPlatformSound);
         // Debug.Log("start moving");
         transform.position = Vector3.MoveTowards(transform.position, nextPosition, moveSpeed * Time.deltaTime);
     }
@@ -126,6 +128,7 @@ public class MovingPlatformV2 : SwichInteractable
     /// </summary>
     public void RetreatPlatform()
     {
+        Manager.Sound.PlaySFX(Manager.Sound.Data.MovingPlatformSound);
         // A(시작점)로 복귀
         transform.position = Vector3.MoveTowards(transform.position, pointA.position, moveSpeed * Time.deltaTime);
     }
@@ -134,7 +137,7 @@ public class MovingPlatformV2 : SwichInteractable
     {
         if (collision.gameObject.tag == "Player")
         {
-
+            Manager.Sound.PlaySFX(Manager.Sound.Data.PlatformOnSound);
             _platformFX.SetActive(false);
             _delayMove = StartCoroutine(DelayMove());
             // _isMoving = true;
@@ -145,11 +148,12 @@ public class MovingPlatformV2 : SwichInteractable
     {
         if (collision.gameObject.tag == "Player")
         {
+            Manager.Sound.PlaySFX(Manager.Sound.Data.PlatformOffSound);
             _platformFX.SetActive(true);
             collision.transform.SetParent(Manager.Game.RespawnPoint);
             // 떨어지면 isMoving비활성화
             _isMoving = false;
-            Debug.Log($"isMoving {_isMoving}");
+           // Debug.Log($"isMoving {_isMoving}");
         }
     }
 }
