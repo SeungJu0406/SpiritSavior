@@ -13,14 +13,30 @@ public partial class SoundData : ScriptableObject
         public AudioClip UnlockDoubleJumpSound;
         public AudioClip UnlockDashSound;
 
-        
+        // 추가된 사운드
+        public AudioClip WallSlidSound;
+        public AudioClip WallJumpSound;
+        public AudioClip LandSound;
+        public AudioClip WakeUpSound;
+
+
+
+
     }
     public AudioClip HealSound { get { return _player.HealSound; } }
     // 능력해금 사운드
-    public AudioClip UnlockTagSound { get { return _player.HealSound; } }
-    public AudioClip UnlockWallJumpSound { get { return _player.HealSound; } }
-    public AudioClip UnlockDoubleJumpSound { get { return _player.HealSound; } }
-    public AudioClip UnlockDashSound { get { return _player.HealSound; } }
+    public AudioClip UnlockTagSound { get { return _player.UnlockTagSound; } }
+    public AudioClip UnlockWallJumpSound { get { return _player.UnlockWallJumpSound; } }
+    public AudioClip UnlockDoubleJumpSound { get { return _player.UnlockDoubleJumpSound; } }
+    public AudioClip UnlockDashSound { get { return _player.UnlockDashSound; } }
+
+    // 추가사운드
+    public AudioClip WallSlidSound { get { return _player.WallSlidSound; } }
+    public AudioClip WallJumpSound {get {return _player.WallJumpSound; } }
+    public AudioClip LandSound {get {return _player.LandSound; } }
+    public AudioClip WakeUpSound {get {return _player.WakeUpSound; } }
+
+
 
 
     // 맵효과음
