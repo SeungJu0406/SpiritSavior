@@ -31,11 +31,6 @@ public class IdleState : PlayerState
         {
             player.ChangeState(PlayerController.State.Fall);
         }
-
-        if (player.rigid.velocity.y != 0 && !player.isGrounded)
-        {
-            player.ChangeState(PlayerController.State.Fall);
-        }
         //훨씬 덜 미끄러짐
         if (player.moveInput == 0)
         {
