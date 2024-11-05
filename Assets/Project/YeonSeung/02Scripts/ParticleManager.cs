@@ -121,19 +121,22 @@ public class ParticleManager : MonoBehaviour
     // ÇØ±Ý FX
     public void PlayUnlockTagFX()
     {
-
+        Manager.Sound.PlaySFX(Manager.Sound.Data.UnlockTagSound);
         ObjectPool.SpawnObject(unlockTagFX, _pBottom.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
     }
     public void PlayUnlockWallJumpFX()
     {
+        Manager.Sound.PlaySFX(Manager.Sound.Data.UnlockWallJumpSound);
         ObjectPool.SpawnObject(unlockWallJumpFX, _pBottom.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
     }
     public void PlayUnlockDoubleJumpFX()
     {
+        Manager.Sound.PlaySFX(Manager.Sound.Data.UnlockDoubleJumpSound);
         ObjectPool.SpawnObject(unlockDoubleJumpFX, _pBottom.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
     }
     public void PlayUnlockDashFX()
     {
+        Manager.Sound.PlaySFX(Manager.Sound.Data.UnlockDashSound);
         ObjectPool.SpawnObject(unlockDashFX, _pBottom.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
     }
 
