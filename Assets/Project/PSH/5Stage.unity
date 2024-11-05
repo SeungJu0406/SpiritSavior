@@ -1241,6 +1241,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2878529203880559142, guid: d7d3c8b0fe7ba8d408c864b6e020ef23, type: 3}
+      propertyPath: m_PlayableAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 7cd8880a63d4ef9419e60e0abd125de8, type: 2}
+    - target: {fileID: 2878529203880559142, guid: d7d3c8b0fe7ba8d408c864b6e020ef23, type: 3}
+      propertyPath: m_SceneBindings.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2878529203880559142, guid: d7d3c8b0fe7ba8d408c864b6e020ef23, type: 3}
+      propertyPath: m_SceneBindings.Array.data[4].key
+      value: 
+      objectReference: {fileID: 6859845592437010038, guid: 7cd8880a63d4ef9419e60e0abd125de8, type: 2}
+    - target: {fileID: 2878529203880559142, guid: d7d3c8b0fe7ba8d408c864b6e020ef23, type: 3}
+      propertyPath: m_SceneBindings.Array.data[4].value
+      value: 
+      objectReference: {fileID: 1595859978}
     - target: {fileID: 4074191868783778033, guid: d7d3c8b0fe7ba8d408c864b6e020ef23, type: 3}
       propertyPath: m_fontColor32.rgba
       value: 4287861651
@@ -1252,11 +1268,11 @@ PrefabInstance:
     - target: {fileID: 8854284099622022575, guid: d7d3c8b0fe7ba8d408c864b6e020ef23, type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: 165d810b44f469247accb556463798d8, type: 2}
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 8854284099622022575, guid: d7d3c8b0fe7ba8d408c864b6e020ef23, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 8345368200003475013, guid: 165d810b44f469247accb556463798d8, type: 2}
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 8854284099622022575, guid: d7d3c8b0fe7ba8d408c864b6e020ef23, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
@@ -1271,7 +1287,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8854284100075952068, guid: d7d3c8b0fe7ba8d408c864b6e020ef23, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -96.85
+      value: -96.6
       objectReference: {fileID: 0}
     - target: {fileID: 8854284100075952068, guid: d7d3c8b0fe7ba8d408c864b6e020ef23, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2120,8 +2136,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 185993710}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 30.857056, y: -23.03563, z: 7.18447}
-  m_LocalScale: {x: 25.660383, y: 8.641395, z: 1.0069162}
+  m_LocalPosition: {x: 31.6043, y: -29.3365, z: 7.18447}
+  m_LocalScale: {x: 25.788685, y: 10.68854, z: 1.0069162}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 797369383}
@@ -10882,8 +10898,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1546830034}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -71.60358, y: -23.608032, z: 7.18447}
-  m_LocalScale: {x: -22.685537, y: 8.698198, z: 1.0069162}
+  m_LocalPosition: {x: -71.3637, y: -29.5, z: 7.18447}
+  m_LocalScale: {x: -22.798965, y: 10.758801, z: 1.0069162}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 797369383}
@@ -10984,6 +11000,11 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 13.187155, y: 1.1073684}
   m_EdgeRadius: 0
+--- !u!95 &1595859978 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6685958917616122955, guid: d7d3c8b0fe7ba8d408c864b6e020ef23, type: 3}
+  m_PrefabInstance: {fileID: 79441147}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1607914002
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11415,8 +11436,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1689145605}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 120.32153, y: -23.03563, z: 7.18447}
-  m_LocalScale: {x: -16.243834, y: 8.641395, z: 1.0069162}
+  m_LocalPosition: {x: 121.5118, y: -29.3365, z: 7.18447}
+  m_LocalScale: {x: -16.325052, y: 10.68854, z: 1.0069162}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 797369383}

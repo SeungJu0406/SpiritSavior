@@ -4351,19 +4351,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4556548242129494, guid: 08da1657f23f1564c9ef682b836efe72, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3.7775826
+      value: 4.9812355
       objectReference: {fileID: 0}
     - target: {fileID: 4556548242129494, guid: 08da1657f23f1564c9ef682b836efe72, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.4473348
+      value: 3.1369443
       objectReference: {fileID: 0}
     - target: {fileID: 4556548242129494, guid: 08da1657f23f1564c9ef682b836efe72, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.168125
+      value: 13.2244
       objectReference: {fileID: 0}
     - target: {fileID: 4556548242129494, guid: 08da1657f23f1564c9ef682b836efe72, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.477444
+      value: 5.4429
       objectReference: {fileID: 0}
     - target: {fileID: 4556548242129494, guid: 08da1657f23f1564c9ef682b836efe72, type: 3}
       propertyPath: m_LocalPosition.z
@@ -14039,6 +14039,10 @@ PrefabInstance:
     - target: {fileID: 7220145990415169448, guid: 5f4e363a81d20974c82d8a2c987f6f19, type: 3}
       propertyPath: m_Name
       value: SceneTrigger 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7220145990415169448, guid: 5f4e363a81d20974c82d8a2c987f6f19, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f4e363a81d20974c82d8a2c987f6f19, type: 3}

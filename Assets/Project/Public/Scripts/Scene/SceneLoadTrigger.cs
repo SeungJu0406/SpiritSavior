@@ -9,8 +9,9 @@ public class SceneLoadTrigger : MonoBehaviour
     [SerializeField] private SceneField[] _sceneToLoad;
 
     SceneField _DontUnLoadScene;
-     [SerializeField]BoxCollider2D _boxCollider2D;
+    BoxCollider2D _boxCollider2D;
     bool _canUnload = true;
+    List<Scene> _unloadSceneList = new List<Scene>(3);
 
     private void Awake()
     {
@@ -36,8 +37,8 @@ public class SceneLoadTrigger : MonoBehaviour
     {
         if (collision.gameObject.tag == Manager.Game.Player.gameObject.tag)
         {
-            LoadScene();
             UnloadScene();
+            LoadScene();         
             SetCurSceneTrigger();
         }
     }
@@ -85,6 +86,8 @@ public class SceneLoadTrigger : MonoBehaviour
     {
         if (_canUnload == false) return;
 
+        _unloadSceneList.Clear();
+
         for (int i = 0; i < SceneManager.sceneCount; i++)
         {
             bool isLoadScene = false;
@@ -106,11 +109,18 @@ public class SceneLoadTrigger : MonoBehaviour
                 }
             }
 
-            // 로드해야할 씬이 아니면 언로드
+            // 로드해야할 씬이 아니면 언로드씬 리스트에 저장
             if(isLoadScene == false)
             {
-                SceneManager.UnloadSceneAsync(loadedScene);
+                _unloadSceneList.Add(loadedScene);
+               
             }
+        }
+
+        // 언로드씬 리스트 언로드로 정리 
+        foreach (Scene scene in _unloadSceneList) 
+        {
+            SceneManager.UnloadSceneAsync(scene);
         }
     }
 

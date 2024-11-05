@@ -203,11 +203,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9157503080114635299, guid: 2784e3e099f601a4491f874e22c2c447, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -215.1
+      value: -320.2
       objectReference: {fileID: 0}
     - target: {fileID: 9157503080114635299, guid: 2784e3e099f601a4491f874e22c2c447, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 320
+      value: 391.2
       objectReference: {fileID: 0}
     - target: {fileID: 9157503080114635299, guid: 2784e3e099f601a4491f874e22c2c447, type: 3}
       propertyPath: m_LocalPosition.z
@@ -243,7 +243,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9157503080114635324, guid: 2784e3e099f601a4491f874e22c2c447, type: 3}
       propertyPath: _isRespawnPoint
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9157503080114635324, guid: 2784e3e099f601a4491f874e22c2c447, type: 3}
       propertyPath: _respawnScene._sceneName
@@ -259,7 +259,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9157503080114635325, guid: 2784e3e099f601a4491f874e22c2c447, type: 3}
       propertyPath: m_TagString
-      value: Respawn
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2784e3e099f601a4491f874e22c2c447, type: 3}
@@ -375,8 +375,9 @@ MonoBehaviour:
     _sceneAsset: {fileID: 102900000, guid: 87ae9c4377f1f744587657cb06daabae, type: 3}
     _sceneName: PlayerSceneKKY
   _firstStage:
-    _sceneAsset: {fileID: 102900000, guid: 1cfcb1c2a938c6b4fa0ac9bb5676b5ea, type: 3}
-    _sceneName: 3Stage
+    _sceneAsset: {fileID: 102900000, guid: b654f0c3f227940498dc231b6acaec1d, type: 3}
+    _sceneName: 1Stage
+  CurSceneTrigger: {fileID: 0}
 --- !u!4 &443592145
 Transform:
   m_ObjectHideFlags: 0
@@ -499,11 +500,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9157503080114635299, guid: 2784e3e099f601a4491f874e22c2c447, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -950.3
+      value: -945.6
       objectReference: {fileID: 0}
     - target: {fileID: 9157503080114635299, guid: 2784e3e099f601a4491f874e22c2c447, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 294.3
+      value: 353.7
       objectReference: {fileID: 0}
     - target: {fileID: 9157503080114635299, guid: 2784e3e099f601a4491f874e22c2c447, type: 3}
       propertyPath: m_LocalPosition.z
@@ -539,7 +540,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9157503080114635324, guid: 2784e3e099f601a4491f874e22c2c447, type: 3}
       propertyPath: _isRespawnPoint
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9157503080114635324, guid: 2784e3e099f601a4491f874e22c2c447, type: 3}
       propertyPath: _respawnScene._sceneName
@@ -555,7 +556,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9157503080114635325, guid: 2784e3e099f601a4491f874e22c2c447, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Respawn
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2784e3e099f601a4491f874e22c2c447, type: 3}

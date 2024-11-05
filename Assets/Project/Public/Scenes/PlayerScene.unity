@@ -438,6 +438,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1860415591688594988, guid: 173000cc5a08c49458f3d42a9bd0e3b7, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1860415592259902455, guid: 173000cc5a08c49458f3d42a9bd0e3b7, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -906,8 +910,9 @@ MonoBehaviour:
     _sceneAsset: {fileID: 102900000, guid: 8e9df1b98d2b8c54786ffe938063f224, type: 3}
     _sceneName: PlayerScene
   _firstStage:
-    _sceneAsset: {fileID: 102900000, guid: b654f0c3f227940498dc231b6acaec1d, type: 3}
-    _sceneName: 1Stage
+    _sceneAsset: {fileID: 102900000, guid: 5fe9f1ade8a5e88448accba098b6f9c5, type: 3}
+    _sceneName: 0Stage
+  CurSceneTrigger: {fileID: 0}
 --- !u!4 &1376304446
 Transform:
   m_ObjectHideFlags: 0
