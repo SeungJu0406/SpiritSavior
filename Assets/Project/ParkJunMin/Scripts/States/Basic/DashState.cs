@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class DashState : PlayerState
 {
-    Vector2 dashDirection;
     public DashState(PlayerController player) : base(player)
     {
         animationIndex = (int)PlayerController.State.Dash;
@@ -17,21 +16,17 @@ public class DashState : PlayerState
         player.dashDeltaTime = 0;
         player.playerView.PlayAnimation(animationIndex);
         player.playerModel.DashPlayerEvent();
-        dashDirection = new Vector2(player.moveInput, 0);
 
         player.rigid.gravityScale = 0;
-        dashDirection = new Vector2(player.moveInput, 0);
-        player.rigid.velocity = dashDirection * player.dashForce;
 
-        if (player.isSlope) // 일단 경사면에서 다르게 처리하게 바꿀경우를 대비해서 나눠놓음
+        //if (player.isSlope) // 일단 경사면에서 다르게 처리하게 바꿀경우를 대비해서 나눠놓음
+        //{
+        //    dashDirection = new Vector2(player.moveInput, 0);
+        //    player.rigid.velocity = dashDirection * (player.dashForce);
+        //}
+        //else
         {
-            dashDirection = new Vector2(player.moveInput, 0);
-            player.rigid.velocity = dashDirection * (player.dashForce);
-        }
-        else
-        {
-            dashDirection = new Vector2(player.moveInput, 0);
-            player.rigid.velocity = dashDirection * player.dashForce;
+           
         }
     }
 
@@ -49,7 +44,7 @@ public class DashState : PlayerState
 
     public override void FixedUpdate()
     {
-
+        player.rigid.velocity = new Vector2(player.isPlayerRight * player.transform.localScale.x * player.dashForce, 0f);
     }
 
     public override void Exit()

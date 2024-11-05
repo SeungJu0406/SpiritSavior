@@ -16,10 +16,10 @@ public class RunState : PlayerState
     }
     public override void Update()
     {
-        Run();
+        
         PlayAnimationInUpdate();
 
-        if (Mathf.Abs(player.rigid.velocity.x) < 0.01f)
+        if (Mathf.Abs(player.rigid.velocity.x) < 0.01f || player.moveInput == 0)
         {
             player.ChangeState(PlayerController.State.Idle);
         }
@@ -45,7 +45,7 @@ public class RunState : PlayerState
     {
         player.moveInput = Input.GetAxisRaw("Horizontal");
 
-        if (player.isSlope && player.groundAngle < player.maxAngle)
+        if (player.isSlope && (player.groundAngle < player.maxAngle))
         {
             player.rigid.velocity = player.perpAngle * player.moveSpeed * player.moveInput * -1.0f;
         }
@@ -54,6 +54,11 @@ public class RunState : PlayerState
             player.rigid.velocity = new Vector2(player.moveInput * player.moveSpeed, player.rigid.velocity.y);
         }
         player.FlipPlayer(player.moveInput);
+    }
+
+    public override void FixedUpdate()
+    {
+        Run();
     }
 
     public override void Exit()
