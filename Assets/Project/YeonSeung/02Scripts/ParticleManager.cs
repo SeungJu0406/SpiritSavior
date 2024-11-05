@@ -54,7 +54,7 @@ public class ParticleManager : MonoBehaviour
 
     [Header("ÀÜµð ¹â´Â FX ")]
     [SerializeField] GameObject GrassFX;
-    [Header("ÀÜµð ¹â´Â FX ")]
+    [Header("¹ö¼¸ ¹â´Â FX ")]
     [SerializeField] GameObject trapomlineFX;
     TrampolineController _trampoline;
 
@@ -84,36 +84,44 @@ public class ParticleManager : MonoBehaviour
     #region ÇÔ¼ö¸®½ºÆ®
     public void PlayRunFX()
     {
+        Manager.Sound.PlaySFX(Manager.Sound.Data.RunningSound);
         ObjectPool.SpawnObject(runFX, _pBottom.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
     }
     public void PlayJumpFX()
     {
+        Manager.Sound.PlaySFX(Manager.Sound.Data.JumpSound);
         ObjectPool.SpawnObject(jumpFX, _pBottom.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
     }
     public void PlayDoubleJumpFX()
     {
+        Manager.Sound.PlaySFX(Manager.Sound.Data.DoubleJumpSound);
         ObjectPool.SpawnObject(dJumpFX, _pBottom.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
     }
     public void PlayHitFX()
     {
+        Manager.Sound.PlaySFX(Manager.Sound.Data.HitSound);
         ObjectPool.SpawnObject(hitFX, _pBottom.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
     }
     public void PlayHealFX()
     {
+        Manager.Sound.PlaySFX(Manager.Sound.Data.HealSound);
         ObjectPool.SpawnObject(healFX, _pBottom.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
     }
     public void PlayDashFX()
     {
+        Manager.Sound.PlaySFX(Manager.Sound.Data.DashSound);
         ObjectPool.SpawnObject(dashFX, _pBottom.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
     }
     public void PlaySpawnFX()
     {
+        Manager.Sound.PlaySFX(Manager.Sound.Data.SpawnSound);
         ObjectPool.SpawnObject(spawnFX, _pBottom.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
     }
 
     // ÇØ±Ý FX
     public void PlayUnlockTagFX()
     {
+
         ObjectPool.SpawnObject(unlockTagFX, _pBottom.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
     }
     public void PlayUnlockWallJumpFX()
