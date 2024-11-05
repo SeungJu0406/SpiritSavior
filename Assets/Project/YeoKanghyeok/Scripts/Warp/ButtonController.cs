@@ -18,6 +18,7 @@ public class ButtonController : MonoBehaviour
 
     public void Warp()
     {
+        Manager.Sound.PlaySFX(Manager.Sound.Data.WarpButtonClickSound); // 2.5 워프리스트에서 워프 버튼 클릭 시 소리
         StartCoroutine(WarpRoutine());       
     }
    
