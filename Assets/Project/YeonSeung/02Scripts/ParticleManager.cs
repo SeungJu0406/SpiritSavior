@@ -18,43 +18,43 @@ public class ParticleManager : MonoBehaviour
     Vector3 _collisionPos;
 
 
-    [Header("ÇÃ·¹ÀÌ¾î °ü·Ã ÆÄÆ¼Å¬")]
+    [Header("í”Œë ˆì´ì–´ ê´€ë ¨ íŒŒí‹°í´")]
     [Space(5)]
-    [Header("´Ş¸®±â FX ")]
+    [Header("ë‹¬ë¦¬ê¸° FX ")]
     [SerializeField] GameObject runFX;
-    [Header("Á¡ÇÁ FX ")]
+    [Header("ì í”„ FX ")]
     [SerializeField] GameObject jumpFX;
-    [Header("ÀÌ´Ü Á¡ÇÁ FX ")]
+    [Header("ì´ë‹¨ ì í”„ FX ")]
     [SerializeField] GameObject dJumpFX;
-    [Header("ÇÇ°İ FX ")]
+    [Header("í”¼ê²© FX ")]
     [SerializeField] GameObject hitFX;
-    [Header("Ã¼·ÂÈ¸º¹ FX ")]
+    [Header("ì²´ë ¥íšŒë³µ FX ")]
     [SerializeField] GameObject healFX;
-    [Header("´ë½ÃÈ¿°ú FX ")]
+    [Header("ëŒ€ì‹œíš¨ê³¼ FX ")]
     [SerializeField] GameObject dashFX;
     [Space(20)]
-    [Header("±â´É¾ğ¶ô È¿°ú FX")]
+    [Header("ê¸°ëŠ¥ì–¸ë½ íš¨ê³¼ FX")]
     [Space(5)]
-    [Header("ÅÂ±× ¾ğ¶ôFX")]
+    [Header("íƒœê·¸ ì–¸ë½FX")]
     [SerializeField] GameObject unlockTagFX;
-    [Header("º®Á¡ÇÁ ¾ğ¶ôFX ")]
+    [Header("ë²½ì í”„ ì–¸ë½FX ")]
     [SerializeField] GameObject unlockWallJumpFX;
-    [Header("´õºíÁ¡ÇÁ ¾ğ¶ôFX ")]
+    [Header("ë”ë¸”ì í”„ ì–¸ë½FX ")]
     [SerializeField] GameObject unlockDoubleJumpFX;
-    [Header("´ë½Ã ¾ğ¶ôFX ")]
+    [Header("ëŒ€ì‹œ ì–¸ë½FX ")]
     [SerializeField] GameObject unlockDashFX;
 
-    [Header("¸®½ºÆù FX ")]
+    [Header("ë¦¬ìŠ¤í° FX ")]
     [SerializeField] GameObject spawnFX;
     [Space(20)]
-    [Header("´Ù¸¥ÆÄÆ¼Å¬µé")]
+    [Header("ë‹¤ë¥¸íŒŒí‹°í´ë“¤")]
     [Space(5)]
 
 
 
-    [Header("ÀÜµğ ¹â´Â FX ")]
+    [Header("ì”ë”” ë°ŸëŠ” FX ")]
     [SerializeField] GameObject GrassFX;
-    [Header("¹ö¼¸ ¹â´Â FX ")]
+    [Header("ë²„ì„¯ ë°ŸëŠ” FX ")]
     [SerializeField] GameObject trapomlineFX;
     TrampolineController _trampoline;
 
@@ -85,7 +85,7 @@ public class ParticleManager : MonoBehaviour
     }
 
 
-    #region ÇÔ¼ö¸®½ºÆ®
+    #region í•¨ìˆ˜ë¦¬ìŠ¤íŠ¸
     public void PlayRunFX()
     {
         ObjectPool.SpawnObject(runFX, _pBottom.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
@@ -126,7 +126,7 @@ public class ParticleManager : MonoBehaviour
         ObjectPool.SpawnObject(spawnFX, _pBottom.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
     }
 
-    // ÇØ±İ FX
+    // í•´ê¸ˆ FX
     public void PlayUnlockTagFX()
     {
         Manager.Sound.PlaySFX(Manager.Sound.Data.UnlockTagSound);
@@ -148,19 +148,39 @@ public class ParticleManager : MonoBehaviour
         ObjectPool.SpawnObject(unlockDashFX, _pBottom.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
     }
 
+    // ì¶”ê°€ ì‚¬ìš´ë“œ
+    public void PlayWallGrabbedFX()
+    {
+        Manager.Sound.PlaySFX(Manager.Sound.Data.WallClimbSound);
+    }
+    public void PlayWallSlidFX()
+    {
+        Manager.Sound.PlaySFX(Manager.Sound.Data.WallSlidSound);
+    }
+    public void PlayWallJumpFX()
+    {
+        Manager.Sound.PlaySFX(Manager.Sound.Data.WallJumpSound);
+    }
+    public void PlayerLandFX()
+    {
+        Manager.Sound.PlaySFX(Manager.Sound.Data.LandSound);
+    }
+    public void PlayWakeUpFX()
+    {
+        Manager.Sound.PlaySFX(Manager.Sound.Data.WakeUpSound);
+    }
 
 
-
-    // ´Ù¸¥ ÆÄÆ¼Å¬µé
+    // ë‹¤ë¥¸ íŒŒí‹°í´ë“¤
     public void PlayGrassFX()
     {
-        //ParticleManager.Instance.PlayGrassFX();
+        // ParticleManager.Instance.PlayGrassFX();
         ObjectPool.SpawnObject(GrassFX, _pBottom.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
     }
 
     public void PlayTrampolineFX()
     {
-        //ParticleManager.Instance.PlayTrampolineFX();
+        // ParticleManager.Instance.PlayTrampolineFX();
         ObjectPool.SpawnObject(trapomlineFX, _pBottom.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
     }
 
@@ -209,7 +229,13 @@ public class ParticleManager : MonoBehaviour
         Manager.Game.Player.playerModel.OnPlayerDashed += PlayDashFX;
         Manager.Game.Player.playerModel.OnAbilityUnlocked += UpdateSkillFX;
         Manager.Game.Player.playerModel.OnPlayerSpawn += PlaySpawnFX;
-       
+
+        Manager.Game.Player.playerModel.OnPlayerWallGrabed += PlayWallGrabbedFX;
+        Manager.Game.Player.playerModel.OnPlayerWallSlided += PlayWallSlidFX;
+        Manager.Game.Player.playerModel.OnPlayerWallJumped += PlayWallJumpFX;
+        Manager.Game.Player.playerModel.OnPlayerLanded += PlayerLandFX;
+        Manager.Game.Player.playerModel.OnPlayerWakedUp += PlayWakeUpFX;
+
         // Climbing
         // landing
     }
