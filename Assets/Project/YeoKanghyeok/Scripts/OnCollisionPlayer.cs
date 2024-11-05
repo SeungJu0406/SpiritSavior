@@ -6,7 +6,7 @@ public class OnCollisionPlayer : MonoBehaviour
 {
     [SerializeField] int attackPower = 1;
 
-    bool _canHit;
+    bool _canHit =true ;
     private void Start()
     {
         Manager.Game.Player.playerModel.OnPlayerDied += StopHit;
