@@ -92,7 +92,7 @@ public class Map : MonoBehaviour
     }
 void Update()
     {
-        if (Input.GetKeyDown(KeyCode.M) && !_isTransparency)
+        if (Input.GetKeyDown(KeyCode.Space) && !_isTransparency)
         {
             if (_mapImage.color.a > 0)
             {

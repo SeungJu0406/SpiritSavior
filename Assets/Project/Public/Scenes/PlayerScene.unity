@@ -430,6 +430,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1860415591538374022, guid: 173000cc5a08c49458f3d42a9bd0e3b7, type: 3}
+      propertyPath: m_text
+      value: SpaceBar
+      objectReference: {fileID: 0}
     - target: {fileID: 1860415591688594988, guid: 173000cc5a08c49458f3d42a9bd0e3b7, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
