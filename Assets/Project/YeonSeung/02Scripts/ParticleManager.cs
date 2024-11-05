@@ -54,6 +54,12 @@ public class ParticleManager : MonoBehaviour
 
     [Header("ÀÜµð ¹â´Â FX ")]
     [SerializeField] GameObject GrassFX;
+    [Header("¹ö¼¸ ¹â´Â FX ")]
+    [SerializeField] GameObject trapomlineFX;
+    TrampolineController _trampoline;
+
+
+
 
     // public Transform location;
 
@@ -78,48 +84,59 @@ public class ParticleManager : MonoBehaviour
     #region ÇÔ¼ö¸®½ºÆ®
     public void PlayRunFX()
     {
+        Manager.Sound.PlaySFX(Manager.Sound.Data.RunningSound);
         ObjectPool.SpawnObject(runFX, _pBottom.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
     }
     public void PlayJumpFX()
     {
+        Manager.Sound.PlaySFX(Manager.Sound.Data.JumpSound);
         ObjectPool.SpawnObject(jumpFX, _pBottom.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
     }
     public void PlayDoubleJumpFX()
     {
+        Manager.Sound.PlaySFX(Manager.Sound.Data.DoubleJumpSound);
         ObjectPool.SpawnObject(dJumpFX, _pBottom.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
     }
     public void PlayHitFX()
     {
+        Manager.Sound.PlaySFX(Manager.Sound.Data.HitSound);
         ObjectPool.SpawnObject(hitFX, _pBottom.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
     }
     public void PlayHealFX()
     {
+        Manager.Sound.PlaySFX(Manager.Sound.Data.HealSound);
         ObjectPool.SpawnObject(healFX, _pBottom.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
     }
     public void PlayDashFX()
     {
+        Manager.Sound.PlaySFX(Manager.Sound.Data.DashSound);
         ObjectPool.SpawnObject(dashFX, _pBottom.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
     }
     public void PlaySpawnFX()
     {
+        Manager.Sound.PlaySFX(Manager.Sound.Data.SpawnSound);
         ObjectPool.SpawnObject(spawnFX, _pBottom.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
     }
 
     // ÇØ±Ý FX
     public void PlayUnlockTagFX()
     {
+        Manager.Sound.PlaySFX(Manager.Sound.Data.UnlockTagSound);
         ObjectPool.SpawnObject(unlockTagFX, _pBottom.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
     }
     public void PlayUnlockWallJumpFX()
     {
+        Manager.Sound.PlaySFX(Manager.Sound.Data.UnlockWallJumpSound);
         ObjectPool.SpawnObject(unlockWallJumpFX, _pBottom.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
     }
     public void PlayUnlockDoubleJumpFX()
     {
+        Manager.Sound.PlaySFX(Manager.Sound.Data.UnlockDoubleJumpSound);
         ObjectPool.SpawnObject(unlockDoubleJumpFX, _pBottom.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
     }
     public void PlayUnlockDashFX()
     {
+        Manager.Sound.PlaySFX(Manager.Sound.Data.UnlockDashSound);
         ObjectPool.SpawnObject(unlockDashFX, _pBottom.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
     }
 
@@ -128,10 +145,15 @@ public class ParticleManager : MonoBehaviour
     // ´Ù¸¥ ÆÄÆ¼Å¬µé
     public void PlayGrassFX()
     {
+        // ParticleManager.Instance.PlayGrassFX();
         ObjectPool.SpawnObject(GrassFX, _pBottom.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
     }
 
-
+    public void PlayTrampolineFX()
+    {
+        // ParticleManager.Instance.PlayTrampolineFX();
+        ObjectPool.SpawnObject(trapomlineFX, _pBottom.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
+    }
 
     #endregion
 
@@ -142,22 +164,28 @@ public class ParticleManager : MonoBehaviour
         _player = Manager.Game.Player;
         // _pBottom.y = _player.transform.position.y;
         _pBottom = _player.bottomPivot;
-
+        // _trampoline = GetComponent<TrampolineController>();
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("SpaceBar EventTest");
+           // Debug.Log("SpaceBar EventTest");
         }
     }
+    private void OnParticleSystemStopped()
+    {
+        ObjectPool.ReturnObjectPool(gameObject);
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
             _collisionPos = collision.transform.position;
         }
+        
     }
 
 
