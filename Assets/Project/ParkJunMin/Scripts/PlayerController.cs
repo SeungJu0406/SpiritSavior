@@ -157,6 +157,20 @@ public partial class PlayerController : MonoBehaviour
         ControlCoyoteTime();
         ControlJumpBuffer();
 
+        //임시 피격 트리거
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            playerModel.TakeDamageEvent(1); // 임시
+        }
+
+        //임시 죽음 트리거
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            playerModel.DiePlayerEvent();
+            Debug.Log("죽음");
+        }
+
+
         /* 미끄럼 방지 시행착오 및 임시피격트리거
 
         //// 미끄러짐 방지1
@@ -174,18 +188,7 @@ public partial class PlayerController : MonoBehaviour
         //    rigid.velocity = new Vector2(0,rigid.velocity.y);
         //}
 
-        //임시 피격 트리거
-        //if (Input.GetKeyDown(KeyCode.O))
-        //{
-        //    playerModel.TakeDamageEvent(1); // 임시
-        //}
 
-        ////임시 죽음 트리거
-        //if (Input.GetKeyDown(KeyCode.P))
-        //{
-        //    playerModel.DiePlayer();
-        //    Debug.Log("죽음");
-        //}
 
         ////임시 능력 해금 트리거
         if (Input.GetKeyDown(KeyCode.Alpha1))
