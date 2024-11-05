@@ -148,19 +148,39 @@ public class ParticleManager : MonoBehaviour
         ObjectPool.SpawnObject(unlockDashFX, _pBottom.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
     }
 
-
+    // 추가 사운드
+    public void PlayWallGrabbedFX()
+    {
+        Manager.Sound.PlaySFX(Manager.Sound.Data.WallClimbSound);
+    }
+    public void PlayWallSlidFX()
+    {
+        Manager.Sound.PlaySFX(Manager.Sound.Data.WallSlidSound);
+    }
+    public void PlayWallJumpFX()
+    {
+        Manager.Sound.PlaySFX(Manager.Sound.Data.WallJumpSound);
+    }
+    public void PlayerLandFX()
+    {
+        Manager.Sound.PlaySFX(Manager.Sound.Data.LandSound);
+    }
+    public void PlayWakeUpFX()
+    {
+        Manager.Sound.PlaySFX(Manager.Sound.Data.WakeUpSound);
+    }
 
 
     // 다른 파티클들
     public void PlayGrassFX()
     {
-        ParticleManager.Instance.PlayGrassFX();
+        // ParticleManager.Instance.PlayGrassFX();
         ObjectPool.SpawnObject(GrassFX, _pBottom.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
     }
 
     public void PlayTrampolineFX()
     {
-        ParticleManager.Instance.PlayTrampolineFX();
+        // ParticleManager.Instance.PlayTrampolineFX();
         ObjectPool.SpawnObject(trapomlineFX, _pBottom.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);
     }
 
@@ -209,7 +229,13 @@ public class ParticleManager : MonoBehaviour
         Manager.Game.Player.playerModel.OnPlayerDashed += PlayDashFX;
         Manager.Game.Player.playerModel.OnAbilityUnlocked += UpdateSkillFX;
         Manager.Game.Player.playerModel.OnPlayerSpawn += PlaySpawnFX;
-       
+
+        Manager.Game.Player.playerModel.OnPlayerWallGrabed += PlayWallGrabbedFX;
+        Manager.Game.Player.playerModel.OnPlayerWallSlided += PlayWallSlidFX;
+        Manager.Game.Player.playerModel.OnPlayerWallJumped += PlayWallJumpFX;
+        Manager.Game.Player.playerModel.OnPlayerLanded += PlayerLandFX;
+        Manager.Game.Player.playerModel.OnPlayerWakedUp += PlayWakeUpFX;
+
         // Climbing
         // landing
     }
