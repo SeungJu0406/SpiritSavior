@@ -1,9 +1,28 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
 public class OnCollisionPlayer : MonoBehaviour
 {
     [SerializeField] int attackPower = 1;
+
+    bool _canHit;
+    private void Start()
+    {
+        Manager.Game.Player.playerModel.OnPlayerDied += StopHit;
+        Manager.Game.Player.playerModel.OnPlayerSpawn += StartHit;
+    }
+
+    private void StartHit()
+    {
+        _canHit = true;
+    }
+
+    private void StopHit()
+    {
+        _canHit = false;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject == Manager.Game.Player.gameObject)
@@ -31,7 +50,8 @@ public class OnCollisionPlayer : MonoBehaviour
     {
         while (true)
         {
-            Manager.Game.Player.playerModel.TakeDamageEvent(attackPower);
+            if (_canHit) 
+                Manager.Game.Player.playerModel.TakeDamageEvent(attackPower);
             yield return delay;
         }
     }
