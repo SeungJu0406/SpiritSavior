@@ -157,6 +157,20 @@ public partial class PlayerController : MonoBehaviour
         ControlCoyoteTime();
         ControlJumpBuffer();
 
+        ////임시 피격 트리거
+        //if (Input.GetKeyDown(KeyCode.O))
+        //{
+        //    playerModel.TakeDamageEvent(1); // 임시
+        //}
+
+        //죽고 리셋
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            ChangeState(State.Dead);
+            Debug.Log("죽음");
+        }
+
+
         /* 미끄럼 방지 시행착오 및 임시피격트리거
 
         //// 미끄러짐 방지1
@@ -172,21 +186,8 @@ public partial class PlayerController : MonoBehaviour
         //if(moveInput == 0)
         //{
         //    rigid.velocity = new Vector2(0,rigid.velocity.y);
-        //}
-
-        //임시 피격 트리거
-        //if (Input.GetKeyDown(KeyCode.O))
-        //{
-        //    playerModel.TakeDamageEvent(1); // 임시
-        //}
-
-        ////임시 죽음 트리거
-        //if (Input.GetKeyDown(KeyCode.P))
-        //{
-        //    playerModel.DiePlayer();
-        //    Debug.Log("죽음");
-        //}
-
+        //
+        */
         ////임시 능력 해금 트리거
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -208,7 +209,6 @@ public partial class PlayerController : MonoBehaviour
             UnlockAbility(PlayerModel.Ability.DoubleJump);
             // Debug.Log("더블점프 해금");
         }
-        */
     }
 
     private void FixedUpdate()
@@ -286,16 +286,13 @@ public partial class PlayerController : MonoBehaviour
         Debug.DrawLine(_groundCheckPoint1.position, (Vector2)_groundCheckPoint1.position + Vector2.down * _groundCheckDistance, Color.cyan);
         Debug.DrawLine(_groundCheckPoint2.position, (Vector2)_groundCheckPoint2.position + Vector2.down * _groundCheckDistance, Color.yellow);
 
-        if(groundHit1 && groundHit2)
-        {
-            _isStandable = true; // 현재 미사용
-        }
 
         if (groundHit1 || groundHit2)
         {
             isGrounded = true;
             if (groundHit1 && groundHit2)
             {
+                //_isStandable = true; // 현재 미사용
                 //둘 중 더 distance가 더 짧은 ray를 선택
                 chosenHit = groundHit1.distance <= groundHit2.distance ? groundHit1 : groundHit2;
             }
@@ -323,6 +320,9 @@ public partial class PlayerController : MonoBehaviour
             if (groundAngle > maxAngle)
             {
                 moveInput = 0;
+            }
+            else
+            {
             }
 
             //법선벡터, 지면에서 수직
@@ -519,67 +519,67 @@ public partial class PlayerController : MonoBehaviour
         }
 
     }
-    public void AdjustDash() // 미완성
-    {
-        float boundaryOffset = 1.0f; // y축 간격
-        float colliderHeight = 2.6f; // 콜라이더의 높이
-        float colliderOffsetY = 0.73f; // 콜라이더의 y 오프셋
-        float colliderOffsetX = 0.06f; // 콜라이더의 x 오프셋
+    //public void AdjustDash() // 미완성
+    //{
+    //    float boundaryOffset = 1.0f; // y축 간격
+    //    float colliderHeight = 2.6f; // 콜라이더의 높이
+    //    float colliderOffsetY = 0.73f; // 콜라이더의 y 오프셋
+    //    float colliderOffsetX = 0.06f; // 콜라이더의 x 오프셋
 
-        boxHits = Physics2D.BoxCastAll(_wallCheckPoint.position, new Vector2(_wallCheckDistance, _wallCheckHeight + 0.35f), 0, Vector2.right * isPlayerRight, _wallCheckDistance);
-        if (boxHits.Length > 0)
-        {
-            float closestDistance = float.MaxValue;
-            RaycastHit2D closestHit = new RaycastHit2D();
-            foreach (RaycastHit2D hit in boxHits)
-            {
-                if (hit.distance < closestDistance)
-                {
-                    closestDistance = hit.distance;
-                    closestHit = hit;
-                }
-            }
+    //    boxHits = Physics2D.BoxCastAll(_wallCheckPoint.position, new Vector2(_wallCheckDistance, _wallCheckHeight + 0.35f), 0, Vector2.right * isPlayerRight, _wallCheckDistance);
+    //    if (boxHits.Length > 0)
+    //    {
+    //        float closestDistance = float.MaxValue;
+    //        RaycastHit2D closestHit = new RaycastHit2D();
+    //        foreach (RaycastHit2D hit in boxHits)
+    //        {
+    //            if (hit.distance < closestDistance)
+    //            {
+    //                closestDistance = hit.distance;
+    //                closestHit = hit;
+    //            }
+    //        }
 
-            if (closestHit.collider != null)
-            {
-                if (!isGrounded)
-                {
-                    Vector2 hitPosition = closestHit.point;
-                    Vector2 adjustedPosition = transform.position; // 기존 플레이어 위치
+    //        if (closestHit.collider != null)
+    //        {
+    //            if (!isGrounded)
+    //            {
+    //                Vector2 hitPosition = closestHit.point;
+    //                Vector2 adjustedPosition = transform.position; // 기존 플레이어 위치
 
-                    //// 현재 콜라이더 중앙의 y 위치
-                    //float currentColliderY = adjustedPosition.y - colliderOffsetY;
+    //                //// 현재 콜라이더 중앙의 y 위치
+    //                //float currentColliderY = adjustedPosition.y - colliderOffsetY;
 
-                    //// 플레이어가 조금 내려주거나 올려주면 매끄럽게 대쉬 할 수 있을때
-                    //if (Mathf.Abs(currentColliderY - hitPosition.y) < boundaryOffset)
-                    //{
-                    //    if (currentColliderY > hitPosition.y) // 천장에 붙여야 하는 경우
-                    //    {
-                    //        Debug.Log("천장에 붙어야함");
-                    //        //// 천장에 맞게 y 위치 보정
-                    //        //adjustedPosition.y = hitPosition.y + (colliderHeight - colliderOffsetY);
-                    //    }
-                    //    else if (currentColliderY < hitPosition.y) // 바닥에 붙여야 하는 경우
-                    //    {
-                    //        Debug.Log("바닥에 붙어야함");
-                    //        // 바닥에 맞게 y 위치 보정
-                    //        adjustedPosition.y = hitPosition.y - colliderOffsetY;
-                    //    }
-                    //}
+    //                //// 플레이어가 조금 내려주거나 올려주면 매끄럽게 대쉬 할 수 있을때
+    //                //if (Mathf.Abs(currentColliderY - hitPosition.y) < boundaryOffset)
+    //                //{
+    //                //    if (currentColliderY > hitPosition.y) // 천장에 붙여야 하는 경우
+    //                //    {
+    //                //        Debug.Log("천장에 붙어야함");
+    //                //        //// 천장에 맞게 y 위치 보정
+    //                //        //adjustedPosition.y = hitPosition.y + (colliderHeight - colliderOffsetY);
+    //                //    }
+    //                //    else if (currentColliderY < hitPosition.y) // 바닥에 붙여야 하는 경우
+    //                //    {
+    //                //        Debug.Log("바닥에 붙어야함");
+    //                //        // 바닥에 맞게 y 위치 보정
+    //                //        adjustedPosition.y = hitPosition.y - colliderOffsetY;
+    //                //    }
+    //                //}
 
-                    // x축 오프셋 고려해 보정
-                    adjustedPosition.x = hitPosition.x - colliderOffsetX;
-                    // 순간이동
-                    transform.position = adjustedPosition;
-                    //기존 속도 유지
-                    Vector2 newVelocity = rigid.velocity;
-                    newVelocity.y = 0;
-                    rigid.velocity = newVelocity;
-                    return;
-                }
-            }
-        }
-    }
+    //                // x축 오프셋 고려해 보정
+    //                adjustedPosition.x = hitPosition.x - colliderOffsetX;
+    //                // 순간이동
+    //                transform.position = adjustedPosition;
+    //                //기존 속도 유지
+    //                Vector2 newVelocity = rigid.velocity;
+    //                newVelocity.y = 0;
+    //                rigid.velocity = newVelocity;
+    //                return;
+    //            }
+    //        }
+    //    }
+    //}
     private Vector2 GetCenterOfCollider()
     {
         return (Vector2)_playerCollider.bounds.center;
