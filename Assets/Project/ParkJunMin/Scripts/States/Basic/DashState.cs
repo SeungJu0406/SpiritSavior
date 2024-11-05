@@ -48,6 +48,12 @@ public class DashState : PlayerState
 
     public override void Update()
     {
+        PlayAnimationInUpdate();
+
+
+        //미완성
+        //player.AdjustDash();
+
         //if (player.isWall)
         //{
         //    Debug.Log("대시 중 벽 감지");
@@ -70,7 +76,7 @@ public class DashState : PlayerState
 
         if (player.playerView.IsAnimationFinished())
         {
-            Debug.Log("대시 애니메이션 종료");
+            //Debug.Log("대시 애니메이션 종료");
             player.ChangeState(PlayerController.State.Fall);
         }
 

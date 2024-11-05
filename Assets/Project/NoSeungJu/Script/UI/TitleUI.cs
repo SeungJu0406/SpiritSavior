@@ -15,6 +15,7 @@ public class TitleUI : BaseUI
     {
         Init();
         SubsCribeEvents();
+        Time.timeScale = 1.0f;
     }
 
 
@@ -59,6 +60,11 @@ public class TitleUI : BaseUI
 
     void StartNewGame()
     {
+        if(Manager.Game != null)
+        {
+            GameManager.Instance = null;
+        }
+
         SceneChanger.Instance.InitGameScene();
     }
 

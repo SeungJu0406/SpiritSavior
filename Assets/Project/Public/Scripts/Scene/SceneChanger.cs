@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class SceneChanger : MonoBehaviour
@@ -12,7 +13,8 @@ public class SceneChanger : MonoBehaviour
     [Header("최초 스테이지")]
     [SerializeField] SceneField _firstStage;
 
-    Dictionary<Vector2, bool> _disPosableTrapDic = new Dictionary<Vector2, bool>(40);
+    [HideInInspector] public SceneLoadTrigger CurSceneTrigger;
+    public event UnityAction OnChangeCurSceneTrigger;
 
     private void Awake()
     {
@@ -30,11 +32,11 @@ public class SceneChanger : MonoBehaviour
     /// <returns></returns>
     public bool CheckKeepingTrap(Vector2 key)
     {
-        if (_disPosableTrapDic.ContainsKey(key) == false)
+        if (Manager.Game.DisPosableTrapDic.ContainsKey(key) == false)
         {
-            _disPosableTrapDic.Add(key, true);
+            Manager.Game.DisPosableTrapDic.Add(key, true);
         }
-        return _disPosableTrapDic[key];
+        return Manager.Game.DisPosableTrapDic[key];
     }
 
     /// <summary>
@@ -44,9 +46,9 @@ public class SceneChanger : MonoBehaviour
     /// <param name="value"></param>
     public void SetKeepingTrap(Vector2 key, bool value)
     {
-        if (_disPosableTrapDic.ContainsKey(key))
+        if (Manager.Game.DisPosableTrapDic.ContainsKey(key))
         {
-            _disPosableTrapDic[key] = value;
+            Manager.Game.DisPosableTrapDic[key] = value;
         }
     }
 
@@ -62,6 +64,11 @@ public class SceneChanger : MonoBehaviour
         //StartCoroutine(LoadSceneRoutine());
     }
 
+    public void SetCurSceneTrigger(SceneLoadTrigger sceneTrigger)
+    {
+        CurSceneTrigger = sceneTrigger;
+        OnChangeCurSceneTrigger?.Invoke();
+    }
     //IEnumerator LoadSceneRoutine()
     //{ 
 

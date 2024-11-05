@@ -50,6 +50,8 @@ public class TriggerTrap : Trap
     {
         if (_canActive)
         {
+            Manager.Sound.PlaySFX(Manager.Sound.Data.TrapActivationSound);
+
             FallingTrapObject fallingTrapObject = Instantiate(_fallingTrapObject, _fallingPoint.position, _fallingPoint.rotation);
             fallingTrapObject.SetLifeTimeDelay(_lifeTimeDelay);
             fallingTrapObject.SetDamage(_damage);

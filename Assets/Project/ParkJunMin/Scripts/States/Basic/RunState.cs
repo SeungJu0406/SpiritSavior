@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class RunState : PlayerState
@@ -32,6 +31,11 @@ public class RunState : PlayerState
             player.ChangeState(PlayerController.State.Idle);
         }
         else if (player.coyoteTimeCounter <= 0 && player.rigid.velocity.y != 0f) //!player.isGrounded &&
+        {
+            player.ChangeState(PlayerController.State.Fall);
+        }
+
+        if(player.groundAngle > player.maxAngle)
         {
             player.ChangeState(PlayerController.State.Fall);
         }

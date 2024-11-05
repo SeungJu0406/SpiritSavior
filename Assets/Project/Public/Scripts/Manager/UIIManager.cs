@@ -8,6 +8,8 @@ public class UIIManager : MonoBehaviour
 
     public GameObject WarpUI;
 
+    public bool IsPopUp;
+
     private void Awake()
     {
         if (Instance == null) Instance = this;

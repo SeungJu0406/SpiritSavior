@@ -18,6 +18,8 @@ public partial class GameManager : MonoBehaviour
     public event UnityAction OnClear;
     public Dictionary<int, bool> IsClearStageDIc = new Dictionary<int, bool>();
     public event UnityAction<int> OnChangeIsClearStage;
+
+    public Dictionary<Vector2, bool> DisPosableTrapDic = new Dictionary<Vector2, bool>(40);
     private void Awake()
     {
         if (Instance == null) Instance = this;

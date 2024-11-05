@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class TestSceneChanger : MonoBehaviour
@@ -13,7 +14,8 @@ public class TestSceneChanger : MonoBehaviour
     [Header("최초 스테이지")]
     [SerializeField] SceneField _firstStage;
 
-    Dictionary<Vector2, bool> _disPosableTrapDic = new Dictionary<Vector2, bool>(40);
+    [SerializeField] public SceneLoadTrigger CurSceneTrigger;
+    public event UnityAction OnChangeCurSceneTrigger;
 
     private void Awake()
     {
@@ -37,11 +39,11 @@ public class TestSceneChanger : MonoBehaviour
     /// <returns></returns>
     public bool CheckKeepingTrap(Vector2 key)
     {
-        if (_disPosableTrapDic.ContainsKey(key) == false)
+        if (Manager.Game.DisPosableTrapDic.ContainsKey(key) == false)
         {
-            _disPosableTrapDic.Add(key, true);
+            Manager.Game.DisPosableTrapDic.Add(key, true);
         }
-        return _disPosableTrapDic[key];
+        return Manager.Game.DisPosableTrapDic[key];
     }
 
     /// <summary>
@@ -51,9 +53,9 @@ public class TestSceneChanger : MonoBehaviour
     /// <param name="value"></param>
     public void SetKeepingTrap(Vector2 key, bool value)
     {
-        if (_disPosableTrapDic.ContainsKey(key))
+        if (Manager.Game.DisPosableTrapDic.ContainsKey(key))
         {
-            _disPosableTrapDic[key] = value;
+            Manager.Game.DisPosableTrapDic[key] = value;
         }
     }
 
@@ -67,5 +69,11 @@ public class TestSceneChanger : MonoBehaviour
         AsyncOperation firstSceneOper = SceneManager.LoadSceneAsync(_firstStage, LoadSceneMode.Additive);
         firstSceneOper.allowSceneActivation = true;
         //StartCoroutine(LoadSceneRoutine());
+    }
+
+    public void SetCurSceneTrigger(SceneLoadTrigger sceneTrigger)
+    {
+        CurSceneTrigger = sceneTrigger;
+        OnChangeCurSceneTrigger?.Invoke();
     }
 }

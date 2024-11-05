@@ -64,7 +64,7 @@ public class PlayerModel
         }
         else
         {
-            Debug.Log("무적상태라 피격받지 않음");
+            //Debug.Log("무적상태라 피격받지 않음");
         }
         // 예외상황 발생 우려에 따라 일단 주석 처리
         //else

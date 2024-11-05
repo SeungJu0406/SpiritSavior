@@ -13,7 +13,8 @@ public class TrampolineController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-                collision.rigidbody.velocity = Vector2.up * _jumpSpeed;
+            ParticleManager.Instance.PlayTrampolineFX();
+            collision.rigidbody.velocity = Vector2.up * _jumpSpeed;
                 _animator.SetTrigger("boing");
         }
     }

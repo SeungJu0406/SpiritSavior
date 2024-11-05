@@ -621,6 +621,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ClearUI
       objectReference: {fileID: 0}
+    - target: {fileID: 8260617264427320096, guid: b7eaf6cd0c204104b97ccc219f76a357, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4287861651
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7eaf6cd0c204104b97ccc219f76a357, type: 3}
 --- !u!224 &4618555157464850299 stripped
