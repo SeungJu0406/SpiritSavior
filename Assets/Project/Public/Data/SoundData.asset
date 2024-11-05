@@ -16,15 +16,15 @@ MonoBehaviour:
     TitleBGM: {fileID: 8300000, guid: 67c0550fef4a54016830ff981c218ae4, type: 3}
     GameBGM: {fileID: 8300000, guid: 3829f8b13687f4d1595e5c8064111887, type: 3}
   _player:
-    RunningSound: {fileID: 8300000, guid: ddc27d8001caf204cad96a9571e897ee, type: 3}
-    JumpSound: {fileID: 8300000, guid: 10c7b2df68d0a9945846e2aa3823ec2f, type: 3}
+    RunningSound: {fileID: 8300000, guid: b2babdaa16cb815419b5e3d70126a6a9, type: 3}
+    JumpSound: {fileID: 8300000, guid: ddc27d8001caf204cad96a9571e897ee, type: 3}
     LandingSound: {fileID: 8300000, guid: fefa14ad1ba5a454a8778f88d15c99f8, type: 3}
-    DoubleJumpSound: {fileID: 8300000, guid: b2babdaa16cb815419b5e3d70126a6a9, type: 3}
+    DoubleJumpSound: {fileID: 8300000, guid: 10c7b2df68d0a9945846e2aa3823ec2f, type: 3}
     WallClimbSound: {fileID: 8300000, guid: 4e92f1572924be5419d3ca96afc3b1d9, type: 3}
     DashSound: {fileID: 8300000, guid: 7c7881b72245f5b4a8642524f08c73f5, type: 3}
     HitSound: {fileID: 8300000, guid: dd07cde71e5afe347acdb290c63e70dc, type: 3}
     DeathSound: {fileID: 8300000, guid: a3053555b94c86940acd7ed8db5dad02, type: 3}
-    SpawnSound: {fileID: 8300000, guid: 5afda1a9d5c24bc48a33b2da01511c2b, type: 3}
+    SpawnSound: {fileID: 8300000, guid: f8517e6613813674198a25870ee63ce1, type: 3}
     TagSound: {fileID: 8300000, guid: c5c7d599b490f08499688fac87b8f307, type: 3}
     HealSound: {fileID: 8300000, guid: 4b03832a4f0cb9146b7542406b4ea851, type: 3}
     UnlockTagSound: {fileID: 8300000, guid: 2ce5b4543f2ca3749a1cb1c3e5ff96c1, type: 3}
