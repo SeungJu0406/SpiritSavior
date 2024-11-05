@@ -3,7 +3,7 @@ using UnityEngine;
 public class OnCollisionPlayer : MonoBehaviour
 {
     [SerializeField] int attackPower = 1;
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject == Manager.Game.Player.gameObject)
         {
