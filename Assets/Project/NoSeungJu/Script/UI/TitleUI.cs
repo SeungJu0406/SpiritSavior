@@ -60,7 +60,9 @@ public class TitleUI : BaseUI
 
     void StartNewGame()
     {
-        if(Manager.Game != null)
+        Manager.Sound.PlaySFX(Manager.Sound.Data.ButtonClickSound);
+
+        if (Manager.Game != null)
         {
             GameManager.Instance = null;
         }
@@ -70,6 +72,8 @@ public class TitleUI : BaseUI
 
     void ShowCredit()
     {
+        Manager.Sound.PlaySFX(Manager.Sound.Data.ButtonClickSound);
+
         GetUI("BlackFillter").gameObject.SetActive(false);
         GetUI("CreditFillter").gameObject.SetActive(true);
         CloseHighlight();
@@ -77,6 +81,8 @@ public class TitleUI : BaseUI
 
     void HideCredit()
     {
+        Manager.Sound.PlaySFX(Manager.Sound.Data.ButtonClickSound);
+
         GetUI("BlackFillter").gameObject.SetActive(true);
         GetUI("CreditFillter").gameObject.SetActive(false);      
     }
@@ -96,6 +102,8 @@ public class TitleUI : BaseUI
     /// </summary>
     private void ToggleOptionUI()
     {
+        Manager.Sound.PlaySFX(Manager.Sound.Data.MenuToggleSound);
+
         if (GetUI("OptionUI").activeSelf)
         {
             GetUI("TitleUI").SetActive(true);
@@ -116,6 +124,8 @@ public class TitleUI : BaseUI
     /// </summary>
     private void ToggleKeyOption()
     {
+        Manager.Sound.PlaySFX(Manager.Sound.Data.ButtonClickSound);
+
         GameObject keyOption = GetUI("KeyOption");
         for (int i = 0; i < optionBoxs.Count; i++)
         {
@@ -131,6 +141,8 @@ public class TitleUI : BaseUI
     /// </summary>
     private void ToggleAudioOption()
     {
+        Manager.Sound.PlaySFX(Manager.Sound.Data.ButtonClickSound);
+
         GameObject audioOption = GetUI("AudioOption");
         for (int i = 0; i < optionBoxs.Count; i++)
         {
