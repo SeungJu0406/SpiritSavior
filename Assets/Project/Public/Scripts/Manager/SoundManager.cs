@@ -24,6 +24,8 @@ public class SoundManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
         else Destroy(gameObject);
+
+        _bgm.loop = true;
     }
 
     /// <summary>
