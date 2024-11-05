@@ -41,6 +41,8 @@ public class GameOptionUI : BaseUI
     /// </summary>
     private void ToggleGameOptionUI()
     {
+        Manager.Sound.PlaySFX(Manager.Sound.Data.MenuToggleSound);
+
         if (GetUI("GameOptionUI").activeSelf)
         {
             Time.timeScale = 1f;
@@ -85,6 +87,8 @@ public class GameOptionUI : BaseUI
     /// </summary>
     private void ToggleAudioOption()
     {
+        Manager.Sound.PlaySFX(Manager.Sound.Data.ButtonClickSound);
+
         GameObject audioOption = GetUI("AudioOption");
         for (int i = 0; i < optionBoxs.Count; i++)
         {
@@ -132,6 +136,7 @@ public class GameOptionUI : BaseUI
 
     private void BackTitle()
     {
+        Manager.Sound.PlaySFX(Manager.Sound.Data.ButtonClickSound);
         SceneManager.LoadSceneAsync("TitleScene");
     }
 
