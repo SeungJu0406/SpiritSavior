@@ -35,7 +35,7 @@ public class SpawnState : PlayerState
     {
         prevNature = player.playerModel.curNature;
         player.playerModel.hp = player.playerModel.curMaxHP;
-        player.isDead = false;
+        //player.isDead = false;
         player.playerModel.invincibility = false;
 
         if (Manager.Game.RespawnPos != null )

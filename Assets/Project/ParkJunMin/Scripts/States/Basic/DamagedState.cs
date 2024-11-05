@@ -5,23 +5,16 @@ using UnityEngine.PlayerLoop;
 
 public class DamagedState : PlayerState
 {
-    private float _knockbackForce;
-    //private float _minKnockback = 0.5f;
     private Vector2 knockbackDirection;
     private bool knockbackFlag;
     public DamagedState(PlayerController player) : base(player)
     {
         animationIndex = (int)PlayerController.State.Damaged;
-        this._knockbackForce = player.knockbackForce;
     }
 
     public override void Enter()
     {
         knockbackFlag = true;
-        if (player.rigid.sharedMaterial != null)
-        {
-            player.rigid.sharedMaterial.friction = 0.6f;
-        }
 
         //무적상태 
         player.playerModel.invincibility = true;
@@ -57,10 +50,6 @@ public class DamagedState : PlayerState
     public override void Exit()
     {
         knockbackDirection = Vector2.zero;
-        if (player.rigid.sharedMaterial != null)
-        {
-            player.rigid.sharedMaterial.friction = 0f;
-        }
     }
 
     private void KnockbackPlayer()
@@ -73,7 +62,7 @@ public class DamagedState : PlayerState
 
         //넉백
 
-        player.rigid.AddForce(knockbackDirection * _knockbackForce, ForceMode2D.Impulse);
+        player.rigid.AddForce(knockbackDirection * player.knockbackForce, ForceMode2D.Impulse);
 
         knockbackFlag = false;
     }

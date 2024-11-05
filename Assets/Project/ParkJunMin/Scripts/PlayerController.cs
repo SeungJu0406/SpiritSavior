@@ -4,7 +4,6 @@ using UnityEngine;
 public partial class PlayerController : MonoBehaviour
 {
     public enum State { Idle, Run, Dash, Jump, DoubleJump, Fall, Land, WallGrab, WallSliding, WallJump, Damaged, WakeUp, Dead, Spawn, Size }
-    //public PlayerData playerData;
     [SerializeField] State _curState;
     private PlayerState[] _states = new PlayerState[(int)State.Size];
 
@@ -17,7 +16,6 @@ public partial class PlayerController : MonoBehaviour
     private int _wallLayerMask;
     private int _ignorePlayerLayerMask;
 
-    //public SpriteRenderer renderer;
     [Header("Player Setting")]
     public float moveSpeed;        // 이동속도
     public float dashForce;         // 대시 힘
@@ -31,16 +29,14 @@ public partial class PlayerController : MonoBehaviour
 
     // "SpeedInAir = SpeedInGround * x")
     [HideInInspector] public float moveSpeedInAir;    // 공중에서 플레이어의 속도
-    //기본 이동속도에 따라 변화되는 변수 변경x
 
     [Space(30)]
     [Header("Checking")]
     public bool isDoubleJumpUsed; // 더블점프 사용 유무를 나타내는 변수
     public bool isDashUsed; // 대시를 사용했는지 유무를 나타내는 변수
 
-    public bool isDead = false; // 죽었는지 확인
     [HideInInspector] public Rigidbody2D rigid;
-    [HideInInspector] public float hp;
+    //[HideInInspector] public float hp;
     [HideInInspector] public float dashDeltaTime;
 
     [Space(30)]
@@ -50,12 +46,6 @@ public partial class PlayerController : MonoBehaviour
     [SerializeField] Transform _groundCheckPoint1;
     [SerializeField] Transform _groundCheckPoint2;
 
-    //[SerializeField] Vector2 _originalCheckPoint1;
-    //[SerializeField] Vector2 _originalCheckPoint2;
-    //private Vector2 _changedPoint1;
-    //private Vector2 _changedPoint2;
-
-
     public Transform _wallCheckPoint;
     private float _wallCheckDistance = 0.01f;
     [SerializeField] private float _wallCheckHeight; //2.25f; // 너무 길면 경사도 벽으로 인식함
@@ -63,7 +53,7 @@ public partial class PlayerController : MonoBehaviour
     public float groundAngle;
     public int isPlayerRight = 1;
     public bool isGrounded;        // 캐릭터가 땅에 붙어있는지 체크
-    private bool _isStandable; // 두 레이 모두 땅에 붙어있는지 체크
+    private bool _isStandable; // 두 레이 모두 땅에 붙어있는지 체크 // 현재 미사용
     [HideInInspector] public Vector2 perpAngle;
     [HideInInspector] public bool isSlope;
     [HideInInspector] public RaycastHit2D groundHit1;
@@ -72,7 +62,7 @@ public partial class PlayerController : MonoBehaviour
     [HideInInspector] public RaycastHit2D wallHit;
     [HideInInspector] public RaycastHit2D[] boxHits;
     public bool isWall;                  // 캐릭터가 벽에 붙어있는지 체크
-    public bool isWallJumpUsed;         // 벽에서 벽점프를 사용 했는지 체크
+    //public bool isWallJumpUsed;         // 벽에서 벽점프를 사용 했는지 체크
     private Vector2 _wallCheckBoxSize;
     Coroutine _wallCheckDisplayRoutine;
 
@@ -103,17 +93,14 @@ public partial class PlayerController : MonoBehaviour
     private void Awake()
     {
         if (playerModel != null)
-        {
             playerModel.curNature = PlayerModel.Nature.Red;
-        }
         else
-        {
             Debug.LogError("모델 생성 오류");
-        }
 
         rigid = GetComponent<Rigidbody2D>();
         if (rigid == null)
             Debug.LogError("rigidBody없음");
+
         _playerCollider = GetComponent<CapsuleCollider2D>();
 
 
@@ -132,8 +119,6 @@ public partial class PlayerController : MonoBehaviour
         _states[(int)State.Dead] = new DeadState(this);
         _states[(int)State.Spawn] = new SpawnState(this);
         moveSpeedInAir = moveSpeed * speedAdjustmentOffsetInAir;
-        //maxMoveSpeedInAir = maxMoveSpeed * speedAdjustmentOffsetInAir;
-
 
         if (bottomPivot == null)
             bottomPivot = transform.Find("BottomPivot");
@@ -147,13 +132,13 @@ public partial class PlayerController : MonoBehaviour
         if (_wallCheckPoint == null)
             _wallCheckPoint = transform.Find("WallCheckPoint");
 
-        if (_wallCheckDisplayRoutine == null) // 작성중
+        if (_wallCheckDisplayRoutine == null)
             _wallCheckDisplayRoutine = StartCoroutine(CheckWallDisplayRoutine());
 
         _wallCheckBoxSize = new Vector2(_wallCheckDistance, _wallCheckHeight);
 
-        //임시 체력 확인용
-        hp = playerModel.hp;
+        ////임시 체력 확인용
+        //hp = playerModel.hp;
     }
 
 
@@ -182,8 +167,8 @@ public partial class PlayerController : MonoBehaviour
         CheckWall();
         ControlCoyoteTime();
         ControlJumpBuffer();
-        //CheckGroundRaycast();
 
+        /* 임시 트리거
         //// 미끄러짐 방지1
         //if (player.moveInput == 0)
         //{
@@ -233,12 +218,7 @@ public partial class PlayerController : MonoBehaviour
             UnlockAbility(PlayerModel.Ability.DoubleJump);
             // Debug.Log("더블점프 해금");
         }
-
-
-
-        //임시 체력 확인용
-        //hp = playerModel.hp;
-
+        */
     }
 
     private void FixedUpdate()
@@ -246,9 +226,7 @@ public partial class PlayerController : MonoBehaviour
         if (Time.timeScale == 0)
             return;
         _states[(int)(_curState)].FixedUpdate();
-        //여기서 바닥체크를 하니까 하나는 해결됨..
         CheckGroundRaycast();
-        //CheckWall();
     }
 
     public void CheckDashCoolTime()
@@ -301,7 +279,6 @@ public partial class PlayerController : MonoBehaviour
             _states[(int)_curState].Enter();
         }
 
-
         //방안2. 중복 코드를 줄임
         if (_states[(int)nextState].ability == PlayerModel.Ability.None || HasAbility(_states[(int)nextState].ability))
         {
@@ -313,7 +290,6 @@ public partial class PlayerController : MonoBehaviour
         {
             //Debug.Log("아직 해금하지 않은 능력");
         }
-
     }
 
     private void CheckGroundRaycast()
@@ -325,12 +301,11 @@ public partial class PlayerController : MonoBehaviour
 
         Debug.DrawLine(_groundCheckPoint1.position, (Vector2)_groundCheckPoint1.position + Vector2.down * _groundCheckDistance, Color.cyan);
         Debug.DrawLine(_groundCheckPoint2.position, (Vector2)_groundCheckPoint2.position + Vector2.down * _groundCheckDistance, Color.yellow);
-        //slopeHit = Physics2D.Raycast(_groundCheckPoint.position, Vector2.down, _slopeCheckDistance, groundLayerMask);
-        //노멀벡터로 각도를 구함
 
         if(groundHit1 && groundHit2)
         {
-
+            // 두 레이 모두 바닥에 있을 경우 필요하면 처리, 현재 사용처 없음
+            _isStandable = true;
         }
 
         if (groundHit1 || groundHit2)
@@ -351,14 +326,8 @@ public partial class PlayerController : MonoBehaviour
         {
             isGrounded = false;
         }
-
-        // Vector2.Perpendicular(Vector2 A) : A의 값에서 반시계 방향으로 90도 회전한 벡터값을 반환
-
         if (isGrounded)
         {
-            //if (rigid.sharedMaterial.friction != 0.6f)
-            //    rigid.sharedMaterial.friction = 0.6f;
-
             perpAngle = Vector2.Perpendicular(chosenHit.normal).normalized; // 
             groundAngle = Vector2.Angle(chosenHit.normal, Vector2.up);
 
@@ -367,16 +336,10 @@ public partial class PlayerController : MonoBehaviour
             else
                 isSlope = false;
 
-
             if (groundAngle > maxAngle)
             {
                 moveInput = 0;
             }
-            else
-            {
-                //Debug.Log(groundAngle);
-            }
-
 
             //법선벡터, 지면에서 수직
             Debug.DrawLine(chosenHit.point, chosenHit.point + chosenHit.normal, Color.blue);
@@ -390,7 +353,6 @@ public partial class PlayerController : MonoBehaviour
     {
         wallHit = Physics2D.BoxCast(_wallCheckPoint.position, _wallCheckBoxSize, 0, Vector2.right * isPlayerRight, _wallCheckDistance);
         isWall = wallHit;
-
 
         if (wallHit.collider == null)
             return;
@@ -406,7 +368,7 @@ public partial class PlayerController : MonoBehaviour
 
         if (HasAbility(PlayerModel.Ability.WallJump) && (_wallLayerMask & (1 << wallHit.collider.gameObject.layer)) != 0)// 벽타기 가능한 벽일 경우
         {
-            if (isGrounded || _curState == State.WallJump || _curState == State.WallGrab || _curState == State.WallSliding) //너무 긴데
+            if (isGrounded || _curState == State.WallJump || _curState == State.WallGrab || _curState == State.WallSliding)
                 return;
 
             if (moveInput == isPlayerRight && moveInput != 0) //&& _curState != State.WallGrab && _curState != State.WallSliding)
@@ -415,16 +377,13 @@ public partial class PlayerController : MonoBehaviour
         else // 벽타기 불가능한 벽이었을 경우
         {
             float wallAngle = Vector2.Angle(Vector2.up, wallHit.normal);
-            //if (wallAngle > maxAngle)
             {
                 Vector2 slideDirection = Vector2.Perpendicular(wallHit.normal).normalized;
                 rigid.velocity = new Vector2(slideDirection.x * rigid.velocity.x, rigid.velocity.y);
 
             }
-            //if(rigid.sharedMaterial.friction != 0)
-            //    rigid.sharedMaterial.friction = 0f;
 
-
+            /* 경사면 처리 시행착오
             //float slopeAngle = Vector2.Angle(Vector2.up, wallHit.normal); // 벽의 법선 벡터와 수직 벡터의 각도
             //if (slopeAngle > 45f) // 예를 들어, 45도 이상의 경사면
             //{
@@ -451,76 +410,8 @@ public partial class PlayerController : MonoBehaviour
             //        // 너무 무식한 방법인데 다른방법이 없을까
             //    }
             //}
+            */
         }
-    }
-
-    public void AdjustDash() // 미완성
-    {
-        float boundaryOffset = 1.0f; // y축 간격
-        float colliderHeight = 2.6f; // 콜라이더의 높이
-        float colliderOffsetY = 0.73f; // 콜라이더의 y 오프셋
-        float colliderOffsetX = 0.06f; // 콜라이더의 x 오프셋
-
-        boxHits = Physics2D.BoxCastAll(_wallCheckPoint.position, new Vector2(_wallCheckDistance, _wallCheckHeight + 0.35f), 0, Vector2.right * isPlayerRight, _wallCheckDistance);
-        if (boxHits.Length > 0)
-        {
-            float closestDistance = float.MaxValue;
-            RaycastHit2D closestHit = new RaycastHit2D();
-            foreach (RaycastHit2D hit in boxHits)
-            {
-                if (hit.distance < closestDistance)
-                {
-                    closestDistance = hit.distance;
-                    closestHit = hit;
-                }
-            }
-
-            if (closestHit.collider != null)
-            {
-                if (!isGrounded)
-                {
-                    Vector2 hitPosition = closestHit.point;
-                    Vector2 adjustedPosition = transform.position; // 기존 플레이어 위치
-
-                    //// 현재 콜라이더 중앙의 y 위치
-                    //float currentColliderY = adjustedPosition.y - colliderOffsetY;
-
-                    //// 플레이어가 조금 내려주거나 올려주면 매끄럽게 대쉬 할 수 있을때
-                    //if (Mathf.Abs(currentColliderY - hitPosition.y) < boundaryOffset)
-                    //{
-                    //    if (currentColliderY > hitPosition.y) // 천장에 붙여야 하는 경우
-                    //    {
-                    //        Debug.Log("천장에 붙어야함");
-                    //        //// 천장에 맞게 y 위치 보정
-                    //        //adjustedPosition.y = hitPosition.y + (colliderHeight - colliderOffsetY);
-                    //    }
-                    //    else if (currentColliderY < hitPosition.y) // 바닥에 붙여야 하는 경우
-                    //    {
-                    //        Debug.Log("바닥에 붙어야함");
-                    //        // 바닥에 맞게 y 위치 보정
-                    //        adjustedPosition.y = hitPosition.y - colliderOffsetY;
-                    //    }
-                    //}
-
-                    // x축 오프셋 고려해 보정
-                    adjustedPosition.x = hitPosition.x - colliderOffsetX;
-                    // 순간이동
-                    transform.position = adjustedPosition;
-                    //기존 속도 유지
-                    Vector2 newVelocity = rigid.velocity;
-                    newVelocity.y = 0;
-                    rigid.velocity = newVelocity;
-                    return;
-                }
-            }
-        }
-    }
-
-
-
-    private Vector2 GetCenterOfCollider()
-    {
-        return (Vector2)_playerCollider.bounds.center;
     }
 
     public void MoveInAir()
@@ -534,25 +425,17 @@ public partial class PlayerController : MonoBehaviour
     private void ControlCoyoteTime()
     {
         if (isGrounded)
-        {
             coyoteTimeCounter = coyoteTime;
-        }
         else
-        {
             coyoteTimeCounter -= Time.deltaTime;
-        }
     }
 
     private void ControlJumpBuffer()
     {
         if (Input.GetKeyDown(KeyCode.C))
-        {
             jumpBufferCounter = jumpBufferTime;
-        }
         else
-        {
             jumpBufferCounter -= Time.deltaTime;
-        }
     }
 
     public void UnlockAbility(PlayerModel.Ability ability)
@@ -586,8 +469,6 @@ public partial class PlayerController : MonoBehaviour
         _groundCheckPoint2.localPosition = new Vector2(Mathf.Abs(_groundCheckPoint2.localPosition.x) * isPlayerRight, _groundCheckPoint2.localPosition.y);
         _wallCheckPoint.localPosition = new Vector2(Mathf.Abs(_wallCheckPoint.localPosition.x) * isPlayerRight, _wallCheckPoint.localPosition.y);
     }
-
-
     private void AdjustColliderOffset()
     {
         _playerCollider.offset = new Vector2(Mathf.Abs(_playerCollider.offset.x) * isPlayerRight, _playerCollider.offset.y);
@@ -652,9 +533,6 @@ public partial class PlayerController : MonoBehaviour
     {
         UnsubscribeEvents();
 
-        //if (_groundCheckRoutine != null)
-        //    StopCoroutine(_groundCheckRoutine);
-
         if (_wallCheckDisplayRoutine != null)
             StopCoroutine(_wallCheckDisplayRoutine);
     }
@@ -697,6 +575,71 @@ public partial class PlayerController : MonoBehaviour
             yield return delay;
         }
 
+    }
+    public void AdjustDash() // 미완성
+    {
+        float boundaryOffset = 1.0f; // y축 간격
+        float colliderHeight = 2.6f; // 콜라이더의 높이
+        float colliderOffsetY = 0.73f; // 콜라이더의 y 오프셋
+        float colliderOffsetX = 0.06f; // 콜라이더의 x 오프셋
+
+        boxHits = Physics2D.BoxCastAll(_wallCheckPoint.position, new Vector2(_wallCheckDistance, _wallCheckHeight + 0.35f), 0, Vector2.right * isPlayerRight, _wallCheckDistance);
+        if (boxHits.Length > 0)
+        {
+            float closestDistance = float.MaxValue;
+            RaycastHit2D closestHit = new RaycastHit2D();
+            foreach (RaycastHit2D hit in boxHits)
+            {
+                if (hit.distance < closestDistance)
+                {
+                    closestDistance = hit.distance;
+                    closestHit = hit;
+                }
+            }
+
+            if (closestHit.collider != null)
+            {
+                if (!isGrounded)
+                {
+                    Vector2 hitPosition = closestHit.point;
+                    Vector2 adjustedPosition = transform.position; // 기존 플레이어 위치
+
+                    //// 현재 콜라이더 중앙의 y 위치
+                    //float currentColliderY = adjustedPosition.y - colliderOffsetY;
+
+                    //// 플레이어가 조금 내려주거나 올려주면 매끄럽게 대쉬 할 수 있을때
+                    //if (Mathf.Abs(currentColliderY - hitPosition.y) < boundaryOffset)
+                    //{
+                    //    if (currentColliderY > hitPosition.y) // 천장에 붙여야 하는 경우
+                    //    {
+                    //        Debug.Log("천장에 붙어야함");
+                    //        //// 천장에 맞게 y 위치 보정
+                    //        //adjustedPosition.y = hitPosition.y + (colliderHeight - colliderOffsetY);
+                    //    }
+                    //    else if (currentColliderY < hitPosition.y) // 바닥에 붙여야 하는 경우
+                    //    {
+                    //        Debug.Log("바닥에 붙어야함");
+                    //        // 바닥에 맞게 y 위치 보정
+                    //        adjustedPosition.y = hitPosition.y - colliderOffsetY;
+                    //    }
+                    //}
+
+                    // x축 오프셋 고려해 보정
+                    adjustedPosition.x = hitPosition.x - colliderOffsetX;
+                    // 순간이동
+                    transform.position = adjustedPosition;
+                    //기존 속도 유지
+                    Vector2 newVelocity = rigid.velocity;
+                    newVelocity.y = 0;
+                    rigid.velocity = newVelocity;
+                    return;
+                }
+            }
+        }
+    }
+    private Vector2 GetCenterOfCollider()
+    {
+        return (Vector2)_playerCollider.bounds.center;
     }
 
     //public void Freeze()
