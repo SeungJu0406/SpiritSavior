@@ -334,6 +334,8 @@ public partial class PlayerController : MonoBehaviour
     }
     private void CheckWall()
     {
+        if (_curState == State.Damaged || _curState == State.Dead) return;
+
         wallHit = Physics2D.BoxCast(_wallCheckPoint.position, _wallCheckBoxSize, 0, Vector2.right * isPlayerRight, _wallCheckDistance);
         isWall = wallHit;
 
