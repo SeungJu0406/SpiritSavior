@@ -12,56 +12,39 @@ public class IdleState : PlayerState
 
     public override void Enter()
     {
-        //player.rigid.velocity = Vector2.zero;
-
-
-        //player.isDoubleJumpUsed = false;
-        //Debug.Log("Idle »óÅÂ ÁøÀÔ");
         player.playerView.PlayAnimation(animationIndex);
     }
 
     public override void Update()
     {
         PlayAnimationInUpdate();
-        //if (prevNature != player.playerModel.curNature)
-        //{
-        //    player.playerView.PlayAnimation(animationIndex);
-        //    prevNature = player.playerModel.curNature;
-        //}
         player.moveInput = Mathf.Abs(Input.GetAxisRaw("Horizontal"));
         if (player.moveInput > 0 && player.isGrounded)
         {
             player.ChangeState(PlayerController.State.Run);
         }
-
         if (player.jumpBufferCounter > 0f)
         {
             player.ChangeState(PlayerController.State.Jump);
         }
-
-        if (player.rigid.velocity.y != 0 && !player.isGrounded) //(player.rigid.velocity.y < -0.1f)
+        if (player.rigid.velocity.y != 0 && !player.isGrounded)
         {
             player.ChangeState(PlayerController.State.Fall);
         }
 
-        //ÀÏ´Ü ÁÖ¼® Àß µ¹¾Æ°¨
-        //if(!player.isGrounded && player.rigid.velocity.y < -0.1f)
-        //{
-        //    player.ChangeState(PlayerController.State.Fall);
-        //}
-
-        //¾È¹Ì²ô·¯Áö´Â°Ç ¾Æ´Ï°í ÈÎ¾À ´ú ¹Ì²ô·¯Áü..y±îÁö 0À¸·Î ÇØµµ °°À½
-        //ÁÖ¼® Ã³¸®ÇØµµ ´õ ¸¹ÀÌ ¹Ì²ô·¯Áú »Ó °°´Ù
+        if (player.rigid.velocity.y != 0 && !player.isGrounded)
+        {
+            player.ChangeState(PlayerController.State.Fall);
+        }
+        //í›¨ì”¬ ëœ ë¯¸ë„ëŸ¬ì§
         if (player.moveInput == 0)
         {
             player.rigid.velocity = new Vector2(0, player.rigid.velocity.y);
         }
-
     }
 
     public override void Exit()
     {
-        
-        //Debug.Log("Idle »óÅÂ Á¾·á");
+
     }
 }

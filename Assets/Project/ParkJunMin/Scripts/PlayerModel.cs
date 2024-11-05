@@ -14,6 +14,7 @@ public class PlayerModel
         WallJump = 1 << 2,
         DoubleJump = 1 << 3
     }
+
     public event Action<Nature> OnPlayerTagged;
     public event Action OnPlayerDamageTaken;
     public event Action OnPlayerHealth;
@@ -26,8 +27,13 @@ public class PlayerModel
     public event Action OnPlayerDied;
     public event Action OnPlayerSpawn;
 
-    public event Action<Ability> OnAbilityUnlocked;
+    public event Action OnPlayerWallGrabed;
+    public event Action OnPlayerWallSlided;
+    public event Action OnPlayerWallJumped;
+    public event Action OnPlayerLanded;
+    public event Action OnPlayerWakedUp;
 
+    public event Action<Ability> OnAbilityUnlocked;
 
     public bool invincibility = false;
     public Nature curNature;
@@ -38,8 +44,6 @@ public class PlayerModel
     public PlayerModel()
     {
         hp = curMaxHP;
-        //curNature = Nature.Red;
-        //curNature += 10;
     }
 
     public void UnlockAbilityEvent(Ability _newAbility)
@@ -49,8 +53,6 @@ public class PlayerModel
 
     public void TagPlayerEvent()
     {
-        //curNature = (Nature)(((int)curNature + 1) % (int)Nature.Size);
-        //curNature = (curNature + 1) % (int)Nature.Size;
         curNature = curNature == Nature.Red ? Nature.Blue : Nature.Red;
         OnPlayerTagged?.Invoke(curNature);
     }
@@ -62,15 +64,6 @@ public class PlayerModel
             hp -= damage;
             OnPlayerDamageTaken?.Invoke();
         }
-        else
-        {
-            //Debug.Log("무적상태라 피격받지 않음");
-        }
-        // 예외상황 발생 우려에 따라 일단 주석 처리
-        //else
-        //{
-        //    DiePlayer();
-        //}
     }
 
     public void JumpPlayerEvent()
@@ -92,9 +85,31 @@ public class PlayerModel
     {
         OnPlayerRan?.Invoke();
     }
-    
 
-    
+    public void GrabWallEvent()
+    {
+        OnPlayerWallGrabed?.Invoke();
+    }
+
+    public void SlideWallEvent()
+    {
+        OnPlayerWallSlided?.Invoke();
+    }
+
+    public void JumpWallEvent()
+    {
+        OnPlayerWallJumped?.Invoke();
+    }
+
+    public void LandEvent()
+    {
+        OnPlayerLanded?.Invoke();
+    }
+
+    public void WakeUpEvent()
+    {
+        OnPlayerWakedUp?.Invoke();
+    }
 
     public void HealPlayerEvent()
     {

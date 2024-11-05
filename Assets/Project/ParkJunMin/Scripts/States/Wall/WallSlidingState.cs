@@ -12,8 +12,8 @@ public class WallSlidingState : PlayerState
     public override void Enter()
     {
         player.playerView.PlayAnimation(animationIndex);
-        player.rigid.gravityScale = 0.2f; // 임시값 ,
-        //업데이트에서 slidingSpeed만큼 계속 y속도를 주는게 나을까 그냥 중력값변경이 나을까
+        player.playerModel.SlideWallEvent();
+        player.rigid.gravityScale = 0.2f;
     }
 
     public override void Update()

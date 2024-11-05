@@ -5,6 +5,8 @@ using UnityEngine.PlayerLoop;
 
 public class DamagedState : PlayerState
 {
+    private float _knockbackForce;
+
     private Vector2 knockbackDirection;
     private bool knockbackFlag;
     public DamagedState(PlayerController player) : base(player)
@@ -16,19 +18,15 @@ public class DamagedState : PlayerState
     {
         knockbackFlag = true;
 
-        //¹«Àû»óÅÂ 
         player.playerModel.invincibility = true;
         
         player.playerView.PlayAnimation(animationIndex);
-
-        //¸ğµ¨¿¡¼­ ÀÌ¹Ì ¾÷µ¥ÀÌÆ® µÈ hp¸¦ ¹Ş¾Æ¿È
-        player.hp = player.playerModel.hp;
     }
 
     public override void Update()
     {
-        // ÇÇ°İ»óÅÂ°¡ ³¡³ª´Â°É È®ÀÎ
-        if (!knockbackFlag && player.rigid.velocity.sqrMagnitude < 0.1f) // ³Ë¹éÀÇ ÈûÀÌ °ÅÀÇ »ç¶óÁ³À» ¶§
+        // í”¼ê²©ìƒíƒœê°€ ëë‚˜ëŠ”ê±¸ í™•ì¸
+        if (!knockbackFlag && player.rigid.velocity.sqrMagnitude < 0.1f) // ë„‰ë°±ì˜ í˜ì´ ê±°ì˜ ì‚¬ë¼ì¡Œì„ ë•Œ
         {
             if (player.playerModel.hp > 0)
             {
@@ -54,15 +52,14 @@ public class DamagedState : PlayerState
 
     private void KnockbackPlayer()
     {
-        //³Ë¹éµÉ ¹æÇâ Á¤ÀÇ
+        //ë„‰ë°±ë  ë°©í–¥ ì •ì˜
         knockbackDirection = -player.rigid.velocity.normalized;
 
-        //±âÁ¸ÀÇ ¿îµ¿·® ÃÊ±âÈ­
+        //ê¸°ì¡´ì˜ ìš´ë™ëŸ‰ ì´ˆê¸°í™”
         player.rigid.velocity = Vector2.zero;
 
-        //³Ë¹é
-
-        player.rigid.AddForce(knockbackDirection * player.knockbackForce, ForceMode2D.Impulse);
+        //ë„‰ë°±
+        player.rigid.AddForce(knockbackDirection * _knockbackForce, ForceMode2D.Impulse);
 
         knockbackFlag = false;
     }

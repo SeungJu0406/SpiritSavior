@@ -16,7 +16,6 @@ public class SpawnState : PlayerState
         player.playerView.PlayAnimation(animationIndex);
         
         player.playerModel.SpawnPlayerEvent();
-        
     }
 
     public override void Update()
@@ -35,20 +34,12 @@ public class SpawnState : PlayerState
     {
         prevNature = player.playerModel.curNature;
         player.playerModel.hp = player.playerModel.curMaxHP;
-        //player.isDead = false;
         player.playerModel.invincibility = false;
 
         if (Manager.Game.RespawnPos != null )
         {
             player.transform.position = Manager.Game.RespawnPos;
         }
-        else
-        {
-            Debug.Log("¸®½ºÆù Æ÷ÀÎÆ® ¾øÀ½");
-        }
-
-        
-
     }
 
 }

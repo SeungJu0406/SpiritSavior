@@ -11,8 +11,10 @@ public class WallJumpState : PlayerState
     }
     public override void Enter()
     {
+        player.rigid.gravityScale = 1;
         player.isDoubleJumpUsed = false;
         player.playerView.PlayAnimation(animationIndex);
+        player.playerModel.JumpWallEvent();
         player.rigid.velocity = new Vector2(-player.isPlayerRight* player.wallJumpPower, 1.5f * player.wallJumpPower);
         player.FlipPlayer(player.isPlayerRight);
     }
@@ -27,7 +29,7 @@ public class WallJumpState : PlayerState
             player.ChangeState(PlayerController.State.DoubleJump);
         }
 
-        if(player.rigid.velocity.y < -5.0f) // wallJump¶ó´Â°É ¾Ë¾Æº¸±â ½±°Ô ÇÏ±â À§ÇÔ, 0À¸·Î ¼³Á¤½Ã ³Ê¹« ºü¸¥ fall·Î ÀüÈ¯
+        if(player.rigid.velocity.y < -5.0f) // wallJumpë¼ëŠ”ê±¸ ì•Œì•„ë³´ê¸° ì‰½ê²Œ í•˜ê¸° ìœ„í•¨, 0ìœ¼ë¡œ ì„¤ì •ì‹œ ë„ˆë¬´ ë¹ ë¥¸ fallë¡œ ì „í™˜
         { 
             player.ChangeState(PlayerController.State.Fall);
         }
