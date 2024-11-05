@@ -513,7 +513,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 210251936}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.03, y: 11.71, z: 0}
+  m_LocalPosition: {x: -7.72, y: 11.31, z: 0}
   m_LocalScale: {x: 4.2446527, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -757,9 +757,7 @@ MonoBehaviour:
   moveSpeedInAir: 0
   isDoubleJumpUsed: 0
   isDashUsed: 0
-  isDead: 0
   rigid: {fileID: 0}
-  hp: 0
   dashDeltaTime: 0
   bottomPivot: {fileID: 0}
   _groundCheckPoint1: {fileID: 0}
@@ -773,7 +771,6 @@ MonoBehaviour:
   perpAngle: {x: 0, y: 0}
   isSlope: 0
   isWall: 0
-  isWallJumpUsed: 0
   moveInput: 0
   coyoteTime: 0.2
   coyoteTimeCounter: 0
@@ -883,7 +880,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 641222683}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -20.58, y: 12.59, z: 0}
+  m_LocalPosition: {x: -14.05, y: 16.97, z: 0}
   m_LocalScale: {x: -8.03, y: -1, z: -1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1247,7 +1244,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 744020166}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -4.22, y: 29.15, z: 0}
+  m_LocalPosition: {x: -4.18, y: 19.23, z: 0}
   m_LocalScale: {x: -18.882545, y: -2.4728, z: -1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1809,9 +1806,7 @@ MonoBehaviour:
   moveSpeedInAir: 0
   isDoubleJumpUsed: 0
   isDashUsed: 0
-  isDead: 0
   rigid: {fileID: 0}
-  hp: 0
   dashDeltaTime: 0
   bottomPivot: {fileID: 0}
   _groundCheckPoint1: {fileID: 0}
@@ -1825,7 +1820,6 @@ MonoBehaviour:
   perpAngle: {x: 0, y: 0}
   isSlope: 0
   isWall: 0
-  isWallJumpUsed: 0
   moveInput: 0
   coyoteTime: 0.2
   coyoteTimeCounter: 0
@@ -2112,11 +2106,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2960225417464368242, guid: 63d2021b9ae0f4645a68270546dcc028, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.75
+      value: -27.69
       objectReference: {fileID: 0}
     - target: {fileID: 2960225417464368242, guid: 63d2021b9ae0f4645a68270546dcc028, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 20.43
+      value: 28.12
       objectReference: {fileID: 0}
     - target: {fileID: 2960225417464368242, guid: 63d2021b9ae0f4645a68270546dcc028, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2374,6 +2368,117 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 10.906}
+--- !u!1 &1575116427
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1575116430}
+  - component: {fileID: 1575116429}
+  - component: {fileID: 1575116428}
+  m_Layer: 9
+  m_Name: Square (16)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!61 &1575116428
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1575116427}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!212 &1575116429
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1575116427}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 71e148f9ea3de894eaa729cb7db9aa44, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!4 &1575116430
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1575116427}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: -11.56, y: 19.27, z: 0}
+  m_LocalScale: {x: -18.882545, y: -2.4728, z: -1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 28
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!1 &1642793102
 GameObject:
   m_ObjectHideFlags: 0
@@ -2932,7 +3037,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2044426830535345418}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.63, y: 7.16, z: 0}
+  m_LocalPosition: {x: -7.7, y: 6.71, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3220,9 +3325,7 @@ MonoBehaviour:
   moveSpeedInAir: 0
   isDoubleJumpUsed: 0
   isDashUsed: 0
-  isDead: 0
   rigid: {fileID: 0}
-  hp: 0
   dashDeltaTime: 0
   bottomPivot: {fileID: 0}
   _groundCheckPoint1: {fileID: 0}
@@ -3236,7 +3339,6 @@ MonoBehaviour:
   perpAngle: {x: 0, y: 0}
   isSlope: 0
   isWall: 0
-  isWallJumpUsed: 0
   moveInput: 0
   coyoteTime: 0.2
   coyoteTimeCounter: 0
