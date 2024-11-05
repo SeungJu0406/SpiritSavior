@@ -37,9 +37,9 @@ MonoBehaviour:
     WakeUpSound: {fileID: 8300000, guid: f7c3927c4973f284eabd6e74c353b59d, type: 3}
   _mapObject:
     MovingPlatformSound: {fileID: 8300000, guid: c9e8b5bb2135d164dbf4b555c5f72191, type: 3}
-    WarpBeforeOpenSound: {fileID: 8300000, guid: a5d76bdc9cf483d42ad7808c378bf809, type: 3}
-    WarpOpeningSound: {fileID: 8300000, guid: 03d29e40309d81f45a4e94a3359951cb, type: 3}
-    WarpAfterOpenSound: {fileID: 8300000, guid: d390bb4e642e53f45b757aeb4d2c2a97, type: 3}
+    WarpBeforeOpenSound: {fileID: 8300000, guid: 4790175bf412249838632eb18a3b7deb, type: 3}
+    WarpOpeningSound: {fileID: 8300000, guid: a5d76bdc9cf483d42ad7808c378bf809, type: 3}
+    WarpAfterOpenSound: {fileID: 8300000, guid: 4790175bf412249838632eb18a3b7deb, type: 3}
     WarpInteractionSound: {fileID: 8300000, guid: bb9a0692ebe8ce148962b3860a54ea15, type: 3}
     WarpButtonClickSound: {fileID: 8300000, guid: fc768915528bba4439f3fc45c0f9b4b4, type: 3}
     AbilityItemPickUpSound: {fileID: 8300000, guid: de20eeaa30ea1324ea824897015e0e43, type: 3}
