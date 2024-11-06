@@ -20,6 +20,8 @@ public partial class GameManager : MonoBehaviour
     public event UnityAction<int> OnChangeIsClearStage;
 
     public Dictionary<Vector2, bool> DisPosableTrapDic = new Dictionary<Vector2, bool>(40);
+
+    bool _isPlayClearSound;
     private void Awake()
     {
         if (Instance == null) Instance = this;
@@ -75,7 +77,12 @@ public partial class GameManager : MonoBehaviour
         if(IsClearStageDIc.Count >= MaxStage)
         {
             IsClear = true;
-            OnClear?.Invoke();
+
+            if (_isPlayClearSound == false)
+            {
+                OnClear?.Invoke();
+                _isPlayClearSound = true;
+            }
         }
     }
 }
