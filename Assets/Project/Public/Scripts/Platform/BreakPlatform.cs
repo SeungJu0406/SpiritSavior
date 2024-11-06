@@ -24,15 +24,19 @@ public class BreakPlatform : Trap
     [SerializeField] bool _canRespawn;
     [SerializeField] float _respawnTime;
 
+    [Space(10)]
+    [SerializeField] float _breakDelayTime = 0.2f;
 
     PolygonCollider2D _platformCollider;
     BrokenRockPiece[] _rockPieces;
     WaitForSeconds _respawnDelay;
+    WaitForSeconds _breakDelay;
      
     private void Awake()
     {
         _platformCollider = GetComponent<PolygonCollider2D>();   
         _respawnDelay = new WaitForSeconds(_respawnTime);
+        _breakDelay = new WaitForSeconds(_breakDelayTime);
     }
     protected override void Start()
     {
@@ -40,14 +44,24 @@ public class BreakPlatform : Trap
         InitRockPiecesLifeTime();
     }
 
-    protected override void OnCollisionEnter2D(Collision2D collision)
+    protected override void OnTriggerEnter2D(Collider2D collision)
     {
-        base.OnCollisionEnter2D(collision);
-
-        if(collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player")
         {
-            Break();
+            Active();
         }
+    }
+
+    protected override void ProcessActive()
+    {
+        StartCoroutine(BreakDelayRoutine());
+    }
+
+
+    IEnumerator BreakDelayRoutine()
+    {
+       yield return _breakDelay;
+       Break();
     }
 
     void Break()
@@ -63,6 +77,8 @@ public class BreakPlatform : Trap
 
     IEnumerator RespawnRoutine()
     {
+        if(_isDisposable == true) yield break;
+
         yield return _respawnDelay;
         _platform.SetActive(true);
         _platformCollider.enabled = true;

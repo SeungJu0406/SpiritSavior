@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5753689002538849246}
   - component: {fileID: 5739219030544988490}
   - component: {fileID: 5721826446182640151}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'RockChunk_12 '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 5755422145856381914}
   - component: {fileID: 5745266214652429684}
   - component: {fileID: 5721870499218818141}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'RockChunk_4 '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -283,7 +283,7 @@ GameObject:
   - component: {fileID: 5727006006911412932}
   - component: {fileID: 5743195363148918790}
   - component: {fileID: 5721909952037243037}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Breakable_Rocks_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -319,7 +319,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -334,94 +334,17 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.85999995, y: -0.78999996}
-      - {x: 0.90999997, y: -0.68}
-      - {x: 0.9, y: -0.61}
-      - {x: 1.02, y: -0.69}
-      - {x: 1.3199999, y: -0.84}
-      - {x: 1.5699999, y: -0.83}
-      - {x: 1.9499999, y: -0.78999996}
-      - {x: 2.3, y: -0.68}
-      - {x: 2.4099998, y: -0.63}
-      - {x: 2.61, y: -0.47}
-      - {x: 2.71, y: -0.37}
-      - {x: 2.75, y: -0.25}
-      - {x: 2.74, y: -0.13}
-      - {x: 2.84, y: -0.17999999}
-      - {x: 2.97, y: -0.22999999}
-      - {x: 3.29, y: -0.24}
-      - {x: 3.54, y: -0.17999999}
-      - {x: 3.61, y: -0.22999999}
-      - {x: 3.6799998, y: -0.26}
-      - {x: 3.75, y: -0.28}
-      - {x: 3.87, y: -0.28}
-      - {x: 4.02, y: -0.31}
-      - {x: 4.15, y: -0.32999998}
-      - {x: 4.47, y: -0.35999998}
-      - {x: 4.71, y: -0.39}
-      - {x: 4.85, y: -0.35}
-      - {x: 4.92, y: -0.29}
-      - {x: 4.95, y: -0.22}
-      - {x: 4.95, y: -0.01}
-      - {x: 4.85, y: 0.11}
-      - {x: 4.7599998, y: 0.17999999}
-      - {x: 4.63, y: 0.25}
-      - {x: 4.44, y: 0.29999998}
-      - {x: 4.2799997, y: 0.29}
-      - {x: 4.35, y: 0.35999998}
-      - {x: 4.37, y: 0.48}
-      - {x: 4.35, y: 0.62}
-      - {x: 4.2, y: 0.79999995}
-      - {x: 3.3535566, y: 0.75486374}
-      - {x: 2.8, y: 0.45}
-      - {x: 2.209179, y: 0.36890602}
-      - {x: 1.2327366, y: 0.13404274}
-      - {x: 0.19362164, y: -0.08650589}
-      - {x: -1.5285864, y: -0.23100853}
-      - {x: -2.1641827, y: -0.011915207}
-      - {x: -2.9124012, y: 0.31489372}
-      - {x: -3.3047714, y: 0.31681442}
-      - {x: -3.859375, y: 0.20689392}
-      - {x: -4.9197264, y: 0.26732635}
-      - {x: -4.92, y: -0.14999999}
-      - {x: -4.88, y: -0.26999998}
-      - {x: -4.8199997, y: -0.38}
-      - {x: -4.7, y: -0.55}
-      - {x: -4.5899997, y: -0.61}
-      - {x: -4.37, y: -0.65}
-      - {x: -4.12, y: -0.65}
-      - {x: -3.97, y: -0.62}
-      - {x: -3.72, y: -0.52}
-      - {x: -3.6699998, y: -0.48999998}
-      - {x: -3.58, y: -0.44}
-      - {x: -3.3899999, y: -0.59}
-      - {x: -3.23, y: -0.7}
-      - {x: -3.04, y: -0.78}
-      - {x: -2.83, y: -0.74}
-      - {x: -2.6799998, y: -0.84999996}
-      - {x: -2.57, y: -0.9}
-      - {x: -2.31, y: -1}
-      - {x: -2.04, y: -1.0799999}
-      - {x: -1.99, y: -1.09}
-      - {x: -1.7199999, y: -1.11}
-      - {x: -1.56, y: -1.11}
-      - {x: -1.48, y: -1.0699999}
-      - {x: -1.37, y: -1}
-      - {x: -1.28, y: -0.91999996}
-      - {x: -1, y: -0.93}
-      - {x: -0.71999997, y: -1.11}
-      - {x: -0.51, y: -1.18}
-      - {x: -0.07, y: -1.26}
-      - {x: 0.13, y: -1.26}
-      - {x: 0.29, y: -1.22}
-      - {x: 0.53999996, y: -1.14}
-      - {x: 0.79999995, y: -0.85999995}
-    - - {x: -1.1999999, y: -0.37}
-      - {x: -1.2099999, y: -0.38}
-      - {x: -1.1999999, y: -0.42}
-    - - {x: 0.69, y: -0.049999997}
-      - {x: 0.7, y: -0.099999994}
-      - {x: 0.7, y: -0.089999996}
+    - - {x: 0.13591403, y: -0.026905894}
+      - {x: -1.5098143, y: -0.18933445}
+      - {x: -3.0223897, y: 0.3997792}
+      - {x: -3.9341776, y: 0.28981978}
+      - {x: -4.7874017, y: 0.3148234}
+      - {x: -3.1248474, y: 0.081974864}
+      - {x: -1.4314284, y: -0.4250307}
+      - {x: 0.39146507, y: -0.3408686}
+      - {x: 4.0011406, y: 0.8743541}
+      - {x: 3.3142774, y: 0.8375002}
+      - {x: 2.6877358, y: 0.5053374}
 --- !u!114 &5721909952037243037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -434,12 +357,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2324ff2276a19d43bc960661c05ab65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isDisposable: 0
   _platform: {fileID: 5723326506172801294}
   _rockPieceGroup: {fileID: 5723389145972452648}
   _particleGroup: {fileID: 5723390518655699524}
   _rockLifeTime: 2
   _canRespawn: 1
   _respawnTime: 5
+  _breakDelayTime: 0.2
 --- !u!1 &5723181074231361174
 GameObject:
   m_ObjectHideFlags: 0
@@ -451,7 +376,7 @@ GameObject:
   - component: {fileID: 5720799618620199418}
   - component: {fileID: 5596821542636534318}
   - component: {fileID: 5597694210500463030}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stone Puff Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5200,7 +5125,7 @@ GameObject:
   - component: {fileID: 5755369724747482500}
   - component: {fileID: 5745202436861786602}
   - component: {fileID: 5723259246468862677}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'RockChunk_3 '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5333,7 +5258,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5721071533990748912}
   - component: {fileID: 5591677295368821852}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Rocks Cracks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5417,7 +5342,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5727100579389542512}
   - component: {fileID: 5593280831778424676}
-  m_Layer: 0
+  - component: {fileID: 5131253366915604061}
+  m_Layer: 6
   m_Name: Rocks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5491,6 +5417,119 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!60 &5131253366915604061
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5723326506172801294}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 9.9, y: 2.52}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.85999995, y: -0.78999996}
+      - {x: 0.90999997, y: -0.68}
+      - {x: 0.9, y: -0.61}
+      - {x: 1.02, y: -0.69}
+      - {x: 1.3199999, y: -0.84}
+      - {x: 1.5699999, y: -0.83}
+      - {x: 1.9499999, y: -0.78999996}
+      - {x: 2.3, y: -0.68}
+      - {x: 2.4099998, y: -0.63}
+      - {x: 2.61, y: -0.47}
+      - {x: 2.71, y: -0.37}
+      - {x: 2.75, y: -0.25}
+      - {x: 2.74, y: -0.13}
+      - {x: 2.84, y: -0.17999999}
+      - {x: 2.97, y: -0.22999999}
+      - {x: 3.29, y: -0.24}
+      - {x: 3.54, y: -0.17999999}
+      - {x: 3.61, y: -0.22999999}
+      - {x: 3.6799998, y: -0.26}
+      - {x: 3.75, y: -0.28}
+      - {x: 3.87, y: -0.28}
+      - {x: 4.02, y: -0.31}
+      - {x: 4.15, y: -0.32999998}
+      - {x: 4.47, y: -0.35999998}
+      - {x: 4.71, y: -0.39}
+      - {x: 4.85, y: -0.35}
+      - {x: 4.92, y: -0.29}
+      - {x: 4.95, y: -0.22}
+      - {x: 4.95, y: -0.01}
+      - {x: 4.85, y: 0.11}
+      - {x: 4.7599998, y: 0.17999999}
+      - {x: 4.63, y: 0.25}
+      - {x: 4.44, y: 0.29999998}
+      - {x: 4.2799997, y: 0.29}
+      - {x: 4.35, y: 0.35999998}
+      - {x: 4.37, y: 0.48}
+      - {x: 4.35, y: 0.62}
+      - {x: 4.2, y: 0.79999995}
+      - {x: 3.3535566, y: 0.75486374}
+      - {x: 2.8, y: 0.45}
+      - {x: 2.209179, y: 0.36890602}
+      - {x: 1.2327366, y: 0.13404274}
+      - {x: 0.19362164, y: -0.08650589}
+      - {x: -1.5285864, y: -0.23100853}
+      - {x: -2.1641827, y: -0.011915207}
+      - {x: -2.9124012, y: 0.31489372}
+      - {x: -3.3047714, y: 0.31681442}
+      - {x: -3.859375, y: 0.20689392}
+      - {x: -4.9197264, y: 0.26732635}
+      - {x: -4.92, y: -0.14999999}
+      - {x: -4.88, y: -0.26999998}
+      - {x: -4.8199997, y: -0.38}
+      - {x: -4.7, y: -0.55}
+      - {x: -4.5899997, y: -0.61}
+      - {x: -4.37, y: -0.65}
+      - {x: -4.12, y: -0.65}
+      - {x: -3.97, y: -0.62}
+      - {x: -3.72, y: -0.52}
+      - {x: -3.6699998, y: -0.48999998}
+      - {x: -3.58, y: -0.44}
+      - {x: -3.3899999, y: -0.59}
+      - {x: -3.23, y: -0.7}
+      - {x: -3.04, y: -0.78}
+      - {x: -2.83, y: -0.74}
+      - {x: -2.6799998, y: -0.84999996}
+      - {x: -2.57, y: -0.9}
+      - {x: -2.31, y: -1}
+      - {x: -2.04, y: -1.0799999}
+      - {x: -1.99, y: -1.09}
+      - {x: -1.7199999, y: -1.11}
+      - {x: -1.56, y: -1.11}
+      - {x: -1.48, y: -1.0699999}
+      - {x: -1.37, y: -1}
+      - {x: -1.28, y: -0.91999996}
+      - {x: -1, y: -0.93}
+      - {x: -0.71999997, y: -1.11}
+      - {x: -0.51, y: -1.18}
+      - {x: -0.07, y: -1.26}
+      - {x: 0.13, y: -1.26}
+      - {x: 0.29, y: -1.22}
+      - {x: 0.53999996, y: -1.14}
+      - {x: 0.79999995, y: -0.85999995}
+    - - {x: -1.1999999, y: -0.37}
+      - {x: -1.2099999, y: -0.38}
+      - {x: -1.1999999, y: -0.42}
+    - - {x: 0.69, y: -0.049999997}
+      - {x: 0.7, y: -0.099999994}
+      - {x: 0.7, y: -0.089999996}
 --- !u!1 &5723389145972452648
 GameObject:
   m_ObjectHideFlags: 0
@@ -5500,7 +5539,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5727077941399421042}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Rock Pieces
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5544,7 +5583,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5721094971451836422}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5583,7 +5622,7 @@ GameObject:
   - component: {fileID: 5753471464860659724}
   - component: {fileID: 5745159297339095572}
   - component: {fileID: 5723406636719964245}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'RockChunk_1 '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5717,7 +5756,7 @@ GameObject:
   - component: {fileID: 5727449923934383336}
   - component: {fileID: 5596721554246522470}
   - component: {fileID: 5595962054525246412}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Splinters Particles (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10466,7 +10505,7 @@ GameObject:
   - component: {fileID: 5753578510291392946}
   - component: {fileID: 5738717538736244944}
   - component: {fileID: 5723561691821816671}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'RockChunk_11 '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10602,7 +10641,7 @@ GameObject:
   - component: {fileID: 5753913099672503970}
   - component: {fileID: 5738956726896203868}
   - component: {fileID: 5723590924188817645}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'RockChunk_7 '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10738,7 +10777,7 @@ GameObject:
   - component: {fileID: 5755425515882648348}
   - component: {fileID: 5738820586052210332}
   - component: {fileID: 5723622308216649033}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RockChunk_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10874,7 +10913,7 @@ GameObject:
   - component: {fileID: 5753348815183051734}
   - component: {fileID: 5745131819383973900}
   - component: {fileID: 5723659020020389395}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'RockChunk_12 '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11010,7 +11049,7 @@ GameObject:
   - component: {fileID: 5755435971674676760}
   - component: {fileID: 5745371232039227430}
   - component: {fileID: 5723661443522033215}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'RockChunk_2 '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11146,7 +11185,7 @@ GameObject:
   - component: {fileID: 5753886038011987148}
   - component: {fileID: 5739036134862825006}
   - component: {fileID: 5723677917010271537}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'RockChunk_6 '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11280,7 +11319,7 @@ GameObject:
   - component: {fileID: 5727075991610900484}
   - component: {fileID: 5596571412111112734}
   - component: {fileID: 5595992737750512286}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stone Puff Particles (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16029,7 +16068,7 @@ GameObject:
   - component: {fileID: 5753708276899263672}
   - component: {fileID: 5739256691122398218}
   - component: {fileID: 5723784472885718227}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'RockChunk_5 '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16165,7 +16204,7 @@ GameObject:
   - component: {fileID: 5753564542681383404}
   - component: {fileID: 5745376288137237916}
   - component: {fileID: 5723820619363752803}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RockChunk_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16299,7 +16338,7 @@ GameObject:
   - component: {fileID: 5727041146829606112}
   - component: {fileID: 5596584975536636448}
   - component: {fileID: 5597735753891590902}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Splinters Particles (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21048,7 +21087,7 @@ GameObject:
   - component: {fileID: 5755448562632761448}
   - component: {fileID: 5745357807205414316}
   - component: {fileID: 5723983642989191009}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'RockChunk_7 '
   m_TagString: Untagged
   m_Icon: {fileID: 0}

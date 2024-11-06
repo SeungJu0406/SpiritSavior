@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a4396934e179cd4f99683c7f141dc27, type: 3}
+  m_Name: SoundData
+  m_EditorClassIdentifier: 
+  _bgm:
+    TitleBGM: {fileID: 8300000, guid: 67c0550fef4a54016830ff981c218ae4, type: 3}
+    GameBGM: {fileID: 8300000, guid: 3829f8b13687f4d1595e5c8064111887, type: 3}
+  _player:
+    RunningSound: {fileID: 8300000, guid: b2babdaa16cb815419b5e3d70126a6a9, type: 3}
+    JumpSound: {fileID: 8300000, guid: ddc27d8001caf204cad96a9571e897ee, type: 3}
+    LandingSound: {fileID: 8300000, guid: fefa14ad1ba5a454a8778f88d15c99f8, type: 3}
+    DoubleJumpSound: {fileID: 8300000, guid: 10c7b2df68d0a9945846e2aa3823ec2f, type: 3}
+    WallClimbSound: {fileID: 8300000, guid: 4e92f1572924be5419d3ca96afc3b1d9, type: 3}
+    DashSound: {fileID: 8300000, guid: e7ec77895e1e35c41b65ee614bf55c3f, type: 3}
+    HitSound: {fileID: 8300000, guid: dd07cde71e5afe347acdb290c63e70dc, type: 3}
+    DeathSound: {fileID: 8300000, guid: a3053555b94c86940acd7ed8db5dad02, type: 3}
+    SpawnSound: {fileID: 8300000, guid: c14a8c31ae8766c4a8d119f042b41c2f, type: 3}
+    TagSound: {fileID: 8300000, guid: c5c7d599b490f08499688fac87b8f307, type: 3}
+    HealSound: {fileID: 8300000, guid: 4b03832a4f0cb9146b7542406b4ea851, type: 3}
+    UnlockTagSound: {fileID: 8300000, guid: 2ce5b4543f2ca3749a1cb1c3e5ff96c1, type: 3}
+    UnlockWallJumpSound: {fileID: 8300000, guid: 2ce5b4543f2ca3749a1cb1c3e5ff96c1, type: 3}
+    UnlockDoubleJumpSound: {fileID: 8300000, guid: 2ce5b4543f2ca3749a1cb1c3e5ff96c1, type: 3}
+    UnlockDashSound: {fileID: 8300000, guid: 2ce5b4543f2ca3749a1cb1c3e5ff96c1, type: 3}
+    WallSlidSound: {fileID: 8300000, guid: 31fffa16e68d84047b18f3f3e784f8b2, type: 3}
+    WallJumpSound: {fileID: 8300000, guid: af5a88135f617c34e8d649e974881bf8, type: 3}
+    LandSound: {fileID: 8300000, guid: fefa14ad1ba5a454a8778f88d15c99f8, type: 3}
+    WakeUpSound: {fileID: 8300000, guid: f7c3927c4973f284eabd6e74c353b59d, type: 3}
+  _mapObject:
+    MovingPlatformSound: {fileID: 8300000, guid: c9e8b5bb2135d164dbf4b555c5f72191, type: 3}
+    WarpBeforeOpenSound: {fileID: 8300000, guid: 4790175bf412249838632eb18a3b7deb, type: 3}
+    WarpOpeningSound: {fileID: 8300000, guid: a5d76bdc9cf483d42ad7808c378bf809, type: 3}
+    WarpAfterOpenSound: {fileID: 8300000, guid: 4790175bf412249838632eb18a3b7deb, type: 3}
+    WarpInteractionSound: {fileID: 8300000, guid: bb9a0692ebe8ce148962b3860a54ea15, type: 3}
+    WarpButtonClickSound: {fileID: 8300000, guid: fc768915528bba4439f3fc45c0f9b4b4, type: 3}
+    AbilityItemPickUpSound: {fileID: 8300000, guid: de20eeaa30ea1324ea824897015e0e43, type: 3}
+    SwitchInteractionSound: {fileID: 8300000, guid: 5a2828887871dd3448dea39f58be5322, type: 3}
+    ClearTreeInteractionSound: {fileID: 8300000, guid: b2600e0ad1989054c93d78bb5d4c708e, type: 3}
+    ClearSound: {fileID: 8300000, guid: fbd0a03eafd524ac8a0cc88d96e7d6fc, type: 3}
+    ObjectDropSound: {fileID: 8300000, guid: a7c8bca05af737f4386ef7b070483055, type: 3}
+    TrapActivationSound: {fileID: 8300000, guid: a7c8bca05af737f4386ef7b070483055, type: 3}
+    EnvironmentalSound: {fileID: 8300000, guid: 0ea74226b32114642bf6236469a6cbda, type: 3}
+    MushroomTrampoline: {fileID: 8300000, guid: 8a6df2862312bb24caeb87784afc4865, type: 3}
+    ThunderSound: {fileID: 8300000, guid: b886b2c2cb92a354298807e61847d1ca, type: 3}
+    LeafSound: {fileID: 8300000, guid: 5787f9b870bfb5947a21e6b1f41d17a5, type: 3}
+    PlatformOnSound: {fileID: 8300000, guid: 80b31ef35e4e3e9428fcc82951994717, type: 3}
+    PlatformOffSound: {fileID: 8300000, guid: c9a1b17d40a602c49af97473fb98fca9, type: 3}
+  _uI:
+    MapOpenSound: {fileID: 8300000, guid: dd96510e09c7a1146a548cb826fdaa08, type: 3}
+    NotificationSound: {fileID: 8300000, guid: f8517e6613813674198a25870ee63ce1, type: 3}
+    InteractionSound: {fileID: 8300000, guid: 7e2d0eff2a010bd4792c5732e111be21, type: 3}
+    ButtonClickSound: {fileID: 8300000, guid: 0b71057f066c9ce4d84a391c70fcd481, type: 3}
+    MenuToggleSound: {fileID: 8300000, guid: 71fa29bb3fa2270409e0c63940b3b7be, type: 3}
+    SliderSound: {fileID: 8300000, guid: b5e672611f18dad4dbe8a8e2a0f0dd52, type: 3}
+    SuccessSound: {fileID: 8300000, guid: 0d85096b4f51cf248a43cf002c029ed0, type: 3}
