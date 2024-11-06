@@ -59570,6 +59570,10 @@ PrefabInstance:
       propertyPath: canManyInput
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2707026264427700631, guid: 3fc012e90742487438717b43eb52fc2e, type: 3}
+      propertyPath: _isDisposable
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2707026264680242175, guid: 3fc012e90742487438717b43eb52fc2e, type: 3}
       propertyPath: m_fontAsset
       value: 

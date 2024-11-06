@@ -21,6 +21,34 @@ public class Switch : Trap
         UnTrackingUIToPlayer();
     }
 
+    protected override void Start()
+    {
+        if (_isDisposable)
+        {
+            bool keeping = false;
+            if (SceneChanger.Instance != null)
+            {
+                keeping = SceneChanger.Instance.CheckKeepingTrap(transform.position);
+            }
+            else if (TestSceneChanger.Instance != null)
+            {
+                keeping = TestSceneChanger.Instance.CheckKeepingTrap(transform.position);
+            }
+            if (!keeping)
+            {
+                StartCoroutine(StartRoutine());
+            }
+        }
+    }
+
+    WaitForSeconds _startRoutine = new WaitForSeconds(0.1f);
+    IEnumerator StartRoutine()
+    {
+        yield return _startRoutine;
+        Active();
+        Destroy(gameObject);
+    }
+
     // 트리거에 들어올 때 캐릭터와 상호작용 시작
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
