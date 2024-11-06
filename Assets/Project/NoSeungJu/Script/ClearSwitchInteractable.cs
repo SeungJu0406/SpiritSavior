@@ -26,18 +26,20 @@ public class ClearSwitchInteractable : SwichInteractable
 
     public override void Interact()
     {
-        if (Manager.Game.IsClearStageDIc.Count >= Manager.Game.MaxStage) 
-        {
-            if (Manager.Game.IsClear)
-            {
-                // 클리어
-                ShowClearUI();
-            }
-            else
-            {
-                // 클리어 못함
-            }
-        }
+        ShowClearUI();
+
+        //if (Manager.Game.IsClearStageDIc.Count >= Manager.Game.MaxStage) 
+        //{
+        //    if (Manager.Game.IsClear)
+        //    {
+        //        // 클리어
+        //        ShowClearUI();
+        //    }
+        //    else
+        //    {
+        //        // 클리어 못함
+        //    }
+        //}
     }
 
     void ShowClearUI()
