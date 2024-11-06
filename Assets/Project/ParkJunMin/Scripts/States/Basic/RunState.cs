@@ -19,7 +19,7 @@ public class RunState : PlayerState
         
         PlayAnimationInUpdate();
 
-        if (Mathf.Abs(player.rigid.velocity.x) < 0.01f || player.moveInput == 0)
+        if (Mathf.Abs(player.rigid.velocity.x) < 0.01f && player.moveInput == 0)
         {
             player.ChangeState(PlayerController.State.Idle);
         }

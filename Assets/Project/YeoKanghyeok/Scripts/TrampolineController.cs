@@ -17,7 +17,8 @@ public class TrampolineController : MonoBehaviour
             ParticleManager.Instance.PlayTrampolineFX();
             if (collision.rigidbody.velocity.y < 0.1f)
             {
-                collision.rigidbody.velocity = Vector2.up * _jumpSpeed;
+                collision.rigidbody.AddForce(Vector2.up * _jumpSpeed,ForceMode2D.Impulse);
+                //collision.rigidbody.velocity = Vector2.up * _jumpSpeed;
                 _animator.SetTrigger("boing");
             }
         }
