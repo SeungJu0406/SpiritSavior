@@ -14,10 +14,11 @@ public class Switch : Trap
     Vector2 posUI = new Vector2(2, 3);
     SwitchUI _switchUI;
     Coroutine _enterTriggerRoutine;
-
+    bool _isKeeping;
     private void Awake()
     {
         _switchUI = GetComponent<SwitchUI>();
+        _swichInteractable.SetSwitch(this);
         UnTrackingUIToPlayer();
     }
 
@@ -25,16 +26,16 @@ public class Switch : Trap
     {
         if (_isDisposable)
         {
-            bool keeping = false;
+            _isKeeping = false;
             if (SceneChanger.Instance != null)
             {
-                keeping = SceneChanger.Instance.CheckKeepingTrap(transform.position);
+                _isKeeping = SceneChanger.Instance.CheckKeepingTrap(transform.position);
             }
             else if (TestSceneChanger.Instance != null)
             {
-                keeping = TestSceneChanger.Instance.CheckKeepingTrap(transform.position);
+                _isKeeping = TestSceneChanger.Instance.CheckKeepingTrap(transform.position);
             }
-            if (!keeping)
+            if (!_isKeeping)
             {
                 StartCoroutine(StartRoutine());
             }
@@ -72,7 +73,10 @@ public class Switch : Trap
 
     protected override void ProcessActive()
     {
-        _swichInteractable.Interact();
+        if (_swichInteractable != null)
+        {
+            _swichInteractable.Interact();
+        }
     }
 
     /// <summary>
@@ -114,6 +118,12 @@ public class Switch : Trap
             switchUI.SetActive(false);
             switchUI.transform.SetParent(transform);
         }
+    }
+
+
+    public bool GetIsKeeping()
+    {
+        return _isKeeping;
     }
 
     void Delete()
