@@ -7,33 +7,36 @@ public class ClearSwitchInteractable : SwichInteractable
     [SerializeField] GameObject _clearUI;
     [SerializeField] ParticleSystem _particle;
 
-    BoxCollider2D _boxCollider;
+    //BoxCollider2D _boxCollider;
 
     private void Awake()
     {
-        _boxCollider = GetComponent<BoxCollider2D>();
+        //_boxCollider = GetComponent<BoxCollider2D>();
     }
     private void Start()
     {
-        Manager.Game.OnClear += UpdateClearSwitch;
+       //Manager.Game.OnClear += UpdateClearSwitch;
 
         _clearUI.SetActive(false);
        // _particle.gameObject.SetActive(false);
-        _boxCollider.enabled = false;
+       // _boxCollider.enabled = false;
 
-        UpdateClearSwitch();
+        //UpdateClearSwitch();
     }
 
     public override void Interact()
     {
-        if (Manager.Game.IsClear)
+        if (Manager.Game.IsClearStageDIc.Count >= Manager.Game.MaxStage) 
         {
-            // 클리어
-            ShowClearUI();
-        }
-        else
-        {
-            // 클리어 못함
+            if (Manager.Game.IsClear)
+            {
+                // 클리어
+                ShowClearUI();
+            }
+            else
+            {
+                // 클리어 못함
+            }
         }
     }
 
@@ -51,7 +54,7 @@ public class ClearSwitchInteractable : SwichInteractable
         if (Manager.Game.IsClearStageDIc.Count >= Manager.Game.MaxStage)
         {
            // _particle.gameObject.SetActive(true);
-            _boxCollider.enabled = true;
+            //_boxCollider.enabled = true;
         }
     }
 }
