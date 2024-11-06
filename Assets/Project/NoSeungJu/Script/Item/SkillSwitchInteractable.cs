@@ -7,9 +7,13 @@ public class SkillSwitchInteractable : SwichInteractable
     [SerializeField] SkillTooltipUI _tooltipUI;
     [SerializeField] PlayerModel.Ability _ability;
 
+   
     public override void Interact()
     {
-        ActivePlayerSkill();
+        if (_switch.GetIsKeeping() == true)
+        {
+            ActivePlayerSkill();
+        }
     }
 
     void ActivePlayerSkill()
@@ -21,4 +25,5 @@ public class SkillSwitchInteractable : SwichInteractable
         //Manager.Game.Player.playerModel.UnlockAbilityEvent(_ability);
         Destroy(gameObject);
     }
+
 }

@@ -1276,7 +1276,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2688880460085771454, guid: 951994e785a387b4fa5a28ec54b50230, type: 3}
       propertyPath: _isDisposable
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2688880460085771454, guid: 951994e785a387b4fa5a28ec54b50230, type: 3}
       propertyPath: _rockLifeTime
@@ -1676,7 +1676,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2688880460085771454, guid: 951994e785a387b4fa5a28ec54b50230, type: 3}
       propertyPath: _isDisposable
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2688880460085771454, guid: 951994e785a387b4fa5a28ec54b50230, type: 3}
       propertyPath: _rockLifeTime
@@ -5695,7 +5695,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2688880460085771454, guid: 951994e785a387b4fa5a28ec54b50230, type: 3}
       propertyPath: _isDisposable
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2688880460085771454, guid: 951994e785a387b4fa5a28ec54b50230, type: 3}
       propertyPath: _rockLifeTime
@@ -12356,7 +12356,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2688880460085771454, guid: 951994e785a387b4fa5a28ec54b50230, type: 3}
       propertyPath: _isDisposable
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2688880460085771454, guid: 951994e785a387b4fa5a28ec54b50230, type: 3}
       propertyPath: _rockLifeTime
@@ -16814,7 +16814,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2688880460085771454, guid: 951994e785a387b4fa5a28ec54b50230, type: 3}
       propertyPath: _isDisposable
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2688880460085771454, guid: 951994e785a387b4fa5a28ec54b50230, type: 3}
       propertyPath: _rockLifeTime
@@ -31403,7 +31403,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2688880460085771454, guid: 951994e785a387b4fa5a28ec54b50230, type: 3}
       propertyPath: _isDisposable
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2688880460085771454, guid: 951994e785a387b4fa5a28ec54b50230, type: 3}
       propertyPath: _rockLifeTime
@@ -32446,7 +32446,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2688880460085771454, guid: 951994e785a387b4fa5a28ec54b50230, type: 3}
       propertyPath: _isDisposable
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2688880460085771454, guid: 951994e785a387b4fa5a28ec54b50230, type: 3}
       propertyPath: _rockLifeTime
@@ -33299,7 +33299,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2688880460085771454, guid: 951994e785a387b4fa5a28ec54b50230, type: 3}
       propertyPath: _isDisposable
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2688880460085771454, guid: 951994e785a387b4fa5a28ec54b50230, type: 3}
       propertyPath: _rockLifeTime
@@ -34282,7 +34282,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2688880460085771454, guid: 951994e785a387b4fa5a28ec54b50230, type: 3}
       propertyPath: _isDisposable
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2688880460085771454, guid: 951994e785a387b4fa5a28ec54b50230, type: 3}
       propertyPath: _rockLifeTime
@@ -65250,7 +65250,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2688880460085771454, guid: 951994e785a387b4fa5a28ec54b50230, type: 3}
       propertyPath: _isDisposable
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2688880460085771454, guid: 951994e785a387b4fa5a28ec54b50230, type: 3}
       propertyPath: _rockLifeTime
@@ -69450,7 +69450,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2688880460085771454, guid: 951994e785a387b4fa5a28ec54b50230, type: 3}
       propertyPath: _isDisposable
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2688880460085771454, guid: 951994e785a387b4fa5a28ec54b50230, type: 3}
       propertyPath: _rockLifeTime
@@ -72185,7 +72185,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2688880460085771454, guid: 951994e785a387b4fa5a28ec54b50230, type: 3}
       propertyPath: _isDisposable
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2688880460085771454, guid: 951994e785a387b4fa5a28ec54b50230, type: 3}
       propertyPath: _rockLifeTime
@@ -82089,7 +82089,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2688880460085771454, guid: 951994e785a387b4fa5a28ec54b50230, type: 3}
       propertyPath: _isDisposable
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2688880460085771454, guid: 951994e785a387b4fa5a28ec54b50230, type: 3}
       propertyPath: _rockLifeTime
@@ -89537,7 +89537,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2688880460085771454, guid: 951994e785a387b4fa5a28ec54b50230, type: 3}
       propertyPath: _isDisposable
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2688880460085771454, guid: 951994e785a387b4fa5a28ec54b50230, type: 3}
       propertyPath: _rockLifeTime
