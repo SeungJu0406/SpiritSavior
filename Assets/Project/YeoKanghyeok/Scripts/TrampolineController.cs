@@ -15,8 +15,11 @@ public class TrampolineController : MonoBehaviour
         {
             Manager.Sound.PlaySFX(Manager.Sound.Data.MushroomTrampoline);
             ParticleManager.Instance.PlayTrampolineFX();
-            collision.rigidbody.velocity = Vector2.up * _jumpSpeed;
+            if (collision.rigidbody.velocity.y < 0.1f)
+            {
+                collision.rigidbody.velocity = Vector2.up * _jumpSpeed;
                 _animator.SetTrigger("boing");
+            }
         }
     }
 }

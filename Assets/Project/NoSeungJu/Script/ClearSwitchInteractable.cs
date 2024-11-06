@@ -18,7 +18,7 @@ public class ClearSwitchInteractable : SwichInteractable
         Manager.Game.OnClear += UpdateClearSwitch;
 
         _clearUI.SetActive(false);
-        _particle.gameObject.SetActive(false);
+       // _particle.gameObject.SetActive(false);
         _boxCollider.enabled = false;
 
         UpdateClearSwitch();
@@ -50,7 +50,7 @@ public class ClearSwitchInteractable : SwichInteractable
     {
         if (Manager.Game.IsClearStageDIc.Count >= Manager.Game.MaxStage)
         {
-            _particle.gameObject.SetActive(true);
+           // _particle.gameObject.SetActive(true);
             _boxCollider.enabled = true;
         }
     }

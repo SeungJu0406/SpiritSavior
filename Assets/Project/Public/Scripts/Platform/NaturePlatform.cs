@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class NaturePlatform : MonoBehaviour
 {
-    public enum Type{ Platform, Wall}
+    public enum Type{ Platform, Area}
 
     public struct NaturePlatformStruct
     {
@@ -67,7 +67,7 @@ public class NaturePlatform : MonoBehaviour
                 }
             }
         }
-        else if(_type == Type.Wall)
+        else if(_type == Type.Area)
         {
             if (nature == _platformNature)
             {

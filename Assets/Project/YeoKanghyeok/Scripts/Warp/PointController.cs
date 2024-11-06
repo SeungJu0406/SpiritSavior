@@ -5,11 +5,12 @@ public class PointController : Trap
 {
     [Header("사용자지정")]
     [SerializeField] string pointName;
+    [SerializeField] int _pointStage;
     [SerializeField] ButtonController buttonPrefab;
     [SerializeField] SceneField[] _sceneToLoad;
 
     [Space(10f)]
-    [SerializeField] GameObject buttonCanvas;
+    [SerializeField] WarpUI buttonCanvas;
     [SerializeField] Transform buttonLayout;
     [SerializeField] ParticleSystem unActiveParticle;
     [SerializeField] ParticleSystem activeParticle;
@@ -53,7 +54,7 @@ public class PointController : Trap
     {
         yield return null;
         buttonCanvas = Manager.UI.WarpUI;
-        buttonCanvas.SetActive(false);
+        buttonCanvas.gameObject.SetActive(false);
     }
 
     #region point 접근여부
@@ -77,7 +78,7 @@ public class PointController : Trap
                 _inputRoutine = null;
             }
 
-            buttonCanvas.SetActive(false);
+            buttonCanvas.gameObject.SetActive(false);
             _uiActive = false;
         }
     }
@@ -88,21 +89,14 @@ public class PointController : Trap
     {
         while (true)
         {
-            if (_pointActive)
-            {
-                Manager.Sound.PlaySFX(Manager.Sound.Data.WarpAfterOpenSound); // 2.3 열린 다음 소리
-            }
-            else
-            {
-                Manager.Sound.PlaySFX(Manager.Sound.Data.WarpBeforeOpenSound); // 2.1 열리기 전 소리
-            }
+            if (_warpAroundSoundRoutine == null)
+                _warpAroundSoundRoutine = StartCoroutine(WarpAroundSoundRoutine());
 
             if (Input.GetKeyDown(KeyCode.F))
             {
                 Manager.Sound.PlaySFX(Manager.Sound.Data.WarpOpeningSound); // 2.2 열리는 소리
                 if (!_pointActive)
                 {
-                    
                     Active();
                     _pointActive = true;
                 }
@@ -110,18 +104,34 @@ public class PointController : Trap
                 if (!_uiActive)
                 {
                     Manager.Sound.PlaySFX(Manager.Sound.Data.InteractionSound); // 2.4 F 상호작용 시 소리
-                    buttonCanvas.SetActive(true);
+                    buttonCanvas.gameObject.SetActive(true);
                     _uiActive = true;
                 }
                 else if (_uiActive)
                 {
                     Manager.Sound.PlaySFX(Manager.Sound.Data.InteractionSound); // 2.4 F 상호작용 시 소리
-                    buttonCanvas.SetActive(false);
+                    buttonCanvas.gameObject.SetActive(false);
                     _uiActive = false;
                 }
             }
             yield return null;
         }
+    }
+
+    Coroutine _warpAroundSoundRoutine;
+    WaitForSeconds _warpAroundDelay = new WaitForSeconds(1.5f);
+    IEnumerator WarpAroundSoundRoutine()
+    {
+        if (_pointActive)
+        {
+            Manager.Sound.PlaySFX(Manager.Sound.Data.WarpAfterOpenSound); // 2.3 열린 다음 소리
+        }
+        else
+        {
+            Manager.Sound.PlaySFX(Manager.Sound.Data.WarpBeforeOpenSound); // 2.1 열리기 전 소리
+        }
+        yield return _warpAroundDelay;
+        _warpAroundSoundRoutine = null;
     }
     protected override void ProcessActive()
     {
@@ -130,10 +140,19 @@ public class PointController : Trap
 
     private void ActivePoint()
     {
+        buttonCanvas.ActiveBind();
+
         unActiveParticle.gameObject.SetActive(false);
         activeParticle.gameObject.SetActive(true);
+        GameObject instanceUI = buttonCanvas.GetUI($"{_pointStage}Stage");
+       
+        if (instanceUI == null)
+        {
+            instanceUI = Instantiate(buttonCanvas._warpStageUI, buttonCanvas.transform);
+            instanceUI.name = $"{_pointStage}Stage";
+        }
 
-        _button = Instantiate(buttonPrefab, buttonCanvas.transform);
+        _button = Instantiate(buttonPrefab, instanceUI.transform);
         _button._buttonText.text = pointName;
         _button.destinationPos = transform.position;
         _button.SceneToLoad = _sceneToLoad;

@@ -6,7 +6,7 @@ public class UIIManager : MonoBehaviour
 {
     public static UIIManager Instance;
 
-    public GameObject WarpUI;
+    public WarpUI WarpUI;
 
     public bool IsPopUp;
 
