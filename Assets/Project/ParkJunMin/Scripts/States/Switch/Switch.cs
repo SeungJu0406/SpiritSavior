@@ -14,7 +14,7 @@ public class Switch : Trap
     Vector2 posUI = new Vector2(2, 3);
     SwitchUI _switchUI;
     Coroutine _enterTriggerRoutine;
-    bool _isKeeping;
+    bool _isKeeping = true;
     private void Awake()
     {
         _switchUI = GetComponent<SwitchUI>();
