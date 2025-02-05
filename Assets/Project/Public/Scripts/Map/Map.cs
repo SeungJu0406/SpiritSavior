@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Project.ParkJunMin.Scripts;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Map : MonoBehaviour
 {
-    // Map ºÎºÐ
+    // Map ï¿½Îºï¿½
     private PlayerController _playerController;
     [SerializeField] private GameObject _faceRed;
     [SerializeField] private GameObject _faceBlue;
@@ -13,7 +14,7 @@ public class Map : MonoBehaviour
     [SerializeField] private Camera mainCamera;
     [SerializeField] private LayerMask miniMapLayer;
 
-    // Map¾Ö´Ï¸ÞÀÌ¼Ç ºÎºÐ
+    // Mapï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½Îºï¿½
     [SerializeField] private RawImage _mapImage;
     public float transparencyTime = 1.0f;
     private bool _isTransparency = false;
@@ -22,7 +23,7 @@ public class Map : MonoBehaviour
     {
         if (mainCamera == null)
         {
-            mainCamera = Camera.main; // ±âº» Ä«¸Þ¶ó·Î ¼³Á¤
+            mainCamera = Camera.main; // ï¿½âº» Ä«ï¿½Þ¶ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         }
 
         mainCamera.cullingMask &= ~miniMapLayer; // MiniMap Layer out
@@ -30,7 +31,7 @@ public class Map : MonoBehaviour
     void Start()
     {
         _playerController = Manager.Game.Player.GetComponent<PlayerController>();
-        _mapImage.color = new Color(_mapImage.color.r, _mapImage.color.g, _mapImage.color.b, 0); // Åõ¸íµµ 0
+        _mapImage.color = new Color(_mapImage.color.r, _mapImage.color.g, _mapImage.color.b, 0); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 0
         _faceRed.SetActive(false);
         _faceBlue.SetActive(false);
         ChildSettings();
@@ -38,17 +39,17 @@ public class Map : MonoBehaviour
     }
     private void ChildSettings()
     {
-        // FaceRed, FaceBlue, Camera¸¦ Player ÀÚ½ÄÀ¸·Î ¼³Á¤
+        // FaceRed, FaceBlue, Cameraï¿½ï¿½ Player ï¿½Ú½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         Transform faceRedTransform = _faceRed.transform;
         Transform faceBlueTransform = _faceBlue.transform;
         Transform cameraTransform = _mapCam.transform;
 
-        // Player ÀÚ½ÄÀ¸·Î ¼³Á¤
+        // Player ï¿½Ú½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         faceRedTransform.SetParent(Manager.Game.Player.transform);
         faceBlueTransform.SetParent(Manager.Game.Player.transform);
         cameraTransform.SetParent(Manager.Game.Player.transform);
 
-        // Player À§Ä¡·Î ¼³Á¤
+        // Player ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         faceRedTransform.localPosition = new Vector3(0.23f, 4.28f, 0);
         faceBlueTransform.localPosition = new Vector3(0.23f, 4.28f, 0);
         cameraTransform.localPosition = new Vector3(0.15f, 4.11f, -86.49741f);
@@ -57,7 +58,7 @@ public class Map : MonoBehaviour
     {
         if (_playerController != null)
         {
-            // »ö»ó È®ÀÎ
+            // ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
             bool isRed = _playerController.playerModel.curNature == PlayerModel.Nature.Red;
             _faceRed.SetActive(isRed);
             _faceBlue.SetActive(!isRed);
@@ -77,13 +78,13 @@ public class Map : MonoBehaviour
             yield return null;
         }
 
-        if (end == 0) // Áöµµ°¡ On
+        if (end == 0) // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ On
         {
             _faceRed.SetActive(false);
             _faceBlue.SetActive(false);
              // Minimap layer out
         }
-        else // Áöµµ°¡ Off
+        else // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Off
         {
             FaceMap();
         }

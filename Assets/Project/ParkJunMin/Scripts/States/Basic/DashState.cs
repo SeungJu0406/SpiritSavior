@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Project.ParkJunMin.Scripts;
 using UnityEngine;
 
 public class DashState : PlayerState
@@ -44,7 +45,7 @@ public class DashState : PlayerState
 
     public override void FixedUpdate()
     {
-        player.rigid.velocity = new Vector2(player.isPlayerRight * player.transform.localScale.x * player.dashForce, 0f);
+        player.rigid.velocity = new Vector2(player.isPlayerRight * player.transform.localScale.x * player.playerModel.dashForce, 0f);
     }
 
     public override void Exit()

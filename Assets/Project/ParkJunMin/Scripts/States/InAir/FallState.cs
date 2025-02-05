@@ -29,7 +29,7 @@ public class FallState : PlayerState
         {
             if (player.isSlope)
             {
-                if (player.groundAngle < player.maxAngle) // 플레이어가 오를 수 있는 경사면 일 경우
+                if (player.groundAngle < player.playerModel.maxAngle) // 플레이어가 오를 수 있는 경사면 일 경우
                 {
                     player.ChangeState(PlayerController.State.Land);
                 }

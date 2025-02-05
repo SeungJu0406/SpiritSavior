@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Project.ParkJunMin.Scripts;
 using UnityEngine;
 
 public class PlayerParticles : MonoBehaviour
@@ -7,18 +8,18 @@ public class PlayerParticles : MonoBehaviour
     public static PlayerParticles Instance;
 
 
-    [Header("´Þ¸®±â FX ")]
+    [Header("ï¿½Þ¸ï¿½ï¿½ï¿½ FX ")]
     [SerializeField] GameObject runFX;
-    [Header("Á¡ÇÁ FX ")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ FX ")]
     [SerializeField] GameObject jumpFX;
-    [Header("ÀÌ´Ü Á¡ÇÁ FX ")]
+    [Header("ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½ï¿½ FX ")]
     [SerializeField] GameObject dJumpFX;
-    [Header("ÇÇ°Ý FX ")]
+    [Header("ï¿½Ç°ï¿½ FX ")]
     [SerializeField] GameObject hitFX;
-    [Header("È¸º¹ FX ")]
+    [Header("È¸ï¿½ï¿½ FX ")]
     [SerializeField] GameObject healFX;
 
-    [Header("ÀÜµð ¹â´Â FX ")]
+    [Header("ï¿½Üµï¿½ ï¿½ï¿½ï¿½ FX ")]
     [SerializeField] GameObject GrassFX;
 
     public Transform location;
@@ -40,7 +41,7 @@ public class PlayerParticles : MonoBehaviour
     }
 
 
-    #region ÇÔ¼ö¸®½ºÆ®
+    #region ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
     public void PlayRunFX()
     {
         ObjectPool.SpawnObject(runFX, this.transform.position, transform.rotation, ObjectPool.PoolType.ParticleSystem);

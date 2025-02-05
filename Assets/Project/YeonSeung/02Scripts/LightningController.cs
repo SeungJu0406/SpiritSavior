@@ -1,31 +1,32 @@
 using System.Collections;
+using Project.ParkJunMin.Scripts;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class LightningController : MonoBehaviour
 {
-    [Header("¹ø°³ ¼±ÅÃ \n1 = ÆÄ¶û / 2 = »¡°­")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ \n1 = ï¿½Ä¶ï¿½ / 2 = ï¿½ï¿½ï¿½ï¿½")]
     [SerializeField] int selectLightning;
     private GameObject _lightning;
 
-    [Header("ÆÄ¶õ¹ø°³")]
+    [Header("ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ï¿½")]
     [SerializeField] GameObject LightningB;
-    [Header("»¡°£¹ø°³")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
     [SerializeField] GameObject LightningR;
-    [Header("ÈùÆ® ÆÄ¶õ")]
+    [Header("ï¿½ï¿½Æ® ï¿½Ä¶ï¿½")]
     [SerializeField] GameObject glimpseB;
-    [Header("ÈùÆ® »¡°£")]
+    [Header("ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½")]
     [SerializeField] GameObject glimpseR;
     private GameObject _glimpse;
-    [Header("¹ø°³ Ä¥ À§Ä¡")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ Ä¥ ï¿½ï¿½Ä¡")]
     [SerializeField] Transform hitSpot;
     [Space(10)]
 
-    [Header("¹ø°³ Ä¡´Â ÁÖ±â:  __ÃÊ ¸¶´Ù Äâ±¤")]  // ±Ùµ¥ 
+    [Header("ï¿½ï¿½ï¿½ï¿½ Ä¡ï¿½ï¿½ ï¿½Ö±ï¿½:  __ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½â±¤")]  // ï¿½Ùµï¿½ 
     [SerializeField] float hittingPeriod;
 
 
-   // [Header("¹ø°³ µ¥¹ÌÁö")]
+   // [Header("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
    // [SerializeField] int lightningDamage;
     // 
     //
@@ -35,8 +36,8 @@ public class LightningController : MonoBehaviour
 
     [SerializeField] PlayerModel.Nature _lightningNature;
 
-    // ÆÄ - 0 : »¡ - 1  / ³ªÁß¿¡ ¹°¾îº¸°í ´Ù¸¥½ºÅ¸ÀÏ ±â¹ÍÇÏ¸é
-    // [Header("¹ø°³ ·£´ý")]
+    // ï¿½ï¿½ - 0 : ï¿½ï¿½ - 1  / ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½ï¿½ï¿½îº¸ï¿½ï¿½ ï¿½Ù¸ï¿½ï¿½ï¿½Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½
+    // [Header("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½")]
     // [SerializeField] bool isRandom;
     // private GameObject _thisStrike;
 
@@ -53,8 +54,8 @@ public class LightningController : MonoBehaviour
     WaitForSeconds _poolDelay;
     float _poolDelayTime = 0.5f;
 
-    // Tag »ö»ó != ¹ø°³»ö»ó, È¸ÇÇ°¡´É
-    // Tag »ö»ó == ¹ø°³»ö»ó, ÇÇÇØ¹ÞÀ½
+    // Tag ï¿½ï¿½ï¿½ï¿½ != ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, È¸ï¿½Ç°ï¿½ï¿½ï¿½
+    // Tag ï¿½ï¿½ï¿½ï¿½ == ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½Ø¹ï¿½ï¿½ï¿½
 
 
 
@@ -62,7 +63,7 @@ public class LightningController : MonoBehaviour
 
     void Awake()
     {
-        // Layer Ãß°¡
+        // Layer ï¿½ß°ï¿½
         _defaultLayer = gameObject.layer;
         _ignorePlayerLayer = LayerMask.NameToLayer("Ignore Player");
         _respawnDelay = new WaitForSeconds(hittingPeriod);
@@ -104,7 +105,7 @@ public class LightningController : MonoBehaviour
 
     private void Update()
     {
-        // Å×½ºÆ®¿ë
+        // ï¿½×½ï¿½Æ®ï¿½ï¿½
         // if (Input.GetKeyDown(KeyCode.Q))
         // {
         //     Lightning();
@@ -113,7 +114,7 @@ public class LightningController : MonoBehaviour
         if (_PeriodicStrike == null)
         {
             _PeriodicStrike = StartCoroutine(RespawnRoutine());
-           // Debug.Log("ÄÚ·çÆ¾³¡");
+           // Debug.Log("ï¿½Ú·ï¿½Æ¾ï¿½ï¿½");
             //  Lightning();
         }
         // else if (_PeriodicStrike != null)
@@ -121,14 +122,14 @@ public class LightningController : MonoBehaviour
         //     StopCoroutine(_PeriodicStrike);
         //     
         // }
-        // StopCoroutine ±¸ÇöÇØ¾ßµÊ
+        // StopCoroutine ï¿½ï¿½ï¿½ï¿½ï¿½Ø¾ßµï¿½
 
     }
     IEnumerator RespawnRoutine()
     {
         while (true)
         {
-          //  Debug.Log("Coroutine¹ø°³");
+          //  Debug.Log("Coroutineï¿½ï¿½ï¿½ï¿½");
             Lightning();
             yield return _respawnDelay;
 
@@ -175,7 +176,7 @@ public class LightningController : MonoBehaviour
  //   }
 
 
-    /* »ý°¢¸¸ÇÏ°í ¾ÆÁ÷ ¹Ì»ç¿ë
+    /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ì»ï¿½ï¿½
     private void GenerateRandom()
     {
         int _chance = Random.Range(0, 1);

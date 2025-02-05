@@ -1,3 +1,4 @@
+using Project.ParkJunMin.Scripts;
 using UnityEngine;
 
 public class ParticleManager : MonoBehaviour
@@ -230,7 +231,7 @@ public class ParticleManager : MonoBehaviour
         Manager.Game.Player.playerModel.OnAbilityUnlocked += UpdateSkillFX;
         Manager.Game.Player.playerModel.OnPlayerSpawn += PlaySpawnFX;
 
-        Manager.Game.Player.playerModel.OnPlayerWallGrabed += PlayWallGrabbedFX;
+        Manager.Game.Player.playerModel.OnPlayerWallGrabbed += PlayWallGrabbedFX;
         Manager.Game.Player.playerModel.OnPlayerWallSlided += PlayWallSlidFX;
         Manager.Game.Player.playerModel.OnPlayerWallJumped += PlayWallJumpFX;
         Manager.Game.Player.playerModel.OnPlayerLanded += PlayerLandFX;

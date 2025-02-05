@@ -28,7 +28,7 @@ public class RunState : PlayerState
             player.ChangeState(PlayerController.State.Fall);
         }
 
-        if(player.groundAngle > player.maxAngle)
+        if(player.groundAngle > player.playerModel.maxAngle)
         {
             player.ChangeState(PlayerController.State.Fall);
         }
@@ -45,13 +45,13 @@ public class RunState : PlayerState
     {
         player.moveInput = Input.GetAxisRaw("Horizontal");
 
-        if (player.isSlope && (player.groundAngle < player.maxAngle))
+        if (player.isSlope && (player.groundAngle < player.playerModel.maxAngle))
         {
-            player.rigid.velocity = player.perpAngle * player.moveSpeed * player.moveInput * -1.0f;
+            player.rigid.velocity = player.perpAngle * player.playerModel.moveSpeed * player.moveInput * -1.0f;
         }
         else if (!player.isSlope && player.isGrounded)
         {
-            player.rigid.velocity = new Vector2(player.moveInput * player.moveSpeed, player.rigid.velocity.y);
+            player.rigid.velocity = new Vector2(player.moveInput * player.playerModel.moveSpeed, player.rigid.velocity.y);
         }
         player.FlipPlayer(player.moveInput);
     }

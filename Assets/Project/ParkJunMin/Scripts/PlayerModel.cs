@@ -1,140 +1,140 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class PlayerModel
+namespace Project.ParkJunMin.Scripts
 {
-    public enum Nature {Red, Blue}
-    public enum Ability
+    [System.Serializable]
+    public class PlayerModel
     {
-        None = 0,
-        Tag = 1 << 0,
-        Dash = 1 << 1,
-        WallJump = 1 << 2,
-        DoubleJump = 1 << 3
-    }
-
-    public event Action<Nature> OnPlayerTagged;
-    public event Action OnPlayerDamageTaken;
-    public event Action OnPlayerHealth;
-    public event Action OnPlayerMaxHpUp;
-
-    public event Action OnPlayerJumped;
-    public event Action OnPlayerRan;
-    public event Action OnPlayerDoubleJumped;
-    public event Action OnPlayerDashed;
-    public event Action OnPlayerDied;
-    public event Action OnPlayerSpawn;
-
-    public event Action OnPlayerWallGrabed;
-    public event Action OnPlayerWallSlided;
-    public event Action OnPlayerWallJumped;
-    public event Action OnPlayerLanded;
-    public event Action OnPlayerWakedUp;
-
-    public event Action<Ability> OnAbilityUnlocked;
-
-    public bool invincibility = false;
-    public Nature curNature;
-    public int hp;
-    public int curMaxHP = 2; //ÀÓ½Ã°ª
-    private int _MaxHP = 3;
-
-    public PlayerModel()
-    {
-        hp = curMaxHP;
-    }
-
-    public void UnlockAbilityEvent(Ability _newAbility)
-    {
-        OnAbilityUnlocked?.Invoke(_newAbility);
-    }
-
-    public void TagPlayerEvent()
-    {
-        curNature = curNature == Nature.Red ? Nature.Blue : Nature.Red;
-        OnPlayerTagged?.Invoke(curNature);
-    }
-
-    public void TakeDamageEvent(int damage)
-    {
-        if(!invincibility && hp > 0)
+        public enum Nature {Red, Blue}
+        public enum Ability
         {
-            hp -= damage;
-            OnPlayerDamageTaken?.Invoke();
+            None = 0,
+            Tag = 1 << 0,
+            Dash = 1 << 1,
+            WallJump = 1 << 2,
+            DoubleJump = 1 << 3
         }
-    }
 
-    public void JumpPlayerEvent()
-    {
-        OnPlayerJumped?.Invoke();
-    }
+        public event Action<Nature> OnPlayerTagged;
+        public event Action OnPlayerDamageTaken;
+        public event Action OnPlayerHealth;
+        public event Action OnPlayerJumped;
+        public event Action OnPlayerRan;
+        public event Action OnPlayerDoubleJumped;
+        public event Action OnPlayerDashed;
+        public event Action OnPlayerDied;
+        public event Action OnPlayerSpawn;
+        public event Action OnPlayerWallGrabbed;
+        public event Action OnPlayerWallSlided;
+        public event Action OnPlayerWallJumped;
+        public event Action OnPlayerLanded;
+        public event Action OnPlayerWakedUp;
+        public event Action<Ability> OnAbilityUnlocked;
 
-    public void DoubleJumpPlayerEvent()
-    {
-        OnPlayerDoubleJumped?.Invoke();
-    }
+        [Header("Player Data")]
+        public float moveSpeed;        // ì´ë™ì†ë„
+        public float dashForce;         // ëŒ€ì‹œ íž˜
+        public float dashCoolTime; // ëŒ€ì‹œ ì‚¬ìš© í›„ ì¿¨íƒ€ìž„
+        public float jumpForce;    // ë†’ì€ì í”„ íž˜
+        public float doubleJumpForce; // ë”ë¸” ì í”„ì‹œ ì–¼ë§ˆë‚˜ ìœ„ë¡œ ì˜¬ë¼ê°ˆì§€ ê²°ì •
+        public float knockbackForce; // í”¼ê²©ì‹œ ì–¼ë§ˆë‚˜ ë’¤ë¡œ ë°€ë ¤ë‚  ì§€ ê²°ì •
+        public float wallJumpPower; // ë²½ì í”„ íž˜
+        public float maxAngle; // ì´ë™ ê°€ëŠ¥í•œ ìµœëŒ€ ê°ë„
+    
+        public bool invincibility;
+        public Nature curNature;
+        public int hp;
+        [FormerlySerializedAs("curMaxHP")] public int curMaxHp = 2; //ï¿½Ó½Ã°ï¿½
+        private const int MaxHp = 3;
 
-    public void DashPlayerEvent()
-    {
-        OnPlayerDashed?.Invoke();
-    }
+        public PlayerModel()
+        {
+            hp = curMaxHp;
+        }
 
-    public void RunPlayerEvent()
-    {
-        OnPlayerRan?.Invoke();
-    }
+        public void UnlockAbilityEvent(Ability newAbility)
+        {
+            OnAbilityUnlocked?.Invoke(newAbility);
+        }
 
-    public void GrabWallEvent()
-    {
-        OnPlayerWallGrabed?.Invoke();
-    }
+        public void TagPlayerEvent()
+        {
+            curNature = curNature == Nature.Red ? Nature.Blue : Nature.Red;
+            OnPlayerTagged?.Invoke(curNature);
+        }
 
-    public void SlideWallEvent()
-    {
-        OnPlayerWallSlided?.Invoke();
-    }
+        public void TakeDamageEvent(int damage)
+        {
+            if(!invincibility && hp > 0)
+            {
+                hp -= damage;
+                OnPlayerDamageTaken?.Invoke();
+            }
+        }
 
-    public void JumpWallEvent()
-    {
-        OnPlayerWallJumped?.Invoke();
-    }
+        public void JumpPlayerEvent()
+        {
+            OnPlayerJumped?.Invoke();
+        }
 
-    public void LandEvent()
-    {
-        OnPlayerLanded?.Invoke();
-    }
+        public void DoubleJumpPlayerEvent()
+        {
+            OnPlayerDoubleJumped?.Invoke();
+        }
 
-    public void WakeUpEvent()
-    {
-        OnPlayerWakedUp?.Invoke();
-    }
+        public void DashPlayerEvent()
+        {
+            OnPlayerDashed?.Invoke();
+        }
 
-    public void HealPlayerEvent()
-    {
-        if (hp < curMaxHP)
-            hp++;
-        OnPlayerHealth?.Invoke();
-    }
+        public void RunPlayerEvent()
+        {
+            OnPlayerRan?.Invoke();
+        }
 
-    public void AddMaxHPEvent()
-    {
-        if(curMaxHP < _MaxHP)
-            curMaxHP++;
-        // ÃÖ´ëÃ¼·Â Áõ°¡ ¾ÆÀÌÅÛÀ» ½Àµæ ½Ã Ã¼·ÂÀÌ ¸ðµÎ È¸º¹µÉ Áö´Â ÃßÈÄ °áÁ¤
-        //hp = curMaxHP;
-        OnPlayerMaxHpUp?.Invoke();
-    }
+        public void GrabWallEvent()
+        {
+            OnPlayerWallGrabbed?.Invoke();
+        }
 
-    public void DiePlayerEvent()
-    {
-        OnPlayerDied?.Invoke();
-    }
+        public void SlideWallEvent()
+        {
+            OnPlayerWallSlided?.Invoke();
+        }
 
-    public void SpawnPlayerEvent()
-    {
-        OnPlayerSpawn?.Invoke();
+        public void JumpWallEvent()
+        {
+            OnPlayerWallJumped?.Invoke();
+        }
+
+        public void LandEvent()
+        {
+            OnPlayerLanded?.Invoke();
+        }
+
+        public void WakeUpEvent()
+        {
+            OnPlayerWakedUp?.Invoke();
+        }
+
+        public void HealPlayerEvent()
+        {
+            if (hp < curMaxHp)
+                hp++;
+            OnPlayerHealth?.Invoke();
+        }
+    
+        public void DiePlayerEvent()
+        {
+            OnPlayerDied?.Invoke();
+        }
+
+        public void SpawnPlayerEvent()
+        {
+            OnPlayerSpawn?.Invoke();
+        }
     }
 }
 

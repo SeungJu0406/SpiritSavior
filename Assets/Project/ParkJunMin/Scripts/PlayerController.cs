@@ -1,30 +1,23 @@
 using System.Collections;
+using Project.ParkJunMin.Scripts;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public partial class PlayerController : MonoBehaviour
 {
     public enum State { Idle, Run, Dash, Jump, DoubleJump, Fall, Land, WallGrab, WallSliding, WallJump, Damaged, WakeUp, Dead, Spawn, Size }
-    [SerializeField] State _curState;
+    [FormerlySerializedAs("_curState")] [SerializeField] private State curState;
     private PlayerState[] _states = new PlayerState[(int)State.Size];
 
     [HideInInspector] public PlayerModel.Ability unlockedAbilities = PlayerModel.Ability.None;
-    [HideInInspector] public PlayerModel playerModel = new PlayerModel();
+    public PlayerModel playerModel = new PlayerModel();
     [HideInInspector] public PlayerView playerView;
 
     private Collider2D _playerCollider;
-    public int _groundLayerMask;
+    [FormerlySerializedAs("_groundLayerMask")] public int groundLayerMask;
     private int _wallLayerMask;
     private int _ignorePlayerLayerMask;
 
-    [Header("Player Setting")]
-    public float moveSpeed;        // 이동속도
-    public float dashForce;         // 대시 힘
-    public float dashCoolTime; // 대시 사용 후 쿨타임
-    public float jumpForce;    // 높은점프 힘
-    public float doubleJumpForce; // 더블 점프시 얼마나 위로 올라갈지 결정
-    public float knockbackForce; // 피격시 얼마나 뒤로 밀려날 지 결정
-    public float wallJumpPower; // 벽점프 힘
-    public float maxAngle; // 이동 가능한 최대 각도
     public float speedAdjustmentOffsetInAir; // 공중에서의 속도 = 땅에서의 속도 * 해당 변수
     // "SpeedInAir = SpeedInGround * x")
     [HideInInspector] public float moveSpeedInAir;    // 공중에서 플레이어의 속도
@@ -41,8 +34,8 @@ public partial class PlayerController : MonoBehaviour
     [Header("Ground & Slope & Wall Checking")]
     public Transform bottomPivot;
 
-    [SerializeField] Transform _groundCheckPoint1;
-    [SerializeField] Transform _groundCheckPoint2;
+    [SerializeField] private Transform _groundCheckPoint1;
+    [SerializeField] private Transform _groundCheckPoint2;
 
     public Transform _wallCheckPoint;
     private float _wallCheckDistance = 0.01f;
@@ -54,11 +47,11 @@ public partial class PlayerController : MonoBehaviour
     private bool _isStandable; // 두 레이 모두 땅에 붙어있는지 체크 // 현재 미사용
     [HideInInspector] public Vector2 perpAngle;
     [HideInInspector] public bool isSlope;
-    [HideInInspector] public RaycastHit2D groundHit1;
-    [HideInInspector] public RaycastHit2D groundHit2;
-    [HideInInspector] public RaycastHit2D chosenHit;
-    [HideInInspector] public RaycastHit2D wallHit;
-    [HideInInspector] public RaycastHit2D[] boxHits;
+    private RaycastHit2D groundHit1;
+    private RaycastHit2D groundHit2;
+    private RaycastHit2D chosenHit;
+    private RaycastHit2D wallHit;
+    public RaycastHit2D[] boxHits;
     public bool isWall;                  // 캐릭터가 벽에 붙어있는지 체크
     private Vector2 _wallCheckBoxSize;
     Coroutine _wallCheckDisplayRoutine;
@@ -113,7 +106,8 @@ public partial class PlayerController : MonoBehaviour
         _states[(int)State.WakeUp] = new WakeupState(this);
         _states[(int)State.Dead] = new DeadState(this);
         _states[(int)State.Spawn] = new SpawnState(this);
-        moveSpeedInAir = moveSpeed * speedAdjustmentOffsetInAir;
+        if (playerModel != null) 
+            moveSpeedInAir = playerModel.moveSpeed * speedAdjustmentOffsetInAir;
 
         if (bottomPivot == null)
             bottomPivot = transform.Find("BottomPivot");
@@ -137,11 +131,11 @@ public partial class PlayerController : MonoBehaviour
     void Start()
     {
         playerView = GetComponent<PlayerView>();
-        _curState = State.Spawn;
-        _states[(int)_curState].Enter();
+        curState = State.Spawn;
+        _states[(int)curState].Enter();
         SubscribeEvents();
         _wallLayerMask = LayerMask.GetMask("Wall");
-        _groundLayerMask = LayerMask.GetMask("Ground");
+        groundLayerMask = LayerMask.GetMask("Ground");
         _ignorePlayerLayerMask = LayerMask.GetMask("Ignore Player");
     }
 
@@ -150,7 +144,7 @@ public partial class PlayerController : MonoBehaviour
         if (Time.timeScale == 0)
             return;
 
-        _states[(int)_curState].Update();
+        _states[(int)curState].Update();
         TagePlayer();
         CheckDashCoolTime();
         CheckWall();
@@ -215,7 +209,7 @@ public partial class PlayerController : MonoBehaviour
     {
         if (Time.timeScale == 0)
             return;
-        _states[(int)(_curState)].FixedUpdate();
+        _states[(int)(curState)].FixedUpdate();
         CheckGroundRaycast();
     }
 
@@ -225,7 +219,7 @@ public partial class PlayerController : MonoBehaviour
             return;
 
         // 대쉬를 쓰고 쿨타임만큼 지난경우
-        if (dashDeltaTime >= dashCoolTime)
+        if (dashDeltaTime >= playerModel.dashCoolTime)
         {
             isDashUsed = false;
             //dashDeltaTime을 0으로 초기화해주는건 대시진입시
@@ -240,19 +234,19 @@ public partial class PlayerController : MonoBehaviour
     {
         // 어빌리티가 해금됐는지 확인하는 과정
         // 더블점프의 예외사항 처리
-        if (_curState == State.WallJump && nextState == State.DoubleJump)
+        if (curState == State.WallJump && nextState == State.DoubleJump)
         {
-            _states[(int)_curState].Exit();
-            _curState = nextState;
-            _states[(int)_curState].Enter();
+            _states[(int)curState].Exit();
+            curState = nextState;
+            _states[(int)curState].Enter();
         }
 
         //방안2. 중복 코드를 줄임
         if (_states[(int)nextState].ability == PlayerModel.Ability.None || HasAbility(_states[(int)nextState].ability))
         {
-            _states[(int)_curState].Exit();
-            _curState = nextState;
-            _states[(int)_curState].Enter();
+            _states[(int)curState].Exit();
+            curState = nextState;
+            _states[(int)curState].Enter();
         }
 
         /* 방안1
@@ -281,8 +275,8 @@ public partial class PlayerController : MonoBehaviour
     private void CheckGroundRaycast()
     {
         // 땅 체크와 땅이 평지인지 경사면인지 체크하는 메서드
-        groundHit1 = Physics2D.Raycast(_groundCheckPoint1.position, Vector2.down, _groundCheckDistance, _groundLayerMask);
-        groundHit2 = Physics2D.Raycast(_groundCheckPoint2.position, Vector2.down, _groundCheckDistance, _groundLayerMask);
+        groundHit1 = Physics2D.Raycast(_groundCheckPoint1.position, Vector2.down, _groundCheckDistance, groundLayerMask);
+        groundHit2 = Physics2D.Raycast(_groundCheckPoint2.position, Vector2.down, _groundCheckDistance, groundLayerMask);
         Debug.DrawLine(_groundCheckPoint1.position, (Vector2)_groundCheckPoint1.position + Vector2.down * _groundCheckDistance, Color.cyan);
         Debug.DrawLine(_groundCheckPoint2.position, (Vector2)_groundCheckPoint2.position + Vector2.down * _groundCheckDistance, Color.yellow);
 
@@ -317,7 +311,7 @@ public partial class PlayerController : MonoBehaviour
             else
                 isSlope = false;
 
-            if (groundAngle > maxAngle)
+            if (groundAngle > playerModel.maxAngle)
             {
                 moveInput = 0;
             }
@@ -334,7 +328,7 @@ public partial class PlayerController : MonoBehaviour
     }
     private void CheckWall()
     {
-        if (_curState == State.Damaged || _curState == State.Dead) return;
+        if (curState == State.Damaged || curState == State.Dead) return;
 
         wallHit = Physics2D.BoxCast(_wallCheckPoint.position, _wallCheckBoxSize, 0, Vector2.right * isPlayerRight, _wallCheckDistance);
         isWall = wallHit;
@@ -350,7 +344,7 @@ public partial class PlayerController : MonoBehaviour
 
         if (HasAbility(PlayerModel.Ability.WallJump) && (_wallLayerMask & (1 << wallHit.collider.gameObject.layer)) != 0)// 벽타기 가능한 벽일 경우
         {
-            if (isGrounded || _curState == State.WallJump || _curState == State.WallGrab || _curState == State.WallSliding)
+            if (isGrounded || curState == State.WallJump || curState == State.WallGrab || curState == State.WallSliding)
                 return;
 
             if (moveInput == isPlayerRight && moveInput != 0)

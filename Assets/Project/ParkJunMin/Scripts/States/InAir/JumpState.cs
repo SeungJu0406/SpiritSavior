@@ -26,7 +26,7 @@ public class JumpState : PlayerState
         {
             player.ChangeState(PlayerController.State.DoubleJump);
         }
-        if(player.rigid.velocity.y < 0)
+        if(player.rigid.velocity.y < 0 || !player.isGrounded)
         {
             player.ChangeState(PlayerController.State.Fall);
         }
@@ -91,7 +91,7 @@ public class JumpState : PlayerState
         if (player.coyoteTimeCounter > 0f && player.jumpBufferCounter > 0f)//Input.GetKey(KeyCode.C)) 
                                                                            // //player.coyoteTimeCounter > 0f && 
         {
-            player.rigid.velocity = new Vector2(player.rigid.velocity.x, player.jumpForce);
+            player.rigid.velocity = new Vector2(player.rigid.velocity.x, player.playerModel.jumpForce);
             player.coyoteTimeCounter = 0f;
         }
 

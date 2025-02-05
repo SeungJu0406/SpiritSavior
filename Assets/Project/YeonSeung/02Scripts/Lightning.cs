@@ -1,13 +1,14 @@
+using Project.ParkJunMin.Scripts;
 using UnityEngine;
 
 public class Lightning : MonoBehaviour
 {
-    [Header("¹ø°³ Object")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ Object")]
     [SerializeField] GameObject lightning;
 
     // [SerializeField] bool _canRespawn;
 
-    [Header("¹ø°³ µ¥¹ÌÁö")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
     [SerializeField] int lightningDamage;
 
 
@@ -19,7 +20,7 @@ public class Lightning : MonoBehaviour
     
 
 
-    // OnTriggerEnter2D »ç¿ë
+    // OnTriggerEnter2D ï¿½ï¿½ï¿½
 
     PlayerController _player;
 
@@ -71,7 +72,7 @@ public class Lightning : MonoBehaviour
     {
 
     }
-    // ±¸µ¶Ãë¼Ò / ÀÌº¥Æ® ÇØÁöÇÏ´Â°Å ¸®ÅÏÇ®ÇÒ‹š ÇØ¾ßµÊ (-=SetActiveCollider);
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ / ï¿½Ìºï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½Ï´Â°ï¿½ ï¿½ï¿½ï¿½ï¿½Ç®ï¿½Ò‹ï¿½ ï¿½Ø¾ßµï¿½ (-=SetActiveCollider);
 
 
     private void SetActiveCollider(PlayerModel.Nature nature)
@@ -91,7 +92,7 @@ public class Lightning : MonoBehaviour
     }
     private void OnParticleSystemStopped()
     {
-        // Debug.Log("±¸µ¶Ãë¼Ò Å×½ºÆ®, ÆÄÆ¼Å¬ ³¡³¯¶§");
+        // Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×½ï¿½Æ®, ï¿½ï¿½Æ¼Å¬ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
         _player.playerModel.OnPlayerTagged -= SetActiveCollider;
         ObjectPool.ReturnObjectPool(gameObject);
     }
@@ -116,7 +117,7 @@ public class Lightning : MonoBehaviour
     //     {
     //         if (_canAttack)
     //         {
-    //             Debug.Log("¹ø°³¼ÒÈ¯¹ø°³");
+    //             Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¯ï¿½ï¿½ï¿½ï¿½");
     //             // Lightning();
     //             _player.playerModel.TakeDamageEvent(lightningDamage);
     //         }
@@ -130,7 +131,7 @@ public class Lightning : MonoBehaviour
         if (collision.gameObject.tag == "Player" && _canAttack)
         {
 
-            // Debug.Log("¹ø°³Enter");
+            // Debug.Log("ï¿½ï¿½ï¿½ï¿½Enter");
             // _hitBox.enabled = true;
             // Lightning();
             _player.playerModel.TakeDamageEvent(lightningDamage);
@@ -142,7 +143,7 @@ public class Lightning : MonoBehaviour
         if (collision.gameObject.tag == "Player" && _canAttack)
         {
 
-           // Debug.Log("¹ø°³Exit");
+           // Debug.Log("ï¿½ï¿½ï¿½ï¿½Exit");
            // _hitBox.enabled = false;
 
         }

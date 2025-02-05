@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Project.ParkJunMin.Scripts;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -63,15 +64,15 @@ public class PlayerView : MonoBehaviour
 
 
 
-    public void FlipRender(float _moveDirection)
+    public void FlipRender(float moveDirection)
     {
-        if (_moveDirection < 0)
+        if (moveDirection < 0)
         {
             renderer.flipX = true;
             _player.isPlayerRight = -1;
         }
 
-        if (_moveDirection > 0)
+        if (moveDirection > 0)
         {
             renderer.flipX = false;
             _player.isPlayerRight = 1;

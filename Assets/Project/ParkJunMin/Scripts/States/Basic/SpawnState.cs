@@ -33,7 +33,7 @@ public class SpawnState : PlayerState
     private void ResetPlayer()
     {
         prevNature = player.playerModel.curNature;
-        player.playerModel.hp = player.playerModel.curMaxHP;
+        player.playerModel.hp = player.playerModel.curMaxHp;
         player.playerModel.invincibility = false;
 
         if (Manager.Game.RespawnPos != null )

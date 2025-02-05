@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Project.ParkJunMin.Scripts;
 using UnityEngine;
 
 public class PlayerState : BaseState
@@ -14,7 +15,7 @@ public class PlayerState : BaseState
     }
 
     /// <summary>
-    /// ¾÷µ¥ÀÌÆ®¿¡¼­ ¼Ó¼º º¯°æÀ» Å½ÁöÇÏ°í ¾Ö´Ï¸ÞÀÌ¼ÇÀ» Àç»ýÇÏ´Â ¸Þ¼­µå
+    /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ó¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
     /// </summary>
     protected void PlayAnimationInUpdate()
     {

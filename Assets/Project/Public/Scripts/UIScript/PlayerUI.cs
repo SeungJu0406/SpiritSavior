@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Project.ParkJunMin.Scripts;
 using UnityEngine;
 
 public class PlayerUI : BaseUI
@@ -24,7 +25,7 @@ public class PlayerUI : BaseUI
         Init();
     }
 
-    #region Ä³¸¯ÅÍ ÃÊ»óÈ­ UI
+    #region Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½Ê»ï¿½È­ UI
 
     public void UpdateFace()
     {
@@ -52,7 +53,7 @@ public class PlayerUI : BaseUI
     }
 
     /// <summary>
-    /// ·¹µå Ä³¸¯ÅÍ UI È°¼ºÈ­
+    /// ï¿½ï¿½ï¿½ï¿½ Ä³ï¿½ï¿½ï¿½ï¿½ UI È°ï¿½ï¿½È­
     /// </summary>
     public void ShowRedFace()
     {
@@ -70,7 +71,7 @@ public class PlayerUI : BaseUI
     }
 
     /// <summary>
-    /// ºí·ç Ä³¸¯ÅÍ UI È°¼ºÈ­
+    /// ï¿½ï¿½ï¿½ï¿½ Ä³ï¿½ï¿½ï¿½ï¿½ UI È°ï¿½ï¿½È­
     /// </summary>
     public void ShowBlueFace()
     {
@@ -88,7 +89,7 @@ public class PlayerUI : BaseUI
     }
 
     /// <summary>
-    /// Ä³¸¯ÅÍ Á×À½ ¾ó±¼ UI È°¼ºÈ­
+    /// Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ UI È°ï¿½ï¿½È­
     /// </summary>
     public void ShowDeadFace()
     {
@@ -125,9 +126,9 @@ public class PlayerUI : BaseUI
         }
     }
 
-    #region ÅÂ±× ´É·Â
+    #region ï¿½Â±ï¿½ ï¿½É·ï¿½
     /// <summary>
-    /// ÅÂ±× ´É·Â È°¼ºÈ­ UI
+    /// ï¿½Â±ï¿½ ï¿½É·ï¿½ È°ï¿½ï¿½È­ UI
     /// </summary>
     public void ShowTagSkill()
     {
@@ -135,7 +136,7 @@ public class PlayerUI : BaseUI
         GetUI("TagOn").gameObject.SetActive(true);
     }
     /// <summary>
-    /// ÅÂ±× ´É·Â ºñÈ°¼ºÈ­ UI
+    /// ï¿½Â±ï¿½ ï¿½É·ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­ UI
     /// </summary>
     public void HideTagSkill()
     {
@@ -149,9 +150,9 @@ public class PlayerUI : BaseUI
         GetUI("TagOn").gameObject.SetActive(!GetUI("TagOn").gameObject.activeSelf);
     }
     #endregion
-    #region º® Á¡ÇÁ ´É·Â
+    #region ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½É·ï¿½
     /// <summary>
-    /// º® Á¡ÇÁ ´É·Â È°¼ºÈ­ UI
+    /// ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½É·ï¿½ È°ï¿½ï¿½È­ UI
     /// </summary>
     public void ShowWallJumpSkill()
     {
@@ -159,7 +160,7 @@ public class PlayerUI : BaseUI
         GetUI("WallJumpOn").gameObject.SetActive(true);
     }
     /// <summary>
-    /// º® Á¡ÇÁ ´É·Â ºñÈ°¼ºÈ­ UI
+    /// ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½É·ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­ UI
     /// </summary>
     public void HideWallJumpSkill()
     {
@@ -172,9 +173,9 @@ public class PlayerUI : BaseUI
         GetUI("WallJumpOn").gameObject.SetActive(!GetUI("WallJumpOn").gameObject.activeSelf);
     }
     #endregion
-    #region ´õºí Á¡ÇÁ ´É·Â
+    #region ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½É·ï¿½
     /// <summary>
-    /// ´õºí Á¡ÇÁ ´É·Â È°¼ºÈ­ UI
+    /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½É·ï¿½ È°ï¿½ï¿½È­ UI
     /// </summary>
     public void ShowDoubleJumpSkill()
     {
@@ -182,7 +183,7 @@ public class PlayerUI : BaseUI
         GetUI("DoubleJumpOn").gameObject.SetActive(true);
     }
     /// <summary>
-    /// ´õºí Á¡ÇÁ ´É·Â ºñÈ°¼ºÈ­ UI
+    /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½É·ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­ UI
     /// </summary>
     public void HideDoubleJumpSkill()
     {
@@ -195,9 +196,9 @@ public class PlayerUI : BaseUI
         GetUI("DoubleJumpOn").gameObject.SetActive(!GetUI("DoubleJumpOn").gameObject.activeSelf);
     }
     #endregion
-    #region ´ë½¬ ´É·Â
+    #region ï¿½ë½¬ ï¿½É·ï¿½
     /// <summary>
-    /// ´ë½¬ ´É·Â È°¼ºÈ­ UI
+    /// ï¿½ë½¬ ï¿½É·ï¿½ È°ï¿½ï¿½È­ UI
     /// </summary>
     public void ShowDashSkill()
     {
@@ -205,7 +206,7 @@ public class PlayerUI : BaseUI
         GetUI("DashOn").gameObject.SetActive(true);
     }
     /// <summary>
-    /// ´ë½¬ ´É·Â ºñÈ°¼ºÈ­ UI
+    /// ï¿½ë½¬ ï¿½É·ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­ UI
     /// </summary>
     public void HideDashSkill()
     {

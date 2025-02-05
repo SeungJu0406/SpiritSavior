@@ -57,7 +57,7 @@ public class DamagedState : PlayerState
         player.rigid.velocity = Vector2.zero;
 
         //넉백
-        player.rigid.AddForce(knockbackDirection * player.knockbackForce, ForceMode2D.Impulse);
+        player.rigid.AddForce(knockbackDirection * player.playerModel.knockbackForce, ForceMode2D.Impulse);
 
         knockbackFlag = false;
     }

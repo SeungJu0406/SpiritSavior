@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Project.ParkJunMin.Scripts;
 using UnityEngine;
 
 public class DoubleJumpState : PlayerState
@@ -19,7 +20,7 @@ public class DoubleJumpState : PlayerState
         Vector2 curVelocity = player.rigid.velocity;
         curVelocity.y = 0;
         player.rigid.velocity = curVelocity;
-        player.rigid.AddForce(new Vector2(player.rigid.velocity.x,player.doubleJumpForce),ForceMode2D.Impulse);
+        player.rigid.AddForce(new Vector2(player.rigid.velocity.x,player.playerModel.doubleJumpForce),ForceMode2D.Impulse);
         player.isDoubleJumpUsed = true;
     }
 
@@ -33,10 +34,10 @@ public class DoubleJumpState : PlayerState
             player.ChangeState(PlayerController.State.Fall);
         }
 
-        //Dash »óÅÂ·Î ÀüÈ¯
+        //Dash ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½È¯
         if (player.isDashUsed && Input.GetKeyDown(KeyCode.X))
         {
-            Debug.Log("´ë½Ã ÄðÅ¸ÀÓÁßÀÔ´Ï´Ù.");
+            Debug.Log("ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.");
         }
         else if (!player.isDashUsed && Input.GetKeyDown(KeyCode.X))
         {

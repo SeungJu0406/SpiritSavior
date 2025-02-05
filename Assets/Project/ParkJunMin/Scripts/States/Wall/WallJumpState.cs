@@ -15,7 +15,7 @@ public class WallJumpState : PlayerState
         player.isDoubleJumpUsed = false;
         player.playerView.PlayAnimation(animationIndex);
         player.playerModel.JumpWallEvent();
-        player.rigid.velocity = new Vector2(-player.isPlayerRight* player.wallJumpPower, 1.5f * player.wallJumpPower);
+        player.rigid.velocity = new Vector2(-player.isPlayerRight* player.playerModel.wallJumpPower, 1.5f * player.playerModel.wallJumpPower);
         player.FlipPlayer(player.isPlayerRight);
     }
 
