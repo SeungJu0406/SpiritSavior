@@ -21,6 +21,7 @@ namespace Project.ParkJunMin.Scripts
         public event Action OnPlayerDamageTaken;
         public event Action OnPlayerHealth;
         public event Action OnPlayerJumped;
+        public event Action<Ability> OnAbilityUnlocked;
         public event Action OnPlayerRan;
         public event Action OnPlayerDoubleJumped;
         public event Action OnPlayerDashed;
@@ -31,7 +32,7 @@ namespace Project.ParkJunMin.Scripts
         public event Action OnPlayerWallJumped;
         public event Action OnPlayerLanded;
         public event Action OnPlayerWakedUp;
-        public event Action<Ability> OnAbilityUnlocked;
+        
 
         [Header("Player Data")]
         public float moveSpeed;        // 이동속도
