@@ -1,41 +1,40 @@
-using System.Collections;
-using System.Collections.Generic;
-using Project.ParkJunMin.Scripts;
-using Project.ParkJunMin.Scripts.States;
 using UnityEngine;
 
-public class WallGrabState : PlayerState
+namespace Project.ParkJunMin.Scripts.States.Wall
 {
+    public class WallGrabState : PlayerState
+    {
     
-    public WallGrabState(PlayerController player) : base(player)
-    {
-        animationIndex = (int)PlayerController.State.WallGrab;
-        //wallJump로 가기 위해선 WallGrab이 필수적이라 여기에 닮
-        //wallGrab -> wallSliding -> wallJump 순서로 가야하기때문에 wallGrab에 닮.
-        ability = PlayerModel.Ability.WallJump;
-    }
-
-    public override void Enter()
-    {
-        player.playerView.PlayAnimation(animationIndex);
-        player.playerModel.GrabWallEvent();
-        //위치를 고정시켜줘야함 -> 중력을 받지 않게
-        player.rigid.velocity = Vector2.zero;
-        player.rigid.gravityScale = 0;
-    }
-
-    public override void Update()
-    {
-        PlayAnimationInUpdate();
-
-        if (player.playerView.IsAnimationFinished())
+        public WallGrabState(PlayerController player) : base(player)
         {
-            player.ChangeState(PlayerController.State.WallSliding);
+            animationIndex = (int)PlayerController.State.WallGrab;
+            //wallJump로 가기 위해선 WallGrab이 필수적이라 여기에 닮
+            //wallGrab -> wallSliding -> wallJump 순서로 가야하기때문에 wallGrab에 닮.
+            ability = PlayerModel.Ability.WallJump;
         }
-    }
 
-    public override void Exit()
-    {
-    }
+        public override void Enter()
+        {
+            player.playerView.PlayAnimation(animationIndex);
+            player.playerModel.GrabWallEvent();
+            //위치를 고정시켜줘야함 -> 중력을 받지 않게
+            player.rigid.velocity = Vector2.zero;
+            player.rigid.gravityScale = 0;
+        }
 
+        public override void Update()
+        {
+            PlayAnimationInUpdate();
+
+            if (player.playerView.IsAnimationFinished())
+            {
+                player.ChangeState(PlayerController.State.WallSliding);
+            }
+        }
+
+        public override void Exit()
+        {
+        }
+
+    }
 }

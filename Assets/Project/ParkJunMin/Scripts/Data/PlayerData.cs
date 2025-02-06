@@ -1,16 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Player Data", menuName = "Scriptable Object/Player Data", order = int.MaxValue)]
-public class PlayerData : ScriptableObject
+namespace Project.ParkJunMin.Scripts.Data
 {
-    [SerializeField] public float moveSpeed;
-    [SerializeField] public float dashForce;
-    [SerializeField] public float jumpForce;
-    [SerializeField] public float doubleJumpForce; 
-    [SerializeField] public float knockbackForce;
-    [SerializeField] public float speedAdjustmentOffsetInAir; // °øÁß¿¡¼­ÀÇ ¼Óµµ = ¶¥¿¡¼­ÀÇ ¼Óµµ * ÇØ´ç º¯¼ö
-    [SerializeField] public float maxAngle; // ÀÌµ¿ °¡´ÉÇÑ ÃÖ´ë °¢µµ
-    [SerializeField] public float wallJumpPower;
+    [CreateAssetMenu(fileName = "Player Data", menuName = "Scriptable Object/Player Data", order = int.MaxValue)]
+    public class PlayerData : ScriptableObject
+    {
+        [SerializeField] public float moveSpeed;
+        [SerializeField] public float dashForce;
+        [SerializeField] public float jumpForce;
+        [SerializeField] public float doubleJumpForce; 
+        [SerializeField] public float knockbackForce;
+        [SerializeField] public float speedAdjustmentOffsetInAir; // ï¿½ï¿½ï¿½ß¿ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Óµï¿½ = ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Óµï¿½ * ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½
+        [SerializeField] public float maxAngle; // ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½
+        [SerializeField] public float wallJumpPower;
+    }
 }

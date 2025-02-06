@@ -1,6 +1,7 @@
 using Cinemachine.Utility;
 using System.Collections;
 using System.Collections.Generic;
+using Project.ParkJunMin.Scripts;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -32,7 +33,7 @@ public partial class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// °ÔÀÓ¸Å´ÏÀú¿¡ ÇÃ·¹ÀÌ¾î Á¤º¸ ÀúÀå
+    /// ï¿½ï¿½ï¿½Ó¸Å´ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     /// </summary>
     public void SetPlayer(PlayerController player)
     {
@@ -40,7 +41,7 @@ public partial class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// °ÔÀÓ¸Å´ÏÀú¿¡ ÃÖ±Ù ¸®½ºÆù ÁöÁ¡ ÀúÀå
+    /// ï¿½ï¿½ï¿½Ó¸Å´ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     /// </summary>
     public void SetRespawnPoint(Transform respawnPoint)
     {

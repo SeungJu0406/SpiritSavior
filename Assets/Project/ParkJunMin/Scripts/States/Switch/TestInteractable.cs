@@ -1,14 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class TestInteractable : SwichInteractable
+namespace Project.ParkJunMin.Scripts.States.Switch
 {
-    [SerializeField] GameObject gameObject;
-    private GameObject interactiveObject;
-    public override void Interact()
+    public class TestInteractable : SwichInteractable
     {
-        interactiveObject = Instantiate(gameObject);
-        interactiveObject.SetActive(true);
+        [SerializeField] GameObject gameObject;
+        private GameObject interactiveObject;
+        public override void Interact()
+        {
+            interactiveObject = Instantiate(gameObject);
+            interactiveObject.SetActive(true);
+        }
     }
 }

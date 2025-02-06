@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Project.ParkJunMin.Scripts;
 using UnityEngine;
 
 public class HpItem : Item
 {
-    [Header("Èú·® (±âº»Èú·® 1)")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ (ï¿½âº»ï¿½ï¿½ï¿½ï¿½ 1)")]
     [SerializeField] int _healAmount = 1;
 
     protected override void Use(PlayerController player)

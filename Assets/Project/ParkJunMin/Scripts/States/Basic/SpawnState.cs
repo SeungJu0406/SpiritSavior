@@ -1,46 +1,43 @@
-using System.Collections;
-using System.Collections.Generic;
-using Project.ParkJunMin.Scripts.States;
-using UnityEngine;
-using static UnityEngine.RuleTile.TilingRuleOutput;
-
-public class SpawnState : PlayerState
+namespace Project.ParkJunMin.Scripts.States.Basic
 {
-    public SpawnState(PlayerController player) : base(player)
+    public class SpawnState : PlayerState
     {
-        animationIndex = (int)PlayerController.State.Spawn;
-    }
+        public SpawnState(PlayerController player) : base(player)
+        {
+            animationIndex = (int)PlayerController.State.Spawn;
+        }
 
-    public override void Enter()
-    {
-        ResetPlayer();
-        player.playerView.PlayAnimation(animationIndex);
+        public override void Enter()
+        {
+            ResetPlayer();
+            player.playerView.PlayAnimation(animationIndex);
         
-        player.playerModel.SpawnPlayerEvent();
-    }
-
-    public override void Update()
-    {
-        if(player.playerView.IsAnimationFinished())
-        {
-            player.ChangeState(PlayerController.State.Idle);
+            player.playerModel.SpawnPlayerEvent();
         }
-    }
-    public override void Exit()
-    {
 
-    }
-
-    private void ResetPlayer()
-    {
-        prevNature = player.playerModel.curNature;
-        player.playerModel.hp = player.playerModel.curMaxHp;
-        player.playerModel.invincibility = false;
-
-        if (Manager.Game.RespawnPos != null )
+        public override void Update()
         {
-            player.transform.position = Manager.Game.RespawnPos;
+            if(player.playerView.IsAnimationFinished())
+            {
+                player.ChangeState(PlayerController.State.Idle);
+            }
         }
-    }
+        public override void Exit()
+        {
 
+        }
+
+        private void ResetPlayer()
+        {
+            prevNature = player.playerModel.curNature;
+            player.playerModel.hp = player.playerModel.curMaxHp;
+            player.playerModel.invincibility = false;
+
+            if (Manager.Game.RespawnPos != null )
+            {
+                player.transform.position = Manager.Game.RespawnPos;
+            }
+        }
+
+    }
 }

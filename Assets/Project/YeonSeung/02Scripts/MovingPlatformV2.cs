@@ -1,19 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using Project.ParkJunMin.Scripts.States.Switch;
 using UnityEngine;
 
 public class MovingPlatformV2 : SwichInteractable
 {
-    [Header("¼øÂû¸ðµå(ÀÚµ¿ÀÌµ¿)\nºñÈ°¼º½Ã: ¿Ã¶óÅ¸¾ß¿òÁ÷ÀÓ")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½Úµï¿½ï¿½Ìµï¿½)\nï¿½ï¿½È°ï¿½ï¿½ï¿½ï¿½: ï¿½Ã¶ï¿½Å¸ï¿½ß¿ï¿½ï¿½ï¿½ï¿½ï¿½")]
     [SerializeField] bool _isPatrol;
     
-    [Header("½ÃÀÛÁ¡")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
     public Transform pointA;
-    [Header("µµÂøÁ¡")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
     public Transform pointB;
-    [Header("ÀÌµ¿¼Óµµ")]
+    [Header("ï¿½Ìµï¿½ï¿½Óµï¿½")]
     [SerializeField] float moveSpeed;
-    [Header("±â´Ù¸®´Â ½Ã°£")]
+    [Header("ï¿½ï¿½Ù¸ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½")]
     [SerializeField] float delay;
     private Vector3 nextPosition;
 
@@ -36,8 +37,8 @@ public class MovingPlatformV2 : SwichInteractable
         {
             _isMoving = false;
         }
-        // _isMovingÀÌ È°¼ºÈ­ ¾ÈµÇ¸é ¾Æ¸¶ ¾ÈµÉ°Í
-        // ±×Àü¿¡ switchµÇ³ª È®ÀÎÂ÷ Çß´ø°Í.
+        // _isMovingï¿½ï¿½ È°ï¿½ï¿½È­ ï¿½ÈµÇ¸ï¿½ ï¿½Æ¸ï¿½ ï¿½ÈµÉ°ï¿½
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ switchï¿½Ç³ï¿½ È®ï¿½ï¿½ï¿½ï¿½ ï¿½ß´ï¿½ï¿½ï¿½.
         // MovePlatform();
     }
 
@@ -54,12 +55,12 @@ public class MovingPlatformV2 : SwichInteractable
 
     void Update()
     {
-        // ÆÐÆ®·Ñ ºñÈ°¼º½Ã 
+        // ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½È°ï¿½ï¿½ï¿½ï¿½ 
         if (_isPatrol == false)
         {
             if (_isMoving == true)
             {
-                // _isMovingÀÌ È°¼ºÈ­¶§¸¸ ¿òÁ÷ÀÌ±â
+                // _isMovingï¿½ï¿½ È°ï¿½ï¿½È­ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì±ï¿½
                 if (_delayMove == null)
                 {
                 
@@ -68,7 +69,7 @@ public class MovingPlatformV2 : SwichInteractable
                 }
                 else if (_delayMove != null)
                 {
-                    //Debug.Log("ÄÚ·çÆ¾³¡");
+                    //Debug.Log("ï¿½Ú·ï¿½Æ¾ï¿½ï¿½");
                     StopCoroutine(_delayMove);
                     _delayMove = null;
                 }
@@ -87,7 +88,7 @@ public class MovingPlatformV2 : SwichInteractable
         //     nextPosition = (nextPosition == pointA.position) ? pointB.position : pointA.position;
         // }
 
-        // ÆÐÆ®·Ñ È°¼º½Ã
+        // ï¿½ï¿½Æ®ï¿½ï¿½ È°ï¿½ï¿½ï¿½ï¿½
         if(_isPatrol)
         {
             Patrol();
@@ -99,8 +100,8 @@ public class MovingPlatformV2 : SwichInteractable
        // Debug.Log("Coroutine STARTS!");
         yield return new WaitForSeconds(delay);
        
-       // Debug.Log($"{delay}ÃÊ Áö³²");
-        // ¿©±â¼­ È°¼ºÈ­ ÇØ¼­ MovePlatform();
+       // Debug.Log($"{delay}ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
+        // ï¿½ï¿½ï¿½â¼­ È°ï¿½ï¿½È­ ï¿½Ø¼ï¿½ MovePlatform();
         _isMoving = true;
     }
 
@@ -114,7 +115,7 @@ public class MovingPlatformV2 : SwichInteractable
     }
 
     /// <summary>
-    /// ÇÃ·¹ÀÌ¾î ¿òÁ÷ÀÌ´Â ¸Þ¼­µå
+    /// ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
     /// </summary>
     public void MovePlatform()
     {
@@ -122,11 +123,11 @@ public class MovingPlatformV2 : SwichInteractable
         transform.position = Vector3.MoveTowards(transform.position, nextPosition, moveSpeed * Time.deltaTime);
     }
     /// <summary>
-    /// Ã³À½ À§Ä¡·Î µ¹¾Æ°¡´Â ¸Þ¼­µå
+    /// Ã³ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½Æ°ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
     /// </summary>
     public void RetreatPlatform()
     {
-        // A(½ÃÀÛÁ¡)·Î º¹±Í
+        // A(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         transform.position = Vector3.MoveTowards(transform.position, pointA.position, moveSpeed * Time.deltaTime);
     }
 
@@ -148,7 +149,7 @@ public class MovingPlatformV2 : SwichInteractable
             Manager.Sound.PlaySFX(Manager.Sound.Data.PlatformOffSound);
             _platformFX.SetActive(true);
             collision.transform.SetParent(Manager.Game.RespawnPoint);
-            // ¶³¾îÁö¸é isMovingºñÈ°¼ºÈ­
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ isMovingï¿½ï¿½È°ï¿½ï¿½È­
             _isMoving = false;
            // Debug.Log($"isMoving {_isMoving}");
         }

@@ -1,41 +1,42 @@
-using Project.ParkJunMin.Scripts.States;
 using UnityEngine;
 
-public class JumpState : PlayerState
+namespace Project.ParkJunMin.Scripts.States.InAir
 {
-    //private Vector2 _velocityDirection;
-    //private float _slopeDetectionDelayTimer = 0.2f;
-    public JumpState(PlayerController player) : base(player)
+    public class JumpState : PlayerState
     {
-        animationIndex = (int)PlayerController.State.Jump;
-    }
-
-    public override void Enter()
-    {
-        player.playerView.PlayAnimation(animationIndex);
-        player.playerModel.JumpPlayerEvent();
-    }
-
-    public override void Update()
-    {
-        PlayAnimationInUpdate();
-        JumpVer2();
-        player.MoveInAir();
-
-        // 점프 상태에서 더블점프로 상태변환
-        if (!player.isDoubleJumpUsed && Input.GetKeyDown(KeyCode.C))
+        //private Vector2 _velocityDirection;
+        //private float _slopeDetectionDelayTimer = 0.2f;
+        public JumpState(PlayerController player) : base(player)
         {
-            player.ChangeState(PlayerController.State.DoubleJump);
+            animationIndex = (int)PlayerController.State.Jump;
         }
-        if(player.rigid.velocity.y < 0 || !player.isGrounded)
-        {
-            player.ChangeState(PlayerController.State.Fall);
-        }
-    }
 
-    public override void FixedUpdate()
-    {
-        /* 경사면 시행착오
+        public override void Enter()
+        {
+            player.playerView.PlayAnimation(animationIndex);
+            player.playerModel.JumpPlayerEvent();
+        }
+
+        public override void Update()
+        {
+            PlayAnimationInUpdate();
+            JumpVer2();
+            player.MoveInAir();
+
+            // 점프 상태에서 더블점프로 상태변환
+            if (!player.isDoubleJumpUsed && Input.GetKeyDown(KeyCode.C))
+            {
+                player.ChangeState(PlayerController.State.DoubleJump);
+            }
+            if(player.rigid.velocity.y < 0 || !player.isGrounded)
+            {
+                player.ChangeState(PlayerController.State.Fall);
+            }
+        }
+
+        public override void FixedUpdate()
+        {
+            /* 경사면 시행착오
         //if (player.isGrounded && !player.isSlope)
         //{
         //    player.ChangeState(PlayerController.State.Idle);
@@ -81,24 +82,24 @@ public class JumpState : PlayerState
         //    player.ChangeState(PlayerController.State.Fall);
         //}
         */
-    }
-
-    public override void Exit()
-    {
-    }
-    private void JumpVer2()
-    {
-        //Debug.Log("b");
-        if (player.coyoteTimeCounter > 0f && player.jumpBufferCounter > 0f)//Input.GetKey(KeyCode.C)) 
-                                                                           // //player.coyoteTimeCounter > 0f && 
-        {
-            player.rigid.velocity = new Vector2(player.rigid.velocity.x, player.playerModel.jumpForce);
-            player.coyoteTimeCounter = 0f;
         }
 
-    }
+        public override void Exit()
+        {
+        }
+        private void JumpVer2()
+        {
+            //Debug.Log("b");
+            if (player.coyoteTimeCounter > 0f && player.jumpBufferCounter > 0f)//Input.GetKey(KeyCode.C)) 
+                // //player.coyoteTimeCounter > 0f && 
+            {
+                player.rigid.velocity = new Vector2(player.rigid.velocity.x, player.playerModel.jumpForce);
+                player.coyoteTimeCounter = 0f;
+            }
 
-    /* 기존 점프
+        }
+
+        /* 기존 점프
     private void JumpVer1()
     {
         if (Input.GetKey(KeyCode.C) && _hasJumped) // 스페이스바를 누르는 동안 점프력 증가
@@ -183,4 +184,5 @@ public class JumpState : PlayerState
         }
     }
     */
+    }
 }

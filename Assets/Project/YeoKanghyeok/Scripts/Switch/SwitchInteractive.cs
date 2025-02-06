@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Project.ParkJunMin.Scripts.States.Switch;
 using UnityEngine;
 
 public class SwitchInteractive : SwichInteractable
 {
-    [Header("»ç¿ëÀÚÁöÁ¤")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
     [SerializeField] GameObject _interactiveObject;
     
     

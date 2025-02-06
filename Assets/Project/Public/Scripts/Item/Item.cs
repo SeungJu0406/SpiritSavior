@@ -1,3 +1,4 @@
+using Project.ParkJunMin.Scripts;
 using UnityEngine;
 
 public abstract class Item : Trap

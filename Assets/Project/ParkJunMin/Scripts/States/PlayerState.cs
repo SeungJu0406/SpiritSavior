@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Project.ParkJunMin.Scripts.States
 {
     [SuppressMessage("ReSharper", "InconsistentNaming")]
-    public class PlayerState : BaseState
+    public abstract class PlayerState : BaseState
     {
         protected readonly PlayerController player;
         protected PlayerModel.Nature prevNature;
@@ -15,10 +15,6 @@ namespace Project.ParkJunMin.Scripts.States
         {
             this.player = player;
         }
-
-        /// <summary>
-        /// ������Ʈ���� �Ӽ� ������ Ž���ϰ� �ִϸ��̼��� ����ϴ� �޼���
-        /// </summary>
         protected void PlayAnimationInUpdate()
         {
             AnimatorStateInfo curAnimationState = player.playerView.animator.GetCurrentAnimatorStateInfo(0);

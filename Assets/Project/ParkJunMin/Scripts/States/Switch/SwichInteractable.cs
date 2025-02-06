@@ -1,15 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class SwichInteractable : MonoBehaviour
+namespace Project.ParkJunMin.Scripts.States.Switch
 {
-    protected Switch _switch;
-
-    public abstract void Interact();
-
-    public void SetSwitch(Switch thisSwitch)
+    public abstract class SwichInteractable : MonoBehaviour
     {
-        _switch = thisSwitch;
+        protected Switch _switch;
+
+        public abstract void Interact();
+
+        public void SetSwitch(Switch thisSwitch)
+        {
+            _switch = thisSwitch;
+        }
     }
 }

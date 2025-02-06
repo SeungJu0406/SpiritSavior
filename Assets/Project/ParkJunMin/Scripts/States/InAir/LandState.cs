@@ -1,51 +1,50 @@
-using System.Collections;
-using System.Collections.Generic;
-using Project.ParkJunMin.Scripts.States;
-using UnityEditor;
 using UnityEngine;
 
-public class LandState : PlayerState
+namespace Project.ParkJunMin.Scripts.States.InAir
 {
-    public LandState(PlayerController player) : base(player)
+    public class LandState : PlayerState
     {
-        animationIndex = (int)PlayerController.State.Land;
-    }
-
-    public override void Enter()
-    {
-        player.playerView.PlayAnimation(animationIndex);
-        player.playerModel.LandEvent();
-        player.isDoubleJumpUsed = false;
-    }
-
-    public override void Update()
-    {
-        if (player.jumpBufferCounter > 0f)
+        public LandState(PlayerController player) : base(player)
         {
-            player.ChangeState(PlayerController.State.Jump);
-            return;
+            animationIndex = (int)PlayerController.State.Land;
         }
 
-        if (Input.anyKey)
+        public override void Enter()
         {
-            player.ChangeState(PlayerController.State.Idle);
-            return;
+            player.playerView.PlayAnimation(animationIndex);
+            player.playerModel.LandEvent();
+            player.isDoubleJumpUsed = false;
         }
 
-        if (player.playerView.IsAnimationFinished())
+        public override void Update()
         {
-            player.ChangeState(PlayerController.State.Idle);
-        }
-    }
+            if (player.jumpBufferCounter > 0f)
+            {
+                player.ChangeState(PlayerController.State.Jump);
+                return;
+            }
 
-    public override void Exit()
-    {
+            if (Input.anyKey)
+            {
+                player.ChangeState(PlayerController.State.Idle);
+                return;
+            }
+
+            if (player.playerView.IsAnimationFinished())
+            {
+                player.ChangeState(PlayerController.State.Idle);
+            }
+        }
+
+        public override void Exit()
+        {
         
-    }
+        }
 
-    public override void FixedUpdate()
-    {
+        public override void FixedUpdate()
+        {
         
-    }
+        }
 
+    }
 }
