@@ -1,6 +1,6 @@
 namespace Project.ParkJunMin.Scripts.States
 {
-    public class BaseState
+    public abstract class BaseState
     {
         public virtual void Enter() { }
         public virtual void Update() { }
