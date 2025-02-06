@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class BaseState
+namespace Project.ParkJunMin.Scripts.States
 {
-    public virtual void Enter() { } // »óÅÂ ½ÃÀÛ
-    public virtual void Update() { } // »óÅÂ µ¿ÀÛÁß
-    public virtual void Exit() { } // »óÅÂ ¸¶¹«¸®
-    public virtual void FixedUpdate() { }   
+    public class BaseState
+    {
+        public virtual void Enter() { } // ìƒíƒœ ì‹œì‘
+        public virtual void Update() { } // ìƒíƒœ ë™ì‘ì¤‘
+        public virtual void Exit() { } // ìƒíƒœ ë§ˆë¬´ë¦¬
+        public virtual void FixedUpdate() { }   
+    }
 }

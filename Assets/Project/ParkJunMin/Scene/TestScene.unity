@@ -423,18 +423,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce94a3b1df0241f4da496a92ddb2ee7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _curState: 0
+  curState: 0
   unlockedAbilities: 0
+  playerModel:
+    moveSpeed: 0
+    dashForce: 0
+    dashCoolTime: 0
+    jumpForce: 0
+    doubleJumpForce: 0
+    knockbackForce: 0
+    wallJumpPower: 0
+    maxAngle: 0
+    invincibility: 0
+    curNature: 0
+    hp: 2
+    curMaxHp: 2
   playerView: {fileID: 0}
-  _groundLayerMask: 0
-  moveSpeed: 8
-  dashForce: 0
-  dashCoolTime: 0
-  jumpForce: 0
-  doubleJumpForce: 5
-  knockbackForce: 3
-  wallJumpPower: 10
-  maxAngle: 0
+  groundLayerMask: 0
   speedAdjustmentOffsetInAir: 0.8
   moveSpeedInAir: 0
   isDoubleJumpUsed: 0
@@ -940,18 +945,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce94a3b1df0241f4da496a92ddb2ee7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _curState: 0
+  curState: 0
   unlockedAbilities: 0
+  playerModel:
+    moveSpeed: 0
+    dashForce: 0
+    dashCoolTime: 0
+    jumpForce: 0
+    doubleJumpForce: 0
+    knockbackForce: 0
+    wallJumpPower: 0
+    maxAngle: 0
+    invincibility: 0
+    curNature: 0
+    hp: 2
+    curMaxHp: 2
   playerView: {fileID: 0}
-  _groundLayerMask: 0
-  moveSpeed: 3
-  dashForce: 0
-  dashCoolTime: 0
-  jumpForce: 0
-  doubleJumpForce: 0
-  knockbackForce: 0
-  wallJumpPower: 0
-  maxAngle: 0
+  groundLayerMask: 0
   speedAdjustmentOffsetInAir: 0.8
   moveSpeedInAir: 0
   isDoubleJumpUsed: 0
@@ -1354,6 +1364,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5002474722431601510, guid: 0834a8c5adc41974180b770e6ef0ccf3, type: 3}
+      propertyPath: playerModel.maxAngle
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002474722431601510, guid: 0834a8c5adc41974180b770e6ef0ccf3, type: 3}
+      propertyPath: playerModel.dashForce
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002474722431601510, guid: 0834a8c5adc41974180b770e6ef0ccf3, type: 3}
+      propertyPath: playerModel.jumpForce
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002474722431601510, guid: 0834a8c5adc41974180b770e6ef0ccf3, type: 3}
+      propertyPath: playerModel.moveSpeed
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002474722431601510, guid: 0834a8c5adc41974180b770e6ef0ccf3, type: 3}
+      propertyPath: playerModel.dashCoolTime
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002474722431601510, guid: 0834a8c5adc41974180b770e6ef0ccf3, type: 3}
+      propertyPath: playerModel.wallJumpPower
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002474722431601510, guid: 0834a8c5adc41974180b770e6ef0ccf3, type: 3}
+      propertyPath: playerModel.knockbackForce
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002474722431601510, guid: 0834a8c5adc41974180b770e6ef0ccf3, type: 3}
+      propertyPath: playerModel.doubleJumpForce
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 8629866595228664612, guid: 0834a8c5adc41974180b770e6ef0ccf3, type: 3}
       propertyPath: m_Name
       value: Player_Neo

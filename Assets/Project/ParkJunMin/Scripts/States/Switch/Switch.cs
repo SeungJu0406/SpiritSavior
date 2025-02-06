@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Switch : Trap
 {
-    [Header("¿©·¯¹ø ½ºÀ§Ä¡ ÀÔ·Â °¡´É?")]
+    [Header("ì—¬ëŸ¬ë²ˆ ìŠ¤ìœ„ì¹˜ ì…ë ¥ ê°€ëŠ¥?")]
     [SerializeField] bool canManyInput;
 
-    [Header("½ºÀ§Ä¡¿¡ ¹İÀÀÇÒ ±â¹Í")]
+    [Header("ìŠ¤ìœ„ì¹˜ì— ë°˜ì‘í•  ê¸°ë¯¹")]
     [SerializeField] SwichInteractable _swichInteractable;
 
 
@@ -50,7 +50,7 @@ public class Switch : Trap
         Destroy(gameObject);
     }
 
-    // Æ®¸®°Å¿¡ µé¾î¿Ã ¶§ Ä³¸¯ÅÍ¿Í »óÈ£ÀÛ¿ë ½ÃÀÛ
+    // íŠ¸ë¦¬ê±°ì— ë“¤ì–´ì˜¬ ë•Œ ìºë¦­í„°ì™€ ìƒí˜¸ì‘ìš© ì‹œì‘
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
@@ -60,7 +60,7 @@ public class Switch : Trap
         }
     }
 
-    // Æ®¸®°Å¿¡¼­ ³ª°¥ ¶§ Ä³¸¯ÅÍ¿Í »óÈ£ÀÛ¿ëÀ» ¸ØÃã
+    // íŠ¸ë¦¬ê±°ì—ì„œ ë‚˜ê°ˆ ë•Œ ìºë¦­í„°ì™€ ìƒí˜¸ì‘ìš©ì„ ë©ˆì¶¤
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (_enterTriggerRoutine != null)
@@ -80,7 +80,7 @@ public class Switch : Trap
     }
 
     /// <summary>
-    /// FÅ° ÀÔ·ÂÀ» ´ë±â¹Ş´Â ÄÚ·çÆ¾
+    /// Fí‚¤ ì…ë ¥ì„ ëŒ€ê¸°ë°›ëŠ” ì½”ë£¨í‹´
     /// </summary>
     /// <returns></returns>
     IEnumerator EnterTriggerRoutine()

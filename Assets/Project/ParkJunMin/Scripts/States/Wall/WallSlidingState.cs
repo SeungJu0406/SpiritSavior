@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Project.ParkJunMin.Scripts.States;
 using UnityEngine;
 
 public class WallSlidingState : PlayerState
@@ -20,7 +21,7 @@ public class WallSlidingState : PlayerState
     {
         PlayAnimationInUpdate();
 
-        // WallJump »óÅÂ·Î ÀüÈ¯
+        // WallJump ìƒíƒœë¡œ ì „í™˜
         if (Input.GetKeyDown(KeyCode.C))
         {
             player.ChangeState(PlayerController.State.WallJump);

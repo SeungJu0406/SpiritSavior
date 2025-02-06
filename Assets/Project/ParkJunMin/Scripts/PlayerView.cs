@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Project.ParkJunMin.Scripts;
@@ -13,7 +14,7 @@ public class PlayerView : MonoBehaviour
     public Sprite[] sprites;
     private int _curSpriteIndex = 0;
     public int animationIntervalNumber = 4;
-    public AnimatorStateInfo stateInfo;
+    private AnimatorStateInfo stateInfo;
 
     //[SerializeField] AudioClip[] clips;
 
@@ -83,13 +84,16 @@ public class PlayerView : MonoBehaviour
     {
         if (animationIndex >= 0 && animationIndex < _animationHash.Length)
         {
-            if (_playerModel.curNature == PlayerModel.Nature.Red)
+            switch (_playerModel.curNature)
             {
-                animator.Play(_animationHash[animationIndex],0,0);
-            }
-            else if (_playerModel.curNature == PlayerModel.Nature.Blue)
-            {
-                animator.Play(_animationHash[animationIndex + (int)PlayerController.State.Size],0,0);
+                case PlayerModel.Nature.Red:
+                    animator.Play(_animationHash[animationIndex],0,0);
+                    break;
+                case PlayerModel.Nature.Blue:
+                    animator.Play(_animationHash[animationIndex + (int)PlayerController.State.Size],0,0);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
         else
@@ -100,32 +104,25 @@ public class PlayerView : MonoBehaviour
 
     public void PlayAnimation(int animationIndex, float normalizedTime)
     {
-        if (animationIndex >= 0 && animationIndex < _animationHash.Length)
+        if (animationIndex < 0 || animationIndex >= _animationHash.Length) 
+            return;
+        switch (_playerModel.curNature)
         {
-            if (_playerModel.curNature == PlayerModel.Nature.Red)
-            {
+            case PlayerModel.Nature.Red:
                 animator.Play(_animationHash[animationIndex], 0, normalizedTime);
-            }
-            else if (_playerModel.curNature == PlayerModel.Nature.Blue)
-            {
+                break;
+            case PlayerModel.Nature.Blue:
                 animator.Play(_animationHash[animationIndex + (int)PlayerController.State.Size], 0, normalizedTime);
-            }
-        }
-        else
-        {
-            Debug.LogError("애니메이션 인덱스 에러");
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(_playerModel.curNature), "플레이어 속성 에러");
         }
     }
 
     public bool IsAnimationFinished()
     {
         stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        if(stateInfo.normalizedTime >= 1.0f)
-        {
-            return true;
-        }
-        else
-            return false;
+        return stateInfo.normalizedTime >= 1.0f;
     }
     public void ChangeSprite()
     {

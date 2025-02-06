@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Project.ParkJunMin.Scripts.States;
 using UnityEngine;
 
 public class WakeupState : PlayerState

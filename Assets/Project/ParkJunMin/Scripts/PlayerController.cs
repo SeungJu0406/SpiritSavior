@@ -1,5 +1,6 @@
 using System.Collections;
 using Project.ParkJunMin.Scripts;
+using Project.ParkJunMin.Scripts.States;
 using UnityEngine;
 using UnityEngine.Serialization;
 
