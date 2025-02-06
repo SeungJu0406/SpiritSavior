@@ -70,11 +70,10 @@ namespace Project.ParkJunMin.Scripts
 
         public void TakeDamageEvent(int damage)
         {
-            if(!invincibility && hp > 0)
-            {
-                hp -= damage;
-                OnPlayerDamageTaken?.Invoke();
-            }
+            if (invincibility || hp <= 0) 
+                return;
+            hp -= damage;
+            OnPlayerDamageTaken?.Invoke();
         }
 
         public void JumpPlayerEvent()
