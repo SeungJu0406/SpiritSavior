@@ -28,8 +28,16 @@ namespace Project.ParkJunMin.Scripts
 
         [Space(30)]
         [Header("Checking")]
-        public bool isDoubleJumpUsed; // 더블점프 사용 유무를 나타내는 변수
-        public bool isDashUsed; // 대시를 사용했는지 유무를 나타내는 변수
+        // 코요테 타임
+        public float coyoteTime = 0.2f;
+        public float coyoteTimeCounter;
+        //점프 버퍼
+        public float jumpBufferTime = 0.2f;
+        public float jumpBufferCounter;
+        public bool isGrounded;        // 캐릭터가 땅에 붙어있는지 체크
+        
+        [HideInInspector] public bool isDoubleJumpUsed; // 더블점프 사용 유무를 나타내는 변수
+        [HideInInspector] public bool isDashUsed; // 대시를 사용했는지 유무를 나타내는 변수
 
         [HideInInspector] public Rigidbody2D rigid;
         [HideInInspector] public float dashDeltaTime;
@@ -47,7 +55,7 @@ namespace Project.ParkJunMin.Scripts
         [SerializeField] private float _groundCheckDistance;
         public float groundAngle;
         public int isPlayerRight = 1;
-        public bool isGrounded;        // 캐릭터가 땅에 붙어있는지 체크
+        
         private bool _isStandable; // 두 레이 모두 땅에 붙어있는지 체크 // 현재 미사용
         [HideInInspector] public Vector2 perpAngle;
         [HideInInspector] public bool isSlope;
@@ -61,12 +69,7 @@ namespace Project.ParkJunMin.Scripts
 
         [Header("Input")]
         [HideInInspector] public float moveInput;
-        // 코요테 타임
-        [HideInInspector] public float coyoteTime = 0.2f;
-        [HideInInspector] public float coyoteTimeCounter;
-        //점프 버퍼
-        [HideInInspector] public float jumpBufferTime = 0.2f;
-        [SerializeField] public float jumpBufferCounter;
+        
 
         private void Awake()
         {
@@ -212,7 +215,6 @@ namespace Project.ParkJunMin.Scripts
 
         public void ChangeState(State nextState)
         {
-        
             // 벽타기 더블점프의 예외사항 처리
             if (curState == State.WallJump && nextState == State.DoubleJump)
             {
@@ -361,14 +363,10 @@ namespace Project.ParkJunMin.Scripts
         public void UnlockAbility(PlayerModel.Ability ability)
         {
             if (HasAbility(ability))
-            {
-                Debug.Log("이미 해금된 능력입니다.");
                 return;
-            }
-
+            
             unlockedAbilities |= ability;
             playerModel.UnlockAbilityEvent(ability);
-            Debug.Log($"{ability} 해금");
         }
 
         private bool HasAbility(PlayerModel.Ability ability)
@@ -376,9 +374,9 @@ namespace Project.ParkJunMin.Scripts
             return (unlockedAbilities & ability) == ability;
         }
 
-        public void FlipPlayer(float _moveDirection)
+        public void FlipPlayer(float moveDirection)
         {
-            playerView.FlipRender(_moveDirection);
+            playerView.FlipRender(moveDirection);
             AdjustColliderOffset();
             AdjustCheckPoint();
         }
@@ -450,7 +448,7 @@ namespace Project.ParkJunMin.Scripts
 
         private IEnumerator CheckWallDisplayRoutine()
         {
-            WaitForSeconds delay = new WaitForSeconds(0.1f);
+            WaitForSeconds delay = new WaitForSeconds(0.01f);
 
             //BoxCast를 통해 벽을 체크한 범위를 보여줌
             while (true)
@@ -464,10 +462,10 @@ namespace Project.ParkJunMin.Scripts
                 Vector2 bottomLeft = origin + (Vector2.down * _wallCheckBoxSize.y / 2) + (Vector2.left * _wallCheckBoxSize.x / 2 * isPlayerRight) + offset;
                 Vector2 bottomRight = origin + (Vector2.down * _wallCheckBoxSize.y / 2) + (Vector2.right * _wallCheckBoxSize.x / 2 * isPlayerRight) + offset;
 
-                Debug.DrawLine(topLeft, topRight, Color.red);
-                Debug.DrawLine(topRight, bottomRight, Color.red);
-                Debug.DrawLine(bottomRight, bottomLeft, Color.red);
-                Debug.DrawLine(bottomLeft, topLeft, Color.red);
+                Debug.DrawLine(topLeft, topRight, Color.green);
+                Debug.DrawLine(topRight, bottomRight, Color.green);
+                Debug.DrawLine(bottomRight, bottomLeft, Color.green);
+                Debug.DrawLine(bottomLeft, topLeft, Color.green);
                 yield return delay;
             }
 

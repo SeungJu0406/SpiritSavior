@@ -33,14 +33,15 @@ namespace Project.ParkJunMin.Scripts.States.InAir
                 player.ChangeState(PlayerController.State.Fall);
             }
 
-            //Dash ���·� ��ȯ
-            if (player.isDashUsed && Input.GetKeyDown(KeyCode.X))
+            switch (player.isDashUsed)
             {
-                Debug.Log("��� ��Ÿ�����Դϴ�.");
-            }
-            else if (!player.isDashUsed && Input.GetKeyDown(KeyCode.X))
-            {
-                player.ChangeState(PlayerController.State.Dash);
+                case true 
+                    when Input.GetKeyDown(KeyCode.X):
+                    break;
+                case false 
+                    when Input.GetKeyDown(KeyCode.X):
+                    player.ChangeState(PlayerController.State.Dash);
+                    break;
             }
         }
 

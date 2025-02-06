@@ -24,28 +24,29 @@ namespace Project.ParkJunMin.Scripts.States.InAir
             {
                 player.ChangeState(PlayerController.State.DoubleJump);
             }
-            if(player.isGrounded)
+
+            if (!player.isGrounded) 
+                return;
+            
+            if (player.isSlope)
             {
-                if (player.isSlope)
+                if (player.groundAngle < player.playerModel.maxAngle) // 플레이어가 오를 수 있는 경사면 일 경우
                 {
-                    if (player.groundAngle < player.playerModel.maxAngle) // 플레이어가 오를 수 있는 경사면 일 경우
-                    {
-                        player.ChangeState(PlayerController.State.Land);
-                    }
-                    else
-                    {
-                        // 오를 수 없는 경사면일 경우 미끄러짐
-                        if(player.rigid.velocity.y >= 0) // 다 미끄러졌으면
-                        {
-                            player.ChangeState(PlayerController.State.Land);
-                        }
-                    }
+                    player.ChangeState(PlayerController.State.Land);
                 }
                 else
                 {
-                    // 평지일 경우
-                    player.ChangeState(PlayerController.State.Land);
+                    // 오를 수 없는 경사면일 경우 미끄러짐
+                    if(player.rigid.velocity.y >= 0) // 다 미끄러졌으면
+                    {
+                        player.ChangeState(PlayerController.State.Land);
+                    }
                 }
+            }
+            else
+            {
+                // 평지일 경우
+                player.ChangeState(PlayerController.State.Land);
             }
         }
     

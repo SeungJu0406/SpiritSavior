@@ -8,6 +8,7 @@ namespace Project.ParkJunMin.Scripts
     public class PlayerModel
     {
         public enum Nature {Red, Blue}
+        
         [Flags]
         public enum Ability
         {

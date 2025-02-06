@@ -23,16 +23,14 @@ namespace Project.ParkJunMin.Scripts.States.Basic
             {
                 player.ChangeState(PlayerController.State.Idle);
             }
-            else if (player.coyoteTimeCounter <= 0 && player.rigid.velocity.y != 0f)
+            else if 
+                ((player.coyoteTimeCounter <= 0 && player.rigid.velocity.y != 0f) 
+                 || player.groundAngle > player.playerModel.maxAngle)
             {
                 player.ChangeState(PlayerController.State.Fall);
             }
 
-            if(player.groundAngle > player.playerModel.maxAngle)
-            {
-                player.ChangeState(PlayerController.State.Fall);
-            }
-            else if (Input.GetKeyDown(KeyCode.C))
+            else if (player.jumpBufferCounter > 0)
             {
                 player.ChangeState(PlayerController.State.Jump);
             }
@@ -47,7 +45,7 @@ namespace Project.ParkJunMin.Scripts.States.Basic
 
             if (player.isSlope && (player.groundAngle < player.playerModel.maxAngle))
             {
-                player.rigid.velocity = player.perpAngle * player.playerModel.moveSpeed * player.moveInput * -1.0f;
+                player.rigid.velocity = player.perpAngle * (player.playerModel.moveSpeed * player.moveInput * -1.0f);
             }
             else if (!player.isSlope && player.isGrounded)
             {

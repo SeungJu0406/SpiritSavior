@@ -4,7 +4,7 @@ namespace Project.ParkJunMin.Scripts.States.Wall
 {
     public class WallJumpState : PlayerState
     {
-        float wallJumpPower;
+        private float _wallJumpPower;
         public WallJumpState(PlayerController player) : base(player)
         {
             animationIndex = (int)PlayerController.State.WallJump;

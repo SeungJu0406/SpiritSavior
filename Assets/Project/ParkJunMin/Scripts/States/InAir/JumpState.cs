@@ -89,13 +89,10 @@ namespace Project.ParkJunMin.Scripts.States.InAir
         }
         private void JumpVer2()
         {
-            //Debug.Log("b");
-            if (player.coyoteTimeCounter > 0f && player.jumpBufferCounter > 0f)//Input.GetKey(KeyCode.C)) 
-                // //player.coyoteTimeCounter > 0f && 
-            {
-                player.rigid.velocity = new Vector2(player.rigid.velocity.x, player.playerModel.jumpForce);
-                player.coyoteTimeCounter = 0f;
-            }
+            if (!(player.coyoteTimeCounter > 0f) || !(player.jumpBufferCounter > 0f)) 
+                return;
+            player.rigid.velocity = new Vector2(player.rigid.velocity.x, player.playerModel.jumpForce);
+            player.coyoteTimeCounter = 0f;
 
         }
 
