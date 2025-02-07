@@ -32,11 +32,7 @@ namespace Project.ParkJunMin.Scripts.States.Basic
             prevNature = player.playerModel.curNature;
             player.playerModel.hp = player.playerModel.curMaxHp;
             player.playerModel.invincibility = false;
-
-            if (Manager.Game.RespawnPos != null )
-            {
-                player.transform.position = Manager.Game.RespawnPos;
-            }
+            player.transform.position = Manager.Game.RespawnPos;
         }
 
     }

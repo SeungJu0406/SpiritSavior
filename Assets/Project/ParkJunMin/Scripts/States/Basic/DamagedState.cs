@@ -23,17 +23,9 @@ namespace Project.ParkJunMin.Scripts.States.Basic
         public override void Update()
         {
             // 피격상태가 끝나는걸 확인
-            if (!knockbackFlag && player.rigid.velocity.sqrMagnitude < 0.1f) // 넉백의 힘이 거의 사라졌을 때
-            {
-                if (player.playerModel.hp > 0)
-                {
-                    player.ChangeState(PlayerController.State.WakeUp);
-                }
-                else
-                {
-                    player.ChangeState(PlayerController.State.Dead);
-                }
-            }
+            if (knockbackFlag || !(player.rigid.velocity.sqrMagnitude < 0.1f)) 
+                return; 
+            player.ChangeState(player.playerModel.hp > 0 ? PlayerController.State.WakeUp : PlayerController.State.Dead);
         }
 
         public override void FixedUpdate()
