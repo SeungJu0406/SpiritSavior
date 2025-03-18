@@ -26,8 +26,9 @@ public class ButtonController : MonoBehaviour
     {
         SceneLoadTrigger instance = Instantiate(_loadTrigger, destinationPos, Quaternion.identity);
         instance.AddSceneToLoad(SceneToLoad);
+        instance.IsInstance = true;
         yield return null;
-        playerPos.transform.position = destinationPos;  
+        playerPos.transform.position = destinationPos;
         instance.Delete();
     }
 }

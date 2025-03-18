@@ -8,6 +8,8 @@ public class SceneLoadTrigger : MonoBehaviour
 {
     [SerializeField] private SceneField[] _sceneToLoad;
 
+    public bool IsInstance;
+
     SceneField _DontUnLoadScene;
     BoxCollider2D _boxCollider2D;
     bool _canUnload = true;
@@ -35,7 +37,10 @@ public class SceneLoadTrigger : MonoBehaviour
 
     private void OnDestroy()
     {
-        Manager.Game.ClearInstanceDisposableDic(gameObject.scene.name);
+        if (IsInstance == false)
+        {
+            Manager.Game.ClearInstanceDisposableDic(gameObject.scene.name);
+        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
