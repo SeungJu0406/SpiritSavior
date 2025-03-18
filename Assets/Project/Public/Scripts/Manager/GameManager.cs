@@ -21,7 +21,7 @@ public partial class GameManager : MonoBehaviour
 
     public Dictionary<string, bool> DisPosableDic = new Dictionary<string, bool>(40);
 
-    public Dictionary<string, List<int>> InstanceDisposableDic = new Dictionary<string, List<int>>();
+    public Dictionary<string, int> InstanceDisposableDic = new Dictionary<string, int>();
 
     bool _isPlayClearSound;
     private void Awake()
@@ -76,19 +76,19 @@ public partial class GameManager : MonoBehaviour
     {
         if(InstanceDisposableDic.ContainsKey(key) == false)
         {
-            InstanceDisposableDic.Add(key, new List<int>());
+            InstanceDisposableDic.Add(key, 0);
         }
 
-        InstanceDisposableDic[key].Add(instance.GetInstanceID());
-        return InstanceDisposableDic[key].Count;
+        InstanceDisposableDic[key]++;
+        return InstanceDisposableDic[key];
     }
     public void ClearInstanceDisposableDic(string key)
     {
         if (InstanceDisposableDic.ContainsKey(key) == false)
         {
-            InstanceDisposableDic.Add(key, new List<int>());
+            InstanceDisposableDic.Add(key, 0);
         }
-        InstanceDisposableDic[key].Clear();
+        InstanceDisposableDic[key]= 0;
     }
 
     private void UpdateIsClear()
