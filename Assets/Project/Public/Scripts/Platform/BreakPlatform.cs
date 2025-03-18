@@ -6,7 +6,7 @@ using UnityEngine;
 /// <summary>
 /// 무너지는 발판
 /// </summary>
-public class BreakPlatform : Trap
+public class BreakPlatform : Disposable
 {
     [Header("발판 모델 오브젝트")]
     [SerializeField] GameObject _platform;

@@ -33,6 +33,10 @@ public class SceneLoadTrigger : MonoBehaviour
       StartCoroutine(StartRoutine());
     }
 
+    private void OnDestroy()
+    {
+        Manager.Game.ClearInstanceDisposableDic(gameObject.scene.name);
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == Manager.Game.Player.gameObject.tag)

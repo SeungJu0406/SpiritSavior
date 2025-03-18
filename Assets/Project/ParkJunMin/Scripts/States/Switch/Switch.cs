@@ -2,7 +2,7 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Switch : Trap
+public class Switch : Disposable
 {
     [Header("여러번 스위치 입력 가능?")]
     [SerializeField] bool canManyInput;
@@ -29,11 +29,11 @@ public class Switch : Trap
             _isKeeping = false;
             if (SceneChanger.Instance != null)
             {
-                _isKeeping = SceneChanger.Instance.CheckKeepingTrap(transform.position);
+                _isKeeping = SceneChanger.Instance.CheckKeepingTrap(name);
             }
             else if (TestSceneChanger.Instance != null)
             {
-                _isKeeping = TestSceneChanger.Instance.CheckKeepingTrap(transform.position);
+                _isKeeping = TestSceneChanger.Instance.CheckKeepingTrap(name);
             }
             if (!_isKeeping)
             {

@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Timeline;
 
-public class DarkArea : Trap
+public class DarkArea : Disposable
 {
     [Header("토글 형식?")]
     [SerializeField] bool _isToggle;

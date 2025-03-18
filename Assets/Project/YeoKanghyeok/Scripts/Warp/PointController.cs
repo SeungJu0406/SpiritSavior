@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class PointController : Trap
+public class PointController : Disposable
 {
     [Header("사용자지정")]
     [SerializeField] string pointName;
@@ -25,11 +25,11 @@ public class PointController : Trap
             bool isUnActive = false;
             if (SceneChanger.Instance != null)
             {
-                isUnActive = SceneChanger.Instance.CheckKeepingTrap(transform.position);
+                isUnActive = SceneChanger.Instance.CheckKeepingTrap(name);
             }
             else if (TestSceneChanger.Instance != null)
             {
-                isUnActive = TestSceneChanger.Instance.CheckKeepingTrap(transform.position);
+                isUnActive = TestSceneChanger.Instance.CheckKeepingTrap(name);
             }
             if (isUnActive == true)
             {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class StageClearZone : Trap
+public class StageClearZone : Disposable
 {
     [SerializeField] int _stage;
 

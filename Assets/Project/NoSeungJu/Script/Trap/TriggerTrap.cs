@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class TriggerTrap : Trap
+public class TriggerTrap : Disposable
 {
     [Header("떨어지는 포인트")]
     [SerializeField] Transform _fallingPoint;

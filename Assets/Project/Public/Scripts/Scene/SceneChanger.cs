@@ -30,13 +30,13 @@ public class SceneChanger : MonoBehaviour
     /// 일회용 트랩이 사용됬는지 체크
     /// </summary>
     /// <returns></returns>
-    public bool CheckKeepingTrap(Vector2 key)
+    public bool CheckKeepingTrap(string key)
     {
-        if (Manager.Game.DisPosableTrapDic.ContainsKey(key) == false)
+        if (Manager.Game.DisPosableDic.ContainsKey(key) == false)
         {
-            Manager.Game.DisPosableTrapDic.Add(key, true);
+            Manager.Game.DisPosableDic.Add(key, true);
         }
-        return Manager.Game.DisPosableTrapDic[key];
+        return Manager.Game.DisPosableDic[key];
     }
 
     /// <summary>
@@ -44,11 +44,11 @@ public class SceneChanger : MonoBehaviour
     /// </summary>
     /// <param name="key"></param>
     /// <param name="value"></param>
-    public void SetKeepingTrap(Vector2 key, bool value)
+    public void SetKeepingTrap(string key, bool value)
     {
-        if (Manager.Game.DisPosableTrapDic.ContainsKey(key))
+        if (Manager.Game.DisPosableDic.ContainsKey(key))
         {
-            Manager.Game.DisPosableTrapDic[key] = value;
+            Manager.Game.DisPosableDic[key] = value;
         }
     }
 

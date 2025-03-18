@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovingPlatform : Trap
+public class MovingPlatform : Disposable
 {
     [SerializeField] GameObject _movingPlatform;
     PolygonCollider2D _movingPlatformCollider;

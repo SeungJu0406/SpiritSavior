@@ -4,7 +4,7 @@ using UnityEngine.Events;
 /// <summary>
 /// 무조건 ProcessActive에서 로직을 작성한 후, Active 함수로 실행시킬 것
 /// </summary>
-public abstract class Trap : MonoBehaviour
+public abstract class Disposable : MonoBehaviour
 {
 
     [Header("게임에서 일회용인가?")]
@@ -12,16 +12,19 @@ public abstract class Trap : MonoBehaviour
 
     protected virtual void Start()
     {
+        int count = Manager.Game.AddInstanceDisposableDic(gameObject.scene.name, gameObject);
+        gameObject.name = $"{gameObject.scene.name} ".GetText().Append(name).Append($" {count}").ToString();
+
         if (_isDisposable)
         {
             bool keeping = false;
             if (SceneChanger.Instance != null)
             {
-                keeping = SceneChanger.Instance.CheckKeepingTrap(transform.position);
+                keeping = SceneChanger.Instance.CheckKeepingTrap(name);
             }
             else if (TestSceneChanger.Instance != null)
             {
-                keeping = TestSceneChanger.Instance.CheckKeepingTrap(transform.position);
+                keeping = TestSceneChanger.Instance.CheckKeepingTrap(name);
             }
             if (!keeping)
             {
@@ -64,11 +67,11 @@ public abstract class Trap : MonoBehaviour
     {
         if (SceneChanger.Instance != null)
         {
-            SceneChanger.Instance.SetKeepingTrap(transform.position, true);
+            SceneChanger.Instance.SetKeepingTrap(name, true);
         }
         else if(TestSceneChanger.Instance != null)
         {
-            TestSceneChanger.Instance.SetKeepingTrap(transform.position, true);
+            TestSceneChanger.Instance.SetKeepingTrap(name, true);
         }
         
     }
@@ -80,11 +83,11 @@ public abstract class Trap : MonoBehaviour
     {
         if (SceneChanger.Instance != null)
         {
-            SceneChanger.Instance.SetKeepingTrap(transform.position, false);
+            SceneChanger.Instance.SetKeepingTrap(name, false);
         }
         else if (TestSceneChanger.Instance != null)
         {
-            TestSceneChanger.Instance.SetKeepingTrap(transform.position, false);
+            TestSceneChanger.Instance.SetKeepingTrap(name, false);
         }
     }
     protected virtual void OnCollisionEnter2D(Collision2D collision) { }

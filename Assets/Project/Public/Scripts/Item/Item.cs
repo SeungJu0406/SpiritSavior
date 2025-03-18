@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class Item : Trap
+public abstract class Item : Disposable
 {
     PlayerController player;
 

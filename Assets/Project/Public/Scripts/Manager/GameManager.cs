@@ -19,7 +19,9 @@ public partial class GameManager : MonoBehaviour
     public Dictionary<int, bool> IsClearStageDIc = new Dictionary<int, bool>();
     public event UnityAction<int> OnChangeIsClearStage;
 
-    public Dictionary<Vector2, bool> DisPosableTrapDic = new Dictionary<Vector2, bool>(40);
+    public Dictionary<string, bool> DisPosableDic = new Dictionary<string, bool>(40);
+
+    public Dictionary<string, List<int>> InstanceDisposableDic = new Dictionary<string, List<int>>();
 
     bool _isPlayClearSound;
     private void Awake()
@@ -70,7 +72,24 @@ public partial class GameManager : MonoBehaviour
         UpdateIsClear();
     }
 
+    public int AddInstanceDisposableDic(string key, GameObject instance)
+    {
+        if(InstanceDisposableDic.ContainsKey(key) == false)
+        {
+            InstanceDisposableDic.Add(key, new List<int>());
+        }
 
+        InstanceDisposableDic[key].Add(instance.GetInstanceID());
+        return InstanceDisposableDic[key].Count;
+    }
+    public void ClearInstanceDisposableDic(string key)
+    {
+        if (InstanceDisposableDic.ContainsKey(key) == false)
+        {
+            InstanceDisposableDic.Add(key, new List<int>());
+        }
+        InstanceDisposableDic[key].Clear();
+    }
 
     private void UpdateIsClear()
     {
